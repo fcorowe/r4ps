@@ -2,12 +2,18 @@ project:
   type: book
 
 book:
-  title: "r4ps"
-  author: "Jane Doe"
+  title: "Population Science"
+  author: "Francisco Rowe"
+  search: true
+  sidebar:
+    style: docked
+    background: light
   date: "01/10/2022"
+  downloads: [pdf, epub]
   chapters:
     - index.qmd
     - intro.qmd
+    - privacy.qmd
     - summary.qmd
     - references.qmd
 

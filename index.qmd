@@ -4,6 +4,8 @@ This is a Quarto book.
 
 To learn more about Quarto books visit <https://quarto.org/docs/books>.
 
+@rowe2022
+
 ```{r}
 1 + 1
 ```

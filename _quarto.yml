@@ -7,6 +7,7 @@ book:
 
   author-meta: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
   date-meta: today
+
   description-meta: |
     This book will...
 
@@ -27,13 +28,14 @@ book:
     background: light
   date: "01/10/2022"
   downloads: [pdf, epub]
-  cover-image: cover.png
+  cover-image: density_map.png
   cover-image-alt: |
     Alternative text describing the book cover
   chapters:
     - index.qmd
     - intro.qmd
     - privacy.qmd
+    - geodemographics.qmd
     - sequence-analysis.qmd
     - network.qmd
     - sentiment-analysis.qmd

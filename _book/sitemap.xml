@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.population-science.net/index.html</loc>
-    <lastmod>2022-10-02T21:17:54.832Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.651Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/intro.html</loc>
-    <lastmod>2022-10-02T21:04:29.657Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.652Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/privacy.html</loc>
-    <lastmod>2022-10-02T21:04:29.658Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.653Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.population-science.net/geodemographics.html</loc>
+    <lastmod>2022-10-02T21:55:01.653Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/sequence-analysis.html</loc>
-    <lastmod>2022-10-02T21:04:29.658Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.654Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/network.html</loc>
-    <lastmod>2022-10-02T21:04:29.659Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.655Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/sentiment-analysis.html</loc>
-    <lastmod>2022-10-02T21:04:29.659Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.656Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/topic-modelling.html</loc>
-    <lastmod>2022-10-02T21:04:29.660Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.656Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/longitudinal-1.html</loc>
-    <lastmod>2022-10-02T21:04:29.660Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.657Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/longitudinal-2.html</loc>
-    <lastmod>2022-10-02T21:04:29.661Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.658Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/machine-learning.html</loc>
-    <lastmod>2022-10-02T21:04:29.662Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.659Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/references.html</loc>
-    <lastmod>2022-10-02T21:04:29.662Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.660Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/Population-Science.pdf</loc>
-    <lastmod>2022-10-02T21:04:29.390Z</lastmod>
+    <lastmod>2022-10-02T21:55:01.310Z</lastmod>
   </url>
 </urlset>

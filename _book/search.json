@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Population Science",
     "section": "",
-    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\nRowe, Lovelace, and Dennett (2022)\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nRowe, Francisco, Robin Lovelace, and Adam Dennett. 2022. “Spatial Interaction Modelling: A Manifesto.” http://dx.doi.org/10.31219/osf.io/xcdms."
   },
   {
     "objectID": "intro.html",
@@ -21,51 +21,58 @@
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
+    "objectID": "geodemographics.html",
+    "href": "geodemographics.html",
+    "title": "3  Geodemographics",
+    "section": "",
+    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
     "objectID": "sequence-analysis.html",
     "href": "sequence-analysis.html",
-    "title": "3  Sequence Analysis",
+    "title": "4  Sequence Analysis",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "network.html",
     "href": "network.html",
-    "title": "4  Network Analysis",
+    "title": "5  Network Analysis",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "sentiment-analysis.html",
     "href": "sentiment-analysis.html",
-    "title": "5  Sentiment Analysis",
+    "title": "6  Sentiment Analysis",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "topic-modelling.html",
     "href": "topic-modelling.html",
-    "title": "6  Topic Modelling",
+    "title": "7  Topic Modelling",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "longitudinal-1.html",
     "href": "longitudinal-1.html",
-    "title": "7  Modelling Time",
+    "title": "8  Modelling Time",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "longitudinal-2.html",
     "href": "longitudinal-2.html",
-    "title": "8  Assessing Interventions",
+    "title": "9  Assessing Interventions",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "machine-learning.html",
     "href": "machine-learning.html",
-    "title": "9  Machine Learning",
+    "title": "10  Machine Learning",
     "section": "",
     "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
@@ -74,6 +81,6 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.\n\n\nRowe, Francisco, Robin Lovelace, and Adam Dennett. 2022. “Spatial\nInteraction Modelling: A Manifesto.” http://dx.doi.org/10.31219/osf.io/xcdms."
   }
 ]

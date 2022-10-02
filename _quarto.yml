@@ -5,16 +5,28 @@ book:
   title: "Population Science"
   author: "Francisco Rowe"
   search: true
+  repo-url: https://github.com/fcorowe/r4ps
+  repo-actions: [edit]
+  sharing: [twitter, facebook]
   sidebar:
     style: docked
     background: light
   date: "01/10/2022"
   downloads: [pdf, epub]
+  cover-image: cover.png
+  cover-image-alt: |
+    Alternative text describing the book cover
   chapters:
     - index.qmd
     - intro.qmd
     - privacy.qmd
-    - summary.qmd
+    - sequence-analysis.qmd
+    - network.qmd
+    - sentiment-analysis.qmd
+    - topic-modelling.qmd
+    - longitudinal-1.qmd
+    - longitudinal-2.qmd
+    - machine-learning.qmd
     - references.qmd
 
 bibliography: references.bib

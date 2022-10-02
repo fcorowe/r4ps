@@ -3,8 +3,22 @@ project:
 
 book:
   title: "Population Science"
-  author: "Francisco Rowe"
+  author: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
+
+  author-meta: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
+  date-meta: today
+  description-meta: |
+    This book will...
+
+  page-footer:
+    left: |
+      Population Science was written by Francisco Rowe,
+      Carmen Cabrera-Arnau, Elisabetta Pietrostefani.
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+
   search: true
+  site-url: https://www.population-science.net
   repo-url: https://github.com/fcorowe/r4ps
   repo-actions: [edit]
   sharing: [twitter, facebook]

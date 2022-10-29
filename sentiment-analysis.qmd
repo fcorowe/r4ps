@@ -1,9 +1,7 @@
 # Sentiment Analysis
 
-This is a book created from markdown and executable code.
+This chapter will draw on:
 
-See @knuth84 for additional discussion of literate programming.
+-   @rowe2021
 
-```{r}
-1 + 1
-```
+-   @rowe2021a

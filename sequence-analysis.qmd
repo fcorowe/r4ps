@@ -1,9 +1,9 @@
 # Sequence Analysis
 
-This is a book created from markdown and executable code.
+This chapter shows the use of sequence analysis to study population decline and draw on the following papers:
 
-See @knuth84 for additional discussion of literate programming.
+-   @rowe2022a
 
-```{r}
-1 + 1
-```
+-   @newsham2022
+
+-   @rowe2022b

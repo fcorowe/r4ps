@@ -18,7 +18,7 @@
     "href": "privacy.html",
     "title": "2  Data Privacy, Ethics and Biases",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Green, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021. “New Forms of Data and New Forms of Opportunities to Monitor and Tackle a Pandemic.” In, 423–29. Springer International Publishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
   },
   {
     "objectID": "geodemographics.html",
@@ -32,7 +32,7 @@
     "href": "sequence-analysis.html",
     "title": "4  Sequence Analysis",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Rowe, Neville, and González-Leonardo (2022)\nNewsham and Rowe (2022)\nRowe, Robinson, and Patias (2022)\n\n\n\n\n\nNewsham, Niall, and Francisco Rowe. 2022. “Understanding the Trajectories of Population Decline Across Rural and Urban Europe: A Sequence Analysis.” https://doi.org/10.48550/ARXIV.2203.09798.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. “Sensing Population Displacement from Ukraine Using Facebook Data: Potential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm.\n\n\nRowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022. “Sensing Global Changes in Local Patterns of Energy Consumption in Cities During the Early Stages of the COVID-19 Pandemic.” Cities 129 (October): 103808. https://doi.org/10.1016/j.cities.2022.103808."
   },
   {
     "objectID": "network.html",
@@ -46,7 +46,7 @@
     "href": "sentiment-analysis.html",
     "title": "6  Sentiment Analysis",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Rowe (2021)\nRowe et al. (2021)\n\n\n\n\n\nRowe, Francisco. 2021. “Using Twitter Data to Monitor Immigration Sentiment.” http://dx.doi.org/10.31219/osf.io/sf7u4.\n\n\nRowe, Francisco, Michael Mahony, Eduardo Graells-Garrido, Marzia Rango, and Niklas Sievers. 2021. “Using Twitter to Track Immigration Sentiment During Early Stages of the COVID-19 Pandemic.” Data & Policy 3. https://doi.org/10.1017/dap.2021.38."
   },
   {
     "objectID": "topic-modelling.html",
@@ -81,6 +81,6 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.\n\n\nRowe, Francisco, Robin Lovelace, and Adam Dennett. 2022. “Spatial\nInteraction Modelling: A Manifesto.” http://dx.doi.org/10.31219/osf.io/xcdms."
+    "text": "Green, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021.\n“New Forms of Data and New Forms of Opportunities to Monitor and\nTackle a Pandemic.” In, 423–29. Springer International\nPublishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.\n\n\nNewsham, Niall, and Francisco Rowe. 2022. “Understanding the\nTrajectories of Population Decline Across Rural and Urban Europe: A\nSequence Analysis.” https://doi.org/10.48550/ARXIV.2203.09798.\n\n\nRowe, Francisco. 2021a. “Using Twitter Data to Monitor Immigration\nSentiment.” http://dx.doi.org/10.31219/osf.io/sf7u4.\n\n\n———. 2021b. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e.\n\n\nRowe, Francisco, Robin Lovelace, and Adam Dennett. 2022. “Spatial\nInteraction Modelling: A Manifesto.” http://dx.doi.org/10.31219/osf.io/xcdms.\n\n\nRowe, Francisco, Michael Mahony, Eduardo Graells-Garrido, Marzia Rango,\nand Niklas Sievers. 2021. “Using Twitter to Track Immigration\nSentiment During Early Stages of the COVID-19 Pandemic.” Data\n& Policy 3. https://doi.org/10.1017/dap.2021.38.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022.\n“Sensing Population Displacement from Ukraine Using Facebook Data:\nPotential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm.\n\n\nRowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022.\n“Sensing Global Changes in Local Patterns of Energy Consumption in\nCities During the Early Stages of the COVID-19 Pandemic.”\nCities 129 (October): 103808. https://doi.org/10.1016/j.cities.2022.103808."
   }
 ]

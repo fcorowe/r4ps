@@ -23,6 +23,8 @@ book:
   repo-url: https://github.com/fcorowe/r4ps
   repo-actions: [edit]
   sharing: [twitter, facebook]
+  twitter-card:
+    creator: "@fcorowe"
   sidebar:
     style: docked
     background: light
@@ -49,7 +51,8 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: ember.scss
+    css: styles.css
   pdf:
     documentclass: scrreprt
 

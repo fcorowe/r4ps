@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Population Science",
     "section": "",
-    "text": "This is the website for “Population Science”. This is a course taught by Dr. Francisco Rowe, Dr. Carmen Cabrera-Arnau and Dr. Elisabetta Pietrostefani from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. You will learn applied tools and cutting-edge analytical approaches to use digital footprint data to explore and understand human population trends and patterns, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods.\nThe website is free to use and is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International. A compilation of this web course is hosted as a GitHub repository that you can access:"
+    "text": "This is the website for “Population Science”. This is a course designed and delivered by Dr. Francisco Rowe, Dr. Carmen Cabrera-Arnau and Dr. Elisabetta Pietrostefani from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. You will learn applied tools and cutting-edge analytical approaches to use digital footprint data to explore and understand human population trends and patterns, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods.\nThe website is free to use and is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International. A compilation of this web course is hosted as a GitHub repository that you can access:"
   },
   {
     "objectID": "intro.html",
@@ -88,13 +88,34 @@
     "href": "index.html#contact",
     "title": "Population Science",
     "section": "Contact",
-    "text": "Contact\n\nFrancisco Rowe - f.rowe-gonzalez [at] liverpool.ac.uk Senior Lecturer in Quantitative Human Geography Office 507, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.\n\n\nCarmen Cabrera-Arnau - c.cabrera-arnau [at] liverpool.ac.uk Lecturer in Geographic Data Science Office 1xx, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.\n\n\nElisabetta Pietrostefani - e.pietrostefani [at] liverpool.ac.uk Lecturer in Geographic Data Science Office 6xx, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom."
+    "text": "Contact\n\nFrancisco Rowe - f.rowe-gonzalez [at] liverpool.ac.uk Senior Lecturer in Quantitative Human Geography Office 507, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.\n\n\nCarmen Cabrera-Arnau - c.cabrera-arnau [at] liverpool.ac.uk Lecturer in Geographic Data Science Office 1/016, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.\n\n\nElisabetta Pietrostefani - e.pietrostefani [at] liverpool.ac.uk Lecturer in Geographic Data Science Office 6xx, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom."
   },
   {
     "objectID": "intro.html#aims",
     "href": "intro.html#aims",
     "title": "1  Overview",
     "section": "1.1 Aims",
-    "text": "1.1 Aims\nThis module aims to:\n\nprovide an introduction to fundamental theories of population science;\nintroduce students to novel data and approaches to understanding population dynamics and societal change; and,\nequip students with skills and experience to conduct population science using computational, data science approaches.\n\n\n\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
+    "text": "1.1 Aims\nThis module aims to:\n\nprovide an introduction to fundamental theories of population science;\nintroduce students to novel data and approaches to understanding population dynamics and societal change; and,\nequip students with skills and experience to conduct population science using computational, data science approaches."
+  },
+  {
+    "objectID": "intro.html#learning-outcomes",
+    "href": "intro.html#learning-outcomes",
+    "title": "1  Overview",
+    "section": "1.2 Learning Outcomes",
+    "text": "1.2 Learning Outcomes\nBy the end of the module, students should be able to:\n\ngain an appreciation of relevant demographic theory to help interpret patterns of popu- lation change;\ndevelop an understanding of the types of demographic and social science methods that are essential for interpreting and analysing digital footprint data in the context of population dynamics;\ndevelop the ability to apply different methods to understand population dynamics and societal change;\ngain an appreciation of how population science approaches can produce relevant evidence to inform policy debates;\ndevelop critical awareness of modern demographic analysis and ethical considerations in the use of digital footprint data."
+  },
+  {
+    "objectID": "intro.html#feedback",
+    "href": "intro.html#feedback",
+    "title": "1  Overview",
+    "section": "1.3 Feedback",
+    "text": "1.3 Feedback\nFormal assessment of two computational essays. Written assignment-specific feedback will be provided within three working weeks of the submission deadline. Comments will offer an understanding of the mark awarded and identify areas which can be considered for improvement in future assignments.\nVerbal face-to-face feedback. Immediate face-to-face feedback will be provided during computer, discussion and clinic sessions in interaction with staff. This will take place in all live sessions during the semester.\nOnline forum. Asynchronous written feedback will be provided via an online forum. Students are encouraged to contribute by asking and answering questions relating to the module content. Staff will monitor the forum Monday to Friday 9am-5pm, but it will be open to students to make contributions at all times. Response time will vary depending on the complexity of the question and staff availability."
+  },
+  {
+    "objectID": "intro.html#computational-environment",
+    "href": "intro.html#computational-environment",
+    "title": "1  Overview",
+    "section": "1.4 Computational Environment",
+    "text": "1.4 Computational Environment\nTo reproduce the code in the book, you need the following software packages:\n\nR-4.2.2\nRStudio 2022.12.0-353\nQuarto 1.2.280\nthe list of libraries in the next section\n\nTo check your version of:\n\nR and libraries run sessionInfo()\nRStudio click help on the menu bar and then About\nQuarto check the version file in the quarto folder on your computer.\n\nTo install and update:\n\nR, download the appropriate version from The Comprehensive R Archive Network (CRAN)\nRStudio, download the appropriate version from Posit\nQuarto, download the appropriate version from the Quarto website\n\n\n1.4.1 List of libraries\nThe list of libraries used in this book is provided below:\n\ntidyverse\nviridis\nviridisLite\nggthemes\npatchwork\nshowtext\nRColorBrewer\nlubridate\ntmap\nsjPlot\nsf\nsp\nkableExtra\n\nYou need to ensure you have installed the list of libraries used in this book, running the following code:\n\nlist.of.packages.cran <- c( “tidyverse”, “viridis”, “viridisLite”, “ggthemes”, “patchwork”, “showtext”, “RColorBrewer”, “lubridate”, “tmap”, “sjPlot”, “sf”, “sp”, “kableExtra”)\n\n\nnew.packages.cran <- list.of.packages.cran[!(list.of.packages.cran %in% installed.packages()[,“Package”])] if(length(new.packages.cran)) install.packages(new.packages.cran)\n\n\nfor(i in 1:length(list.of.packages.cran)) { library(list.of.packages.cran[i], character.only = T) }\n\n\n\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
   }
 ]

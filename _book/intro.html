@@ -220,6 +220,12 @@ div.csl-indent {
    
   <ul>
   <li><a href="#aims" id="toc-aims" class="nav-link active" data-scroll-target="#aims"><span class="toc-section-number">1.1</span>  Aims</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="toc-section-number">1.2</span>  Learning Outcomes</a></li>
+  <li><a href="#feedback" id="toc-feedback" class="nav-link" data-scroll-target="#feedback"><span class="toc-section-number">1.3</span>  Feedback</a></li>
+  <li><a href="#computational-environment" id="toc-computational-environment" class="nav-link" data-scroll-target="#computational-environment"><span class="toc-section-number">1.4</span>  Computational Environment</a>
+  <ul class="collapse">
+  <li><a href="#list-of-libraries" id="toc-list-of-libraries" class="nav-link" data-scroll-target="#list-of-libraries"><span class="toc-section-number">1.4.1</span>  List of libraries</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/intro.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -252,6 +258,73 @@ div.csl-indent {
 <li><p>introduce students to novel data and approaches to understanding population dynamics and societal change; and,</p></li>
 <li><p>equip students with skills and experience to conduct population science using computational, data science approaches.</p></li>
 </ul>
+</section>
+<section id="learning-outcomes" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">1.2</span> Learning Outcomes</h2>
+<p>By the end of the module, students should be able to:</p>
+<ul>
+<li><p>gain an appreciation of relevant demographic theory to help interpret patterns of popu- lation change;</p></li>
+<li><p>develop an understanding of the types of demographic and social science methods that are essential for interpreting and analysing digital footprint data in the context of population dynamics;</p></li>
+<li><p>develop the ability to apply different methods to understand population dynamics and societal change;</p></li>
+<li><p>gain an appreciation of how population science approaches can produce relevant evidence to inform policy debates;</p></li>
+<li><p>develop critical awareness of modern demographic analysis and ethical considerations in the use of digital footprint data.</p></li>
+</ul>
+</section>
+<section id="feedback" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="feedback"><span class="header-section-number">1.3</span> Feedback</h2>
+<p><em>Formal assessment of two computational essays</em>. Written assignment-specific feedback will be provided within three working weeks of the submission deadline. Comments will offer an understanding of the mark awarded and identify areas which can be considered for improvement in future assignments.</p>
+<p><em>Verbal face-to-face feedback</em>. Immediate face-to-face feedback will be provided during computer, discussion and clinic sessions in interaction with staff. This will take place in all live sessions during the semester.</p>
+<p><em>Online forum</em>. Asynchronous written feedback will be provided via an online forum. Students are encouraged to contribute by asking and answering questions relating to the module content. Staff will monitor the forum Monday to Friday 9am-5pm, but it will be open to students to make contributions at all times. Response time will vary depending on the complexity of the question and staff availability.</p>
+</section>
+<section id="computational-environment" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="computational-environment"><span class="header-section-number">1.4</span> Computational Environment</h2>
+<p>To reproduce the code in the book, you need the following software packages:</p>
+<ul>
+<li>R-4.2.2</li>
+<li>RStudio 2022.12.0-353</li>
+<li>Quarto 1.2.280</li>
+<li>the list of libraries in the next section</li>
+</ul>
+<p>To check your version of:</p>
+<ul>
+<li>R and libraries run <code>sessionInfo()</code></li>
+<li>RStudio click <code>help</code> on the menu bar and then <code>About</code></li>
+<li>Quarto check the <code>version</code> file in the quarto folder on your computer.</li>
+</ul>
+<p>To install and update:</p>
+<ul>
+<li>R, download the appropriate version from <a href="https://cran.r-project.org">The Comprehensive R Archive Network (CRAN)</a></li>
+<li>RStudio, download the appropriate version from <a href="https://posit.co/download/rstudio-desktop/">Posit</a></li>
+<li>Quarto, download the appropriate version from <a href="https://quarto.org/docs/get-started/">the Quarto website</a></li>
+</ul>
+<section id="list-of-libraries" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="list-of-libraries"><span class="header-section-number">1.4.1</span> List of libraries</h3>
+<p>The list of libraries used in this book is provided below:</p>
+<ul>
+<li><code>tidyverse</code></li>
+<li><code>viridis</code></li>
+<li><code>viridisLite</code></li>
+<li><code>ggthemes</code></li>
+<li><code>patchwork</code></li>
+<li><code>showtext</code></li>
+<li><code>RColorBrewer</code></li>
+<li><code>lubridate</code></li>
+<li><code>tmap</code></li>
+<li><code>sjPlot</code></li>
+<li><code>sf</code></li>
+<li><code>sp</code></li>
+<li><code>kableExtra</code></li>
+</ul>
+<p>You need to ensure you have installed the list of libraries used in this book, running the following code:</p>
+<blockquote class="blockquote">
+<p>list.of.packages.cran &lt;- c( “tidyverse”, “viridis”, “viridisLite”, “ggthemes”, “patchwork”, “showtext”, “RColorBrewer”, “lubridate”, “tmap”, “sjPlot”, “sf”, “sp”, “kableExtra”)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>new.packages.cran &lt;- list.of.packages.cran[!(list.of.packages.cran %in% installed.packages()[,“Package”])] if(length(new.packages.cran)) install.packages(new.packages.cran)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>for(i in 1:length(list.of.packages.cran)) { library(list.of.packages.cran[i], character.only = T) }</p>
+</blockquote>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
@@ -259,6 +332,7 @@ div.csl-indent {
 Rowe, Francisco. 2021. <span>“Big Data and Human Geography.”</span> <a href="http://dx.doi.org/10.31235/osf.io/phz3e">http://dx.doi.org/10.31235/osf.io/phz3e</a>.
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,7 +1,13 @@
-# Introduction
+# Overview
 
-This chapter will introduce the book - @tao2018
+The module provides students with an introduction to the use of data science and digital footprint data to analyse human population dynamics. Established approaches to study population dynamics rely on traditional data sources, such as censuses and surveys. Digital footprint data have emerged as a novel source of information providing an opportunity to understand key societal population issues at an unprecedented temporal and spatial granularity at scale [@rowe2021b]. Yet, these data represent major methodological challenges to traditional demographic approaches [@rowe2021b]. Machine learning, artificial intelligence and data science approaches are needed to overcome these methodological challenges.
 
-```{r}
-1 + 1
-```
+## Aims
+
+This module aims to:
+
+-   provide an introduction to fundamental theories of population science;
+
+-   introduce students to novel data and approaches to understanding population dynamics and societal change; and,
+
+-   equip students with skills and experience to conduct population science using computational, data science approaches.

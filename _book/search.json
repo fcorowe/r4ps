@@ -18,63 +18,63 @@
     "href": "privacy.html",
     "title": "2  Data Privacy, Ethics and Biases",
     "section": "",
-    "text": "Green, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021. “New Forms of Data and New Forms of Opportunities to Monitor and Tackle a Pandemic.” In, 423–29. Springer International Publishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
+    "text": "Rowe (2021)\nGreen, Pollock, and Rowe (2021)\n\n\n\n\n\nGreen, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021. “New Forms of Data and New Forms of Opportunities to Monitor and Tackle a Pandemic.” In, 423–29. Springer International Publishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
   },
   {
     "objectID": "geodemographics.html",
     "href": "geodemographics.html",
     "title": "3  Geodemographics",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\nThis is Carmen writing.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Carmen to write"
   },
   {
     "objectID": "sequence-analysis.html",
     "href": "sequence-analysis.html",
     "title": "4  Sequence Analysis",
     "section": "",
-    "text": "Rowe, Neville, and González-Leonardo (2022)\nNewsham and Rowe (2022)\nRowe, Robinson, and Patias (2022)\n\n\n\n\n\nNewsham, Niall, and Francisco Rowe. 2022. “Understanding the Trajectories of Population Decline Across Rural and Urban Europe: A Sequence Analysis.” https://doi.org/10.48550/ARXIV.2203.09798.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. “Sensing Population Displacement from Ukraine Using Facebook Data: Potential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm.\n\n\nRowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022. “Sensing Global Changes in Local Patterns of Energy Consumption in Cities During the Early Stages of the COVID-19 Pandemic.” Cities 129 (October): 103808. https://doi.org/10.1016/j.cities.2022.103808."
+    "text": "Francisco to write\nThis chapter shows the use of sequence analysis to study population decline and draw on the following papers:\n\nRowe, Neville, and González-Leonardo (2022)\nNewsham and Rowe (2022)\nRowe, Robinson, and Patias (2022)\n\n\n\n\n\nNewsham, Niall, and Francisco Rowe. 2022. “Understanding the Trajectories of Population Decline Across Rural and Urban Europe: A Sequence Analysis.” https://doi.org/10.48550/ARXIV.2203.09798.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. “Sensing Population Displacement from Ukraine Using Facebook Data: Potential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm.\n\n\nRowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022. “Sensing Global Changes in Local Patterns of Energy Consumption in Cities During the Early Stages of the COVID-19 Pandemic.” Cities 129 (October): 103808. https://doi.org/10.1016/j.cities.2022.103808."
   },
   {
     "objectID": "network.html",
     "href": "network.html",
     "title": "5  Network Analysis",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Carmen to write"
   },
   {
     "objectID": "sentiment-analysis.html",
     "href": "sentiment-analysis.html",
     "title": "6  Sentiment Analysis",
     "section": "",
-    "text": "Rowe (2021)\nRowe et al. (2021)\n\n\n\n\n\nRowe, Francisco. 2021. “Using Twitter Data to Monitor Immigration Sentiment.” http://dx.doi.org/10.31219/osf.io/sf7u4.\n\n\nRowe, Francisco, Michael Mahony, Eduardo Graells-Garrido, Marzia Rango, and Niklas Sievers. 2021. “Using Twitter to Track Immigration Sentiment During Early Stages of the COVID-19 Pandemic.” Data & Policy 3. https://doi.org/10.1017/dap.2021.38."
+    "text": "Francisco to write\nThis chapter will draw on:\n\nRowe (2021)\nRowe et al. (2021)\n\n\n\n\n\nRowe, Francisco. 2021. “Using Twitter Data to Monitor Immigration Sentiment.” http://dx.doi.org/10.31219/osf.io/sf7u4.\n\n\nRowe, Francisco, Michael Mahony, Eduardo Graells-Garrido, Marzia Rango, and Niklas Sievers. 2021. “Using Twitter to Track Immigration Sentiment During Early Stages of the COVID-19 Pandemic.” Data & Policy 3. https://doi.org/10.1017/dap.2021.38."
   },
   {
     "objectID": "topic-modelling.html",
     "href": "topic-modelling.html",
     "title": "7  Topic Modelling",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Elisabetta to write"
   },
   {
     "objectID": "longitudinal-1.html",
     "href": "longitudinal-1.html",
     "title": "8  Modelling Time",
     "section": "",
-    "text": "1 + 1\n\n[1] 2\n\n\n\n\n\n\nTao, Sui, Jonathan Corcoran, Francisco Rowe, and Mark Hickman. 2018. “To Travel or Not to Travel: ‘Weather’ Is the Question. Modelling the Effect of Local Weather Conditions on Bus Ridership.” Transportation Research Part C: Emerging Technologies 86 (January): 147–67. https://doi.org/10.1016/j.trc.2017.11.005."
+    "text": "Elisabetta to write\nTao et al. (2018)\n\n\n\n\nTao, Sui, Jonathan Corcoran, Francisco Rowe, and Mark Hickman. 2018. “To Travel or Not to Travel: ‘Weather’ Is the Question. Modelling the Effect of Local Weather Conditions on Bus Ridership.” Transportation Research Part C: Emerging Technologies 86 (January): 147–67. https://doi.org/10.1016/j.trc.2017.11.005."
   },
   {
     "objectID": "longitudinal-2.html",
     "href": "longitudinal-2.html",
     "title": "9  Assessing Interventions",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Elisabetta to write"
   },
   {
     "objectID": "machine-learning.html",
     "href": "machine-learning.html",
     "title": "10  Machine Learning",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "Carmen to write"
   },
   {
     "objectID": "references.html",
@@ -116,6 +116,13 @@
     "href": "intro.html#computational-environment",
     "title": "1  Overview",
     "section": "1.4 Computational Environment",
-    "text": "1.4 Computational Environment\nTo reproduce the code in the book, you need the following software packages:\n\nR-4.2.2\nRStudio 2022.12.0-353\nQuarto 1.2.280\nthe list of libraries in the next section\n\nTo check your version of:\n\nR and libraries run sessionInfo()\nRStudio click help on the menu bar and then About\nQuarto check the version file in the quarto folder on your computer.\n\nTo install and update:\n\nR, download the appropriate version from The Comprehensive R Archive Network (CRAN)\nRStudio, download the appropriate version from Posit\nQuarto, download the appropriate version from the Quarto website\n\n\n1.4.1 List of libraries\nThe list of libraries used in this book is provided below:\n\ntidyverse\nviridis\nviridisLite\nggthemes\npatchwork\nshowtext\nRColorBrewer\nlubridate\ntmap\nsjPlot\nsf\nsp\nkableExtra\n\nYou need to ensure you have installed the list of libraries used in this book, running the following code:\n\nlist.of.packages.cran <- c( “tidyverse”, “viridis”, “viridisLite”, “ggthemes”, “patchwork”, “showtext”, “RColorBrewer”, “lubridate”, “tmap”, “sjPlot”, “sf”, “sp”, “kableExtra”)\n\n\nnew.packages.cran <- list.of.packages.cran[!(list.of.packages.cran %in% installed.packages()[,“Package”])] if(length(new.packages.cran)) install.packages(new.packages.cran)\n\n\nfor(i in 1:length(list.of.packages.cran)) { library(list.of.packages.cran[i], character.only = T) }\n\n\n\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
+    "text": "1.4 Computational Environment\nTo reproduce the code in the book, you need the following software packages:\n\nR-4.2.2\nRStudio 2022.12.0-353\nQuarto 1.2.280\nthe list of libraries in the next section\n\nTo check your version of:\n\nR and libraries run sessionInfo()\nRStudio click help on the menu bar and then About\nQuarto check the version file in the quarto folder on your computer.\n\nTo install and update:\n\nR, download the appropriate version from The Comprehensive R Archive Network (CRAN)\nRStudio, download the appropriate version from Posit\nQuarto, download the appropriate version from the Quarto website\n\n\n1.4.1 List of libraries\nThe list of libraries used in this book is provided below:\n\ntidyverse\nviridis\nviridisLite\nggthemes\npatchwork\nshowtext\nRColorBrewer\nlubridate\ntmap\nsjPlot\nsf\nsp\nkableExtra\n\nYou need to ensure you have installed the list of libraries used in this book, running the following code:\n\nlist.of.packages.cran <- c( “tidyverse”, “viridis”, “viridisLite”, “ggthemes”, “patchwork”, “showtext”, “RColorBrewer”, “lubridate”, “tmap”, “sjPlot”, “sf”, “sp”, “kableExtra”)\n\n\nnew.packages.cran <- list.of.packages.cran[!(list.of.packages.cran %in% installed.packages()[,“Package”])] if(length(new.packages.cran)) install.packages(new.packages.cran)\n\n\nfor(i in 1:length(list.of.packages.cran)) { library(list.of.packages.cran[i], character.only = T) }"
+  },
+  {
+    "objectID": "intro.html#assessment",
+    "href": "intro.html#assessment",
+    "title": "1  Overview",
+    "section": "1.5 Assessment",
+    "text": "1.5 Assessment\nThe final module mark is composed of the two computational essays. Together they are designed to cover the materials introduced in the entirety of content covered during the semester. A computational essay is an essay whose narrative is supported by code and computational results that are included in the essay itself. Each teaching week, you will be required to address a set of questions relating to the module content covered in that week, and to use the material that you will produce for this purpose to build your computational essay.\nAssignment 1 (50%) refer to the set of questions at the end of Chapters Chapter 2, Chapter 3, Chapter 4 and Chapter 5. You are required to use your responses to build your computational essay. Each chapter provides more specific guidance of the tasks and discussion that you are required to consider in your assignment.\nAssignment 2 (50%) refer to the set of questions at the end of Chapters Chapter 6, Chapter 7, Chapter 8, Chapter 9 and ?sec-chp11. You are required to use your responses to build your computational essay. Each chapter provides more specific guidance of the tasks and discussion that you are required to consider in your assignment.\n\n1.5.1 Format Requirements\nBoth assignments will have the same requirements:\nMaximum word count: 2,000 words, excluding figures and references. Up to three maps, plot or figures (a figure may include more than one map and/or plot and will only count as one but needs to be integrated in the figure) Up to two tables. Assignments need to be prepared in R Notebook format and then converted into a self-contained HTML file that will then be submitted via Turnitin. The notebook should only display content that will be assessed. Intermediate steps do not need to be displayed. Messages resulting from loading packages, attaching data frames, or similar messages do not need to be included as output code. Useful resources to customise your R notebook can be found on the R Markdown website from RStudio: * A Guide * R Markdown: The Definitive Guide by Xie, Allaire, and Grolemund (2018) * R Markdown Reference Guide\nTwo R Notebook templates will be available via the module Canvas site.\nSubmission is electronic only via Turnitin on Canvas.\n\n\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
   }
 ]

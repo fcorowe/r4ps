@@ -1,11 +1,3 @@
-# Geodemographics
+# Geodemographics {#sec-chp3}
 
-This is a book created from markdown and executable code.
-
-See @knuth84 for additional discussion of literate programming.
-
-```{r}
-1 + 1
-```
-
-This is Carmen writing.
+Carmen to write

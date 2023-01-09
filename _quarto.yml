@@ -4,12 +4,7 @@ project:
 book:
   title: "Population Science"
   author: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
-
-  author-meta: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
-  date-meta: today
-
-  description-meta: |
-    This book will...
+  date: today
 
   page-footer:
     left: |
@@ -28,7 +23,6 @@ book:
   sidebar:
     style: docked
     background: light
-  date: "01/10/2022"
   downloads: [pdf, epub]
   cover-image: source-dall-e.png
   cover-image-alt: |

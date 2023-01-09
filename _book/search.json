@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Population Science",
     "section": "",
-    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\nRowe, Lovelace, and Dennett (2022)\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nRowe, Francisco, Robin Lovelace, and Adam Dennett. 2022. “Spatial Interaction Modelling: A Manifesto.” http://dx.doi.org/10.31219/osf.io/xcdms."
+    "text": "This is the website for “Population Science”. This is a course taught by Dr. Francisco Rowe, Dr. Carmen Cabrera-Arnau and Dr. Elisabetta Pietrostefani from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. You will learn applied tools and cutting-edge analytical approaches to use digital footprint data to explore and understand human population trends and patterns, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods.\nThe website is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International. A compilation of this web course is hosted as a GitHub repository that you can access:"
   },
   {
     "objectID": "intro.html",
@@ -25,7 +25,7 @@
     "href": "geodemographics.html",
     "title": "3  Geodemographics",
     "section": "",
-    "text": "See Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\nThis is Carmen writing.\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
   },
   {
     "objectID": "sequence-analysis.html",
@@ -82,5 +82,12 @@
     "title": "References",
     "section": "",
     "text": "Green, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021.\n“New Forms of Data and New Forms of Opportunities to Monitor and\nTackle a Pandemic.” In, 423–29. Springer International\nPublishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.\n\n\nNewsham, Niall, and Francisco Rowe. 2022. “Understanding the\nTrajectories of Population Decline Across Rural and Urban Europe: A\nSequence Analysis.” https://doi.org/10.48550/ARXIV.2203.09798.\n\n\nRowe, Francisco. 2021a. “Using Twitter Data to Monitor Immigration\nSentiment.” http://dx.doi.org/10.31219/osf.io/sf7u4.\n\n\n———. 2021b. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e.\n\n\nRowe, Francisco, Robin Lovelace, and Adam Dennett. 2022. “Spatial\nInteraction Modelling: A Manifesto.” http://dx.doi.org/10.31219/osf.io/xcdms.\n\n\nRowe, Francisco, Michael Mahony, Eduardo Graells-Garrido, Marzia Rango,\nand Niklas Sievers. 2021. “Using Twitter to Track Immigration\nSentiment During Early Stages of the COVID-19 Pandemic.” Data\n& Policy 3. https://doi.org/10.1017/dap.2021.38.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022.\n“Sensing Population Displacement from Ukraine Using Facebook Data:\nPotential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm.\n\n\nRowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022.\n“Sensing Global Changes in Local Patterns of Energy Consumption in\nCities During the Early Stages of the COVID-19 Pandemic.”\nCities 129 (October): 103808. https://doi.org/10.1016/j.cities.2022.103808.\n\n\nTao, Sui, Jonathan Corcoran, Francisco Rowe, and Mark Hickman. 2018.\n“To Travel or Not to Travel: ‘Weather’\nIs the Question. Modelling the Effect of Local Weather Conditions on Bus\nRidership.” Transportation Research Part C: Emerging\nTechnologies 86 (January): 147–67. https://doi.org/10.1016/j.trc.2017.11.005."
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Population Science",
+    "section": "Contact",
+    "text": "Contact\n\nFrancisco Rowe - f.rowe-gonzalez [at] liverpool.ac.uk Senior Lecturer in Quantitative Human Geography Office 507, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.\n\n\nCarmen Cabrera-Arnau - c.cabrera-arnau [at] liverpool.ac.uk Lecturer in Geographic Data Science Office 1xx, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom.\n\n\nElisabetta Pietrostefani - e.pietrostefani [at] liverpool.ac.uk Lecturer in Geographic Data Science Office 6xx, Roxby Building, University of Liverpool - 74 Bedford St S, Liverpool, L69 7ZT, United Kingdom."
   }
 ]

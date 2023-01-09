@@ -30,7 +30,7 @@ book:
     background: light
   date: "01/10/2022"
   downloads: [pdf, epub]
-  cover-image: density_map.png
+  cover-image: source-dall-e.png
   cover-image-alt: |
     Alternative text describing the book cover
   chapters:

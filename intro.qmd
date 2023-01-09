@@ -87,7 +87,7 @@ The final module mark is composed of the *two computational essays*. Together th
 
 **Assignment 1 (50%)** refer to the set of questions at the end of Chapters @sec-chp2, @sec-chp3, @sec-chp4 and @sec-chp5. You are required to use your responses to build your computational essay. Each chapter provides more specific guidance of the tasks and discussion that you are required to consider in your assignment.
 
-**Assignment 2 (50%)** refer to the set of questions at the end of Chapters @sec-chp6, @sec-chp7, @sec-chp8, @sec-chp9 and @sec-chp11. You are required to use your responses to build your computational essay. Each chapter provides more specific guidance of the tasks and discussion that you are required to consider in your assignment.
+**Assignment 2 (50%)** refer to the set of questions at the end of Chapters @sec-chp6, @sec-chp7, @sec-chp8, @sec-chp9 and @sec-chp10. You are required to use your responses to build your computational essay. Each chapter provides more specific guidance of the tasks and discussion that you are required to consider in your assignment.
 
 ### Format Requirements
 

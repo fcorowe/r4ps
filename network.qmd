@@ -1,3 +1,304 @@
 # Network Analysis {#sec-chp5}
 
-Carmen to write
+## Dependencies
+
+In this session we need some basic R packages before importing the data.
+
+```{r}
+
+library(magrittr)
+library(dplyr)
+
+# An R package for network manipulation and analysis
+library(igraph)
+```
+
+```{r}
+getwd() #Obtain the working directory, where we will save the data folder
+```
+
+## Data
+
+### The US Census dataset
+
+Describe here the dataset used for this session. It has been cleaned beforehand by myself.
+
+Each row corresponds to a origin-destination pair, the number or rows gives the total number of reported migratory movements.
+
+### Import the data
+
+Before we start any analysis with the data, ensure to set the path to the directory where we are working. Please replace in the following line the path to the folder where you have placed the data file.
+
+```{r}
+
+df <- read.csv("./data/metro_to_metro_2015_2019_US_migration.csv")
+df$MSA_Current_Code <- as.character(df$MSA_Current_Code) #Ensure the MSA code is imported as a character and not as a number
+head(df) #Examine the first few rows of the dataset
+
+```
+
+We can obtain the total number of reported migratory movements with the following command:
+
+```{r}
+nrow(df)
+```
+
+## Creating networks
+
+Before we start to analyse the data introduced in section 5.2., let us first take a step back to consider the main object of study of this Chapter: the so-called networks. In the most general sense, a **network** (also known as a graph) is a structure formed by a set of objects which may have some connections between them. The objects are represented by **nodes** (a.k.a. vertices) and the connections between these objects are represented by **edges** (a.k.a. links). Networks are used as a tool to conceptualise many real-life contexts, such as the friendships between the members of a year group at school, the direct airline connections between cities in a continent or the presence of hyperlinks between a set of websites. In this session, we will use networks to model the migratory flows between US cities.
+
+### Starting from the basics
+
+In order to create, manipulate and analyse networks in R, we will use the igraph package, which we imported in section 5.1. We start by creating a very simple network with the code below. The network contains five nodes and five edges and it is undirected, so the edges do not have orientations. The nodes and edges could represent, respectively, a set of cities and the presence of migration flows between these cities in two consecutive years.
+
+```{r}
+g1 <- graph( edges=c(1,2, 1,4, 2,3, 2,4, 4,5), n=5, directed=F ) # Creates an undirected network with 5 nodes and 5 edges
+# The number of nodes is given by argument n
+# In this case, the node labels or IDs are represented by numbers 1 to 5
+# The edges are specified as a list of pairs of nodes
+plot(g1) # A simple plot of the network allows us to visualise it
+```
+
+If the connections between the nodes of a network are non-reciprocal, the network is called directed. For example, this could correspond to a situation where there are people moving from city 1 to city 2, but nobody moving from city 2 to city 1. Note that in the code below we have not only added directions to the edges, but we have also added a few additional parameters to the plot function in order to customise the diagram.
+
+```{r}
+g2 <- graph( edges=c(1,2, 1,4, 2,3, 4,1, 4,2, 4,5), n=7, directed=T ) # Creates a directed network with 7 nodes and 6 edges 
+#note that we now have edge 1,4 and edge 4,1 and that 2 of the nodes are isolated
+plot(g2, vertex.frame.color="red",  vertex.label.color="black",
+vertex.label.cex=0.9, vertex.label.dist=2.3, edge.curved=0.3, edge.arrow.size=.5, edge.color = "blue", vertex.color="yellow", vertex.size=15) # A simple plot of the network with a few extra features
+```
+
+The network can also be defined as a list containing pairs of named nodes. Then, it is not necessary to specify the number of nodes but the isolated nodes have to be included. The following code generates a network which is equivalent to the one above.
+
+```{r}
+g3 <- graph( c("City 1","City 2", "City 2","City 3", "City 1","City 4",  "City 4","City 1",  "City 4","City 2", "City 4","City 5"), isolates=c("City 6", "City 7") ) 
+plot(g3, vertex.frame.color="red",  vertex.label.color="black",
+vertex.label.cex=0.9, vertex.label.dist=2.3, edge.curved=0.3, edge.arrow.size=.5, edge.color = "blue", vertex.color="yellow", vertex.size=15) 
+
+
+```
+
+### Adding attributes
+
+In R, we can add attributes to the nodes, edges and the network. To add attributes to the nodes, we first need to access them via the following command:
+
+```{r}
+V(g3)
+```
+
+The node attribute *name* is automatically generated from the node labels that we manually assigned before.
+
+```{r}
+V(g3)$name
+```
+
+But other node attributes could be added. For example, the current population of the cities represented by the nodes:
+
+```{r}
+V(g3)$population <- c(134000, 92000, 549000, 1786000, 74000, 8000, 21000)
+```
+
+Similarly, we can access the edges:
+
+```{r}
+E(g3)
+```
+
+and add edge attributes, such as the number of people moving from an origin to a destination city in two consecutive years. We call this attribute the *weight* of the edge, since if there is a lot of people going from one city to another, the connection between these cities has more importance or "weight" in the network.
+
+```{r}
+{E(g3)$weight <- c(2000, 3000, 5000, 1000, 1000, 4000)}
+```
+
+We can examine the adjacency matrix of the network, which represents the presence of edges between different pairs of nodes. In this case, each row corresponds to an origin city and each column to a destination:
+
+```{r}
+g3[] #The adjacency matrix of network g3
+```
+
+We can also look at the existing node and edge attributes.
+
+```{r}
+vertex_attr(g3) #Node attributes of g3. Use edge_attr() to access the edge attributes
+```
+
+Finally, it is possible to add network attributes
+
+```{r}
+g3$title <- "Network of migration between cities"
+```
+
+## Reading networks from data files
+
+### Preparing the data
+
+At the beginning of the chapter, we defined a data frame called *df* based on some imported data from the US Census about migratory movements between different US cities, or more precisely, between US Metropolitan Statistical Areas. This is a large data frame containing 52,930 rows, but how can we turn this data frame into a network similar to the ones that we generated in section 5.3.? The igraph function **graph_from_data_frame()** can do this for us. To find out more about this function, we can run the following command:
+
+```{r}
+help("graph_from_data_frame")
+```
+
+As we can see, the input data for **graph_from_data_frame()** needs to be in a certain format which is different from our migration data frame. In particular, the function requires three arguments: 1) *d*, which is a data frame containing an edge list in the first two columns and any additional columns are considered as edge attributes; 2) *vertices*, which is either NULL or a data frame with vertex metadata (i.e. vertex attributes); and 3) *directed*, which is a boolean argument indicating whether the network is directed or not. Our next task is therefore to obtain 1) and 2) from the migration data frame called *df*.
+
+Let us start with argument 1). Each row in *df* will correspond to an edge in the migration network since it contains information about a pair of origin and destination cities for two consecutive years. The names of the origin and destination cities are given by the columns in *df* called *MSA_Previous_Name* and *MSA_Current_Name*. In addition, the column called *Movers_Metro_to_Metro_Flow_Estimate* gives the number of people moving between the origin and the destination cities, so this will be the weight attribute of each edge in the migration network. Hence, we can define a data frame of edges which we will call *df_edges* that conforms with the format required by the argument 1) as follows:
+
+```{r}
+
+#The pipe operator used below and denoted by %>% is a feature of the magrittr package, it takes the output of one function and passes it into another function as an argument
+
+df_edges <- data.frame(df$MSA_Previous_Name, df$MSA_Current_Name, df$Movers_Metro_to_Metro_Flow_Estimate) %>%
+  rename(origin = df.MSA_Previous_Name, destination = df.MSA_Current_Name, weight = df.Movers_Metro_to_Metro_Flow_Estimate) # Creates the df_edges data frame with data from df and renames the columns as "origin", "destination" and "weight"
+
+df_edges$weight <- as.numeric(gsub(",","",df_edges$weight)) #Ensure that the weight attribute is stored as a number and not as character 
+```
+
+For argument 2) we can define a data frame of nodes which we will call *df_nodes*, where each row will correspond to a unique node or city. To obtain all the unique cities from *df*, we can firstly obtain a data frame of unique origin cities, then a data frame of unique destinations, and finally, apply the **full_join()** function to these two data frames to obtain their union, which will be *df_nodes*. The name of the unique cities in *df_nodes* is in the column called *label*, the other columns can be seen as the nodes metadata.
+
+```{r}
+df_unique_origins <- df %>% 
+  distinct(MSA_Previous_Name) %>%
+  rename(name = MSA_Previous_Name) 
+
+df_unique_destinations <- df %>%
+  distinct(MSA_Current_Name) %>%
+  rename(name = MSA_Current_Name)
+
+df_nodes <- full_join(df_unique_origins, df_unique_destinations, by = "name")
+
+```
+
+```{r}
+df_nodes
+```
+
+Finally, a directed migration network can be obtained with the following line of code:
+
+```{r}
+US_migration_network <- graph_from_data_frame(d = df_edges,
+                                       vertices = df_nodes,
+                                       directed = TRUE)
+```
+
+## Network visualisation
+
+Once the data is imported, we need to build the network. The aim of this section is to visualise the network. To facilitate the visualisation, we will filter the dataset so that we only include cities from a state. In this case, Minnesota. To filter, we use the **grepl()** function, which stands for grep logical. Both **grep()** and **grepl()** allow us to check whether a pattern is present in a character string or vector of a character string. While the **grep()** function returns vector of indices of the element if a pattern exists in that vector, the **grepl()** function returns TRUE if the given pattern is present in the vector. Otherwise, it returns FALSE. In this case, we are filtering the dataset so that only the rows where the field MSA_Current_State is MN, which is the official abbreviation for Minnesota.
+
+```{r}
+
+# df <- df %>% filter(grepl('MN', MSA_Current_State)) %>% filter(grepl('MN', MSA_Previous_State))
+```
+
+## 
+
+```{r}
+
+# library(network)
+# 
+# routes_network <- network(edges,
+#                           vertex.attr = nodes,
+#                           matrix.type = "edgelist",
+#                           ignore.eval = FALSE)
+# 
+# plot(routes_network, vertex.cex = 2.5)
+# 
+# detach(package:network)
+
+```
+
+```{r}
+
+
+# rm(routes_network)
+# library(igraph)
+# 
+# routes_igraph <- graph_from_data_frame(d = edges,
+#                                        vertices = nodes,
+#                                        directed = TRUE)
+# 
+# plot(routes_igraph,
+#      layout = layout_with_graphopt,
+#      vertex.size = 3,
+#      vertex.label.cex = 0.7,
+#      edge.arrow.size = 0.01)
+
+```
+
+```{r}
+
+# library(tidygraph)
+# library(ggraph)
+# 
+# routes_tidy <- tbl_graph(nodes = nodes,
+#                          edges = edges,
+#                          directed = TRUE)
+# 
+# routes_igraph_tidy <- as_tbl_graph(routes_igraph)
+# 
+# 
+# ggraph(routes_tidy, layout = "graphopt") + 
+#   geom_node_point() +
+#   geom_edge_link(aes(width = weight), alpha = 0.7) +
+#   scale_edge_width(range = c(0.01, 3)) +
+#   geom_node_text(aes(label = label), repel = TRUE, cex=2.5, color='red') +
+#   labs(edge_width = "Flow") +
+#   theme_graph()
+# ```
+# 
+# ```{r}
+# 
+# library(circlize)
+# 
+# chordDiagram(edges, annotationTrack = "grid", preAllocateTracks = list(track.height = 0.01))
+#   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+#   xlim = get.cell.meta.data("xlim")
+#   xplot = get.cell.meta.data("xplot")
+#   ylim = get.cell.meta.data("ylim")
+#   sector.name = get.cell.meta.data("sector.index")
+#   if(abs(xplot[2] - xplot[1]) < 1000) {
+#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
+#                 niceFacing = TRUE, adj = c(0, 0.05), cex=0.5)
+#   } else {
+#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
+#                 niceFacing = TRUE, adj = c(0, 0.05), cex=0.5)
+#   }
+# }, bg.border = NA)
+
+
+```
+
+```{r}
+
+# library(reshape2)
+# m1 <- acast(edges, origin ~ destination, value.var = 'weight')
+# m1[is.na(m1)] <- 0
+# 
+# rownames(m1) <- paste0("Origin ", 1:nrow(nodes))
+# colnames(m1) <- paste0("Destination ", 1:nrow(nodes))
+# 
+# chordDiagram(m1, annotationTrack = "grid", annotationTrackHeight = c(0.04, 0.2))
+# 
+# # Restart circular layout parameters
+# circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+#   xlim = get.cell.meta.data("xlim")
+#   xplot = get.cell.meta.data("xplot")
+#   ylim = get.cell.meta.data("ylim")
+#   sector.name = get.cell.meta.data("sector.index")
+#   if(abs(xplot[2] - xplot[1]) < 1000) {
+#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
+#                 niceFacing = TRUE, adj = c(-0.2, 0), cex=0.7)
+#   } else {
+#     circos.text(mean(xlim), ylim[1], sector.name, facing = "inside",
+#                 niceFacing = TRUE, adj = c(0, -0.2), cex=0.7)
+#   }
+# }, bg.border = NA)
+```
+
+If you want to play around and make a nicer diagram, check this [link](https://r-graph-gallery.com/122-a-circular-plot-with-the-circlize-package.html).
+
+## Network metrics
+
+Now that we have visualised a small migration network, let us define some of the network
+
+## Distances and paths
+
+## Subgroups and communities

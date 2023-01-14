@@ -93,14 +93,12 @@ The final module mark is composed of the *two computational essays*. Together th
 
 Both assignments will have the same requirements:
 
-Maximum word count: 2,000 words, excluding figures and references.
-Up to three maps, plot or figures (a figure may include more than one map and/or plot and will only count as one but needs to be integrated in the figure)
-Up to two tables.
-Assignments need to be prepared in R Notebook format and then converted into a self-contained HTML file that will then be submitted via Turnitin. The notebook should only display content that will be assessed. Intermediate steps do not need to be displayed. Messages resulting from loading packages, attaching data frames, or similar messages do not need to be included as output code. Useful resources to customise your R notebook can be found on the R Markdown website from RStudio:
-* A Guide
-* R Markdown: The Definitive Guide by Xie, Allaire, and Grolemund (2018)
-* R Markdown Reference Guide
+- Maximum word count: 2,000 words, excluding figures and references. 
+- Up to three maps, plot or figures (a figure may include more than one map and/or plot and will only count as one but needs to be integrated in the figure) 
+- Up to two tables. 
 
-Two R Notebook templates will be available via the module Canvas site.
+Assignments need to be prepared in "*Quarto Document*" format (i.e. qmd extension) and then converted into a self-contained HTML file that will then be submitted via Turnitin. The document should only display content that will be assessed. Intermediate steps do not need to be displayed. Messages resulting from loading packages, attaching data frames, or similar messages do not need to be included as output code. Useful resources to customise your R notebook can be found on [Quarto's website](https://quarto.org/docs/guide/).
+
+Two Quarto Document templates will be available via [the module Canvas site](https://canvas.liverpool.ac.uk/courses/60454).
 
 Submission is electronic only via Turnitin on Canvas.

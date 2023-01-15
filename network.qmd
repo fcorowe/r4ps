@@ -1,10 +1,10 @@
 # Network Analysis {#sec-chp5}
 
-## Dependencies
+## Dependencies {#sec-sec_dependencies}
 
 In this session we need some basic R packages before importing the data.
 
-```{r, message = FALSE}
+```{r}
 
 library(magrittr)
 library(dplyr)
@@ -17,7 +17,7 @@ library(igraph)
 getwd() #Obtain the working directory, where we will save the data folder
 ```
 
-## Data
+## Data {#sec-sec_data}
 
 ### The US Census dataset
 
@@ -43,13 +43,13 @@ We can obtain the total number of reported migratory movements with the followin
 nrow(df)
 ```
 
-## Creating networks
+## Creating networks {#sec-sec_create}
 
-Before we start to analyse the data introduced in section 5.2., let us first take a step back to consider the main object of study of this Chapter: the so-called networks. In the most general sense, a **network** (also known as a graph) is a structure formed by a set of objects which may have some connections between them. The objects are represented by **nodes** (a.k.a. vertices) and the connections between these objects are represented by **edges** (a.k.a. links). Networks are used as a tool to conceptualise many real-life contexts, such as the friendships between the members of a year group at school, the direct airline connections between cities in a continent or the presence of hyperlinks between a set of websites. In this session, we will use networks to model the migratory flows between US cities.
+Before we start to analyse the data introduced in @sec-sec_data, let us first take a step back to consider the main object of study of this Chapter: the so-called networks. In the most general sense, a **network** (also known as a graph) is a structure formed by a set of objects which may have some connections between them. The objects are represented by **nodes** (a.k.a. vertices) and the connections between these objects are represented by **edges** (a.k.a. links). Networks are used as a tool to conceptualise many real-life contexts, such as the friendships between the members of a year group at school, the direct airline connections between cities in a continent or the presence of hyperlinks between a set of websites. In this session, we will use networks to model the migratory flows between US cities.
 
 ### Starting from the basics
 
-In order to create, manipulate and analyse networks in R, we will use the igraph package, which we imported in section 5.1. We start by creating a very simple network with the code below. The network contains five nodes and five edges and it is undirected, so the edges do not have orientations. The nodes and edges could represent, respectively, a set of cities and the presence of migration flows between these cities in two consecutive years.
+In order to create, manipulate and analyse networks in R, we will use the igraph package, which we imported in @sec-sec_data. We start by creating a very simple network with the code below. The network contains five nodes and five edges and it is undirected, so the edges do not have orientations. The nodes and edges could represent, respectively, a set of cities and the presence of migration flows between these cities in two consecutive years.
 
 ```{r}
 g1 <- graph( edges=c(1,2, 1,4, 2,3, 2,4, 4,5), n=5, directed=F ) # Creates an undirected network with 5 nodes and 5 edges
@@ -128,11 +128,11 @@ Finally, it is possible to add network attributes
 g3$title <- "Network of migration between cities"
 ```
 
-## Reading networks from data files
+## Reading networks from data files {#sec-sec_reading}
 
-### Preparing the data
+### Preparing the data to create an igraph object
 
-At the beginning of the chapter, we defined a data frame called *df* based on some imported data from the US Census about migratory movements between different US cities, or more precisely, between US Metropolitan Statistical Areas. This is a large data frame containing 52,930 rows, but how can we turn this data frame into a network similar to the ones that we generated in section 5.3.? The igraph function **graph_from_data_frame()** can do this for us. To find out more about this function, we can run the following command:
+At the beginning of the chapter, we defined a data frame called *df* based on some imported data from the US Census about migratory movements between different US cities, or more precisely, between US Metropolitan Statistical Areas. This is a large data frame containing 52,930 rows, but how can we turn this data frame into a network similar to the ones that we generated in @sec-sec_create. The igraph function **graph_from_data_frame()** can do this for us. To find out more about this function, we can run the following command:
 
 ```{r}
 help("graph_from_data_frame")
@@ -167,61 +167,169 @@ df_nodes <- full_join(df_unique_origins, df_unique_destinations, by = "name")
 
 ```
 
-```{r}
-df_nodes
-```
-
-Finally, a directed migration network can be obtained with the following line of code:
+Finally, a directed migration network can be obtained with the following line of code. It should contain 386 nodes and 52,930 edges. You can test this yourself with the functions that you learnt in @sec-sec_create.
 
 ```{r}
-US_migration_network <- graph_from_data_frame(d = df_edges,
+g_US <- graph_from_data_frame(d = df_edges,
                                        vertices = df_nodes,
                                        directed = TRUE)
 ```
 
-## Network visualisation
+If we try to plot the network *g3* containing the migratory movements between all the US cities with the **plot()** function as we did before, we obtain a result which is rather undesirable...
 
-Once the data is imported, we need to build the network. The aim of this section is to visualise the network. To facilitate the visualisation, we will filter the dataset so that we only include cities from a state. In this case, Minnesota. To filter, we use the **grepl()** function, which stands for grep logical. Both **grep()** and **grepl()** allow us to check whether a pattern is present in a character string or vector of a character string. While the **grep()** function returns vector of indices of the element if a pattern exists in that vector, the **grepl()** function returns TRUE if the given pattern is present in the vector. Otherwise, it returns FALSE. In this case, we are filtering the dataset so that only the rows where the field MSA_Current_State is MN, which is the official abbreviation for Minnesota.
+```{r}
+plot(g_US)
+```
+
+### Filtering the data to create a subgraph
+
+We will dedicate the entirety of next section to explore tools that can help us improve the visualisation of networks, since it is one of the most important aspects of network analysis. To facilitate the visualisation in the examples shown in @sec-sec_visualise, we will work with a subset of the full network called *g_US*. A way to create a subnetwork is to filter the original data frame. In particular, we will filter *df* to only include cities from a state, in this case, Minnesota. To filter, we use the **grepl()** function, which stands for grep logical. Both **grep()** and **grepl()** allow us to check whether a pattern is present in a character string or vector of a character string. While the **grep()** function returns a vector of indices of the element if a pattern exists in that vector, the **grepl()** function returns TRUE if the given pattern is present in the vector. Otherwise, it returns FALSE. In this case, we are filtering the dataset so that only the rows where the field MSA_Current_State is WA, which is the official abbreviation for Washington state.
 
 ```{r}
 
-# df <- df %>% filter(grepl('MN', MSA_Current_State)) %>% filter(grepl('MN', MSA_Previous_State))
+df_sub <- df %>% filter(grepl('WA', MSA_Current_State)) %>% filter(grepl('WA', MSA_Previous_State)) #Filter the original data frame
 ```
 
-## 
+Then, we can prepare the data as we did before to create *gUS*. But, instead of basing the network on *df*, we will generate it from *df_sub*.
 
 ```{r}
 
-# library(network)
-# 
-# routes_network <- network(edges,
-#                           vertex.attr = nodes,
-#                           matrix.type = "edgelist",
-#                           ignore.eval = FALSE)
-# 
-# plot(routes_network, vertex.cex = 2.5)
-# 
-# detach(package:network)
+df_sub_edges <- data.frame(df_sub$MSA_Previous_Name, df_sub$MSA_Current_Name, df_sub$Movers_Metro_to_Metro_Flow_Estimate) %>%
+  rename(origin = df_sub.MSA_Previous_Name, destination = df_sub.MSA_Current_Name, weight = df_sub.Movers_Metro_to_Metro_Flow_Estimate)
+
+df_sub_edges$weight <- as.numeric(gsub(",","",df_sub_edges$weight)) 
+
+df_sub_unique_origins <- df_sub %>% 
+  distinct(MSA_Previous_Name) %>%
+  rename(name = MSA_Previous_Name) 
+
+df_sub_unique_destinations <- df_sub %>%
+  distinct(MSA_Current_Name) %>%
+  rename(name = MSA_Current_Name)
+
+df_sub_nodes <- full_join(df_sub_unique_origins, df_sub_unique_destinations, by = "name")
+
+g_sub <- graph_from_data_frame(d = df_sub_edges,
+                                       vertices = df_sub_nodes,
+                                       directed = TRUE)
 
 ```
+
+## Network visualisation {#sec-sec_visualise}
+
+### Visualisation with igraph
+
+Let us start by generating the most basic visualisation of *g_sub*.
 
 ```{r}
 
+plot(g_sub)
+```
 
-# rm(routes_network)
-# library(igraph)
-# 
-# routes_igraph <- graph_from_data_frame(d = edges,
-#                                        vertices = nodes,
-#                                        directed = TRUE)
-# 
-# plot(routes_igraph,
-#      layout = layout_with_graphopt,
-#      vertex.size = 3,
-#      vertex.label.cex = 0.7,
-#      edge.arrow.size = 0.01)
+This plot can be improved by changing adding a few additional arguments to the **plot()** function. For example, by just changing the color and size of the labels, the color and size of the nodes and the arrow size of the edges, we can already see some improvements.
+
+```{r}
+
+plot(g_sub, vertex.size=10, edge.arrow.size=.2, edge.curved=0.1,
+vertex.color="gold", vertex.frame.color="black",
+vertex.label=V(g_sub)$name, vertex.label.color="black",
+vertex.label.cex=.65)
 
 ```
+
+But there are few more things we can do not only to improve the look of the diagram, but also to include more information about the network. For example, we can set the size of the nodes so that it reflects the total number of people that the corresponding cities receive. We can do this by adding a new node attribute, *inflow*, which is obtained as the sum of the rows of the adjacency matrix of *g_sub*.
+
+```{r}
+
+V(g_sub)$inflow <- rowSums(as.matrix(g_sub[]))
+```
+
+Below we set the node size based on the inflow attribute. Note the formula *0.4\*(V(gsub)\$inflow)\^0.4*, where the power of 0.4 is chosen to scale the size of the nodes in such a way that the largest ones do not get excessively large and the smallest ones do not get excessively small. We also set the edge width based on its weight, which is the total number of people migrating from the origin and destination cities that it connects.
+
+```{r}
+
+# Set node size based on inflow of migrants:
+V(g_sub)$size <- 0.4*(V(g_sub)$inflow)^0.4
+# Set edge width based on weight:
+E(g_sub)$width <- E(g_sub)$weight/1200
+```
+
+Run the code below to discover how the aspect of the network has significantly improved with the modifications that we have introduced above.
+
+```{r}
+plot(g_sub, vertex.size=V(g_sub)$size, edge.arrow.size=.15, edge.arrow.width=.2, edge.curved=0.1, edge.width=E(g_sub)$width, edge.color ="gray80",
+vertex.color="gold", vertex.frame.color="gray90",
+vertex.label=V(g_sub)$name, vertex.label.color="black",
+vertex.label.cex=.65)
+```
+
+### Visualisation of spatial networks
+
+Firstly, we will import geographical data for the metropolitan and micropolitan statistical areas in the whole of the US, using the sf package. Here, we are only interested in the metropolitan areas so we will filter the data frame *cbsa_us* to keep only the metropolitan areas, i.e. those entries with value M1 for the column named *LSAD.*
+
+```{r}
+library(sf)
+library(stringr)
+
+#Import core-based statistical areas https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2020.html#list-tab-YXS5CUH5MBYOZ7MJLN
+cbsa_us <- st_read("./data/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp")
+
+msa_us <- cbsa_us %>% filter(grepl('M1', LSAD)) #Filter the original data frame to obtain only metro areas
+
+
+```
+
+We will now find the centroid of each MSA polygon and add columns to *msa_us* for the longitude and latitude of each centroid.
+
+```{r}
+
+#Add longitude and latitude corresponding to centroid of each MSA polygon
+msa_us$lon_centroid <- st_coordinates(st_centroid(msa_us$geometry))[,"X"]
+msa_us$lat_centroid <- st_coordinates(st_centroid(msa_us$geometry))[,"Y"]
+
+```
+
+Since we are focusing on Washington state, let us filter *msa_us* so that it only includes data from Washington. This requires some data manipulation via the library stringr:
+
+```{r}
+msa_us$NAME_ONLY <- gsub(",.*$", "", msa_us$NAME) #Create a new column with the name of the state taken from the last two characters of entries in column NAME
+
+msa_us$STATE <- substr(msa_us$NAME, nchar(msa_us$NAME)-1, nchar(msa_us$NAME)) #Create a new column with the name of the state taken from the last two characters of entries in column NAME
+
+msa_sub <- msa_us %>% filter(grepl('WA', STATE)) #Filter to keep the metro areas belonging to Washington state only
+```
+
+We can now plot the polygons for the MSA belonging to Washington state as well as the centroids:
+
+```{r}
+plot(st_geometry(msa_sub))
+plot(st_centroid(msa_sub$geometry), add=TRUE, col="red")
+```
+
+However, we still need to link this data to the network data that we obtained before. In order to incorporate the geographic information to the nodes of the migration subnetwork, we can join data from two data frames: *msa_sub*, which contains the geographic data, and *df_sub_nodes*, which contains the names of the nodes. To do this, we can use the function **left_join()** and then, select only the columns of interest. For more information on this magical function, check [this link](https://dplyr.tidyverse.org/reference/mutate-joins.html).
+
+```{r}
+
+#Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA
+df_sub_spatial_nodes <- df_sub_nodes %>% left_join(msa_sub, by = c("name" = "NAME_ONLY")) %>% select(c("name", "lon_centroid", "lat_centroid"))
+```
+
+CONTINUE HERE!
+
+```{r}
+
+lo <- as.matrix(df_sub_spatial_nodes[,2:3])
+```
+
+```{r}
+plot(st_geometry(msa_sub), border=adjustcolor("gray50"))
+plot(g_sub, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_sub)$size, edge.arrow.size=.6, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_sub)$width, edge.color=adjustcolor("gray80", alpha.f = .6), vertex.color="gold", vertex.frame.color="gray90",
+vertex.label=V(g_sub)$name, vertex.label.color="black",
+vertex.label.cex=.4)
+
+```
+
+### Alternative visualisations
 
 ```{r}
 
@@ -295,10 +403,10 @@ Once the data is imported, we need to build the network. The aim of this section
 
 If you want to play around and make a nicer diagram, check this [link](https://r-graph-gallery.com/122-a-circular-plot-with-the-circlize-package.html).
 
-## Network metrics
+## Network metrics {#sec-sec_metrics}
 
 Now that we have visualised a small migration network, let us define some of the network
 
-## Distances and paths
+## Distances and paths {#sec-sec_distances}
 
-## Subgroups and communities
+## Subgroups and communities {#sec-sec_communities}

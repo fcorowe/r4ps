@@ -243,5 +243,40 @@
     "title": "5  Network Analysis",
     "section": "5.8 Subgroups and communities",
     "text": "5.8 Subgroups and communities"
+  },
+  {
+    "objectID": "privacy.html#introduction",
+    "href": "privacy.html#introduction",
+    "title": "2  Data Revolution",
+    "section": "2.1 Introduction",
+    "text": "2.1 Introduction\nRise of technology and information\nWe have passed the point at which more data are being collected than can be physically stored (Hilbert and López 2011).\n“big data” “data revolution”\nAims:"
+  },
+  {
+    "objectID": "privacy.html#digital-footprint-data",
+    "href": "privacy.html#digital-footprint-data",
+    "title": "2  Data Revolution",
+    "section": "2.2 Digital footprint data",
+    "text": "2.2 Digital footprint data\nWhat is digital footprint data"
+  },
+  {
+    "objectID": "privacy.html#section",
+    "href": "privacy.html#section",
+    "title": "2  Data Revolution",
+    "section": "2.3 ",
+    "text": "2.3 \n\n\n\n\nArribas-Bel, Dani, Mark Green, Francisco Rowe, and Alex Singleton. 2021. “Open Data Products-A Framework for Creating Valuable Analysis Ready Data.” Journal of Geographical Systems 23 (4): 497–514. https://doi.org/10.1007/s10109-021-00363-5.\n\n\nGreen, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021. “New Forms of Data and New Forms of Opportunities to Monitor and Tackle a Pandemic.” In, 423–29. Springer International Publishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nKashyap, Ridhi. 2021. “Has Demography Witnessed a Data Revolution? Promises and Pitfalls of a Changing Data Ecosystem.” Population Studies 75 (sup1): 47–75. https://doi.org/10.1080/00324728.2021.1969031.\n\n\nKashyap, Ridhi, R. Gordon Rinderknecht, Aliakbar Akbaritabar, Diego Alburez-Gutierrez, Sofia Gil-Clavel, André Grow, Jisu Kim, et al. 2022. “Digital and Computational Demography.” http://dx.doi.org/10.31235/osf.io/7bvpt.\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
+  },
+  {
+    "objectID": "privacy.html#opportunities",
+    "href": "privacy.html#opportunities",
+    "title": "2  Data Revolution",
+    "section": "2.3 Opportunities",
+    "text": "2.3 Opportunities\n\nGranularity\nCoverage\nFrequency"
+  },
+  {
+    "objectID": "privacy.html#challenges",
+    "href": "privacy.html#challenges",
+    "title": "2  Data Revolution",
+    "section": "2.4 Challenges",
+    "text": "2.4 Challenges\n\nConceptual\nMethodological: biases and new techniques\nEthical: privacy\n\n\n\n\n\nArribas-Bel, Dani, Mark Green, Francisco Rowe, and Alex Singleton. 2021. “Open Data Products-A Framework for Creating Valuable Analysis Ready Data.” Journal of Geographical Systems 23 (4): 497–514. https://doi.org/10.1007/s10109-021-00363-5.\n\n\nGreen, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021. “New Forms of Data and New Forms of Opportunities to Monitor and Tackle a Pandemic.” In, 423–29. Springer International Publishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nKashyap, Ridhi. 2021. “Has Demography Witnessed a Data Revolution? Promises and Pitfalls of a Changing Data Ecosystem.” Population Studies 75 (sup1): 47–75. https://doi.org/10.1080/00324728.2021.1969031.\n\n\nKashyap, Ridhi, R. Gordon Rinderknecht, Aliakbar Akbaritabar, Diego Alburez-Gutierrez, Sofia Gil-Clavel, André Grow, Jisu Kim, et al. 2022. “Digital and Computational Demography.” http://dx.doi.org/10.31235/osf.io/7bvpt.\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e."
   }
 ]

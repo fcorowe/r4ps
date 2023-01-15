@@ -4,7 +4,7 @@
 
 In this session we need some basic R packages before importing the data.
 
-```{r}
+```{r, message = FALSE}
 
 library(magrittr)
 library(dplyr)

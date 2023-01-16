@@ -124,7 +124,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 <meta name="twitter:title" content="Population Science - 5&nbsp; Network Analysis">
@@ -286,16 +285,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#visualisation-of-spatial-networks" id="toc-visualisation-of-spatial-networks" class="nav-link" data-scroll-target="#visualisation-of-spatial-networks"><span class="toc-section-number">5.5.2</span>  Visualisation of spatial networks</a></li>
   <li><a href="#alternative-visualisations" id="toc-alternative-visualisations" class="nav-link" data-scroll-target="#alternative-visualisations"><span class="toc-section-number">5.5.3</span>  Alternative visualisations</a></li>
   </ul></li>
-  <li><a href="#sec-sec_metrics" id="toc-sec-sec_metrics" class="nav-link" data-scroll-target="#sec-sec_metrics"><span class="toc-section-number">5.6</span>  Network metrics</a>
-  <ul class="collapse">
-  <li><a href="#density" id="toc-density" class="nav-link" data-scroll-target="#density"><span class="toc-section-number">5.6.1</span>  Density</a></li>
-  <li><a href="#reciprocity" id="toc-reciprocity" class="nav-link" data-scroll-target="#reciprocity"><span class="toc-section-number">5.6.2</span>  Reciprocity</a></li>
-  <li><a href="#degree" id="toc-degree" class="nav-link" data-scroll-target="#degree"><span class="toc-section-number">5.6.3</span>  Degree</a></li>
-  <li><a href="#distances" id="toc-distances" class="nav-link" data-scroll-target="#distances"><span class="toc-section-number">5.6.4</span>  Distances</a></li>
-  <li><a href="#centrality" id="toc-centrality" class="nav-link" data-scroll-target="#centrality"><span class="toc-section-number">5.6.5</span>  Centrality</a></li>
-  </ul></li>
-  <li><a href="#sec-sec_communities" id="toc-sec-sec_communities" class="nav-link" data-scroll-target="#sec-sec_communities"><span class="toc-section-number">5.7</span>  Communities</a></li>
-  <li><a href="#final-visualisation" id="toc-final-visualisation" class="nav-link" data-scroll-target="#final-visualisation"><span class="toc-section-number">5.8</span>  Final visualisation</a></li>
+  <li><a href="#sec-sec_metrics" id="toc-sec-sec_metrics" class="nav-link" data-scroll-target="#sec-sec_metrics"><span class="toc-section-number">5.6</span>  Network metrics</a></li>
+  <li><a href="#sec-sec_distances" id="toc-sec-sec_distances" class="nav-link" data-scroll-target="#sec-sec_distances"><span class="toc-section-number">5.7</span>  Distances and paths</a></li>
+  <li><a href="#sec-sec_communities" id="toc-sec-sec_communities" class="nav-link" data-scroll-target="#sec-sec_communities"><span class="toc-section-number">5.8</span>  Subgroups and communities</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/network.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -364,7 +356,7 @@ Attaching package: 'igraph'</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co">#Obtain the working directory, where we will save the data folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps"</code></pre>
+<pre><code>[1] "/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps"</code></pre>
 </div>
 </div>
 </section>
@@ -380,16 +372,8 @@ Attaching package: 'igraph'</code></pre>
 <p>Before we start any analysis with the data, ensure to set the path to the directory where we are working. Please replace in the following line the path to the folder where you have placed the data file.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/metro_to_metro_2015_2019_US_migration.csv"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure the MSA code is imported as a character and not as a number</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Current_Code <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df<span class="sc">$</span>MSA_Current_Code) </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Include an additional column with the full name of the MSA in the format: Name, State</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Previous_Name_State <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>MSA_Previous_Name, <span class="st">', '</span>, df<span class="sc">$</span>MSA_Previous_State)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Current_Name_State <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>MSA_Current_Name, <span class="st">', '</span>, df<span class="sc">$</span>MSA_Current_State)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Examine the first few rows of the dataset</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Current_Code <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df<span class="sc">$</span>MSA_Current_Code) <span class="co">#Ensure the MSA code is imported as a character and not as a number</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) <span class="co">#Examine the first few rows of the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  MSA_Current_Code MSA_Current_Name MSA_Current_State
 1            10180          Abilene                TX
@@ -439,14 +423,7 @@ Attaching package: 'igraph'</code></pre>
 3                                 118                             95
 4                                  30                             40
 5                                 289                             85
-6                                   8                             15
-               MSA_Previous_Name_State MSA_Current_Name_State
-1                      Albuquerque, NM            Abilene, TX
-2                         Amarillo, TX            Abilene, TX
-3 Atlanta-Sandy Springs-Alpharetta, GA            Abilene, TX
-4                   Auburn-Opelika, AL            Abilene, TX
-5     Austin-Round Rock-Georgetown, TX            Abilene, TX
-6        Baltimore-Columbia-Towson, MD            Abilene, TX</code></pre>
+6                                   8                             15</code></pre>
 </div>
 </div>
 <p>We can obtain the total number of reported migratory movements with the following command:</p>
@@ -500,7 +477,7 @@ Attaching package: 'igraph'</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 7/7 vertices, named, from d1c171f:
+<pre><code>+ 7/7 vertices, named, from b4ce2d0:
 [1] City 1 City 2 City 3 City 4 City 5 City 6 City 7</code></pre>
 </div>
 </div>
@@ -519,7 +496,7 @@ Attaching package: 'igraph'</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 6/6 edges from d1c171f (vertex names):
+<pre><code>+ 6/6 edges from b4ce2d0 (vertex names):
 [1] City 1-&gt;City 2 City 2-&gt;City 3 City 1-&gt;City 4 City 4-&gt;City 1 City 4-&gt;City 2
 [6] City 4-&gt;City 5</code></pre>
 </div>
@@ -573,22 +550,20 @@ $population
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The pipe operator used below and denoted by %&gt;% is a feature of the magrittr package, it takes the output of one function and passes it into another function as an argument</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates the df_edges data frame with data from df and renames the columns as "origin", "destination" and "weight"</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>df_edges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df<span class="sc">$</span>MSA_Previous_Name_State, df<span class="sc">$</span>MSA_Current_Name_State, df<span class="sc">$</span>Movers_Metro_to_Metro_Flow_Estimate) <span class="sc">%&gt;%</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">origin =</span> df.MSA_Previous_Name_State, <span class="at">destination =</span> df.MSA_Current_Name_State, <span class="at">weight =</span> df.Movers_Metro_to_Metro_Flow_Estimate) </span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure that the weight attribute is stored as a number and not as character </span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>df_edges<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>,df_edges<span class="sc">$</span>weight)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>df_edges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df<span class="sc">$</span>MSA_Previous_Name, df<span class="sc">$</span>MSA_Current_Name, df<span class="sc">$</span>Movers_Metro_to_Metro_Flow_Estimate) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">origin =</span> df.MSA_Previous_Name, <span class="at">destination =</span> df.MSA_Current_Name, <span class="at">weight =</span> df.Movers_Metro_to_Metro_Flow_Estimate) <span class="co"># Creates the df_edges data frame with data from df and renames the columns as "origin", "destination" and "weight"</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>df_edges<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>,df_edges<span class="sc">$</span>weight)) <span class="co">#Ensure that the weight attribute is stored as a number and not as character </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For argument 2) we can define a data frame of nodes which we will call <em>df_nodes</em>, where each row will correspond to a unique node or city. To obtain all the unique cities from <em>df</em>, we can firstly obtain a data frame of unique origin cities, then a data frame of unique destinations, and finally, apply the <strong>full_join()</strong> function to these two data frames to obtain their union, which will be <em>df_nodes</em>. The name of the unique cities in <em>df_nodes</em> is in the column called <em>label</em>, the other columns can be seen as the nodes metadata.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_unique_origins <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Previous_Name_State) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Previous_Name_State) </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Previous_Name) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Previous_Name) </span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>df_unique_destinations <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Current_Name_State) <span class="sc">%&gt;%</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Current_Name_State)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Current_Name) <span class="sc">%&gt;%</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Current_Name)</span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>df_nodes <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_unique_origins, df_unique_destinations, <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -617,26 +592,21 @@ $population
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df_sub_edges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df_sub<span class="sc">$</span>MSA_Previous_Name, df_sub<span class="sc">$</span>MSA_Current_Name, df_sub<span class="sc">$</span>Movers_Metro_to_Metro_Flow_Estimate) <span class="sc">%&gt;%</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">origin =</span> df_sub.MSA_Previous_Name, <span class="at">destination =</span> df_sub.MSA_Current_Name, <span class="at">weight =</span> df_sub.Movers_Metro_to_Metro_Flow_Estimate)</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Split long names into several lines for visualisation purposes</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>df_sub_edges<span class="sc">$</span>origin <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"-"</span>, <span class="st">"-</span><span class="sc">\n</span><span class="st">"</span>, df_sub_edges<span class="sc">$</span>origin)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>df_sub_edges<span class="sc">$</span>destination <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"-"</span>, <span class="st">"-</span><span class="sc">\n</span><span class="st">"</span>, df_sub_edges<span class="sc">$</span>destination)</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>df_sub_edges<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>,df_sub_edges<span class="sc">$</span>weight)) </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>df_sub_edges<span class="sc">$</span>weight <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>,df_sub_edges<span class="sc">$</span>weight)) </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>df_sub_unique_origins <span class="ot">&lt;-</span> df_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Previous_Name) <span class="sc">%&gt;%</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Previous_Name) </span>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>df_sub_unique_origins <span class="ot">&lt;-</span> df_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Previous_Name) <span class="sc">%&gt;%</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Previous_Name) </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>df_sub_unique_destinations <span class="ot">&lt;-</span> df_sub <span class="sc">%&gt;%</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Current_Name) <span class="sc">%&gt;%</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Current_Name)</span>
 <span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>df_sub_unique_destinations <span class="ot">&lt;-</span> df_sub <span class="sc">%&gt;%</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(MSA_Current_Name) <span class="sc">%&gt;%</span></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">name =</span> MSA_Current_Name)</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>df_sub_nodes <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_sub_unique_origins, df_sub_unique_destinations, <span class="at">by =</span> <span class="st">"name"</span>)</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>df_sub_nodes<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"-"</span>, <span class="st">"-</span><span class="sc">\n</span><span class="st">"</span>, df_sub_nodes<span class="sc">$</span>name)</span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>g_sub <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> df_sub_edges,</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">vertices =</span> df_sub_nodes,</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>df_sub_nodes <span class="ot">&lt;-</span> <span class="fu">full_join</span>(df_sub_unique_origins, df_sub_unique_destinations, <span class="at">by =</span> <span class="st">"name"</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>g_sub <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> df_sub_edges,</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">vertices =</span> df_sub_nodes,</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -689,7 +659,7 @@ $population
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+<pre><code>Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -697,7 +667,7 @@ $population
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>cbsa_us <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `cb_2020_us_cbsa_500k' from data source 
-  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 939 features and 9 fields
 Geometry type: MULTIPOLYGON
@@ -717,16 +687,14 @@ Geodetic CRS:  NAD83</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>msa_us<span class="sc">$</span>NAME_ONLY <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">",.*$"</span>, <span class="st">""</span>, msa_us<span class="sc">$</span>NAME) <span class="co">#Create a new column with the name of the state taken from the last two characters of entries in column NAME</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Long names of MSAs are split into lines for visualisation purposes</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>msa_us<span class="sc">$</span>NAME_ONLY <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"-"</span>, <span class="st">"-</span><span class="sc">\n</span><span class="st">"</span>, msa_us<span class="sc">$</span>NAME_ONLY) </span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>msa_us<span class="sc">$</span>STATE <span class="ot">&lt;-</span> <span class="fu">substr</span>(msa_us<span class="sc">$</span>NAME, <span class="fu">nchar</span>(msa_us<span class="sc">$</span>NAME)<span class="sc">-</span><span class="dv">1</span>, <span class="fu">nchar</span>(msa_us<span class="sc">$</span>NAME)) <span class="co">#Create a new column with the name of the state taken from the last two characters of entries in column NAME</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>msa_sub <span class="ot">&lt;-</span> msa_us <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'WA'</span>, STATE)) <span class="co">#Filter to keep the metro areas belonging to Washington state only</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>msa_us<span class="sc">$</span>STATE <span class="ot">&lt;-</span> <span class="fu">substr</span>(msa_us<span class="sc">$</span>NAME, <span class="fu">nchar</span>(msa_us<span class="sc">$</span>NAME)<span class="sc">-</span><span class="dv">1</span>, <span class="fu">nchar</span>(msa_us<span class="sc">$</span>NAME)) <span class="co">#Create a new column with the name of the state taken from the last two characters of entries in column NAME</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>msa_sub <span class="ot">&lt;-</span> msa_us <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'WA'</span>, STATE)) <span class="co">#Filter to keep the metro areas belonging to Washington state only</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now plot the polygons for the MSA belonging to Washington state as well as the centroids:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(msa_sub))</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_centroid</span>(msa_sub<span class="sc">$</span>geometry), <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">cex=</span><span class="fl">0.5</span>, <span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_centroid</span>(msa_sub<span class="sc">$</span>geometry), <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="network_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -736,14 +704,15 @@ Geodetic CRS:  NAD83</code></pre>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>df_sub_spatial_nodes <span class="ot">&lt;-</span> df_sub_nodes <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(msa_sub, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span> <span class="ot">=</span> <span class="st">"NAME_ONLY"</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"lon_centroid"</span>, <span class="st">"lat_centroid"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>CONTINUE HERE!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(df_sub_spatial_nodes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(msa_sub), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray50"</span>))</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g_sub, <span class="at">layout=</span>lo, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">rescale =</span> <span class="cn">FALSE</span>, <span class="at">vertex.size=</span><span class="fu">V</span>(g_sub)<span class="sc">$</span>size, <span class="at">edge.arrow.size=</span>.<span class="dv">1</span>, <span class="at">edge.arrow.width=</span><span class="fl">1.</span>, <span class="at">edge.curved=</span><span class="fl">0.1</span>, <span class="at">edge.width=</span><span class="fu">E</span>(g_sub)<span class="sc">$</span>width, <span class="at">edge.color=</span><span class="fu">adjustcolor</span>(<span class="st">"gray80"</span>, <span class="at">alpha.f =</span> .<span class="dv">6</span>), <span class="at">vertex.color=</span><span class="st">"gold"</span>, <span class="at">vertex.frame.color=</span><span class="st">"gray90"</span>,</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g_sub, <span class="at">layout=</span>lo, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">rescale =</span> <span class="cn">FALSE</span>, <span class="at">vertex.size=</span><span class="fu">V</span>(g_sub)<span class="sc">$</span>size, <span class="at">edge.arrow.size=</span>.<span class="dv">6</span>, <span class="at">edge.arrow.width=</span><span class="fl">1.</span>, <span class="at">edge.curved=</span><span class="fl">0.1</span>, <span class="at">edge.width=</span><span class="fu">E</span>(g_sub)<span class="sc">$</span>width, <span class="at">edge.color=</span><span class="fu">adjustcolor</span>(<span class="st">"gray80"</span>, <span class="at">alpha.f =</span> .<span class="dv">6</span>), <span class="at">vertex.color=</span><span class="st">"gold"</span>, <span class="at">vertex.frame.color=</span><span class="st">"gray90"</span>,</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="at">vertex.label=</span><span class="fu">V</span>(g_sub)<span class="sc">$</span>name, <span class="at">vertex.label.color=</span><span class="st">"black"</span>,</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="at">vertex.label.cex=</span>.<span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="at">vertex.label.cex=</span>.<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="network_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -751,142 +720,82 @@ Geodetic CRS:  NAD83</code></pre>
 </section>
 <section id="alternative-visualisations" class="level3" data-number="5.5.3">
 <h3 data-number="5.5.3" class="anchored" data-anchor-id="alternative-visualisations"><span class="header-section-number">5.5.3</span> Alternative visualisations</h3>
-<p>In this session we have based our visualisations on igraph, however, there exist a variety of packages that would also allow us to generate nice plots of networks.</p>
-<p>For example, COMPLETE</p>
-<p>In addition, migration networks are particularly well-suited to be represented as a chord diagram. If you want to explore this type of visualisation, you can find further information on the <a href="https://www.rdocumentation.org/packages/circlize/versions/0.4.15/topics/chordDiagram">official R documentation</a> and also, for example, on this other link <a href="https://r-graph-gallery.com/122-a-circular-plot-with-the-circlize-package.html">link</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidygraph)</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(ggraph)</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># routes_tidy &lt;- tbl_graph(nodes = nodes,</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                          edges = edges,</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">#                          directed = TRUE)</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co"># routes_igraph_tidy &lt;- as_tbl_graph(routes_igraph)</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ggraph(routes_tidy, layout = "graphopt") + </span></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_node_point() +</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_edge_link(aes(width = weight), alpha = 0.7) +</span></span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_edge_width(range = c(0.01, 3)) +</span></span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_node_text(aes(label = label), repel = TRUE, cex=2.5, color='red') +</span></span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   labs(edge_width = "Flow") +</span></span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   theme_graph()</span></span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="co"># ```</span></span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ```{r}</span></span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a><span class="co"># library(circlize)</span></span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a><span class="co"># chordDiagram(edges, annotationTrack = "grid", preAllocateTracks = list(track.height = 0.01))</span></span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {</span></span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   xlim = get.cell.meta.data("xlim")</span></span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   xplot = get.cell.meta.data("xplot")</span></span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylim = get.cell.meta.data("ylim")</span></span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   sector.name = get.cell.meta.data("sector.index")</span></span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a><span class="co">#   if(abs(xplot[2] - xplot[1]) &lt; 1000) {</span></span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a><span class="co">#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",</span></span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a><span class="co">#                 niceFacing = TRUE, adj = c(0, 0.05), cex=0.5)</span></span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a><span class="co">#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",</span></span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a><span class="co">#                 niceFacing = TRUE, adj = c(0, 0.05), cex=0.5)</span></span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a><span class="co"># }, bg.border = NA)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(reshape2)</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co"># m1 &lt;- acast(edges, origin ~ destination, value.var = 'weight')</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># m1[is.na(m1)] &lt;- 0</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rownames(m1) &lt;- paste0("Origin ", 1:nrow(nodes))</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># colnames(m1) &lt;- paste0("Destination ", 1:nrow(nodes))</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="co"># chordDiagram(m1, annotationTrack = "grid", annotationTrackHeight = c(0.04, 0.2))</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # Restart circular layout parameters</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="co"># circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   xlim = get.cell.meta.data("xlim")</span></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   xplot = get.cell.meta.data("xplot")</span></span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylim = get.cell.meta.data("ylim")</span></span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   sector.name = get.cell.meta.data("sector.index")</span></span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   if(abs(xplot[2] - xplot[1]) &lt; 1000) {</span></span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",</span></span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a><span class="co">#                 niceFacing = TRUE, adj = c(-0.2, 0), cex=0.7)</span></span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   } else {</span></span>
+<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     circos.text(mean(xlim), ylim[1], sector.name, facing = "inside",</span></span>
+<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a><span class="co">#                 niceFacing = TRUE, adj = c(0, -0.2), cex=0.7)</span></span>
+<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb56-23"><a href="#cb56-23" aria-hidden="true" tabindex="-1"></a><span class="co"># }, bg.border = NA)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you want to play around and make a nicer diagram, check this <a href="https://r-graph-gallery.com/122-a-circular-plot-with-the-circlize-package.html">link</a>.</p>
 </section>
 </section>
 <section id="sec-sec_metrics" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="sec-sec_metrics"><span class="header-section-number">5.6</span> Network metrics</h2>
-<p>Here we define some of the most important metrics that help us quantify different characteristics of a network. We will use the migration network for the whole of the US again, <em>g_US</em>. It has more nodes and edges than <em>g_sub</em> and consequently, its behaviour is richer and helps us illustrate better the concepts that we introduce in this section.</p>
-<section id="density" class="level3" data-number="5.6.1">
-<h3 data-number="5.6.1" class="anchored" data-anchor-id="density"><span class="header-section-number">5.6.1</span> Density</h3>
-<p>The network <strong>density</strong> is defined as the proportion of existing edges out of all the possible edges. In a network with <span class="math inline">\(n\)</span> nodes, the total number of possible edges is $n\times(n-1)$, i.e.&nbsp;the number of edges if each node was connected to all the other nodes. A density equal to <span class="math inline">\(1\)</span> corresponds to a situation where <span class="math inline">\(n\times(n-1)\)</span> edges are present. A network with no edges at all would have density equal to <span class="math inline">\(0\)</span>. The line of code below tells us that the density of <em>g_sub</em> is approximately 0.33, meaning that about 33% of all the possible edges are present, or in other words, that there are migratory movements between almost a third of every pair of cities.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(g_US, <span class="at">loops=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3283458</code></pre>
-</div>
-</div>
+<p>Now that we have visualised a small migration network, let us define some of the network</p>
 </section>
-<section id="reciprocity" class="level3" data-number="5.6.2">
-<h3 data-number="5.6.2" class="anchored" data-anchor-id="reciprocity"><span class="header-section-number">5.6.2</span> Reciprocity</h3>
-<p>The <strong>reciprocity</strong> in a directed network is the proportion of reciprocated connections between nodes (i.e.&nbsp;number of pairs of nodes with edges in both directions) from all the existing edges.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reciprocity</span>(g_US)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6067259</code></pre>
-</div>
-</div>
-<p>From this result, we conclude that about 62% of the pairs of nodes that are connected have edges in both directions.</p>
+<section id="sec-sec_distances" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sec-sec_distances"><span class="header-section-number">5.7</span> Distances and paths</h2>
 </section>
-<section id="degree" class="level3" data-number="5.6.3">
-<h3 data-number="5.6.3" class="anchored" data-anchor-id="degree"><span class="header-section-number">5.6.3</span> Degree</h3>
-<p>The <strong>total degree</strong> of a node refers to the number of edges that emerge from or point at that node. The <strong>in-degree</strong> of a node in a directed network is the number of edges that point at it whereas the <strong>out-degree</strong> is the number of edges that emerge from it. The <strong>degree()</strong> functions, allows us to compute the degree of one or more nodes and allows us to specify if we are interested in the total degree, the in-degree or the out-degree.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute degree of the nodes given by v belonging to graph g_US, in this case the in-degree</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>deg <span class="ot">&lt;-</span> <span class="fu">degree</span>(g_US, <span class="at">v=</span><span class="fu">V</span>(g_US), <span class="at">mode=</span><span class="st">"in"</span>)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Produces histogram of the frequency of nodes with a certain in-degree</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(deg, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main=</span><span class="st">"Histogram of node in-degree"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="network_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>As we can see in the histogram, many cities receive immigrants from 60-70 different cities. Very few cities receive immigrants from 300 or above cities. We can check which is the city with the maximum in-degree.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">degree</span>(g_US, <span class="at">mode=</span><span class="st">"in"</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">degree</span>(g_US, <span class="at">mode=</span><span class="st">"in"</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Phoenix-Mesa-Chandler, AZ"                   
-[2] "Washington-Arlington-Alexandria, DC-VA-MD-WV"</code></pre>
-</div>
-</div>
-<p>We actually obtain a tie between two: the MSA containing Phoenix in Arizona and the MSA containing Washington DC, which actually spans over four states. Their in-degree is 354 as we can see below.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(g_US, <span class="at">v=</span><span class="fu">c</span>(<span class="st">"Phoenix-Mesa-Chandler, AZ"</span>), <span class="at">mode=</span><span class="st">"in"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Phoenix-Mesa-Chandler, AZ 
-                      354 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(g_US, <span class="at">v=</span><span class="fu">c</span>(<span class="st">"Washington-Arlington-Alexandria, DC-VA-MD-WV"</span>), <span class="at">mode=</span><span class="st">"in"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Washington-Arlington-Alexandria, DC-VA-MD-WV 
-                                         354 </code></pre>
-</div>
-</div>
-<p>Note that the fact that these two cities have the largest in-degree does not necessarily mean that they are the ones receiving the largest number of migrants.</p>
-</section>
-<section id="distances" class="level3" data-number="5.6.4">
-<h3 data-number="5.6.4" class="anchored" data-anchor-id="distances"><span class="header-section-number">5.6.4</span> Distances</h3>
-<p>Shortest path between nodes, mean distance, diameter ,etc.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(g_US)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 36</code></pre>
-</div>
-</div>
-</section>
-<section id="centrality" class="level3" data-number="5.6.5">
-<h3 data-number="5.6.5" class="anchored" data-anchor-id="centrality"><span class="header-section-number">5.6.5</span> Centrality</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">centr_degree</span>(g_US, <span class="at">mode=</span><span class="st">"in"</span>, <span class="at">normalized=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$res
-  [1] 198 108 330 108 283 275 127 182 116 175 104  66 251 285 187 104 344 198
- [19] 259 123 258 231 141 197 345 331 280 174  66 113 237 159 110  78 148  96
- [37] 230  63 304 261 220 132  44  73  55  76 300 169 166  95 115 333 115 121
- [55] 125 205 297  79 123  66 144  78 291 330 148  67 176 243 237 150 209 240
- [73] 311 354 105  96 282 230 277 134 228 101 279 304 276 222 110 204 316  73
- [91] 113 110 149 336  73 122 245  81 101 128  45 128 354  78 164 138 157   0
-[109]   0   0   0   0   0   0 172  33 163 276 148 132 271 167 104 103 105  26
-[127] 247 128  36 232 286  53 112 200 160  25 113 261  47  20   0  75  70 170
-[145]  61 194 202  74  81 113 170 164  72 105 221  65  92 255  92 271 216 192
-[163]  55 180 196 181  97 178 170 122 157 117  83 151 232 122 288 228 133 163
-[181] 187  70 227 186  71  68 282  64 127 185 222 240 144  54 276 156 274 157
-[199] 207 235 219 127  69  88 128 158 103 156  74 116 190 102 100 163  90 237
-[217] 104 319  93  67  68  77 179 146   0   0  76 136  68  56 131 166 115  69
-[235] 164  88 106  93 217  99  71 140 200  70  82  81 103  94 146 168 155 109
-[253]  94  95  62 113  98 103 152 123  62  98  87 165 187  76  66 117  69  93
-[271]  85 108  92  90 123 116  88 116 133 213  50  69 110 151  61  99 129  67
-[289]  72  74  65 151 161  63  83 154  93 129 117 107 132 115 145 150 155 125
-[307] 134 130 178  42  62 139 130 151 185 161  54  86  99 100  52  70  74 108
-[325]  75 119 140 128 115 121 134 139  43  52  78  47  68  69  90  87 143  80
-[343]  66  83  50 140 159  67  80 106 114  85 117 107  80 123  95  87  93  72
-[361]  86  81  81  89  63  83  93  54  66 124  55 134  60 119  75  77  81 107
-[379]  77  56  78 113  51  37  74 102  80 145 101  62  87  83 100  64  59  68
-[397]  99  67  41  76  51  46
-
-$centralization
-[1] 0.5544472
-
-$theoretical_max
-[1] 161202</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="sec-sec_communities" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="sec-sec_communities"><span class="header-section-number">5.7</span> Communities</h2>
-</section>
-<section id="final-visualisation" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="final-visualisation"><span class="header-section-number">5.8</span> Final visualisation</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># V(g_US)$inflow &lt;- rowSums(as.matrix(g_US[]))</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # Set node size based on inflow of migrants:</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># V(g_US)$size &lt;- 0.03*(V(g_US)$inflow)^0.1</span></span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # Set edge width based on weight:</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="co"># E(g_US)$width &lt;- E(g_US)$weight/1200</span></span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="co"># #Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA</span></span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df_spatial_nodes &lt;- df_nodes %&gt;% left_join(msa_us, by = c("name" = "NAME")) %&gt;% select(c("name", "lon_centroid", "lat_centroid"))</span></span>
-<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="co"># lo &lt;- as.matrix(df_spatial_nodes[,2:3])</span></span>
-<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(st_geometry(msa_us), border=adjustcolor("gray50"))</span></span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(g_US, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_US)$size, edge.arrow.size=.1, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_US)$width, edge.color=adjustcolor("gray80", alpha.f = .1), vertex.color="gold", vertex.frame.color=adjustcolor("gray100", alpha.f = .01),</span></span>
-<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a><span class="co"># vertex.label="", vertex.label.color="black",</span></span>
-<span id="cb70-15"><a href="#cb70-15" aria-hidden="true" tabindex="-1"></a><span class="co"># vertex.label.cex=.0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="sec-sec_communities" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="sec-sec_communities"><span class="header-section-number">5.8</span> Subgroups and communities</h2>
 
 
 </section>

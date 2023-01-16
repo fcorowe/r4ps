@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 _publish.yml
+.DS_Store
 
 /.quarto/

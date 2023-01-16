@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.population-science.net/index.html</loc>
-    <lastmod>2023-01-15T21:26:06.618Z</lastmod>
+    <lastmod>2023-01-16T07:34:12.576Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/intro.html</loc>
-    <lastmod>2023-01-15T21:29:06.625Z</lastmod>
+    <lastmod>2023-01-16T07:34:11.852Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/privacy.html</loc>
-    <lastmod>2023-01-15T23:02:41.272Z</lastmod>
+    <lastmod>2023-01-16T07:14:16.355Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/geodemographics.html</loc>
-    <lastmod>2023-01-15T21:23:55.605Z</lastmod>
+    <lastmod>2023-01-16T07:34:47.183Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/sequence-analysis.html</loc>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://www.population-science.net/network.html</loc>
-    <lastmod>2023-01-16T00:24:59.089Z</lastmod>
+    <lastmod>2023-01-16T07:10:28.017Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/sentiment-analysis.html</loc>
@@ -51,5 +51,9 @@
   <url>
     <loc>https://www.population-science.net/Population-Science.pdf</loc>
     <lastmod>2022-12-14T15:39:47.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.population-science.net/data-revolution.html</loc>
+    <lastmod>2023-01-16T07:34:05.502Z</lastmod>
   </url>
 </urlset>

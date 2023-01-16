@@ -30,7 +30,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - privacy.qmd
+    - data-revolution.qmd
     - geodemographics.qmd
     - sequence-analysis.qmd
     - network.qmd

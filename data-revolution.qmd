@@ -1,0 +1,53 @@
+# Data Revolution {#sec-chp2}
+
+Francisco to write
+
+@sec-chp2
+
+-   @rowe2021b
+
+-   @green2021
+
+-   @arribas-bel2021
+
+-   @kashyap2022
+
+-   @kashyap2021
+
+## Introduction
+
+-   We are living in a data revolution
+
+-   These data enabled opportunities to understand micro and macro human behaviour and population processes
+
+-   However, the data revolution also imposes major conceptual, methodological and ethical challenges.
+
+-   Aims: to
+
+The digital revolution ushered
+
+Rise of technology and information
+
+We have passed the point at which more data are being collected than can be physically stored (Hilbert and López 2011).
+
+"big data" "data revolution"
+
+## Digital footprint data
+
+What is digital footprint data - sources of data collection
+
+## Opportunities
+
+-   Granularity
+
+-   Coverage
+
+-   Frequency
+
+## Challenges
+
+-   Conceptual
+
+-   Methodological: biases and new techniques
+
+-   Ethical: privacy

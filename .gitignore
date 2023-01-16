@@ -4,5 +4,6 @@
 .Ruserdata
 _publish.yml
 .DS_Store
+.Renviron
 
 /.quarto/

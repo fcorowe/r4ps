@@ -32,9 +32,16 @@ Before we start any analysis with the data, ensure to set the path to the direct
 ```{r}
 
 df <- read.csv("./data/metro_to_metro_2015_2019_US_migration.csv")
-df$MSA_Current_Code <- as.character(df$MSA_Current_Code) #Ensure the MSA code is imported as a character and not as a number
-head(df) #Examine the first few rows of the dataset
 
+#Ensure the MSA code is imported as a character and not as a number
+df$MSA_Current_Code <- as.character(df$MSA_Current_Code) 
+
+#Include an additional column with the full name of the MSA in the format: Name, State
+df$MSA_Previous_Name_State <- paste0(df$MSA_Previous_Name, ', ', df$MSA_Previous_State)
+df$MSA_Current_Name_State <- paste0(df$MSA_Current_Name, ', ', df$MSA_Current_State)
+
+#Examine the first few rows of the dataset
+head(df) 
 ```
 
 We can obtain the total number of reported migratory movements with the following command:
@@ -146,22 +153,24 @@ Let us start with argument 1). Each row in *df* will correspond to an edge in th
 
 #The pipe operator used below and denoted by %>% is a feature of the magrittr package, it takes the output of one function and passes it into another function as an argument
 
-df_edges <- data.frame(df$MSA_Previous_Name, df$MSA_Current_Name, df$Movers_Metro_to_Metro_Flow_Estimate) %>%
-  rename(origin = df.MSA_Previous_Name, destination = df.MSA_Current_Name, weight = df.Movers_Metro_to_Metro_Flow_Estimate) # Creates the df_edges data frame with data from df and renames the columns as "origin", "destination" and "weight"
+# Creates the df_edges data frame with data from df and renames the columns as "origin", "destination" and "weight"
+df_edges <- data.frame(df$MSA_Previous_Name_State, df$MSA_Current_Name_State, df$Movers_Metro_to_Metro_Flow_Estimate) %>%
+  rename(origin = df.MSA_Previous_Name_State, destination = df.MSA_Current_Name_State, weight = df.Movers_Metro_to_Metro_Flow_Estimate) 
 
-df_edges$weight <- as.numeric(gsub(",","",df_edges$weight)) #Ensure that the weight attribute is stored as a number and not as character 
+#Ensure that the weight attribute is stored as a number and not as character 
+df_edges$weight <- as.numeric(gsub(",","",df_edges$weight)) 
 ```
 
 For argument 2) we can define a data frame of nodes which we will call *df_nodes*, where each row will correspond to a unique node or city. To obtain all the unique cities from *df*, we can firstly obtain a data frame of unique origin cities, then a data frame of unique destinations, and finally, apply the **full_join()** function to these two data frames to obtain their union, which will be *df_nodes*. The name of the unique cities in *df_nodes* is in the column called *label*, the other columns can be seen as the nodes metadata.
 
 ```{r}
 df_unique_origins <- df %>% 
-  distinct(MSA_Previous_Name) %>%
-  rename(name = MSA_Previous_Name) 
+  distinct(MSA_Previous_Name_State) %>%
+  rename(name = MSA_Previous_Name_State) 
 
 df_unique_destinations <- df %>%
-  distinct(MSA_Current_Name) %>%
-  rename(name = MSA_Current_Name)
+  distinct(MSA_Current_Name_State) %>%
+  rename(name = MSA_Current_Name_State)
 
 df_nodes <- full_join(df_unique_origins, df_unique_destinations, by = "name")
 
@@ -197,6 +206,10 @@ Then, we can prepare the data as we did before to create *gUS*. But, instead of 
 df_sub_edges <- data.frame(df_sub$MSA_Previous_Name, df_sub$MSA_Current_Name, df_sub$Movers_Metro_to_Metro_Flow_Estimate) %>%
   rename(origin = df_sub.MSA_Previous_Name, destination = df_sub.MSA_Current_Name, weight = df_sub.Movers_Metro_to_Metro_Flow_Estimate)
 
+#Split long names into several lines for visualisation purposes
+df_sub_edges$origin <- gsub("-", "-\n", df_sub_edges$origin)
+df_sub_edges$destination <- gsub("-", "-\n", df_sub_edges$destination)
+
 df_sub_edges$weight <- as.numeric(gsub(",","",df_sub_edges$weight)) 
 
 df_sub_unique_origins <- df_sub %>% 
@@ -208,6 +221,7 @@ df_sub_unique_destinations <- df_sub %>%
   rename(name = MSA_Current_Name)
 
 df_sub_nodes <- full_join(df_sub_unique_origins, df_sub_unique_destinations, by = "name")
+df_sub_nodes$name <- gsub("-", "-\n", df_sub_nodes$name)
 
 g_sub <- graph_from_data_frame(d = df_sub_edges,
                                        vertices = df_sub_nodes,
@@ -276,7 +290,6 @@ cbsa_us <- st_read("./data/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp")
 
 msa_us <- cbsa_us %>% filter(grepl('M1', LSAD)) #Filter the original data frame to obtain only metro areas
 
-
 ```
 
 We will now find the centroid of each MSA polygon and add columns to *msa_us* for the longitude and latitude of each centroid.
@@ -294,6 +307,8 @@ Since we are focusing on Washington state, let us filter *msa_us* so that it onl
 ```{r}
 msa_us$NAME_ONLY <- gsub(",.*$", "", msa_us$NAME) #Create a new column with the name of the state taken from the last two characters of entries in column NAME
 
+#Long names of MSAs are split into lines for visualisation purposes
+msa_us$NAME_ONLY <- gsub("-", "-\n", msa_us$NAME_ONLY) 
 msa_us$STATE <- substr(msa_us$NAME, nchar(msa_us$NAME)-1, nchar(msa_us$NAME)) #Create a new column with the name of the state taken from the last two characters of entries in column NAME
 
 msa_sub <- msa_us %>% filter(grepl('WA', STATE)) #Filter to keep the metro areas belonging to Washington state only
@@ -303,7 +318,7 @@ We can now plot the polygons for the MSA belonging to Washington state as well a
 
 ```{r}
 plot(st_geometry(msa_sub))
-plot(st_centroid(msa_sub$geometry), add=TRUE, col="red")
+plot(st_centroid(msa_sub$geometry), add=TRUE, col="red", cex=0.5, pch=20)
 ```
 
 However, we still need to link this data to the network data that we obtained before. In order to incorporate the geographic information to the nodes of the migration subnetwork, we can join data from two data frames: *msa_sub*, which contains the geographic data, and *df_sub_nodes*, which contains the names of the nodes. To do this, we can use the function **left_join()** and then, select only the columns of interest. For more information on this magical function, check [this link](https://dplyr.tidyverse.org/reference/mutate-joins.html).
@@ -314,8 +329,6 @@ However, we still need to link this data to the network data that we obtained be
 df_sub_spatial_nodes <- df_sub_nodes %>% left_join(msa_sub, by = c("name" = "NAME_ONLY")) %>% select(c("name", "lon_centroid", "lat_centroid"))
 ```
 
-CONTINUE HERE!
-
 ```{r}
 
 lo <- as.matrix(df_sub_spatial_nodes[,2:3])
@@ -323,90 +336,101 @@ lo <- as.matrix(df_sub_spatial_nodes[,2:3])
 
 ```{r}
 plot(st_geometry(msa_sub), border=adjustcolor("gray50"))
-plot(g_sub, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_sub)$size, edge.arrow.size=.6, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_sub)$width, edge.color=adjustcolor("gray80", alpha.f = .6), vertex.color="gold", vertex.frame.color="gray90",
+plot(g_sub, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_sub)$size, edge.arrow.size=.1, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_sub)$width, edge.color=adjustcolor("gray80", alpha.f = .6), vertex.color="gold", vertex.frame.color="gray90",
 vertex.label=V(g_sub)$name, vertex.label.color="black",
-vertex.label.cex=.4)
+vertex.label.cex=.45)
 
 ```
 
 ### Alternative visualisations
 
-```{r}
+In this session we have based our visualisations on igraph, however, there exist a variety of packages that would also allow us to generate nice plots of networks.
 
-# library(tidygraph)
-# library(ggraph)
-# 
-# routes_tidy <- tbl_graph(nodes = nodes,
-#                          edges = edges,
-#                          directed = TRUE)
-# 
-# routes_igraph_tidy <- as_tbl_graph(routes_igraph)
-# 
-# 
-# ggraph(routes_tidy, layout = "graphopt") + 
-#   geom_node_point() +
-#   geom_edge_link(aes(width = weight), alpha = 0.7) +
-#   scale_edge_width(range = c(0.01, 3)) +
-#   geom_node_text(aes(label = label), repel = TRUE, cex=2.5, color='red') +
-#   labs(edge_width = "Flow") +
-#   theme_graph()
-# ```
-# 
-# ```{r}
-# 
-# library(circlize)
-# 
-# chordDiagram(edges, annotationTrack = "grid", preAllocateTracks = list(track.height = 0.01))
-#   circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
-#   xlim = get.cell.meta.data("xlim")
-#   xplot = get.cell.meta.data("xplot")
-#   ylim = get.cell.meta.data("ylim")
-#   sector.name = get.cell.meta.data("sector.index")
-#   if(abs(xplot[2] - xplot[1]) < 1000) {
-#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
-#                 niceFacing = TRUE, adj = c(0, 0.05), cex=0.5)
-#   } else {
-#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
-#                 niceFacing = TRUE, adj = c(0, 0.05), cex=0.5)
-#   }
-# }, bg.border = NA)
+For example, COMPLETE
 
-
-```
-
-```{r}
-
-# library(reshape2)
-# m1 <- acast(edges, origin ~ destination, value.var = 'weight')
-# m1[is.na(m1)] <- 0
-# 
-# rownames(m1) <- paste0("Origin ", 1:nrow(nodes))
-# colnames(m1) <- paste0("Destination ", 1:nrow(nodes))
-# 
-# chordDiagram(m1, annotationTrack = "grid", annotationTrackHeight = c(0.04, 0.2))
-# 
-# # Restart circular layout parameters
-# circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
-#   xlim = get.cell.meta.data("xlim")
-#   xplot = get.cell.meta.data("xplot")
-#   ylim = get.cell.meta.data("ylim")
-#   sector.name = get.cell.meta.data("sector.index")
-#   if(abs(xplot[2] - xplot[1]) < 1000) {
-#     circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise",
-#                 niceFacing = TRUE, adj = c(-0.2, 0), cex=0.7)
-#   } else {
-#     circos.text(mean(xlim), ylim[1], sector.name, facing = "inside",
-#                 niceFacing = TRUE, adj = c(0, -0.2), cex=0.7)
-#   }
-# }, bg.border = NA)
-```
-
-If you want to play around and make a nicer diagram, check this [link](https://r-graph-gallery.com/122-a-circular-plot-with-the-circlize-package.html).
+In addition, migration networks are particularly well-suited to be represented as a chord diagram. If you want to explore this type of visualisation, you can find further information on the [official R documentation](https://www.rdocumentation.org/packages/circlize/versions/0.4.15/topics/chordDiagram) and also, for example, on this other link [link](https://r-graph-gallery.com/122-a-circular-plot-with-the-circlize-package.html).
 
 ## Network metrics {#sec-sec_metrics}
 
-Now that we have visualised a small migration network, let us define some of the network
+Here we define some of the most important metrics that help us quantify different characteristics of a network. We will use the migration network for the whole of the US again, *g_US*. It has more nodes and edges than *g_sub* and consequently, its behaviour is richer and helps us illustrate better the concepts that we introduce in this section.
 
-## Distances and paths {#sec-sec_distances}
+### Density
 
-## Subgroups and communities {#sec-sec_communities}
+The network **density** is defined as the proportion of existing edges out of all the possible edges. In a network with $n$ nodes, the total number of possible edges is \$n\\times(n-1)\$, i.e. the number of edges if each node was connected to all the other nodes. A density equal to $1$ corresponds to a situation where $n\times(n-1)$ edges are present. A network with no edges at all would have density equal to $0$. The line of code below tells us that the density of *g_sub* is approximately 0.33, meaning that about 33% of all the possible edges are present, or in other words, that there are migratory movements between almost a third of every pair of cities.
+
+```{r}
+edge_density(g_US, loops=FALSE)
+```
+
+### Reciprocity
+
+The **reciprocity** in a directed network is the proportion of reciprocated connections between nodes (i.e. number of pairs of nodes with edges in both directions) from all the existing edges.
+
+```{r}
+reciprocity(g_US)
+```
+
+From this result, we conclude that about 62% of the pairs of nodes that are connected have edges in both directions.
+
+### Degree
+
+The **total degree** of a node refers to the number of edges that emerge from or point at that node. The **in-degree** of a node in a directed network is the number of edges that point at it whereas the **out-degree** is the number of edges that emerge from it. The **degree()** functions, allows us to compute the degree of one or more nodes and allows us to specify if we are interested in the total degree, the in-degree or the out-degree.
+
+```{r}
+# Compute degree of the nodes given by v belonging to graph g_US, in this case the in-degree
+deg <- degree(g_US, v=V(g_US), mode="in")
+
+#Produces histogram of the frequency of nodes with a certain in-degree
+hist(deg, breaks = 30, main="Histogram of node in-degree")
+```
+
+As we can see in the histogram, many cities receive immigrants from 60-70 different cities. Very few cities receive immigrants from 300 or above cities. We can check which is the city with the maximum in-degree.
+
+```{r}
+V(g_US)$name[degree(g_US, mode="in")==max(degree(g_US, mode="in"))]
+```
+
+We actually obtain a tie between two: the MSA containing Phoenix in Arizona and the MSA containing Washington DC, which actually spans over four states. Their in-degree is 354 as we can see below.
+
+```{r}
+degree(g_US, v=c("Phoenix-Mesa-Chandler, AZ"), mode="in")
+degree(g_US, v=c("Washington-Arlington-Alexandria, DC-VA-MD-WV"), mode="in")
+```
+
+Note that the fact that these two cities have the largest in-degree does not necessarily mean that they are the ones receiving the largest number of migrants.
+
+### Distances
+
+Shortest path between nodes, mean distance, diameter ,etc.
+
+```{r}
+diameter(g_US)
+```
+
+### Centrality
+
+```{r}
+centr_degree(g_US, mode="in", normalized=T)
+```
+
+## Communities {#sec-sec_communities}
+
+## Final visualisation
+
+```{r}
+# V(g_US)$inflow <- rowSums(as.matrix(g_US[]))
+# # Set node size based on inflow of migrants:
+# V(g_US)$size <- 0.03*(V(g_US)$inflow)^0.1
+# # Set edge width based on weight:
+# E(g_US)$width <- E(g_US)$weight/1200
+# 
+# #Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA
+# df_spatial_nodes <- df_nodes %>% left_join(msa_us, by = c("name" = "NAME")) %>% select(c("name", "lon_centroid", "lat_centroid"))
+# 
+# lo <- as.matrix(df_spatial_nodes[,2:3])
+# 
+# plot(st_geometry(msa_us), border=adjustcolor("gray50"))
+# plot(g_US, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_US)$size, edge.arrow.size=.1, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_US)$width, edge.color=adjustcolor("gray80", alpha.f = .1), vertex.color="gold", vertex.frame.color=adjustcolor("gray100", alpha.f = .01),
+# vertex.label="", vertex.label.color="black",
+# vertex.label.cex=.0)
+```

@@ -48,7 +48,7 @@ On the other hand, digital footprint data sparked new questions. Digital footpri
 
 Methodologically, a key challenge is that we need new tools and expertise. As indicated earlier, digital footprint data are not created for research purposes and required
 
-: biases and new techniques
+-   biases and new techniques
 
 -   Ethical: privacy
 

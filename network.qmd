@@ -5,6 +5,7 @@
 In this session we need some basic R packages before importing the data.
 
 ```{r}
+#| warning: false
 
 library(magrittr)
 library(dplyr)

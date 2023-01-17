@@ -1,15 +1,5 @@
 # Data Revolution {#sec-chp2}
 
-Francisco to write
-
-@sec-chp2
-
--   
-
--   @kashyap2022
-
--   @kashyap2021
-
 ## Introduction
 
 The digital revolution ushered in the 1990s has unleashed a data revolution. Technological advances in computational power, storage and digital network platforms have enabled the emergence of "Big Data" or "digital footprint data". These technological developments have enabled the production, processing, analysis and storage of large volumes of digital data. Analysing 1986-2007 data, @hilbert2011 estimated that the world has already passed the point at which more data were being collected than could be physically stored. They estimated that the global general-purpose computing capacity grew at an annual rate of 58 percent between 1986 and 2007, exceeding that of global storage capacity (23 percent). We can now digitally captured and generated data that previously could not easily be recorded and stored.
@@ -42,7 +32,7 @@ Digital footprint data provide extensive coverage. Contrasting to traditional ra
 
 Digital footprint data is generated in real-time. Unlike traditional systems of data collection and release, digital footprint data can be streamed continuously in real- or near real-time. Commercial transactions are generally recorded on bank ledgers as bank card payments occur at retail shops. Individual mobile phone's location are captured as applications ping cellular antennas. Such information offer an opportunity to monitor and response to rapidly evolving situations, such as the COVID-19 pandemic [@green2021], natural disasters [@rowe2022c] and conflicts [@rowe2022a].
 
-We should also loudly and clearly that while digital footprint data should be seen as a key asset to support government and business decision making processes, they should not be considered at the expenses of traditional data sources. Digital footprint data and traditional data sources should be used to complement each other. As stated earlier, digital footprint data are the by-product of an administrative process or services. They were not designed with the aim of doing research. They require considerable data re-engineering to re-purpose them and turn them into an analysis-ready data product that can be used for further analysis [@arribas-bel2021]. Yet, as we will discuss below significant challenges remain. As the saying goes "*all data are dirty, but some data are useful*". This quote used in the data science community to convey the idea that data are often imperfect, but they can still be used to gain valuable insights. Digital footprint data and traditional data sources should be triangulated to leverage on their strengths and mitigate their weaknesses.
+We should also argue loudly and clearly that while digital footprint data should be seen as a key asset to support government and business decision making processes, they should not be considered at the expenses of traditional data sources. Digital footprint data and traditional data sources should be used to complement each other. As indicated earlier, digital footprint data are the by-product of administrative processes or services. They were not designed with the aim of doing research. They require considerable work of data re-engineering to re-purpose them and turn them into an analysis-ready data product that can be used for further analysis [@arribas-bel2021]. Yet, as we will discuss below significant challenges remain. As the saying goes "*all data are dirty, but some data are useful*". This quote used in the data science community to convey the idea that data are often imperfect, but they can still be used to gain valuable insights. Our message is that digital footprint data and traditional data sources should be triangulated to leverage on their strengths and mitigate their weaknesses.
 
 ## Challenges of digital footprint data
 
@@ -53,3 +43,7 @@ We should also loudly and clearly that while digital footprint data should be se
 -   Ethical: privacy
 
 ## Conclusion
+
+-   @kashyap2022
+
+-   @kashyap2021

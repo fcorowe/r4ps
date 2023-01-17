@@ -83,7 +83,7 @@ div.csl-indent {
 
 <link rel="stylesheet" href="styles.css">
 <meta name="twitter:title" content="Population Science - 4&nbsp; Sequence Analysis">
-<meta name="twitter:description" content="Francisco to write">
+<meta name="twitter:description" content="Aim: to define trajectories of population decline or ageing">
 <meta name="twitter:creator" content="@fcorowe">
 <meta name="twitter:card" content="summary">
 </head>
@@ -162,7 +162,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./privacy.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Privacy, Ethics and Biases</span></a>
+  <a href="./data-revolution.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Revolution</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,7 +215,25 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link active" data-scroll-target="#dependencies"><span class="toc-section-number">4.1</span>  Dependencies</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="toc-section-number">4.2</span>  Data</a>
+  <ul class="collapse">
+  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling"><span class="toc-section-number">4.2.1</span>  Data Wrangling</a></li>
+  </ul></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">4.3</span>  Application</a>
+  <ul class="collapse">
+  <li><a href="#defining-outcome-process" id="toc-defining-outcome-process" class="nav-link" data-scroll-target="#defining-outcome-process"><span class="toc-section-number">4.3.1</span>  Defining outcome process</a></li>
+  <li><a href="#optimal-matching" id="toc-optimal-matching" class="nav-link" data-scroll-target="#optimal-matching"><span class="toc-section-number">4.3.2</span>  Optimal matching</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="toc-section-number">4.3.3</span>  Clustering</a></li>
+  <li><a href="#visualising" id="toc-visualising" class="nav-link" data-scroll-target="#visualising"><span class="toc-section-number">4.3.4</span>  Visualising</a></li>
+  </ul></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">4.4</span>  Questions</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/sequence-analysis.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -237,18 +255,56 @@ div.csl-indent {
 
 </header>
 
+<section id="dependencies" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="dependencies"><span class="header-section-number">4.1</span> Dependencies</h2>
+</section>
+<section id="data" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="data"><span class="header-section-number">4.2</span> Data</h2>
+<p>Aim: to define trajectories of population decline or ageing</p>
+<p>Data source: WorldPop 2000-2020</p>
+<section id="data-wrangling" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="data-wrangling"><span class="header-section-number">4.2.1</span> Data Wrangling</h3>
+<p>Exploratory data analysis to understand the data - time-space data</p>
+</section>
+</section>
+<section id="application" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="application"><span class="header-section-number">4.3</span> Application</h2>
+<p>Explain intuition and main steps</p>
+<section id="defining-outcome-process" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="defining-outcome-process"><span class="header-section-number">4.3.1</span> Defining outcome process</h3>
+<p>Define the thresholds that should be used to define the extent / pace of acceleration.</p>
+</section>
+<section id="optimal-matching" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="optimal-matching"><span class="header-section-number">4.3.2</span> Optimal matching</h3>
+<p>Computation of distance - intuition &gt; indel operators &gt; different OM algorithms &gt; use optimal matching</p>
+</section>
+<section id="clustering" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="clustering"><span class="header-section-number">4.3.3</span> Clustering</h3>
+<p>Different cluster algorithms - use of k-meloids</p>
+<p>Determining the number of clusters</p>
+</section>
+<section id="visualising" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="visualising"><span class="header-section-number">4.3.4</span> Visualising</h3>
+<p>Individual trajectories</p>
+<p>Frequency plots</p>
+<p>Time spent</p>
+<p>Top ten trajectories</p>
+</section>
+</section>
+<section id="questions" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">4.4</span> Questions</h2>
 <p>Francisco to write</p>
 <p>This chapter shows the use of sequence analysis to study population decline and draw on the following papers:</p>
 <ul>
 <li><p><span class="citation" data-cites="rowe2022a">Rowe, Neville, and González-Leonardo (<a href="references.html#ref-rowe2022a" role="doc-biblioref">2022</a>)</span></p></li>
-<li><p><span class="citation" data-cites="newsham2022">Newsham and Rowe (<a href="references.html#ref-newsham2022" role="doc-biblioref">2022</a>)</span></p></li>
+<li><p><span class="citation" data-cites="newsham2022a">Newsham and Rowe (<a href="references.html#ref-newsham2022a" role="doc-biblioref">2022</a>)</span></p></li>
 <li><p><span class="citation" data-cites="rowe2022b">Rowe, Robinson, and Patias (<a href="references.html#ref-rowe2022b" role="doc-biblioref">2022</a>)</span></p></li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-newsham2022" class="csl-entry" role="doc-biblioentry">
-Newsham, Niall, and Francisco Rowe. 2022. <span>“Understanding the Trajectories of Population Decline Across Rural and Urban Europe: A Sequence Analysis.”</span> <a href="https://doi.org/10.48550/ARXIV.2203.09798">https://doi.org/10.48550/ARXIV.2203.09798</a>.
+<div id="ref-newsham2022a" class="csl-entry" role="doc-biblioentry">
+Newsham, Niall, and Francisco Rowe. 2022. <span>“Understanding Trajectories of Population Decline Across Rural and Urban Europe: A Sequence Analysis.”</span> <em>Population, Space and Place</em>, December. <a href="https://doi.org/10.1002/psp.2630">https://doi.org/10.1002/psp.2630</a>.
 </div>
 <div id="ref-rowe2022a" class="csl-entry" role="doc-biblioentry">
 Rowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. <span>“Sensing Population Displacement from Ukraine Using Facebook Data: Potential Impacts and Settlement Areas.”</span> <a href="http://dx.doi.org/10.31219/osf.io/7n6wm">http://dx.doi.org/10.31219/osf.io/7n6wm</a>.
@@ -257,6 +313,7 @@ Rowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. <span>“Sen
 Rowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022. <span>“Sensing Global Changes in Local Patterns of Energy Consumption in Cities During the Early Stages of the COVID-19 Pandemic.”</span> <em>Cities</em> 129 (October): 103808. <a href="https://doi.org/10.1016/j.cities.2022.103808">https://doi.org/10.1016/j.cities.2022.103808</a>.
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

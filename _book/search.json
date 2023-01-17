@@ -355,5 +355,33 @@
     "title": "2  Data Revolution",
     "section": "2.5 Conclusion",
     "text": "2.5 Conclusion\nDigital footprint data present unique oppotunites to enhance our understanding of population processes and support individual, business and government decisions to improve targeted processes and outcomes. Businesses have used digital footprint data to segment their consumer populations and improve their targeting of marketing content, products and ultimately increase sales and revenue (Dolega, Rowe, and Branagan 2021). Governments and health care institutions, particularly during the COVID-19 have leverage digital footprint data to monitor the spread of the pandemic and develop appropriate mitigation responses (Green, Pollock, and Rowe 2021). However, the use of digital footprint data poses major conceptual, methodological and ethical challenges - which need to be overcome to unleash their full potential. The aim of this book is to address of the key methodological challenges. In particular, this book seeks to provide applied training on the practical application of commonly used machine learning and artificial intelligence approaches to leverage on digital footprint data in the understanding of human behaviour and population processes.\n\nKashyap et al. (2022)\nKashyap (2021)\n\n\n\n\n\nArribas-Bel, Dani, Mark Green, Francisco Rowe, and Alex Singleton. 2021. “Open Data Products-A Framework for Creating Valuable Analysis Ready Data.” Journal of Geographical Systems 23 (4): 497–514. https://doi.org/10.1007/s10109-021-00363-5.\n\n\nDolega, Les, Francisco Rowe, and Emma Branagan. 2021. “Going Digital? The Impact of Social Media Marketing on Retail Website Traffic, Orders and Sales.” Journal of Retailing and Consumer Services 60 (May): 102501. https://doi.org/10.1016/j.jretconser.2021.102501.\n\n\nGreen, Mark, Frances Darlington Pollock, and Francisco Rowe. 2021. “New Forms of Data and New Forms of Opportunities to Monitor and Tackle a Pandemic.” In, 423–29. Springer International Publishing. https://doi.org/10.1007/978-3-030-70179-6_56.\n\n\nHilbert, Martin, and Priscila López. 2011. “The World’s Technological Capacity to Store, Communicate, and Compute Information.” Science 332 (6025): 60–65. https://doi.org/10.1126/science.1200970.\n\n\nKashyap, Ridhi. 2021. “Has Demography Witnessed a Data Revolution? Promises and Pitfalls of a Changing Data Ecosystem.” Population Studies 75 (sup1): 47–75. https://doi.org/10.1080/00324728.2021.1969031.\n\n\nKashyap, Ridhi, R. Gordon Rinderknecht, Aliakbar Akbaritabar, Diego Alburez-Gutierrez, Sofia Gil-Clavel, André Grow, Jisu Kim, et al. 2022. “Digital and Computational Demography.” http://dx.doi.org/10.31235/osf.io/7bvpt.\n\n\nLazer, David, Alex Pentland, Lada Adamic, Sinan Aral, Albert-László Barabási, Devon Brewer, Nicholas Christakis, et al. 2009. “Computational Social Science.” Science 323 (5915): 721–23. https://doi.org/10.1126/science.1167742.\n\n\nRowe, Francisco. 2021. “Big Data and Human Geography.” http://dx.doi.org/10.31235/osf.io/phz3e.\n\n\n———. 2022. “Using Digital Footprint Data to Monitor Human Mobility and Support Rapid Humanitarian Responses.” Regional Studies, Regional Science 9 (1): 665–68. https://doi.org/10.1080/21681376.2022.2135458.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. “Sensing Population Displacement from Ukraine Using Facebook Data: Potential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm."
+  },
+  {
+    "objectID": "sequence-analysis.html#dependencies",
+    "href": "sequence-analysis.html#dependencies",
+    "title": "4  Sequence Analysis",
+    "section": "4.1 Dependencies",
+    "text": "4.1 Dependencies"
+  },
+  {
+    "objectID": "sequence-analysis.html#data",
+    "href": "sequence-analysis.html#data",
+    "title": "4  Sequence Analysis",
+    "section": "4.2 Data",
+    "text": "4.2 Data\nAim: to define trajectories of population decline or ageing\nData source: WorldPop 2000-2020\n\n4.2.1 Data Wrangling\nExploratory data analysis to understand the data - time-space data"
+  },
+  {
+    "objectID": "sequence-analysis.html#application",
+    "href": "sequence-analysis.html#application",
+    "title": "4  Sequence Analysis",
+    "section": "4.3 Application",
+    "text": "4.3 Application\nExplain intuition and main steps\n\n4.3.1 Defining outcome process\nDefine the thresholds that should be used to define the extent / pace of acceleration.\n\n\n4.3.2 Optimal matching\nComputation of distance - intuition > indel operators > different OM algorithms > use optimal matching\n\n\n4.3.3 Clustering\nDifferent cluster algorithms - use of k-meloids\nDetermining the number of clusters\n\n\n4.3.4 Visualising\nIndividual trajectories\nFrequency plots\nTime spent\nTop ten trajectories"
+  },
+  {
+    "objectID": "sequence-analysis.html#questions",
+    "href": "sequence-analysis.html#questions",
+    "title": "4  Sequence Analysis",
+    "section": "4.4 Questions",
+    "text": "4.4 Questions\nFrancisco to write\nThis chapter shows the use of sequence analysis to study population decline and draw on the following papers:\n\nRowe, Neville, and González-Leonardo (2022)\nNewsham and Rowe (2022)\nRowe, Robinson, and Patias (2022)\n\n\n\n\n\nNewsham, Niall, and Francisco Rowe. 2022. “Understanding Trajectories of Population Decline Across Rural and Urban Europe: A Sequence Analysis.” Population, Space and Place, December. https://doi.org/10.1002/psp.2630.\n\n\nRowe, Francisco, Ruth Neville, and Miguel González-Leonardo. 2022. “Sensing Population Displacement from Ukraine Using Facebook Data: Potential Impacts and Settlement Areas.” http://dx.doi.org/10.31219/osf.io/7n6wm.\n\n\nRowe, Francisco, Caitlin Robinson, and Nikos Patias. 2022. “Sensing Global Changes in Local Patterns of Energy Consumption in Cities During the Early Stages of the COVID-19 Pandemic.” Cities 129 (October): 103808. https://doi.org/10.1016/j.cities.2022.103808."
   }
 ]

@@ -1,11 +1,53 @@
 # Sequence Analysis {#sec-chp4}
 
+## Dependencies
+
+## Data
+
+Aim: to define trajectories of population decline or ageing
+
+Data source: WorldPop 2000-2020
+
+### Data Wrangling
+
+Exploratory data analysis to understand the data - time-space data
+
+## Application
+
+Explain intuition and main steps
+
+### Defining outcome process
+
+Define the thresholds that should be used to define the extent / pace of acceleration.
+
+### Optimal matching
+
+Computation of distance - intuition \> indel operators \> different OM algorithms \> use optimal matching
+
+### Clustering
+
+Different cluster algorithms - use of k-meloids
+
+Determining the number of clusters
+
+### Visualising
+
+Individual trajectories
+
+Frequency plots
+
+Time spent
+
+Top ten trajectories
+
+## Questions
+
 Francisco to write
 
 This chapter shows the use of sequence analysis to study population decline and draw on the following papers:
 
 -   @rowe2022a
 
--   @newsham2022
+-   @newsham2022a
 
 -   @rowe2022b

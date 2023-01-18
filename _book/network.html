@@ -347,7 +347,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="import-the-data"><span class="header-section-number">5.2.2</span> Import the data</h3>
 <p>Before we start any analysis with the data, ensure to set the path to the directory where we are working. Please replace in the following line the path to the folder where you have placed the data file.</p>
 <div class="cell">
-<<<<<<< Updated upstream
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/metro_to_metro_2015_2019_US_migration.csv"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure the MSA code is imported as a character and not as a number</span></span>
@@ -357,37 +356,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Previous_Name_State <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>MSA_Previous_Name, <span class="st">', '</span>, df<span class="sc">$</span>MSA_Previous_State)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Current_Name_State <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>MSA_Current_Name, <span class="st">', '</span>, df<span class="sc">$</span>MSA_Current_State)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Examine the first few rows of the dataset</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-=======
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/metro_to_metro_2015_2019_US_migration.csv"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Ensure the MSA code is imported as a character and not as a number</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Current_Code <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df<span class="sc">$</span>MSA_Current_Code) </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Include an additional column with the full name of the MSA in the format: Name, State</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Previous_Name_State <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>MSA_Previous_Name, <span class="st">', '</span>, df<span class="sc">$</span>MSA_Previous_State)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>MSA_Current_Name_State <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>MSA_Current_Name, <span class="st">', '</span>, df<span class="sc">$</span>MSA_Current_State)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span>(df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Outside Metro Area within U.S. or Puerto Rico"</span> <span class="sc">|</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Africa"</span> <span class="sc">|</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Asia"</span> <span class="sc">|</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Central America"</span> <span class="sc">|</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Caribbean"</span> <span class="sc">|</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Europe"</span> <span class="sc">|</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"U.S. Island Areas"</span> <span class="sc">|</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Northern America"</span> <span class="sc">|</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Oceania and At Sea"</span> <span class="sc">|</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"South America"</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>             ), </span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>         ]</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span>(df<span class="sc">$</span>MSA_Previous_State<span class="sc">==</span><span class="st">"PR"</span> <span class="sc">|</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Current_State<span class="sc">==</span><span class="st">"PR"</span>), ]</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>             </span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Examine the first few rows of the dataset</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
->>>>>>> Stashed changes
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span>(df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Outside Metro Area within U.S. or Puerto Rico"</span> <span class="sc">|</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Africa"</span> <span class="sc">|</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Asia"</span> <span class="sc">|</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Central America"</span> <span class="sc">|</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Caribbean"</span> <span class="sc">|</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Europe"</span> <span class="sc">|</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"U.S. Island Areas"</span> <span class="sc">|</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Northern America"</span> <span class="sc">|</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"Oceania and At Sea"</span> <span class="sc">|</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Previous_Name<span class="sc">==</span><span class="st">"South America"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>             ), </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>         ]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="sc">!</span>(df<span class="sc">$</span>MSA_Previous_State<span class="sc">==</span><span class="st">"PR"</span> <span class="sc">|</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>             df<span class="sc">$</span>MSA_Current_State<span class="sc">==</span><span class="st">"PR"</span>), ]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#Examine the first few rows of the dataset</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  MSA_Current_Code MSA_Current_Name MSA_Current_State
 1            10180          Abilene                TX
@@ -498,11 +484,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<<<<<<< Updated upstream
-<pre><code>+ 7/7 vertices, named, from 53bb9e3:
-=======
-<pre><code>+ 7/7 vertices, named, from 51e33f1:
->>>>>>> Stashed changes
+<pre><code>+ 7/7 vertices, named, from b66bfdc:
 [1] City 1 City 2 City 3 City 4 City 5 City 6 City 7</code></pre>
 </div>
 </div>
@@ -521,11 +503,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<<<<<<< Updated upstream
-<pre><code>+ 6/6 edges from 53bb9e3 (vertex names):
-=======
-<pre><code>+ 6/6 edges from 51e33f1 (vertex names):
->>>>>>> Stashed changes
+<pre><code>+ 6/6 edges from b66bfdc (vertex names):
 [1] City 1-&gt;City 2 City 2-&gt;City 3 City 1-&gt;City 4 City 4-&gt;City 1 City 4-&gt;City 2
 [6] City 4-&gt;City 5</code></pre>
 </div>
@@ -828,25 +806,21 @@ Geodetic CRS:  NAD83</code></pre>
 <p>The length of a path can also be defined in other ways. For example, if the edges are weighted, it can be defined as the sum of the weights of the edges that form the path.</p>
 <p>In R, we can use the function <strong>shortest_paths()</strong> to find the shortest path between a given pair of nodes and its length. For example, below we can see that the shortest path between the MSA containing New York and the MSA containing Los Angeles is one. This is not surprising since we would expect an edge connecting these two MSAs representing the fact that there is people migrating from one to the other in two consecutive years.</p>
 <div class="cell">
-<<<<<<< Updated upstream
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(g_US)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-=======
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shortest_paths</span>(g_US, </span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="at">from =</span> <span class="fu">V</span>(g_US)<span class="sc">$</span>name<span class="sc">==</span><span class="st">"New York-Newark-Jersey City, NY-NJ-PA"</span>,</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="at">to =</span> <span class="fu">V</span>(g_US)<span class="sc">$</span>name<span class="sc">==</span><span class="st">"Los Angeles-Long Beach-Anaheim, CA"</span>,</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="at">weights=</span><span class="cn">NA</span>, <span class="co">#If this is NULL and the graph has a weight edge attribute, then the attribute is used. If this is NA then no weights are used (even if the graph has a weight attribute)</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="at">output =</span> <span class="st">"both"</span>) <span class="co"># outputs both path nodes and edges</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
->>>>>>> Stashed changes
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shortest_paths</span>(g_US, </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="at">from =</span> <span class="fu">V</span>(g_US)<span class="sc">$</span>name<span class="sc">==</span><span class="st">"New York-Newark-Jersey City, NY-NJ-PA"</span>,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="at">to =</span> <span class="fu">V</span>(g_US)<span class="sc">$</span>name<span class="sc">==</span><span class="st">"Los Angeles-Long Beach-Anaheim, CA"</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="at">weights=</span><span class="cn">NA</span>, <span class="co">#If this is NULL and the graph has a weight edge attribute, then the attribute is used. If this is NA then no weights are used (even if the graph has a weight attribute)</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="at">output =</span> <span class="st">"both"</span>) <span class="co"># outputs both path nodes and edges</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$vpath
 $vpath[[1]]
-+ 2/384 vertices, named, from ccd4726:
++ 2/384 vertices, named, from eeb847d:
 [1] New York-Newark-Jersey City, NY-NJ-PA Los Angeles-Long Beach-Anaheim, CA   
 
 
 $epath
 $epath[[1]]
-+ 1/48795 edge from ccd4726 (vertex names):
++ 1/48795 edge from eeb847d (vertex names):
 [1] New York-Newark-Jersey City, NY-NJ-PA-&gt;Los Angeles-Long Beach-Anaheim, CA
 
 
@@ -859,14 +833,14 @@ NULL</code></pre>
 </div>
 <p>Of all shortest paths in a network, there is longest one whose length is defined as the <strong>diameter</strong> of the network. In this case, the diameter is 3 meaning that the longest of all shortest paths in <em>g_US</em> has 3 edges.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(g_US, <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diameter</span>(g_US, <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
 <p>The mean distance is defined as the average length of all shortest paths in the network. The mean distance will always be smaller than the diameter.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_distance</span>(g_US, <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_distance</span>(g_US, <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights=</span><span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.668224</code></pre>
 </div>
@@ -877,55 +851,51 @@ NULL</code></pre>
 <p>Centrality metrics assign scores to nodes (and sometimes also edges) according to their position within a network. These metrics can be used to identify the most influential nodes.</p>
 <p>We have already explored some concepts which can be regarded as centrality metrics, for example, the <strong>degree</strong> of a node or the <strong>strength of a node</strong> or weighted degree, which is the sum of edge weights that link to adjacent nodes or, in other words, the total in-flow or out-flow associated with each node. As we can see from the code below, many nodes in <em>g_US</em> have an inflow of less than 100 immigrants.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute strength of the nodes belonging to graph g_US, in this case the in-flow</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>strength_US <span class="ot">&lt;-</span> <span class="fu">strength</span>(g_US, <span class="co">#The input graph</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="co"># The vertices for which the strength will be calculated.</span></span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="co">#“in” for in-degree</span></span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">loops =</span> <span class="cn">FALSE</span>, <span class="co">#whether the loop edges are also counted</span></span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="cn">NULL</span> <span class="co">#If the graph has a weight edge attribute, then this is used by default. If the graph does not have a weight edge attribute and this argument is NULL, then a warning is given and degree is called.</span></span>
-<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Produce histogram of the frequency of nodes with a certain strength</span></span>
-<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(strength_US, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">main=</span><span class="st">"Histogram of node strength"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute strength of the nodes belonging to graph g_US, in this case the in-flow</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>strength_US <span class="ot">&lt;-</span> <span class="fu">strength</span>(g_US, <span class="co">#The input graph</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="co"># The vertices for which the strength will be calculated.</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="co">#“in” for in-degree</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">loops =</span> <span class="cn">FALSE</span>, <span class="co">#whether the loop edges are also counted</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="cn">NULL</span> <span class="co">#If the graph has a weight edge attribute, then this is used by default. If the graph does not have a weight edge attribute and this argument is NULL, then a warning is given and degree is called.</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Produce histogram of the frequency of nodes with a certain strength</span></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(strength_US, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">main=</span><span class="st">"Histogram of node strength"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="network_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We can check which is the city with the maximum strentgh:</p>
 <div class="cell">
-<<<<<<< Updated upstream
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">centr_degree</span>(g_US, <span class="at">mode=</span><span class="st">"in"</span>, <span class="at">normalized=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-=======
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">strength</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">loops =</span> <span class="cn">FALSE</span>, <span class="at">weights =</span> <span class="cn">NULL</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">strength</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">loops =</span> <span class="cn">FALSE</span>, <span class="at">weights =</span> <span class="cn">NULL</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
->>>>>>> Stashed changes
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">strength</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">loops =</span> <span class="cn">FALSE</span>, <span class="at">weights =</span> <span class="cn">NULL</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">strength</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">loops =</span> <span class="cn">FALSE</span>, <span class="at">weights =</span> <span class="cn">NULL</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Los Angeles-Long Beach-Anaheim, CA"</code></pre>
 </div>
 </div>
 <p>We will look at another two important centrality metrics that are based on the structure of the network. Firstly, <strong>closeness centrality</strong> which is a measure of the length of the shortest path between a node and all the other nodes. For a given node, it is computed as the inverse of the average shortest paths between that node and every other node in the network. So, if a node has closeness centrality close to <span class="math inline">\(1\)</span>, it means that on average, it is very close to the other nodes in the network. A closeness centrality of exactly <span class="math inline">\(0\)</span> corresponds to an isolated node.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>close_centr <span class="ot">&lt;-</span> <span class="fu">closeness</span>(g_US, <span class="at">mode=</span><span class="st">"in"</span>, <span class="at">weights=</span><span class="cn">NA</span>)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(close_centr, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">main=</span><span class="st">"Histogram of closeness centrality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>close_centr <span class="ot">&lt;-</span> <span class="fu">closeness</span>(g_US, <span class="at">mode=</span><span class="st">"in"</span>, <span class="at">weights=</span><span class="cn">NA</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(close_centr, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">main=</span><span class="st">"Histogram of closeness centrality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="network_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">closeness</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">weights =</span> <span class="cn">NA</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">closeness</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">weights =</span> <span class="cn">NA</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">closeness</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">weights =</span> <span class="cn">NA</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">closeness</span>(g_US, <span class="at">vids =</span> <span class="fu">V</span>(g_US), <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"in"</span>), <span class="at">weights =</span> <span class="cn">NA</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Phoenix-Mesa-Chandler, AZ"</code></pre>
 </div>
 </div>
 <p>The other metric is known as <strong>betweenness centrality</strong>. For a given node, it is a measure of the number of shortest paths that go through that node. Therefore, nodes with high values of betweenness centrality are those that play a very important role in the connectivity of the network. Betweenness can also be computed for edges.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>between_centr <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(g_US, <span class="at">v =</span> <span class="fu">V</span>(g_US), <span class="at">directed =</span> <span class="cn">TRUE</span>, <span class="at">weights =</span> <span class="cn">NA</span>)</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(between_centr, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">main=</span><span class="st">"Histogram of betweenness centrality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>between_centr <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(g_US, <span class="at">v =</span> <span class="fu">V</span>(g_US), <span class="at">directed =</span> <span class="cn">TRUE</span>, <span class="at">weights =</span> <span class="cn">NA</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(between_centr, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">main=</span><span class="st">"Histogram of betweenness centrality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="network_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">betweenness</span>(g_US, <span class="at">v =</span> <span class="fu">V</span>(g_US), <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights =</span> <span class="cn">NA</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">betweenness</span>(g_US, <span class="at">v =</span> <span class="fu">V</span>(g_US), <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights =</span> <span class="cn">NA</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>name[<span class="fu">betweenness</span>(g_US, <span class="at">v =</span> <span class="fu">V</span>(g_US), <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights =</span> <span class="cn">NA</span>)<span class="sc">==</span><span class="fu">max</span>(<span class="fu">betweenness</span>(g_US, <span class="at">v =</span> <span class="fu">V</span>(g_US), <span class="at">directed=</span><span class="cn">TRUE</span>, <span class="at">weights =</span> <span class="cn">NA</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Phoenix-Mesa-Chandler, AZ"</code></pre>
 </div>
@@ -946,39 +916,21 @@ NULL</code></pre>
 <section id="final-visualisation" class="level2" data-number="5.8">
 <h2 data-number="5.8" class="anchored" data-anchor-id="final-visualisation"><span class="header-section-number">5.8</span> Final visualisation</h2>
 <div class="cell">
-<<<<<<< Updated upstream
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># V(g_US)$inflow &lt;- rowSums(as.matrix(g_US[]))</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # Set node size based on inflow of migrants:</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># V(g_US)$size &lt;- 0.03*(V(g_US)$inflow)^0.1</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # Set edge width based on weight:</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co"># E(g_US)$width &lt;- E(g_US)$weight/1200</span></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="co"># #Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA</span></span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df_spatial_nodes &lt;- df_nodes %&gt;% left_join(msa_us, by = c("name" = "NAME")) %&gt;% select(c("name", "lon_centroid", "lat_centroid"))</span></span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co"># lo &lt;- as.matrix(df_spatial_nodes[,2:3])</span></span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(st_geometry(msa_us), border=adjustcolor("gray50"))</span></span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(g_US, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_US)$size, edge.arrow.size=.1, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_US)$width, edge.color=adjustcolor("gray80", alpha.f = .1), vertex.color="gold", vertex.frame.color=adjustcolor("gray100", alpha.f = .01),</span></span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="co"># vertex.label="", vertex.label.color="black",</span></span>
-<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a><span class="co"># vertex.label.cex=.0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-=======
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>inflow <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">as.matrix</span>(g_US[]))</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set node size based on inflow of migrants:</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_sub)<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fl">0.4</span><span class="sc">*</span>(<span class="fu">V</span>(g_sub)<span class="sc">$</span>inflow)<span class="sc">^</span><span class="fl">0.4</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set edge width based on weight:</span></span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g_US)<span class="sc">$</span>width <span class="ot">&lt;-</span> <span class="fu">E</span>(g_US)<span class="sc">$</span>weight<span class="sc">/</span><span class="dv">1200</span></span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA</span></span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>df_spatial_nodes <span class="ot">&lt;-</span> df_nodes <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(msa_us, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span> <span class="ot">=</span> <span class="st">"NAME"</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"lon_centroid"</span>, <span class="st">"lat_centroid"</span>))</span>
-<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(df_spatial_nodes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
-<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(msa_us), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray65"</span>, <span class="at">alpha.f=</span><span class="fl">0.4</span>), <span class="at">lwd=</span><span class="fl">0.6</span>) </span>
-<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g_US, <span class="at">layout=</span>lo, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">rescale =</span> <span class="cn">FALSE</span>, <span class="at">vertex.size=</span><span class="fu">V</span>(g_US)<span class="sc">$</span>size, <span class="at">edge.arrow.size=</span><span class="dv">0</span>, <span class="at">edge.arrow.width=</span><span class="dv">0</span>, <span class="at">edge.curved=</span><span class="fl">0.1</span>, <span class="at">edge.width=</span><span class="dv">0</span>, <span class="at">edge.color=</span><span class="fu">adjustcolor</span>(<span class="st">"gray80"</span>, <span class="at">alpha.f =</span> <span class="fl">0.3</span>), <span class="at">vertex.color=</span><span class="st">"gold"</span>, <span class="at">vertex.frame.color=</span><span class="fu">adjustcolor</span>(<span class="st">"gray100"</span>, <span class="at">alpha.f =</span> .<span class="dv">01</span>), <span class="at">vertex.frame.width =</span><span class="dv">0</span>, <span class="at">vertex.label=</span><span class="st">""</span>, <span class="at">vertex.label.color=</span><span class="st">"black"</span>, <span class="at">vertex.label.cex=</span>.<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_US)<span class="sc">$</span>inflow <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">as.matrix</span>(g_US[]))</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set node size based on inflow of migrants:</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_sub)<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fl">0.4</span><span class="sc">*</span>(<span class="fu">V</span>(g_sub)<span class="sc">$</span>inflow)<span class="sc">^</span><span class="fl">0.4</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set edge width based on weight:</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g_US)<span class="sc">$</span>width <span class="ot">&lt;-</span> <span class="fu">E</span>(g_US)<span class="sc">$</span>weight<span class="sc">/</span><span class="dv">1200</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>df_spatial_nodes <span class="ot">&lt;-</span> df_nodes <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(msa_us, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span> <span class="ot">=</span> <span class="st">"NAME"</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"lon_centroid"</span>, <span class="st">"lat_centroid"</span>))</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(df_spatial_nodes[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>])</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(msa_us), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray65"</span>, <span class="at">alpha.f=</span><span class="fl">0.4</span>), <span class="at">lwd=</span><span class="fl">0.6</span>) </span>
+<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(g_US, <span class="at">layout=</span>lo, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">rescale =</span> <span class="cn">FALSE</span>, <span class="at">vertex.size=</span><span class="fu">V</span>(g_US)<span class="sc">$</span>size, <span class="at">edge.arrow.size=</span><span class="dv">0</span>, <span class="at">edge.arrow.width=</span><span class="dv">0</span>, <span class="at">edge.curved=</span><span class="fl">0.1</span>, <span class="at">edge.width=</span><span class="dv">0</span>, <span class="at">edge.color=</span><span class="fu">adjustcolor</span>(<span class="st">"gray80"</span>, <span class="at">alpha.f =</span> <span class="fl">0.3</span>), <span class="at">vertex.color=</span><span class="st">"gold"</span>, <span class="at">vertex.frame.color=</span><span class="fu">adjustcolor</span>(<span class="st">"gray100"</span>, <span class="at">alpha.f =</span> .<span class="dv">01</span>), <span class="at">vertex.frame.width =</span><span class="dv">0</span>, <span class="at">vertex.label=</span><span class="st">""</span>, <span class="at">vertex.label.color=</span><span class="st">"black"</span>, <span class="at">vertex.label.cex=</span>.<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="network_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid" width="672"></p>
 </div>
->>>>>>> Stashed changes
 </div>
 
 

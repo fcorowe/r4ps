@@ -22,11 +22,15 @@
   </url>
   <url>
     <loc>https://www.population-science.net/network.html</loc>
+<<<<<<< Updated upstream
     <lastmod>2023-01-18T13:44:02.446Z</lastmod>
+=======
+    <lastmod>2023-01-17T19:20:33.534Z</lastmod>
+>>>>>>> Stashed changes
   </url>
   <url>
     <loc>https://www.population-science.net/sentiment-analysis.html</loc>
-    <lastmod>2023-01-16T07:40:23.798Z</lastmod>
+    <lastmod>2023-01-17T08:30:57.666Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/topic-modelling.html</loc>
@@ -54,6 +58,10 @@
   </url>
   <url>
     <loc>https://www.population-science.net/data-revolution.html</loc>
+<<<<<<< Updated upstream
     <lastmod>2023-01-17T13:20:32.088Z</lastmod>
+=======
+    <lastmod>2023-01-17T08:30:57.666Z</lastmod>
+>>>>>>> Stashed changes
   </url>
 </urlset>

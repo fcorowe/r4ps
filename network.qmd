@@ -474,8 +474,7 @@ We can check which is the city with the maximum strentgh:
 V(g_US)$name[strength(g_US, vids = V(g_US), mode = c("in"), loops = FALSE, weights = NULL)==max(strength(g_US, vids = V(g_US), mode = c("in"), loops = FALSE, weights = NULL))]
 ```
 
-We will look at another two important centrality metrics that are based on the structure of the network. Firstly, **closeness centrality** which is a measure of the length of the shortest path between a node and all the other nodes. For a given node, it is computed as the inverse of the average shortest paths between that node and every other node in the network. So, if a node has closeness centrality close to $1$, it means that on average, it is very close to the other nodes in the network. A closeness centrality of exactly $0$ corresponds to an isolated node.  
-
+We will look at another two important centrality metrics that are based on the structure of the network. Firstly, **closeness centrality** which is a measure of the length of the shortest path between a node and all the other nodes. For a given node, it is computed as the inverse of the average shortest paths between that node and every other node in the network. So, if a node has closeness centrality close to $1$, it means that on average, it is very close to the other nodes in the network. A closeness centrality of exactly $0$ corresponds to an isolated node.
 
 ```{r}
 close_centr <- closeness(g_US, mode="in", weights=NA)
@@ -497,10 +496,9 @@ hist(between_centr, breaks = 50, main="Histogram of betweenness centrality")
 V(g_US)$name[betweenness(g_US, v = V(g_US), directed=TRUE, weights = NA)==max(betweenness(g_US, v = V(g_US), directed=TRUE, weights = NA))]
 ```
 
-
 ###Hubs and authorities
 
-We call hubs or authorities those nodes with a higher-than-average degree. Normally, the name hub is reserved to nodes with high out-degree whereas authority is reserved to nodes with high in-degree. An algorithm to detect hubs and authorities was developed by Jon Kleinberg, although it was initially used to examine web pages. 
+We call hubs or authorities those nodes with a higher-than-average degree. Normally, the name hub is reserved to nodes with high out-degree whereas authority is reserved to nodes with high in-degree. An algorithm to detect hubs and authorities was developed by Jon Kleinberg, although it was initially used to examine web pages.
 
 ```{r}
 
@@ -514,7 +512,7 @@ We call hubs or authorities those nodes with a higher-than-average degree. Norma
 
 ## Final visualisation
 
-```{r} 
+```{r}
 V(g_US)$inflow <- rowSums(as.matrix(g_US[]))
 # Set node size based on inflow of migrants:
 V(g_sub)$size <- 0.4*(V(g_sub)$inflow)^0.4

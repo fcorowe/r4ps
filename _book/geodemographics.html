@@ -64,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta name="twitter:title" content="Population Science - 3&nbsp; Geodemographics">
-<meta name="twitter:description" content="Carmen to write. Helllo trying.">
+<meta name="twitter:description" content="Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.">
 <meta name="twitter:creator" content="@fcorowe">
 <meta name="twitter:card" content="summary">
 </head>
@@ -196,7 +196,33 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-sec31" id="toc-sec-sec31" class="nav-link active" data-scroll-target="#sec-sec31"><span class="toc-section-number">3.1</span>  Dependencies</a></li>
+  <li><a href="#sec-sec32" id="toc-sec-sec32" class="nav-link" data-scroll-target="#sec-sec32"><span class="toc-section-number">3.2</span>  Data</a></li>
+  <li><a href="#sec-sec33" id="toc-sec-sec33" class="nav-link" data-scroll-target="#sec-sec33"><span class="toc-section-number">3.3</span>  Geodemographic classification</a></li>
+  <li><a href="#sec-sec34" id="toc-sec-sec34" class="nav-link" data-scroll-target="#sec-sec34"><span class="toc-section-number">3.4</span>  Preparing the data for GDC</a>
+  <ul class="collapse">
+  <li><a href="#choice-of-geographic-units" id="toc-choice-of-geographic-units" class="nav-link" data-scroll-target="#choice-of-geographic-units"><span class="toc-section-number">3.4.1</span>  Choice of geographic units</a></li>
+  <li><a href="#choice-of-variables" id="toc-choice-of-variables" class="nav-link" data-scroll-target="#choice-of-variables"><span class="toc-section-number">3.4.2</span>  Choice of variables</a></li>
+  <li><a href="#sec-sec3" id="toc-sec-sec3" class="nav-link" data-scroll-target="#sec-sec3"><span class="toc-section-number">3.4.3</span>  Variable standardisation</a></li>
+  </ul></li>
+  <li><a href="#sec-sec35" id="toc-sec-sec35" class="nav-link" data-scroll-target="#sec-sec35"><span class="toc-section-number">3.5</span>  Checking for variable association</a></li>
+  <li><a href="#sec-sec36" id="toc-sec-sec36" class="nav-link" data-scroll-target="#sec-sec36"><span class="toc-section-number">3.6</span>  The clustering process</a>
+  <ul class="collapse">
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="toc-section-number">3.6.1</span>  K-means</a></li>
+  <li><a href="#number-of-clusters" id="toc-number-of-clusters" class="nav-link" data-scroll-target="#number-of-clusters"><span class="toc-section-number">3.6.2</span>  Number of clusters</a></li>
+  <li><a href="#other-clustering-methods" id="toc-other-clustering-methods" class="nav-link" data-scroll-target="#other-clustering-methods"><span class="toc-section-number">3.6.3</span>  Other clustering methods</a></li>
+  </ul></li>
+  <li><a href="#sec-sec37" id="toc-sec-sec37" class="nav-link" data-scroll-target="#sec-sec37"><span class="toc-section-number">3.7</span>  Dealing with the GDC results</a>
+  <ul class="collapse">
+  <li><a href="#cluster-interpretation" id="toc-cluster-interpretation" class="nav-link" data-scroll-target="#cluster-interpretation"><span class="toc-section-number">3.7.1</span>  Cluster interpretation</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="toc-section-number">3.7.2</span>  Testing</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/geodemographics.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -218,9 +244,54 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Carmen to write. Helllo trying.</p>
+<section id="sec-sec31" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-sec31"><span class="header-section-number">3.1</span> Dependencies</h2>
+</section>
+<section id="sec-sec32" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-sec32"><span class="header-section-number">3.2</span> Data</h2>
+<p>Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.</p>
+</section>
+<section id="sec-sec33" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-sec33"><span class="header-section-number">3.3</span> Geodemographic classification</h2>
+</section>
+<section id="sec-sec34" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-sec34"><span class="header-section-number">3.4</span> Preparing the data for GDC</h2>
+<section id="choice-of-geographic-units" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="choice-of-geographic-units"><span class="header-section-number">3.4.1</span> Choice of geographic units</h3>
+</section>
+<section id="choice-of-variables" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="choice-of-variables"><span class="header-section-number">3.4.2</span> Choice of variables</h3>
+</section>
+<section id="sec-sec3" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="sec-sec3"><span class="header-section-number">3.4.3</span> Variable standardisation</h3>
+</section>
+</section>
+<section id="sec-sec35" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-sec35"><span class="header-section-number">3.5</span> Checking for variable association</h2>
+</section>
+<section id="sec-sec36" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-sec36"><span class="header-section-number">3.6</span> The clustering process</h2>
+<section id="k-means" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">3.6.1</span> K-means</h3>
+</section>
+<section id="number-of-clusters" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="number-of-clusters"><span class="header-section-number">3.6.2</span> Number of clusters</h3>
+</section>
+<section id="other-clustering-methods" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="other-clustering-methods"><span class="header-section-number">3.6.3</span> Other clustering methods</h3>
+</section>
+</section>
+<section id="sec-sec37" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-sec37"><span class="header-section-number">3.7</span> Dealing with the GDC results</h2>
+<section id="cluster-interpretation" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="cluster-interpretation"><span class="header-section-number">3.7.1</span> Cluster interpretation</h3>
+</section>
+<section id="testing" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="testing"><span class="header-section-number">3.7.2</span> Testing</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

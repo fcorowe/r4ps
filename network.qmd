@@ -32,7 +32,7 @@ Before we start any analysis with the data, ensure to set the path to the direct
 
 ```{r}
 
-df <- read.csv("./data/metro_to_metro_2015_2019_US_migration.csv")
+df <- read.csv("./data/networks/metro_to_metro_2015_2019_US_migration.csv")
 
 #Ensure the MSA code is imported as a character and not as a number
 df$MSA_Current_Code <- as.character(df$MSA_Current_Code) 
@@ -304,7 +304,7 @@ library(sf)
 library(stringr)
 
 #Import core-based statistical areas https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2020.html#list-tab-YXS5CUH5MBYOZ7MJLN
-cbsa_us <- st_read("./data/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp")
+cbsa_us <- st_read("./data/networks/cb_2020_us_cbsa_500k/cb_2020_us_cbsa_500k.shp")
 
 msa_us <- cbsa_us %>% filter(grepl('M1', LSAD)) #Filter the original data frame to obtain only metro areas
 

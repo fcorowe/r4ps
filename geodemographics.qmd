@@ -47,3 +47,134 @@ st_LSOA <- st_read("./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_Lo
 ```{r}
 plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
 ```
+
+### Variables of interest
+
+```{r}
+names(df_LSOA)
+```
+
+c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther", "EthnicBAME", "CountryBirthUK", "CountryBirthNotUK", "HouseholdEnglishLanguage", "HouseholdNotEnglishLanguage", "ReligionChristian", "ReligionBuddhist", "ReligionHindu", "ReligionJewish", "ReligionMuslim", "ReligionSikh", "ReligionOther", "ReligionNone", "ReligionNotStated", "FullTimeStudent", "EmploymentRate", "UnemploymentRate" )
+
+```{r}
+df_LSOA <- df_LSOA[, c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther", "EthnicBAME", "CountryBirthUK", "CountryBirthNotUK", "FullTimeStudent", "EmploymentRate", "UnemploymentRate" )]
+```
+
+
+```{r}
+summary(df_LSOA$EthnicBlackAfricanCaribbeanBlackBritish)
+```
+```{r}
+hist(df_LSOA$EthnicBlackAfricanCaribbeanBlackBritish, breaks=50, xlab="% Muslim", main=NULL)
+```
+```{r}
+join_LSOA <- st_LSOA %>% left_join(df_LSOA, by='LSOA11NM')
+```
+
+```{r}
+join_LSOA %>% 
+ggplot(aes(fill=EthnicBlackAfricanCaribbeanBlackBritish, color = EthnicBlackAfricanCaribbeanBlackBritish)) + 
+geom_sf() +
+scale_fill_viridis(direction = 1) + 
+scale_color_viridis(direction = 1) 
+```
+
+## Checking for variable association {#sec-sec35}
+
+```{r}
+colnames_df_LSOA <- colnames(df_LSOA)
+```
+
+```{r}
+# Matrix of Pearson correlation coefficients
+corr_mat <- cor(df_LSOA[,c(colnames_df_LSOA[2: ncol(df_LSOA)])], method = "pearson")
+# Matrix of p-values
+corr_pmat <- cor_pmat(df_LSOA[,c(colnames_df_LSOA[2: ncol(df_LSOA)])], method = "pearson")
+# Barring the no significant coefficient
+ggcorrplot(corr_mat, tl.cex=10, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat, colors = c(viridis(3)))
+```
+ Remove EthnicBAME, HouseholdNotEnglishLAnguage, CountryBirthUK, EmploymentRate
+
+```{r}
+#  Remove EthnicBAME, CountryBirthUK
+
+data <- df_LSOA[, c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther","CountryBirthNotUK", "FullTimeStudent", "EmploymentRate", "UnemploymentRate" )]
+```
+
+```{r}
+join_data <- st_LSOA %>% left_join(data, by='LSOA11NM')
+```
+
+```{r}
+colnames_data <- colnames(data)
+```
+
+```{r}
+# Matrix of Pearson correlation coefficients
+corr_mat_data <- cor(data[,c(colnames_data[2: ncol(data)])], method = "pearson")
+# Matrix of p-values
+corr_pmat_data <- cor_pmat(data[,c(colnames_data[2: ncol(data)])], method = "pearson")
+# Barring the no significant coefficient
+ggcorrplot(corr_mat_data, tl.cex=10, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat_data, colors = c(viridis(3)))
+```
+
+## Variable standardisation {#sec-sec3}
+
+### Between areas
+
+### Between variables
+
+```{r}
+# creates a new data frame
+data_std <- data
+# loops columns from position 1 : the last column
+for(i in 2: ncol (data_std)){
+data_std[, colnames_data[i]] <- scale(as.numeric(data[, colnames_data[i]]))
+}
+```
+
+
+
+## The clustering process {#sec-sec36}
+
+### K-means
+
+```{r}
+Km <- kmeans(data_std[,c(colnames_data[2: ncol(data_std)])], 3, nstart = 20, iter.max = 1000)
+```
+
+
+```{r}
+join_data_cluster <- join_data
+join_data_cluster$cluster <- Km$cluster
+```
+
+
+```{r}
+join_data_cluster %>% 
+ggplot(aes(fill=cluster, color = cluster)) + 
+geom_sf() +
+scale_fill_viridis(direction = 1) + 
+scale_color_viridis(direction = 1) 
+```
+
+### Number of clusters
+
+### Other clustering methods
+
+## Dealing with the GDC results {#sec-sec37}
+
+### Cluster interpretation
+
+```{r}
+# creates a radial plot for the first group [1,]
+# the boxed.radial (False) prevents white boxes forming under labels
+# radlab rotates the labels
+KmCenters <- as.matrix(Km$centers)
+KmCenters <- as.data.frame(KmCenters)
+radial.plot(KmCenters[1,], labels = colnames(KmCenters),
+boxed.radial = FALSE, show.radial.grid = FALSE,
+line.col = "blue", radlab = TRUE )
+```
+
+### Testing

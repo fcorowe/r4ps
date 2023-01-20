@@ -41,24 +41,8 @@ df$MSA_Current_Code <- as.character(df$MSA_Current_Code)
 df$MSA_Previous_Name_State <- paste0(df$MSA_Previous_Name, ', ', df$MSA_Previous_State)
 df$MSA_Current_Name_State <- paste0(df$MSA_Current_Name, ', ', df$MSA_Current_State)
 
-df <- df[!(df$MSA_Previous_Name=="Outside Metro Area within U.S. or Puerto Rico" |
-             df$MSA_Previous_Name=="Africa" |
-             df$MSA_Previous_Name=="Asia" |
-             df$MSA_Previous_Name=="Central America" |
-             df$MSA_Previous_Name=="Caribbean" |
-             df$MSA_Previous_Name=="Europe" |
-             df$MSA_Previous_Name=="U.S. Island Areas" |
-             df$MSA_Previous_Name=="Northern America" |
-             df$MSA_Previous_Name=="Oceania and At Sea" |
-             df$MSA_Previous_Name=="South America"
-             ), 
-         ]
-
-df <- df[!(df$MSA_Previous_State=="PR" |
-             df$MSA_Current_State=="PR"), ]
-             
 #Examine the first few rows of the dataset
-head(df)
+head(df) 
 ```
 
 We can obtain the total number of reported migratory movements with the following command:
@@ -214,7 +198,6 @@ We will dedicate the entirety of next section to explore tools that can help us 
 ```{r}
 
 df_sub <- df %>% filter(grepl('WA', MSA_Current_State)) %>% filter(grepl('WA', MSA_Previous_State)) #Filter the original data frame
-
 ```
 
 Then, we can prepare the data as we did before to create *gUS*. But, instead of basing the network on *df*, we will generate it from *df_sub*.
@@ -374,7 +357,7 @@ Here we define some of the most important metrics that help us quantify differen
 
 ### Density
 
-The network **density** is defined as the proportion of existing edges out of all the possible edges. In a network with $n$ nodes, the total number of possible edges is $n\times(n-1)$, i.e. the number of edges if each node was connected to all the other nodes. A density equal to $1$ corresponds to a situation where $n\times(n-1)$ edges are present. A network with no edges at all would have density equal to $0$. The line of code below tells us that the density of *g_US* is approximately 0.33, meaning that about 33% of all the possible edges are present, or in other words, that there are migratory movements between almost a third of every pair of cities.
+The network **density** is defined as the proportion of existing edges out of all the possible edges. In a network with $n$ nodes, the total number of possible edges is \$n\\times(n-1)\$, i.e. the number of edges if each node was connected to all the other nodes. A density equal to $1$ corresponds to a situation where $n\times(n-1)$ edges are present. A network with no edges at all would have density equal to $0$. The line of code below tells us that the density of *g_sub* is approximately 0.33, meaning that about 33% of all the possible edges are present, or in other words, that there are migratory movements between almost a third of every pair of cities.
 
 ```{r}
 edge_density(g_US, loops=FALSE)
@@ -392,7 +375,7 @@ From this result, we conclude that about 62% of the pairs of nodes that are conn
 
 ### Degree
 
-The **total degree** of a node refers to the number of edges that emerge from or point at that node. The **in-degree** of a node in a directed network is the number of edges that point at it whereas the **out-degree** is the number of edges that emerge from it. The **degree()** function, allows us to compute the degree of one or more nodes and allows us to specify if we are interested in the total degree, the in-degree or the out-degree.
+The **total degree** of a node refers to the number of edges that emerge from or point at that node. The **in-degree** of a node in a directed network is the number of edges that point at it whereas the **out-degree** is the number of edges that emerge from it. The **degree()** functions, allows us to compute the degree of one or more nodes and allows us to specify if we are interested in the total degree, the in-degree or the out-degree.
 
 ```{r}
 # Compute degree of the nodes given by v belonging to graph g_US, in this case the in-degree
@@ -419,93 +402,16 @@ Note that the fact that these two cities have the largest in-degree does not nec
 
 ### Distances
 
-A **path** in a network between node $A$ and node $B$ is a sequence of edges which joins a sequence of distinct nodes, starting at node $A$ and terminating at node $B$. In a **directed path** there is an added restriction: the edges must be all directed in the same direction.
-
-The **length of a path** between nodes $A$ and $B$ is normally defined as the number of edges that form the path. The **shortest path** is the minimum number of edges that need to be traversed to travel from $A$ to $B$.
-
-The length of a path can also be defined in other ways. For example, if the edges are weighted, it can be defined as the sum of the weights of the edges that form the path.
-
-In R, we can use the function **shortest_paths()** to find the shortest path between a given pair of nodes and its length. For example, below we can see that the shortest path between the MSA containing New York and the MSA containing Los Angeles is one. This is not surprising since we would expect an edge connecting these two MSAs representing the fact that there is people migrating from one to the other in two consecutive years.
+Shortest path between nodes, mean distance, diameter ,etc.
 
 ```{r}
-shortest_paths(g_US, 
-from = V(g_US)$name=="New York-Newark-Jersey City, NY-NJ-PA",
-to = V(g_US)$name=="Los Angeles-Long Beach-Anaheim, CA",
-weights=NA, #If this is NULL and the graph has a weight edge attribute, then the attribute is used. If this is NA then no weights are used (even if the graph has a weight attribute)
-output = "both") # outputs both path nodes and edges
-```
-
-Of all shortest paths in a network, there is longest one whose length is defined as the **diameter** of the network. In this case, the diameter is 3 meaning that the longest of all shortest paths in *g_US* has 3 edges.
-
-```{r}
-diameter(g_US, directed=TRUE, weights=NA)
-```
-
-The mean distance is defined as the average length of all shortest paths in the network. The mean distance will always be smaller than the diameter.
-
-```{r}
-mean_distance(g_US, directed=TRUE, weights=NA)
+diameter(g_US)
 ```
 
 ### Centrality
 
-Centrality metrics assign scores to nodes (and sometimes also edges) according to their position within a network. These metrics can be used to identify the most influential nodes.
-
-We have already explored some concepts which can be regarded as centrality metrics, for example, the **degree** of a node or the **strength of a node** or weighted degree, which is the sum of edge weights that link to adjacent nodes or, in other words, the total in-flow or out-flow associated with each node. As we can see from the code below, many nodes in *g_US* have an inflow of less than 100 immigrants.
-
 ```{r}
-
-# Compute strength of the nodes belonging to graph g_US, in this case the in-flow
-strength_US <- strength(g_US, #The input graph
-  vids = V(g_US), #	The vertices for which the strength will be calculated.
-  mode = c("in"), #“in” for in-degree
-  loops = FALSE, #whether the loop edges are also counted
-  weights = NULL #If the graph has a weight edge attribute, then this is used by default. If the graph does not have a weight edge attribute and this argument is NULL, then a warning is given and degree is called.
-)
-  
-#Produce histogram of the frequency of nodes with a certain strength
-hist(strength_US, breaks = 50, main="Histogram of node strength")
-
-```
-
-We can check which is the city with the maximum strentgh:
-
-```{r}
-V(g_US)$name[strength(g_US, vids = V(g_US), mode = c("in"), loops = FALSE, weights = NULL)==max(strength(g_US, vids = V(g_US), mode = c("in"), loops = FALSE, weights = NULL))]
-```
-
-We will look at another two important centrality metrics that are based on the structure of the network. Firstly, **closeness centrality** which is a measure of the length of the shortest path between a node and all the other nodes. For a given node, it is computed as the inverse of the average shortest paths between that node and every other node in the network. So, if a node has closeness centrality close to $1$, it means that on average, it is very close to the other nodes in the network. A closeness centrality of exactly $0$ corresponds to an isolated node.
-
-```{r}
-close_centr <- closeness(g_US, mode="in", weights=NA)
-hist(close_centr, breaks = 50, main="Histogram of closeness centrality")
-```
-
-```{r}
-V(g_US)$name[closeness(g_US, vids = V(g_US), mode = c("in"), weights = NA)==max(closeness(g_US, vids = V(g_US), mode = c("in"), weights = NA))]
-```
-
-The other metric is known as **betweenness centrality**. For a given node, it is a measure of the number of shortest paths that go through that node. Therefore, nodes with high values of betweenness centrality are those that play a very important role in the connectivity of the network. Betweenness can also be computed for edges.
-
-```{r}
-between_centr <- betweenness(g_US, v = V(g_US), directed = TRUE, weights = NA)
-hist(between_centr, breaks = 50, main="Histogram of betweenness centrality")
-```
-
-```{r}
-V(g_US)$name[betweenness(g_US, v = V(g_US), directed=TRUE, weights = NA)==max(betweenness(g_US, v = V(g_US), directed=TRUE, weights = NA))]
-```
-
-###Hubs and authorities
-
-We call hubs or authorities those nodes with a higher-than-average degree. Normally, the name hub is reserved to nodes with high out-degree whereas authority is reserved to nodes with high in-degree. An algorithm to detect hubs and authorities was developed by Jon Kleinberg, although it was initially used to examine web pages.
-
-```{r}
-
-```
-
-```{r}
-
+centr_degree(g_US, mode="in", normalized=T)
 ```
 
 ## Communities {#sec-sec_communities}
@@ -513,17 +419,19 @@ We call hubs or authorities those nodes with a higher-than-average degree. Norma
 ## Final visualisation
 
 ```{r}
-V(g_US)$inflow <- rowSums(as.matrix(g_US[]))
-# Set node size based on inflow of migrants:
-V(g_sub)$size <- 0.4*(V(g_sub)$inflow)^0.4
-# Set edge width based on weight:
-E(g_US)$width <- E(g_US)$weight/1200
-# Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA
-df_spatial_nodes <- df_nodes %>% left_join(msa_us, by = c("name" = "NAME")) %>% select(c("name", "lon_centroid", "lat_centroid"))
-lo <- as.matrix(df_spatial_nodes[,2:3])
-
-
-plot(st_geometry(msa_us), border=adjustcolor("gray65", alpha.f=0.4), lwd=0.6) 
-plot(g_US, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_US)$size, edge.arrow.size=0, edge.arrow.width=0, edge.curved=0.1, edge.width=0, edge.color=adjustcolor("gray80", alpha.f = 0.3), vertex.color="gold", vertex.frame.color=adjustcolor("gray100", alpha.f = .01), vertex.frame.width =0, vertex.label="", vertex.label.color="black", vertex.label.cex=.0)
-
+# V(g_US)$inflow <- rowSums(as.matrix(g_US[]))
+# # Set node size based on inflow of migrants:
+# V(g_US)$size <- 0.03*(V(g_US)$inflow)^0.1
+# # Set edge width based on weight:
+# E(g_US)$width <- E(g_US)$weight/1200
+# 
+# #Join the data frame of nodes df_sub_nodes with the geographic information of the centroid of each MSA
+# df_spatial_nodes <- df_nodes %>% left_join(msa_us, by = c("name" = "NAME")) %>% select(c("name", "lon_centroid", "lat_centroid"))
+# 
+# lo <- as.matrix(df_spatial_nodes[,2:3])
+# 
+# plot(st_geometry(msa_us), border=adjustcolor("gray50"))
+# plot(g_US, layout=lo, add = TRUE, rescale = FALSE, vertex.size=V(g_US)$size, edge.arrow.size=.1, edge.arrow.width=1., edge.curved=0.1, edge.width=E(g_US)$width, edge.color=adjustcolor("gray80", alpha.f = .1), vertex.color="gold", vertex.frame.color=adjustcolor("gray100", alpha.f = .01),
+# vertex.label="", vertex.label.color="black",
+# vertex.label.cex=.0)
 ```

@@ -2,9 +2,41 @@
 
 ## Dependencies {#sec-sec31}
 
+```{r}
+library(sf)
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(ggcorrplot)
+library(viridis)
+library(plotrix)
+```
+
+```{r}
+getwd() #Obtain the working directory, where we will save the d
+```
+
 ## Data {#sec-sec32}
 
+### Demographic data for Greater London Authority
+
 Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.
+
+### Import the data
+
+```{r}
+
+# Import LSOA demographic data for GLA
+# Data obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau
+# https://data.london.gov.uk/dataset/lsoa-atlas
+df_LSOA <- read.csv("./data/geodemographics/lsoa-data-clean.csv")
+
+# Import LSOA boundaries for GLA
+# Data obtained from link below
+# https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london
+st_LSOA <- st_read("./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
+
+```
 
 ## Geodemographic classification {#sec-sec33}
 
@@ -12,22 +44,6 @@ Data will be from LSOA atlas from GLA. For the session GDC based on some feature
 
 ### Choice of geographic units
 
-### Choice of variables
-
-### Variable standardisation {#sec-sec3}
-
-## Checking for variable association {#sec-sec35}
-
-## The clustering process {#sec-sec36}
-
-### K-means
-
-### Number of clusters
-
-### Other clustering methods
-
-## Dealing with the GDC results {#sec-sec37}
-
-### Cluster interpretation
-
-### Testing
+```{r}
+plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
+```

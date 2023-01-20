@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -64,7 +127,6 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta name="twitter:title" content="Population Science - 3&nbsp; Geodemographics">
-<meta name="twitter:description" content="Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.">
 <meta name="twitter:creator" content="@fcorowe">
 <meta name="twitter:card" content="summary">
 </head>
@@ -201,25 +263,15 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#sec-sec31" id="toc-sec-sec31" class="nav-link active" data-scroll-target="#sec-sec31"><span class="toc-section-number">3.1</span>  Dependencies</a></li>
-  <li><a href="#sec-sec32" id="toc-sec-sec32" class="nav-link" data-scroll-target="#sec-sec32"><span class="toc-section-number">3.2</span>  Data</a></li>
+  <li><a href="#sec-sec32" id="toc-sec-sec32" class="nav-link" data-scroll-target="#sec-sec32"><span class="toc-section-number">3.2</span>  Data</a>
+  <ul class="collapse">
+  <li><a href="#demographic-data-for-greater-london-authority" id="toc-demographic-data-for-greater-london-authority" class="nav-link" data-scroll-target="#demographic-data-for-greater-london-authority"><span class="toc-section-number">3.2.1</span>  Demographic data for Greater London Authority</a></li>
+  <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data"><span class="toc-section-number">3.2.2</span>  Import the data</a></li>
+  </ul></li>
   <li><a href="#sec-sec33" id="toc-sec-sec33" class="nav-link" data-scroll-target="#sec-sec33"><span class="toc-section-number">3.3</span>  Geodemographic classification</a></li>
   <li><a href="#sec-sec34" id="toc-sec-sec34" class="nav-link" data-scroll-target="#sec-sec34"><span class="toc-section-number">3.4</span>  Preparing the data for GDC</a>
   <ul class="collapse">
   <li><a href="#choice-of-geographic-units" id="toc-choice-of-geographic-units" class="nav-link" data-scroll-target="#choice-of-geographic-units"><span class="toc-section-number">3.4.1</span>  Choice of geographic units</a></li>
-  <li><a href="#choice-of-variables" id="toc-choice-of-variables" class="nav-link" data-scroll-target="#choice-of-variables"><span class="toc-section-number">3.4.2</span>  Choice of variables</a></li>
-  <li><a href="#sec-sec3" id="toc-sec-sec3" class="nav-link" data-scroll-target="#sec-sec3"><span class="toc-section-number">3.4.3</span>  Variable standardisation</a></li>
-  </ul></li>
-  <li><a href="#sec-sec35" id="toc-sec-sec35" class="nav-link" data-scroll-target="#sec-sec35"><span class="toc-section-number">3.5</span>  Checking for variable association</a></li>
-  <li><a href="#sec-sec36" id="toc-sec-sec36" class="nav-link" data-scroll-target="#sec-sec36"><span class="toc-section-number">3.6</span>  The clustering process</a>
-  <ul class="collapse">
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="toc-section-number">3.6.1</span>  K-means</a></li>
-  <li><a href="#number-of-clusters" id="toc-number-of-clusters" class="nav-link" data-scroll-target="#number-of-clusters"><span class="toc-section-number">3.6.2</span>  Number of clusters</a></li>
-  <li><a href="#other-clustering-methods" id="toc-other-clustering-methods" class="nav-link" data-scroll-target="#other-clustering-methods"><span class="toc-section-number">3.6.3</span>  Other clustering methods</a></li>
-  </ul></li>
-  <li><a href="#sec-sec37" id="toc-sec-sec37" class="nav-link" data-scroll-target="#sec-sec37"><span class="toc-section-number">3.7</span>  Dealing with the GDC results</a>
-  <ul class="collapse">
-  <li><a href="#cluster-interpretation" id="toc-cluster-interpretation" class="nav-link" data-scroll-target="#cluster-interpretation"><span class="toc-section-number">3.7.1</span>  Cluster interpretation</a></li>
-  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="toc-section-number">3.7.2</span>  Testing</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/geodemographics.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -246,10 +298,72 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="sec-sec31" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-sec31"><span class="header-section-number">3.1</span> Dependencies</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: viridisLite</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co">#Obtain the working directory, where we will save the d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps"</code></pre>
+</div>
+</div>
 </section>
 <section id="sec-sec32" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-sec32"><span class="header-section-number">3.2</span> Data</h2>
+<section id="demographic-data-for-greater-london-authority" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="demographic-data-for-greater-london-authority"><span class="header-section-number">3.2.1</span> Demographic data for Greater London Authority</h3>
 <p>Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.</p>
+</section>
+<section id="import-the-data" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="import-the-data"><span class="header-section-number">3.2.2</span> Import the data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA demographic data for GLA</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.london.gov.uk/dataset/lsoa-atlas</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Data obtained from link below</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
+  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 4835 features and 14 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 503574.2 ymin: 155850.8 xmax: 561956.7 ymax: 200933.6
+Projected CRS: OSGB36 / British National Grid</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="sec-sec33" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-sec33"><span class="header-section-number">3.3</span> Geodemographic classification</h2>
@@ -258,36 +372,12 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-sec34"><span class="header-section-number">3.4</span> Preparing the data for GDC</h2>
 <section id="choice-of-geographic-units" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="choice-of-geographic-units"><span class="header-section-number">3.4.1</span> Choice of geographic units</h3>
-</section>
-<section id="choice-of-variables" class="level3" data-number="3.4.2">
-<h3 data-number="3.4.2" class="anchored" data-anchor-id="choice-of-variables"><span class="header-section-number">3.4.2</span> Choice of variables</h3>
-</section>
-<section id="sec-sec3" class="level3" data-number="3.4.3">
-<h3 data-number="3.4.3" class="anchored" data-anchor-id="sec-sec3"><span class="header-section-number">3.4.3</span> Variable standardisation</h3>
-</section>
-</section>
-<section id="sec-sec35" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="sec-sec35"><span class="header-section-number">3.5</span> Checking for variable association</h2>
-</section>
-<section id="sec-sec36" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="sec-sec36"><span class="header-section-number">3.6</span> The clustering process</h2>
-<section id="k-means" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">3.6.1</span> K-means</h3>
-</section>
-<section id="number-of-clusters" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="number-of-clusters"><span class="header-section-number">3.6.2</span> Number of clusters</h3>
-</section>
-<section id="other-clustering-methods" class="level3" data-number="3.6.3">
-<h3 data-number="3.6.3" class="anchored" data-anchor-id="other-clustering-methods"><span class="header-section-number">3.6.3</span> Other clustering methods</h3>
-</section>
-</section>
-<section id="sec-sec37" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="sec-sec37"><span class="header-section-number">3.7</span> Dealing with the GDC results</h2>
-<section id="cluster-interpretation" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="cluster-interpretation"><span class="header-section-number">3.7.1</span> Cluster interpretation</h3>
-</section>
-<section id="testing" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="testing"><span class="header-section-number">3.7.2</span> Testing</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(st_LSOA), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray20"</span>, <span class="at">alpha.f=</span><span class="fl">0.4</span>), <span class="at">lwd=</span><span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>

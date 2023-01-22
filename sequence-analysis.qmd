@@ -7,7 +7,6 @@
 rm(list=ls())
 ```
 
-
 ```{r}
 #| warning: false
 
@@ -32,24 +31,36 @@ Aim: to define trajectories of population decline or ageing
 
 Data source: WorldPop 2000-2020
 
-See list of countries 
+See list of countries
+
 ```{r}
 wpgpListCountries()
 ```
+
 Data sets available for Ukraine
+
 ```{r}
 wpgpListCountryDatasets(ISO3 = "UKR")
 ```
+
 Obtain population data for Ukraine 2000
+
 ```{r}
-pop2000_raster <- read_stars("./data/sequence-analysis/ukr_ppp_2000_1km_Aggregated.tif")
+file_list <- fs::dir_ls("./data/sequence-analysis/raster")
+file_list
+```
+
+
+```{r}
+lapply( )
+
+
+pop2000_raster <- read_stars("./data/sequence-analysis/raster/ukr_ppp_2000_1km_Aggregated.tif")
 
 pop2000_raster
 
 plot(pop2000_raster)
 ```
-
-
 
 ```{r}
 # pop2000_df <- wpgpGetPOPTable(ISO3 = "UKR", 
@@ -75,13 +86,9 @@ ukr_shp
 plot(ukr_shp$geometry)
 ```
 
-
-
-
 ```{r}
 pop2000_raster <- st_transform(pop2000_raster, st_crs(ukr_shp))
 ```
-
 
 ```{r}
 system.time({
@@ -94,7 +101,6 @@ popbyarea_df = aggregate(x = pop2000_raster,
 
 ```
 
-
 ```{r}
 ukr_eshp <- mutate(ukr_shp, population = popbyarea_df$ukr_ppp_2000_1km_Aggregated.tif)
 
@@ -103,21 +109,11 @@ ukr_eshp
 sum(ukr_eshp$population, na.rm = TRUE)
 ```
 
-
-
-
-
 Aggregate population counts by administrative area
+
 ```{r}
 
 ```
-
-
-
-
-
-
-
 
 ### Data Wrangling
 

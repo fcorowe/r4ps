@@ -5,5 +5,6 @@
 _publish.yml
 .DS_Store
 .Renviron
+*.tif
 
 /.quarto/

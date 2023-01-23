@@ -1,0 +1,76 @@
+﻿Name,Description,,,,,,,
+LSOA11NM,Name of LSOA,,,,,,,
+MidYearPop,Mid-year Population Estimates;All Ages;2011,,,,,,,x
+MidYearPopAge0to15,Mid-year Population Estimates;Aged 0-15;2011,,,,,,,x
+MidYearPopAge16to29,Mid-year Population Estimates;Aged 16-29;2011,,,,,,,x
+MidYearPopAge30to44,Mid-year Population Estimates;Aged 30-44;2011,,,,,,,x
+MidYearPopAge45to64,Mid-year Population Estimates;Aged 45-64;2011,,,,,,,x
+MidYearPopAge65,Mid-year Population Estimates;Aged 65+;2011,,,,,,,x
+MidYearPopWorkingAge,Mid-year Population Estimates;Working-age;2011,,,,,,,x
+CensusPop,2011 Census Population;Age Structure;All Ages,,,,,,,
+Density2012,Population Density;Persons per hectare;2012,,,,,,,x
+HouseholdAll,Households;All households;2011,,,,,,,
+HouseholdCoupleWithDepChildren,Household Composition;% Couple household with dependent children;2011,,,,,,,x
+HouseholdCoupleNoDepChildren,Household Composition;% Couple household without dependent children;2011,,,,,,,x
+HouseholdLoneParent,Household Composition;% Lone parent household;2011,,,,,,,x
+HouseholdOnePerson,Household Composition;% One person household;2011,,,,,,,x
+HouseholdOtherMulti,Household Composition;% Other multi person household;2011,,,,,,,x
+EthnicWhite,Ethnic Group;White (%);2011,,,,,,x,x
+EthnicMixedMulti,Ethnic Group;Mixed/multiple ethnic groups (%);2011,,,,,,x,x
+EthnicAsianAsianBritish,Ethnic Group;Asian/Asian British (%);2011,,,,,,x,x
+EthnicBlackAfricanCaribbeanBlackBritish,Ethnic Group;Black/African/Caribbean/Black British (%);2011,,,,,,x,x
+EthnicOther,Ethnic Group;Other ethnic group (%);2011,,,,,,x,x
+EthnicBAME,Ethnic Group;BAME (%);2011,,,,,,x,x
+CountryBirthUK,Country of Birth;% United Kingdom;2011,,,,,,x,x
+CountryBirthNotUK,Country of Birth;% Not United Kingdom;2011,,,,,,x,x
+HouseholdEnglishLanguage,Household Language;% of households with at least one person aged 16 or over with English as a main language;2011,,,,,,x,x
+HouseholdNotEnglishLanguage,Household Language;% of households where no people aged 16 or over have English as a main language;2011,,,,,,x,x
+ReligionChristian,Religion;Christian (%);2011,,,,,,x,x
+ReligionBuddhist,Religion;Buddhist (%);2011,,,,,,x,x
+ReligionHindu,Religion;Hindu (%);2011,,,,,,x,x
+ReligionJewish,Religion;Jewish (%);2011,,,,,,x,x
+ReligionMuslim,Religion;Muslim (%);2011,,,,,,x,x
+ReligionSikh,Religion;Sikh (%);2011,,,,,,x,x
+ReligionOther,Religion;Other religion (%);2011,,,,,,x,x
+ReligionNone,Religion;No religion (%);2011,,,,,,x,x
+ReligionNotStated,Religion;Religion not stated (%);2011,,,,,,x,x
+TenureOwnedOutright,Tenure;Owned outright (%);2011,,,,,,,
+TenureOwnedMortgageLoan,Tenure;Owned with a mortgage or loan (%);2011,,,,,,,
+TenureSocialRent,Tenure;Social rented (%);2011,,,,,,,
+TenurePrivateRent,Tenure;Private rented (%);2011,,,,,,,
+DwellingWithUsualResidents,Dwelling type;Household spaces with at least one usual resident (%);2011,,,,,,,
+DwellingWithNoUsualResidents,Dwelling type;Household spaces with no usual residents (%);2011,,,,,,,
+DwllingDetached,Dwelling type;Whole house or bungalow: Detached (%);2011,,,,,,,
+DwellingSemiDetached,Dwelling type;Whole house or bungalow: Semi-detached (%);2011,,,,,,,
+DwellingTerraced,Dwelling type;Whole house or bungalow: Terraced (including end-terrace) (%);2011,,,,,,,
+DwellingFlat,"Dwelling type;Flat, maisonette or apartment (%);2011",,,,,,,
+HousePriceMedian,House Prices;Median Price (£);2011,,,,,,,
+HouseSales,House Prices;Sales;2011,,,,,,,
+HouseholdNoAdultInEmploymentWithDependentChildren,Adults in Employment;% of households with no adults in employment: With dependent children;2011,,,,,,x,
+LoneParentNotInEmployment,Lone Parents;Lone parent not in employment %;2011,,,,,,,
+FullTimeStudent,Economic Activity;Economically active: Full-time student %;2011,,,,,,x,
+EmploymentRate,Economic Activity;Employment Rate;2011,,,,,,x,
+UnemploymentRate,Economic Activity;Unemployment Rate;2011,,,,,,x,
+QualificationNone,Qualifications;% No qualifications;2011,,,,,,,
+QualificationLevel1,Qualifications;% Highest level of qualification: Level 1 qualifications;2011,,,,,,,
+QualificationLevel2,Qualifications;% Highest level of qualification: Level 2 qualifications;2011,,,,,,,
+QualificationApprenticeship,Qualifications;% Highest level of qualification: Apprenticeship;2011,,,,,,,
+QualificationLevel3,Qualifications;% Highest level of qualification: Level 3 qualifications;2011,,,,,,,
+QualificationLevel4OrAbove,Qualifications;% Highest level of qualification: Level 4 qualifications and above;2011,,,,,,,
+QualificationOther,Qualifications;% Highest level of qualification: Other qualifications;2011,,,,,,,
+QualificationSchoolchildrenAndFullTimeStudentsOver18,Qualifications;% Schoolchildren and full-time students: Age 18 and over;2011,,,,,,,
+HealthDayToDayLimitedALot,Health;Day-to-day activities limited a lot (%);2011,,,,,,,x
+HealthDayToDayLimitedALittle,Health;Day-to-day activities limited a little (%);2011,,,,,,,x
+HealthDayToDayNotLimited,Health;Day-to-day activities not limited (%);2011,,,,,,,x
+HelathVeryGoodOrGood,Health;Very good or Good health (%);2011,,,,,,,x
+HealthFair,Health;Fair health (%);2011,,,,,,,x
+HealthBadOrVeryBad,Health;Bad or Very Bad health (%);2011,,,,,,,x
+HouseholdNoCarOrVan,Car or van availability;No cars or vans in household (%);2011,,,,,,,
+HouseholdOneCarOrVan,Car or van availability;1 car or van in household (%);2011,,,,,,,
+HouseholdTwoCarOrVan,Car or van availability;2 cars or vans in household (%);2011,,,,,,,
+HouseholdThreeCarOrVan,Car or van availability;3 cars or vans in household (%);2011,,,,,,,
+HouseholdFourOrMoreCarOrVan,Car or van availability;4 or more cars or vans in household (%);2011,,,,,,,
+CarsPerHousehold,Car or van availability;Cars per household;2011,,,,,,,
+PublicTransportAccessibilityAverageScore2014,Public Transport Accessibility Levels (2014);Average Score;,,,,,,,
+HouseholdMeanIncome,"Household Income, 2011/12;Mean Annual Household Income estimate (£)",,,,,,,
+HouseholdMedianIncome,"Household Income, 2011/12;Median Annual Household Income estimate (£)",,,,,,,

@@ -1,6 +1,14 @@
 # Geodemographics {#sec-chp3}
 
+In this chapter we introduce the topic of geodemographics and geodemographic classifications. The chapter is based on the following references:
+
+-   [Creating a Geodemographic Classification Using K-means Clustering in R](https://data.cdrc.ac.uk/dataset/creating-geodemographic-classification-using-k-means-clustering-r) (Guy Lansley and James Cheshire, 2018)
+
+-   [Lecture 10](https://jo-wilkin.github.io/GEOG0030/coursebook/geodemographic-classification.html) of the 2020-21 Work Book for the module GEOG0030 on Geocomputation, delivered at UCL Department of Geography.
+
 ## Dependencies {#sec-sec31}
+
+This chapter uses the libraries below. Ensure they are installed on your machine, then execute the following code chunk to load them:
 
 ```{r}
 library(sf)
@@ -13,36 +21,49 @@ library(plotrix)
 ```
 
 ```{r}
-getwd() #Obtain the working directory, where we will save the d
+ #Obtain the working directory, where we will save the data directory
+getwd()
 ```
 
 ## Data {#sec-sec32}
 
 ### Demographic data for Greater London Authority
 
-Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.
+In this Chapter we will be looking at data provided by [London Datastore](https://data.london.gov.uk/), a website created by the Greater London Authority (GLA) to distribute openly and freely London's data. In particular, we have prepared the file lsoa-data-clean.csv based on the [LSOA Atlas](https://data.london.gov.uk/dataset/lsoa-atlas), which contains demographic and related data for each Lower Layer Super Output Area (LSOA) in Greater London.
+
+LSOAs are geographic hierarchies designed to improve the reporting of small area statistics in England and Wales. LSOAs are built from groups of contiguous Output Areas (OAs) and have been automatically generated to be as consistent as possible in population size, with a minimum population of 1,000. For this reason, their spatial extent varies depending on how densely populated a region is. The average population of an LSOA in London in 2010 was 1,722.
 
 ### Import the data
+
+In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it *df_LSOA*. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile [here](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london). We have also stored this shapefile, called *LSOA_2011_Lodnon_gen_MHW.shp*, in the data folder of this workbook so you can import it directly as a data frame with simple features using the **st_read()** function from the **sf** package. For more information on the sf package, check the [documentation](https://cran.r-project.org/web/packages/sf/index.html).
 
 ```{r}
 
 # Import LSOA demographic data for GLA
-# Data obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau
+# The raw data can be obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau for this chapter
 # https://data.london.gov.uk/dataset/lsoa-atlas
 df_LSOA <- read.csv("./data/geodemographics/lsoa-data-clean.csv")
 
 # Import LSOA boundaries for GLA
-# Data obtained from link below
-# https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london
 st_LSOA <- st_read("./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
 
 ```
 
 ## Geodemographic classification {#sec-sec33}
 
+Geodemographics is the statistical study of human populations based on their locations. It includes the application of geodemographic classifications (GDCs) or profiling whereby different locations are classified into groups based on the similarity in their demographic characteristics.
+
+Assuming that the geodemographic characteristics of a group are an indicator of how the people in that group behave, GDC can be a very useful tool to predict the behavioral patterns of different regions. For this reason, geodemographics and GDC have applications in many areas, from marketing and retail to public health or service planning industries.
+
 ## Preparing the data for GDC {#sec-sec34}
 
 ### Choice of geographic units
+
+Normally, GDCs involve the analysis of aggregated demographic data into geographic units. Very small geographic units of data aggregation can provide more detailed results, but if the counts are too low, this could lead to re-identification.
+
+As mentioned above, the data for this chapter is aggregated into LSOAs. The size of the LSOAs is small enough to produce detailed results and is also a convenient choice, since it is broadly used in the UK Census and other official data-reporting exercises.
+
+We can visualise the LSOAs within GLA simply by plotting the geometry column of *sf_LSOA*, which can be selected with the function **st_geometry().**
 
 ```{r}
 plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
@@ -50,55 +71,106 @@ plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
 
 ### Variables of interest
 
+Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame *df_LSOA* contains this data and we can visualise its first few lines by using the function **head()**:
+
+```{r}
+head(df_LSOA)
+```
+
+As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function **names()**, we can get the names of the columns in *df_LSOA*
+
 ```{r}
 names(df_LSOA)
 ```
 
 c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther", "EthnicBAME", "CountryBirthUK", "CountryBirthNotUK", "HouseholdEnglishLanguage", "HouseholdNotEnglishLanguage", "ReligionChristian", "ReligionBuddhist", "ReligionHindu", "ReligionJewish", "ReligionMuslim", "ReligionSikh", "ReligionOther", "ReligionNone", "ReligionNotStated", "FullTimeStudent", "EmploymentRate", "UnemploymentRate" )
 
+The data frame *df_LSOA* contains many variables. As we can see above, they have summarised names. For a short description of what these names mean, we can load the file called Dictionary-lsoa-data-clean.csv:
+
 ```{r}
-df_LSOA <- df_LSOA[, c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther", "EthnicBAME", "CountryBirthUK", "CountryBirthNotUK", "FullTimeStudent", "EmploymentRate", "UnemploymentRate" )]
+df_dictionary <- read.csv("./data/geodemographics/Dictionary-lsoa-data-clean.csv")
+
+head(df_dictionary)
 ```
 
+For the purposes of this chapter, we will focus on just a few of these variables since this will make the results easier to interpret. In particular, we will look at variables related to ethnicity, country of birth, employment status and qualifications. Let us select the fields of interest:
+
+```{r}
+df_LSOA <- df_LSOA[, c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther", "EthnicBAME", "CountryBirthUK", "CountryBirthNotUK", "FullTimeStudent", "EmploymentRate", "UnemploymentRate", "QualificationNone", "QualificationLevel1", "QualificationLevel2", "QualificationApprenticeship", "QualificationLevel3", "QualificationLevel4OrAbove", "QualificationOther", "QualificationSchoolchildrenAndFullTimeStudentsOver18" )]
+```
+
+We can explore the summary statistics for each of the selected fields with the **sumary()** function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group 'Black/African/Caribbean/Black British', we can run the code below:
 
 ```{r}
 summary(df_LSOA$EthnicBlackAfricanCaribbeanBlackBritish)
 ```
+
+This tells us that the mean or average percentage of people from this ethnic group in LSOAs within GLA is 13.05%. It also tells us that 63.70% of the population are Black/African/Caribbean/Black British in the LSOA with the maximum proportion of people belonging to this ethnic group.
+
+To visualise the whole distribution of the variable 'Percentage of Black/African/Caribbean/Black British', we can plot a histogram:
+
 ```{r}
-hist(df_LSOA$EthnicBlackAfricanCaribbeanBlackBritish, breaks=50, xlab="% Muslim", main=NULL)
+hist(df_LSOA$EthnicBlackAfricanCaribbeanBlackBritish, breaks=50, xlab="% Black/African/Caribbean/Black British", ylab='Number of LSOAs', main=NULL)
 ```
+
+The histogram reveals that many LSOAs have a low proportion of Black/African/Caribbean/Black British people, but there are a few with more than 50% of their population belonging to this ethnic group.
+
+Now the question is whether the LSOAs with similar proportions of Black/African/Caribbean/Black British are also spatially close. To find out, we need to map the data. We can do this by joining the data frame *df_LSOA* with the data frame *st_LSOA* which contains the geographic boundaries of the LSOAs:
+
 ```{r}
 join_LSOA <- st_LSOA %>% left_join(df_LSOA, by='LSOA11NM')
 ```
+
+If we plot the joined data frames, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.
 
 ```{r}
 join_LSOA %>% 
 ggplot(aes(fill=EthnicBlackAfricanCaribbeanBlackBritish, color = EthnicBlackAfricanCaribbeanBlackBritish)) + 
 geom_sf() +
-scale_fill_viridis(direction = 1) + 
-scale_color_viridis(direction = 1) 
+scale_fill_viridis(direction = 1, name="Black/African/Caribbean/\nBlack British people") + 
+scale_color_viridis(direction = 1, name="Black/African/Caribbean/\nBlack British people") 
+```
+
+## Standardisation {#sec-sec3}
+
+### Across geographic units
+
+Although LSOAs have been designed to have similar population sizes, the population figures flucuate. And of course, if the population of a place is bigger or smaller, this can affect the figures corresponding to demographic characteristics (e.g. presumably, the larger the total population, the higher the number of people who are unemployed).
+
+To counter the effect of variable population sizes across geographic units, we always need to standardise the data so it is given as a proportion or a percentage. This has already done in the dataset lsoa-data-clean.csv, however, if you were to create your own dataset, you need to take this into account. To compute the right percentages, it is important to consider the right denominator. For example, if we are computing the percentage of people over the age of 65 in a given geographic unit, we can divide the number of people over 65 by the total population in that geographic unit, then multiply by 100. However, if we are computing the percentage of single-person households, we need to divide the number of single-person households by the total number of households (and not by the total population), then multiply by 100.
+
+### Of variables
+
+Data outliers are often present when analysing data from the real-world. These values are generally extreme and difficult to treat statistically. In GDC, they could end up dominating the classification process. To avoid this, we need to standardise the input variables as well, so that they all contribute equally to the classification process.
+
+There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e. for variable $X$, Z-score = $\dfrac{X-mean(X)}{std(X)}$ where $std()$ refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function **scale()**. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:
+
+```{r}
+# creates a new data frame
+df_std <- df_LSOA
+# extracts column names from df_std
+colnames_df_std <- colnames(df_std)
+# loops columns from position 1 : the last column
+for(i in 2: ncol (df_std)){
+df_std[, colnames_df_std[i]] <- scale(as.numeric(df_std[, colnames_df_std[i]]))
+}
 ```
 
 ## Checking for variable association {#sec-sec35}
 
 ```{r}
-colnames_df_LSOA <- colnames(df_LSOA)
-```
-
-```{r}
 # Matrix of Pearson correlation coefficients
-corr_mat <- cor(df_LSOA[,c(colnames_df_LSOA[2: ncol(df_LSOA)])], method = "pearson")
+corr_mat <- cor(df_std[,c(colnames_df_std[2: ncol(df_std)])], method = "pearson")
 # Matrix of p-values
-corr_pmat <- cor_pmat(df_LSOA[,c(colnames_df_LSOA[2: ncol(df_LSOA)])], method = "pearson")
+corr_pmat <- cor_pmat(df_std[,c(colnames_df_std[2: ncol(df_std)])], method = "pearson")
 # Barring the no significant coefficient
 ggcorrplot(corr_mat, tl.cex=10, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat, colors = c(viridis(3)))
 ```
- Remove EthnicBAME, HouseholdNotEnglishLAnguage, CountryBirthUK, EmploymentRate
 
 ```{r}
-#  Remove EthnicBAME, CountryBirthUK
+#  Remove EthnicBAME, CountryBirthUK, QualificationNone
 
-data <- df_LSOA[, c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther","CountryBirthNotUK", "FullTimeStudent", "EmploymentRate", "UnemploymentRate" )]
+data <- df_std[, c("LSOA11NM", "EthnicWhite", "EthnicMixedMulti", "EthnicAsianAsianBritish", "EthnicBlackAfricanCaribbeanBlackBritish", "EthnicOther", "CountryBirthNotUK", "FullTimeStudent", "EmploymentRate", "UnemploymentRate", "QualificationLevel1", "QualificationLevel2", "QualificationApprenticeship", "QualificationLevel3", "QualificationLevel4OrAbove", "QualificationOther", "QualificationSchoolchildrenAndFullTimeStudentsOver18" )]
 ```
 
 ```{r}
@@ -118,37 +190,18 @@ corr_pmat_data <- cor_pmat(data[,c(colnames_data[2: ncol(data)])], method = "pea
 ggcorrplot(corr_mat_data, tl.cex=10, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat_data, colors = c(viridis(3)))
 ```
 
-## Variable standardisation {#sec-sec3}
-
-### Between areas
-
-### Between variables
-
-```{r}
-# creates a new data frame
-data_std <- data
-# loops columns from position 1 : the last column
-for(i in 2: ncol (data_std)){
-data_std[, colnames_data[i]] <- scale(as.numeric(data[, colnames_data[i]]))
-}
-```
-
-
-
 ## The clustering process {#sec-sec36}
 
 ### K-means
 
 ```{r}
-Km <- kmeans(data_std[,c(colnames_data[2: ncol(data_std)])], 3, nstart = 20, iter.max = 1000)
+Km <- kmeans(data[,c(colnames_data[2: ncol(data)])], 7, nstart = 20, iter.max = 1000)
 ```
-
 
 ```{r}
 join_data_cluster <- join_data
 join_data_cluster$cluster <- Km$cluster
 ```
-
 
 ```{r}
 join_data_cluster %>% 
@@ -162,7 +215,7 @@ scale_color_viridis(direction = 1)
 
 ### Other clustering methods
 
-## Dealing with the GDC results {#sec-sec37}
+## GDC results {#sec-sec37}
 
 ### Cluster interpretation
 
@@ -172,7 +225,7 @@ scale_color_viridis(direction = 1)
 # radlab rotates the labels
 KmCenters <- as.matrix(Km$centers)
 KmCenters <- as.data.frame(KmCenters)
-radial.plot(KmCenters[1,], labels = colnames(KmCenters),
+radial.plot(KmCenters[1,], labels = colnames(KmCenters), cex=0.1,
 boxed.radial = FALSE, show.radial.grid = FALSE,
 line.col = "blue", radlab = TRUE )
 ```

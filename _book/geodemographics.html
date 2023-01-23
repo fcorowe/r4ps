@@ -124,6 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -271,19 +272,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#choice-of-geographic-units" id="toc-choice-of-geographic-units" class="nav-link" data-scroll-target="#choice-of-geographic-units"><span class="toc-section-number">3.4.1</span>  Choice of geographic units</a></li>
   <li><a href="#variables-of-interest" id="toc-variables-of-interest" class="nav-link" data-scroll-target="#variables-of-interest"><span class="toc-section-number">3.4.2</span>  Variables of interest</a></li>
   </ul></li>
-  <li><a href="#sec-sec35" id="toc-sec-sec35" class="nav-link" data-scroll-target="#sec-sec35"><span class="toc-section-number">3.5</span>  Checking for variable association</a></li>
-  <li><a href="#sec-sec3" id="toc-sec-sec3" class="nav-link" data-scroll-target="#sec-sec3"><span class="toc-section-number">3.6</span>  Variable standardisation</a>
+  <li><a href="#sec-sec3" id="toc-sec-sec3" class="nav-link" data-scroll-target="#sec-sec3"><span class="toc-section-number">3.5</span>  Standardisation</a>
   <ul class="collapse">
-  <li><a href="#between-areas" id="toc-between-areas" class="nav-link" data-scroll-target="#between-areas"><span class="toc-section-number">3.6.1</span>  Between areas</a></li>
-  <li><a href="#between-variables" id="toc-between-variables" class="nav-link" data-scroll-target="#between-variables"><span class="toc-section-number">3.6.2</span>  Between variables</a></li>
+  <li><a href="#across-geographic-units" id="toc-across-geographic-units" class="nav-link" data-scroll-target="#across-geographic-units"><span class="toc-section-number">3.5.1</span>  Across geographic units</a></li>
+  <li><a href="#of-variables" id="toc-of-variables" class="nav-link" data-scroll-target="#of-variables"><span class="toc-section-number">3.5.2</span>  Of variables</a></li>
   </ul></li>
+  <li><a href="#sec-sec35" id="toc-sec-sec35" class="nav-link" data-scroll-target="#sec-sec35"><span class="toc-section-number">3.6</span>  Checking for variable association</a></li>
   <li><a href="#sec-sec36" id="toc-sec-sec36" class="nav-link" data-scroll-target="#sec-sec36"><span class="toc-section-number">3.7</span>  The clustering process</a>
   <ul class="collapse">
   <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="toc-section-number">3.7.1</span>  K-means</a></li>
   <li><a href="#number-of-clusters" id="toc-number-of-clusters" class="nav-link" data-scroll-target="#number-of-clusters"><span class="toc-section-number">3.7.2</span>  Number of clusters</a></li>
   <li><a href="#other-clustering-methods" id="toc-other-clustering-methods" class="nav-link" data-scroll-target="#other-clustering-methods"><span class="toc-section-number">3.7.3</span>  Other clustering methods</a></li>
   </ul></li>
-  <li><a href="#sec-sec37" id="toc-sec-sec37" class="nav-link" data-scroll-target="#sec-sec37"><span class="toc-section-number">3.8</span>  Dealing with the GDC results</a>
+  <li><a href="#sec-sec37" id="toc-sec-sec37" class="nav-link" data-scroll-target="#sec-sec37"><span class="toc-section-number">3.8</span>  GDC results</a>
   <ul class="collapse">
   <li><a href="#cluster-interpretation" id="toc-cluster-interpretation" class="nav-link" data-scroll-target="#cluster-interpretation"><span class="toc-section-number">3.8.1</span>  Cluster interpretation</a></li>
   <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing"><span class="toc-section-number">3.8.2</span>  Testing</a></li>
@@ -311,12 +312,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>In this chapter we introduce the topic of geodemographics and geodemographic classifications. The chapter is based on the following references:</p>
+<ul>
+<li><p><a href="https://data.cdrc.ac.uk/dataset/creating-geodemographic-classification-using-k-means-clustering-r">Creating a Geodemographic Classification Using K-means Clustering in R</a> (Guy Lansley and James Cheshire, 2018)</p></li>
+<li><p><a href="https://jo-wilkin.github.io/GEOG0030/coursebook/geodemographic-classification.html">Lecture 10</a> of the 2020-21 Work Book for the module GEOG0030 on Geocomputation, delivered at UCL Department of Geography.</p></li>
+</ul>
 <section id="sec-sec31" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-sec31"><span class="header-section-number">3.1</span> Dependencies</h2>
+<p>This chapter uses the libraries below. Ensure they are installed on your machine, then execute the following code chunk to load them:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -343,9 +350,10 @@ Attaching package: 'dplyr'</code></pre>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co">#Obtain the working directory, where we will save the d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#Obtain the working directory, where we will save the data directory</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps"</code></pre>
+<pre><code>[1] "/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps"</code></pre>
 </div>
 </div>
 </section>
@@ -353,23 +361,23 @@ Attaching package: 'dplyr'</code></pre>
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-sec32"><span class="header-section-number">3.2</span> Data</h2>
 <section id="demographic-data-for-greater-london-authority" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="demographic-data-for-greater-london-authority"><span class="header-section-number">3.2.1</span> Demographic data for Greater London Authority</h3>
-<p>Data will be from LSOA atlas from GLA. For the session GDC based on some features. For assignment, GDC based on a different set of features. Need to prepare two different datasets.</p>
+<p>In this Chapter we will be looking at data provided by <a href="https://data.london.gov.uk/">London Datastore</a>, a website created by the Greater London Authority (GLA) to distribute openly and freely London’s data. In particular, we have prepared the file lsoa-data-clean.csv based on the <a href="https://data.london.gov.uk/dataset/lsoa-atlas">LSOA Atlas</a>, which contains demographic and related data for each Lower Layer Super Output Area (LSOA) in Greater London.</p>
+<p>LSOAs are geographic hierarchies designed to improve the reporting of small area statistics in England and Wales. LSOAs are built from groups of contiguous Output Areas (OAs) and have been automatically generated to be as consistent as possible in population size, with a minimum population of 1,000. For this reason, their spatial extent varies depending on how densely populated a region is. The average population of an LSOA in London in 2010 was 1,722.</p>
 </section>
 <section id="import-the-data" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="import-the-data"><span class="header-section-number">3.2.2</span> Import the data</h3>
+<p>In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it <em>df_LSOA</em>. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile <a href="https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london">here</a>. We have also stored this shapefile, called <em>LSOA_2011_Lodnon_gen_MHW.shp</em>, in the data folder of this workbook so you can import it directly as a data frame with simple features using the <strong>st_read()</strong> function from the <strong>sf</strong> package. For more information on the sf package, check the <a href="https://cran.r-project.org/web/packages/sf/index.html">documentation</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA demographic data for GLA</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The raw data can be obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau for this chapter</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.london.gov.uk/dataset/lsoa-atlas</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Data obtained from link below</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -382,11 +390,16 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </section>
 <section id="sec-sec33" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-sec33"><span class="header-section-number">3.3</span> Geodemographic classification</h2>
+<p>Geodemographics is the statistical study of human populations based on their locations. It includes the application of geodemographic classifications (GDCs) or profiling whereby different locations are classified into groups based on the similarity in their demographic characteristics.</p>
+<p>Assuming that the geodemographic characteristics of a group are an indicator of how the people in that group behave, GDC can be a very useful tool to predict the behavioral patterns of different regions. For this reason, geodemographics and GDC have applications in many areas, from marketing and retail to public health or service planning industries.</p>
 </section>
 <section id="sec-sec34" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-sec34"><span class="header-section-number">3.4</span> Preparing the data for GDC</h2>
 <section id="choice-of-geographic-units" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="choice-of-geographic-units"><span class="header-section-number">3.4.1</span> Choice of geographic units</h3>
+<p>Normally, GDCs involve the analysis of aggregated demographic data into geographic units. Very small geographic units of data aggregation can provide more detailed results, but if the counts are too low, this could lead to re-identification.</p>
+<p>As mentioned above, the data for this chapter is aggregated into LSOAs. The size of the LSOAs is small enough to produce detailed results and is also a convenient choice, since it is broadly used in the UK Census and other official data-reporting exercises.</p>
+<p>We can visualise the LSOAs within GLA simply by plotting the geometry column of <em>sf_LSOA</em>, which can be selected with the function <strong>st_geometry().</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(st_LSOA), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray20"</span>, <span class="at">alpha.f=</span><span class="fl">0.4</span>), <span class="at">lwd=</span><span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -396,8 +409,183 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </section>
 <section id="variables-of-interest" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="variables-of-interest"><span class="header-section-number">3.4.2</span> Variables of interest</h3>
+<p>Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame <em>df_LSOA</em> contains this data and we can visualise its first few lines by using the function <strong>head()</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Lower.Super.Output.Area    LSOA11NM MidYearPop MidYearPopAge0to15
+1               E01000907 Camden 001A       1431              20.68
+2               E01000908 Camden 001B       1564              18.16
+3               E01000909 Camden 001C       1602              14.86
+4               E01000912 Camden 001D       1589              16.17
+5               E01000913 Camden 001E       1695              17.23
+6               E01000893 Camden 002A       1563              17.08
+  MidYearPopAge16to29 MidYearPopAge30to44 MidYearPopAge45to64 MidYearPopAge65
+1               17.05               26.62               24.18           11.46
+2               15.41               26.73               26.21           13.49
+3               17.92               20.54               28.34           18.35
+4               22.40               22.22               24.98           14.22
+5               12.74               20.24               30.32           19.47
+6               14.59               27.58               25.59           15.16
+  MidYearPopWorkingAge CensusPop Density2012 HouseholdAll
+1                67.85      1430         136          627
+2                68.35      1581          92          827
+3                66.79      1614          70          661
+4                69.60      1589          18          700
+5                63.30      1710          11          722
+6                67.75      1566          29          715
+  HouseholdCoupleWithDepChildren HouseholdCoupleNoDepChildren
+1                           12.3                         20.1
+2                           11.6                         17.3
+3                           17.9                         29.3
+4                           12.9                         16.6
+5                           19.3                         34.6
+6                           16.8                         23.8
+  HouseholdLoneParent HouseholdOnePerson HouseholdOtherMulti EthnicWhite
+1                21.1               33.0                13.6        73.5
+2                13.2               50.8                 7.1        72.4
+3                 7.3               30.1                15.4        84.1
+4                15.7               38.6                16.3        77.3
+5                 3.7               29.1                13.3        88.2
+6                 5.7               39.3                14.4        88.1
+  EthnicMixedMulti EthnicAsianAsianBritish
+1              7.3                     8.5
+2              8.7                     6.2
+3              5.5                     4.6
+4              5.6                     5.1
+5              5.1                     4.7
+6              4.5                     4.8
+  EthnicBlackAfricanCaribbeanBlackBritish EthnicOther EthnicBAME CountryBirthUK
+1                                     7.9         2.8       26.5           72.2
+2                                     8.0         4.7       27.6           70.5
+3                                     2.9         2.9       15.9           74.7
+4                                     9.2         2.8       22.7           70.4
+5                                     1.3         0.7       11.8           72.0
+6                                     1.0         1.5       11.9           63.5
+  CountryBirthNotUK HouseholdEnglishLanguage HouseholdNotEnglishLanguage
+1              27.8                     88.5                        11.5
+2              29.5                     91.1                         8.9
+3              25.3                     95.3                         4.7
+4              29.6                     92.3                         7.7
+5              28.0                     97.4                         2.6
+6              36.5                     92.0                         8.0
+  ReligionChristian ReligionBuddhist ReligionHindu ReligionJewish
+1              39.3              1.5           0.7            1.3
+2              38.9              1.3           0.5            2.7
+3              37.7              0.9           0.4            5.0
+4              37.6              0.8           0.4            1.3
+5              37.1              0.3           0.5           12.0
+6              31.1              1.6           1.0            7.1
+  ReligionMuslim ReligionSikh ReligionOther ReligionNone ReligionNotStated
+1            8.5          0.1           0.6         32.7              15.5
+2            4.2          0.0           1.6         27.5              23.3
+3            2.2          0.2           1.0         34.1              18.5
+4           10.0          0.0           0.9         31.5              17.4
+5            0.9          0.0           0.4         27.5              21.3
+6            1.0          0.0           1.0         38.4              18.8
+  TenureOwnedOutright TenureOwnedMortgageLoan TenureSocialRent
+1                12.6                    18.0             54.4
+2                14.0                    17.7             52.6
+3                38.3                    21.2             18.6
+4                15.3                    14.6             51.3
+5                47.1                    27.6              1.9
+6                39.0                    20.6              4.5
+  TenurePrivateRent DwellingWithUsualResidents DwellingWithNoUsualResidents
+1              13.7                       99.5                          0.5
+2              14.0                       95.2                          4.8
+3              18.8                       97.6                          2.4
+4              15.0                       98.6                          1.4
+5              19.4                       89.7                         10.3
+6              34.1                       92.4                          7.6
+  DwllingDetached DwellingSemiDetached DwellingTerraced DwellingFlat
+1             2.2                  4.1             15.4         78.3
+2             1.7                  9.4              3.8         85.0
+3            11.7                 21.1              9.5         57.8
+4             1.0                  1.8             10.0         87.2
+5            27.1                 12.3             15.3         45.3
+6             1.2                 14.5              7.0         77.4
+  HousePriceMedian HouseSales HouseholdNoAdultInEmploymentWithDependentChildren
+1           415000         11                                                10
+2           282500         21                                                 5
+3           435000         19                                                 2
+4           500000         17                                                 7
+5          1000000         31                                                 1
+6           740000         24                                                 2
+  LoneParentNotInEmployment FullTimeStudent EmploymentRate UnemploymentRate
+1                      55.4            1.82           58.6              9.9
+2                      48.6            1.77           62.3              8.0
+3                      59.1            1.24           65.7              4.9
+4                      47.6            2.96           58.8              8.8
+5                      12.5            1.17           71.8              2.1
+6                      36.4            1.09           74.1              3.6
+  QualificationNone QualificationLevel1 QualificationLevel2
+1              20.0                 9.2                 9.1
+2              15.0                 7.7                10.1
+3               9.6                 5.1                 8.3
+4              18.0                 9.3                 9.4
+5               4.9                 4.9                 9.6
+6               3.7                 2.4                 7.1
+  QualificationApprenticeship QualificationLevel3 QualificationLevel4OrAbove
+1                         1.0                 9.1                       44.2
+2                         0.8                 8.8                       50.4
+3                         0.7                 9.6                       61.9
+4                         1.1                 8.7                       47.2
+5                         0.4                 9.4                       65.2
+6                         0.7                 7.5                       72.6
+  QualificationOther QualificationSchoolchildrenAndFullTimeStudentsOver18
+1                7.5                                                  6.4
+2                7.3                                                  4.8
+3                4.7                                                  4.5
+4                6.2                                                  8.8
+5                5.5                                                  4.0
+6                6.1                                                  4.1
+  HealthDayToDayLimitedALot HealthDayToDayLimitedALittle
+1                      10.8                          9.3
+2                      10.2                          9.1
+3                       7.1                          8.1
+4                       9.8                         10.5
+5                       4.1                          5.5
+6                       4.0                          5.7
+  HealthDayToDayNotLimited HealthVeryGoodOrGood HealthFair HealthBadOrVeryBad
+1                     79.9                 78.0       13.2                8.7
+2                     80.7                 78.2       12.4                9.4
+3                     84.8                 85.6       10.0                4.5
+4                     79.7                 77.2       14.6                8.2
+5                     90.4                 89.6        7.3                3.1
+6                     90.3                 90.2        7.0                2.7
+  HouseholdNoCarOrVan HouseholdOneCarOrVan HouseholdTwoCarOrVan
+1                61.2                 33.0                  4.6
+2                59.5                 34.5                  5.3
+3                36.8                 44.5                 15.1
+4                60.6                 36.1                  3.0
+5                22.3                 42.8                 26.7
+6                43.8                 42.2                 11.6
+  HouseholdThreeCarOrVan HouseholdFourOrMoreCarOrVan CarsPerHousehold
+1                    1.1                         0.0              0.5
+2                    0.5                         0.2              0.5
+3                    2.7                         0.9              0.9
+4                    0.3                         0.0              0.4
+5                    6.0                         2.2              1.2
+6                    1.5                         0.8              0.8
+  PublicTransportAccessibilityAverageScore HouseholdMeanIncome
+1                                      4.6               39985
+2                                      2.9               42394
+3                                      3.3               77370
+4                                      4.6               41737
+5                                      2.8               96649
+6                                      3.2               84878
+  HouseholdMedianIncome
+1                 30223
+2                 32049
+3                 58469
+4                 31551
+5                 73024
+6                 64138</code></pre>
+</div>
+</div>
+<p>As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function <strong>names()</strong>, we can get the names of the columns in <em>df_LSOA</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Lower.Super.Output.Area"                             
  [2] "LSOA11NM"                                            
@@ -478,113 +666,144 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 </div>
 <p>c(“LSOA11NM”, “EthnicWhite”, “EthnicMixedMulti”, “EthnicAsianAsianBritish”, “EthnicBlackAfricanCaribbeanBlackBritish”, “EthnicOther”, “EthnicBAME”, “CountryBirthUK”, “CountryBirthNotUK”, “HouseholdEnglishLanguage”, “HouseholdNotEnglishLanguage”, “ReligionChristian”, “ReligionBuddhist”, “ReligionHindu”, “ReligionJewish”, “ReligionMuslim”, “ReligionSikh”, “ReligionOther”, “ReligionNone”, “ReligionNotStated”, “FullTimeStudent”, “EmploymentRate”, “UnemploymentRate” )</p>
+<p>The data frame <em>df_LSOA</em> contains many variables. As we can see above, they have summarised names. For a short description of what these names mean, we can load the file called Dictionary-lsoa-data-clean.csv:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>, <span class="st">"EthnicBAME"</span>, <span class="st">"CountryBirthUK"</span>, <span class="st">"CountryBirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmploymentRate"</span>, <span class="st">"UnemploymentRate"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/Dictionary-lsoa-data-clean.csv"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 Name                                   Description  X X.1 X.2
+1            LSOA11NM                                  Name of LSOA NA  NA  NA
+2          MidYearPop   Mid-year Population Estimates;All Ages;2011 NA  NA  NA
+3  MidYearPopAge0to15  Mid-year Population Estimates;Aged 0-15;2011 NA  NA  NA
+4 MidYearPopAge16to29 Mid-year Population Estimates;Aged 16-29;2011 NA  NA  NA
+5 MidYearPopAge30to44 Mid-year Population Estimates;Aged 30-44;2011 NA  NA  NA
+6 MidYearPopAge45to64 Mid-year Population Estimates;Aged 45-64;2011 NA  NA  NA
+  X.3 X.4 X.5 X.6
+1  NA  NA        
+2  NA  NA       x
+3  NA  NA       x
+4  NA  NA       x
+5  NA  NA       x
+6  NA  NA       x</code></pre>
 </div>
+</div>
+<p>For the purposes of this chapter, we will focus on just a few of these variables since this will make the results easier to interpret. In particular, we will look at variables related to ethnicity, country of birth, employment status and qualifications. Let us select the fields of interest:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_LSOA<span class="sc">$</span>EthnicBlackAfricanCaribbeanBlackBritish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>, <span class="st">"EthnicBAME"</span>, <span class="st">"CountryBirthUK"</span>, <span class="st">"CountryBirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmploymentRate"</span>, <span class="st">"UnemploymentRate"</span>, <span class="st">"QualificationNone"</span>, <span class="st">"QualificationLevel1"</span>, <span class="st">"QualificationLevel2"</span>, <span class="st">"QualificationApprenticeship"</span>, <span class="st">"QualificationLevel3"</span>, <span class="st">"QualificationLevel4OrAbove"</span>, <span class="st">"QualificationOther"</span>, <span class="st">"QualificationSchoolchildrenAndFullTimeStudentsOver18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can explore the summary statistics for each of the selected fields with the <strong>sumary()</strong> function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group ‘Black/African/Caribbean/Black British’, we can run the code below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_LSOA<span class="sc">$</span>EthnicBlackAfricanCaribbeanBlackBritish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    0.10    4.30    9.50   13.05   18.90   63.70 </code></pre>
 </div>
 </div>
+<p>This tells us that the mean or average percentage of people from this ethnic group in LSOAs within GLA is 13.05%. It also tells us that 63.70% of the population are Black/African/Caribbean/Black British in the LSOA with the maximum proportion of people belonging to this ethnic group.</p>
+<p>To visualise the whole distribution of the variable ‘Percentage of Black/African/Caribbean/Black British’, we can plot a histogram:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_LSOA<span class="sc">$</span>EthnicBlackAfricanCaribbeanBlackBritish, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">xlab=</span><span class="st">"% Muslim"</span>, <span class="at">main=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>join_LSOA <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df_LSOA, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>join_LSOA <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>EthnicBlackAfricanCaribbeanBlackBritish, <span class="at">color =</span> EthnicBlackAfricanCaribbeanBlackBritish)) <span class="sc">+</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_LSOA<span class="sc">$</span>EthnicBlackAfricanCaribbeanBlackBritish, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">xlab=</span><span class="st">"% Black/African/Caribbean/Black British"</span>, <span class="at">ylab=</span><span class="st">'Number of LSOAs'</span>, <span class="at">main=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-</section>
-<section id="sec-sec35" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="sec-sec35"><span class="header-section-number">3.5</span> Checking for variable association</h2>
+<p>The histogram reveals that many LSOAs have a low proportion of Black/African/Caribbean/Black British people, but there are a few with more than 50% of their population belonging to this ethnic group.</p>
+<p>Now the question is whether the LSOAs with similar proportions of Black/African/Caribbean/Black British are also spatially close. To find out, we need to map the data. We can do this by joining the data frame <em>df_LSOA</em> with the data frame <em>st_LSOA</em> which contains the geographic boundaries of the LSOAs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>colnames_df_LSOA <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>join_LSOA <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df_LSOA, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>If we plot the joined data frames, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>corr_mat <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_LSOA[,<span class="fu">c</span>(colnames_df_LSOA[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_LSOA)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>corr_pmat <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(df_LSOA[,<span class="fu">c</span>(colnames_df_LSOA[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_LSOA)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat, <span class="at">tl.cex=</span><span class="dv">10</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>join_LSOA <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>EthnicBlackAfricanCaribbeanBlackBritish, <span class="at">color =</span> EthnicBlackAfricanCaribbeanBlackBritish)) <span class="sc">+</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>, <span class="at">name=</span><span class="st">"Black/African/Caribbean/</span><span class="sc">\n</span><span class="st">Black British people"</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>, <span class="at">name=</span><span class="st">"Black/African/Caribbean/</span><span class="sc">\n</span><span class="st">Black British people"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Remove EthnicBAME, HouseholdNotEnglishLAnguage, CountryBirthUK, EmploymentRate</p>
+</section>
+</section>
+<section id="sec-sec3" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-sec3"><span class="header-section-number">3.5</span> Standardisation</h2>
+<section id="across-geographic-units" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="across-geographic-units"><span class="header-section-number">3.5.1</span> Across geographic units</h3>
+<p>Although LSOAs have been designed to have similar population sizes, the population figures flucuate. And of course, if the population of a place is bigger or smaller, this can affect the figures corresponding to demographic characteristics (e.g.&nbsp;presumably, the larger the total population, the higher the number of people who are unemployed).</p>
+<p>To counter the effect of variable population sizes across geographic units, we always need to standardise the data so it is given as a proportion or a percentage. This has already done in the dataset lsoa-data-clean.csv, however, if you were to create your own dataset, you need to take this into account. To compute the right percentages, it is important to consider the right denominator. For example, if we are computing the percentage of people over the age of 65 in a given geographic unit, we can divide the number of people over 65 by the total population in that geographic unit, then multiply by 100. However, if we are computing the percentage of single-person households, we need to divide the number of single-person households by the total number of households (and not by the total population), then multiply by 100.</p>
+</section>
+<section id="of-variables" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="of-variables"><span class="header-section-number">3.5.2</span> Of variables</h3>
+<p>Data outliers are often present when analysing data from the real-world. These values are generally extreme and difficult to treat statistically. In GDC, they could end up dominating the classification process. To avoid this, we need to standardise the input variables as well, so that they all contribute equally to the classification process.</p>
+<p>There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e.&nbsp;for variable <span class="math inline">\(X\)</span>, Z-score = <span class="math inline">\(\dfrac{X-mean(X)}{std(X)}\)</span> where <span class="math inline">\(std()\)</span> refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function <strong>scale()</strong>. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Remove EthnicBAME, CountryBirthUK</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>,<span class="st">"CountryBirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmploymentRate"</span>, <span class="st">"UnemploymentRate"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a new data frame</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df_std <span class="ot">&lt;-</span> df_LSOA</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># extracts column names from df_std</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>colnames_df_std <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df_std)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># loops columns from position 1 : the last column</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span> (df_std)){</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>df_std[, colnames_df_std[i]] <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">as.numeric</span>(df_std[, colnames_df_std[i]]))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>join_data <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(data, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>colnames_data <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
+</section>
+<section id="sec-sec35" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-sec35"><span class="header-section-number">3.6</span> Checking for variable association</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>corr_mat_data <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>corr_mat <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>corr_pmat_data <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>corr_pmat <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat_data, <span class="at">tl.cex=</span><span class="dv">10</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat_data, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat, <span class="at">tl.cex=</span><span class="dv">10</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="sec-sec3" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="sec-sec3"><span class="header-section-number">3.6</span> Variable standardisation</h2>
-<section id="between-areas" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="between-areas"><span class="header-section-number">3.6.1</span> Between areas</h3>
-</section>
-<section id="between-variables" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="between-variables"><span class="header-section-number">3.6.2</span> Between variables</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a new data frame</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data_std <span class="ot">&lt;-</span> data</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># loops columns from position 1 : the last column</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span> (data_std)){</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>data_std[, colnames_data[i]] <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">as.numeric</span>(data[, colnames_data[i]]))</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Remove EthnicBAME, CountryBirthUK, QualificationNone</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> df_std[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>, <span class="st">"CountryBirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmploymentRate"</span>, <span class="st">"UnemploymentRate"</span>, <span class="st">"QualificationLevel1"</span>, <span class="st">"QualificationLevel2"</span>, <span class="st">"QualificationApprenticeship"</span>, <span class="st">"QualificationLevel3"</span>, <span class="st">"QualificationLevel4OrAbove"</span>, <span class="st">"QualificationOther"</span>, <span class="st">"QualificationSchoolchildrenAndFullTimeStudentsOver18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>join_data <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(data, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>colnames_data <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>corr_mat_data <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>corr_pmat_data <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat_data, <span class="at">tl.cex=</span><span class="dv">10</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat_data, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="sec-sec36" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="sec-sec36"><span class="header-section-number">3.7</span> The clustering process</h2>
 <section id="k-means" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">3.7.1</span> K-means</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data_std[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data_std)])], <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="dv">7</span>, <span class="at">nstart =</span> <span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="ot">&lt;-</span> join_data</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>join_data_cluster<span class="sc">$</span>cluster <span class="ot">&lt;-</span> Km<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="ot">&lt;-</span> join_data</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>join_data_cluster<span class="sc">$</span>cluster <span class="ot">&lt;-</span> Km<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="sc">%&gt;%</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>cluster, <span class="at">color =</span> cluster)) <span class="sc">+</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>cluster, <span class="at">color =</span> cluster)) <span class="sc">+</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_viridis</span>(<span class="at">direction =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -596,20 +815,20 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </section>
 </section>
 <section id="sec-sec37" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="sec-sec37"><span class="header-section-number">3.8</span> Dealing with the GDC results</h2>
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-sec37"><span class="header-section-number">3.8</span> GDC results</h2>
 <section id="cluster-interpretation" class="level3" data-number="3.8.1">
 <h3 data-number="3.8.1" class="anchored" data-anchor-id="cluster-interpretation"><span class="header-section-number">3.8.1</span> Cluster interpretation</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a radial plot for the first group [1,]</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxed.radial (False) prevents white boxes forming under labels</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># radlab rotates the labels</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Km<span class="sc">$</span>centers)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(KmCenters)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">radial.plot</span>(KmCenters[<span class="dv">1</span>,], <span class="at">labels =</span> <span class="fu">colnames</span>(KmCenters),</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="at">boxed.radial =</span> <span class="cn">FALSE</span>, <span class="at">show.radial.grid =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="at">line.col =</span> <span class="st">"blue"</span>, <span class="at">radlab =</span> <span class="cn">TRUE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a radial plot for the first group [1,]</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxed.radial (False) prevents white boxes forming under labels</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># radlab rotates the labels</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Km<span class="sc">$</span>centers)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(KmCenters)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">radial.plot</span>(KmCenters[<span class="dv">1</span>,], <span class="at">labels =</span> <span class="fu">colnames</span>(KmCenters), <span class="at">cex=</span><span class="fl">0.1</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="at">boxed.radial =</span> <span class="cn">FALSE</span>, <span class="at">show.radial.grid =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="at">line.col =</span> <span class="st">"blue"</span>, <span class="at">radlab =</span> <span class="cn">TRUE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

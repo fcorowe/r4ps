@@ -37,6 +37,7 @@ book:
     - longitudinal-1.qmd
     - longitudinal-2.qmd
     - machine-learning.qmd
+    - data-sets.qmd
     - references.qmd
 
 bibliography: references.bib

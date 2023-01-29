@@ -1,5 +1,3 @@
 # Modelling Time {#sec-chp8}
 
-Elisabetta to write
-
-@tao2018
+In progress

@@ -1,5 +1,0 @@
-# Machine Learning {#sec-chp10}
-
-Carmen to write
-
-@sec-chp10

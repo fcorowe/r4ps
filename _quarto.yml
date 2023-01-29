@@ -28,7 +28,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - data-revolution.qmd
+    - intro-population-science.qmd
     - geodemographics.qmd
     - sequence-analysis.qmd
     - network.qmd

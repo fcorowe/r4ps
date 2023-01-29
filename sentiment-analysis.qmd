@@ -1,15 +1,3 @@
 # Sentiment Analysis {#sec-chp6}
 
-Francisco to write
-
-@sec-chp6
-
-This chapter will draw on:
-
--   @rowe2021
-
--   @rowe2021a
-
-## Dependencies
-
-## Data
+In progress

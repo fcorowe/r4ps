@@ -2,7 +2,7 @@
 
 In this chapter we introduce the topic of geodemographics and geodemographic classifications. The chapter is based on the following references:
 
--   [Creating a Geodemographic Classification Using K-means Clustering in R](https://data.cdrc.ac.uk/dataset/creating-geodemographic-classification-using-k-means-clustering-r) (Guy Lansley and James Cheshire, 2018)
+-   [Creating a Geodemographic Classification Using K-means Clustering in R](https://data.cdrc.ac.uk/dataset/creating-geodemographic-classification-using-k-means-clustering-r) (Guy Lansley and James Cheshire, 2018 <!--# Ensure this is cross-reference and it's included in the bibliography - see https://quarto.org/docs/authoring/cross-references.html  -->)
 
 -   [Lecture 10](https://jo-wilkin.github.io/GEOG0030/coursebook/geodemographic-classification.html) of the 2020-21 Work Book for the module GEOG0030 on Geocomputation, delivered at UCL Department of Geography.
 
@@ -11,6 +11,7 @@ In this chapter we introduce the topic of geodemographics and geodemographic cla
 This chapter uses the libraries below. Ensure they are installed on your machine, then execute the following code chunk to load them:
 
 ```{r}
+#| warning: false
 library(sf)
 library(stringr)
 library(dplyr)
@@ -18,11 +19,6 @@ library(ggplot2)
 library(ggcorrplot)
 library(viridis)
 library(plotrix)
-```
-
-```{r}
- #Obtain the working directory, where we will save the data directory
-getwd()
 ```
 
 ## Data {#sec-sec32}
@@ -35,7 +31,7 @@ LSOAs are geographic hierarchies designed to improve the reporting of small area
 
 ### Import the data
 
-In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it *df_LSOA*. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile [here](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london). We have also stored this shapefile, called *LSOA_2011_Lodnon_gen_MHW.shp*, in the data folder of this workbook so you can import it directly as a data frame with simple features using the **st_read()** function from the **sf** package. For more information on the sf package, check the [documentation](https://cran.r-project.org/web/packages/sf/index.html).
+In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it *df_LSOA*. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile [here](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london). We have also stored this shapefile, called *LSOA_2011_Lodnon_gen_MHW.shp*, <!--# should this say London? --> in the data folder of this workbook so you can import it directly as a data frame with simple features using the `st_read()` function from the `sf` package. For more information on the sf package, check the [documentation](https://cran.r-project.org/web/packages/sf/index.html).
 
 ```{r}
 
@@ -63,7 +59,7 @@ Normally, GDCs involve the analysis of aggregated demographic data into geograph
 
 As mentioned above, the data for this chapter is aggregated into LSOAs. The size of the LSOAs is small enough to produce detailed results and is also a convenient choice, since it is broadly used in the UK Census and other official data-reporting exercises.
 
-We can visualise the LSOAs within GLA simply by plotting the geometry column of *sf_LSOA*, which can be selected with the function **st_geometry().**
+We can visualise the LSOAs within GLA simply by plotting the geometry column of `sf_LSOA`, which can be selected with the function **st_geometry().**
 
 ```{r}
 plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)

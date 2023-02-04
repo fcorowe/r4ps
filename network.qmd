@@ -14,10 +14,6 @@ library(dplyr)
 library(igraph)
 ```
 
-```{r}
-getwd() #Obtain the working directory, where we will save the data folder
-```
-
 ## Data {#sec-sec_data}
 
 ### The US Census dataset

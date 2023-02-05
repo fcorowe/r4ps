@@ -24,6 +24,8 @@ Data footprint data are distinctive features in their volume, velocity, variety,
 
 Multiple digital systems contribute to the storage and generation of digital footprint data. @kitchin2014 identified three broad systems directed, automated and volunteered systems. Directed systems comprise digital administrative systems operated by a human recording data on places or people e.g. immigration control, biometric scanning and health records. Automated systems involve digital systems which automatically and autonomously record and process data with little human intervention e.g. mobile phone applications, electronic smartcard ticketing, energy smart meter and traffic sensors. Volunteered systems involve digital spaces in which humans contribute data through interactions on social media platforms (e.g. Twitter and Facebook) or crowdsourcing (e.g. OpenStreetMap and Wikipedia).
 
+![Digital footprint systems](figs/chp2/fig2-systems.png)
+
 ## Opportunities of digital footprint data
 
 Digital footprint data offer unique opportunities for the analysis of human population patterns. As @rowe2021b argues, digital footprint data offer three key promises in relation to traditional data sources, such as surveys and censuses. They generally provide greater spatio-temporal granularity, wider coverage and timeliness.

@@ -251,7 +251,7 @@ Km <- kmeans(data[,c(colnames_data[2: ncol(data)])], centers=5, nstart=20, iter.
 
 ### Other clustering methods
 
-There are several other clustering methods apart from k-means. Each method has its own advantages and disadvantages, and the choice of method will ultimately depend on the specific data and clustering problem. We will not explore these methods in detail, but below we include some of their names and a brief description. If you want to learn about them, you can refer to the book "Pattern Recognition and Machine Learning" by Christopher Bishop.
+There are several other clustering methods apart from k-means. Each method has its own advantages and disadvantages, and the choice of method will ultimately depend on the specific data and clustering problem. We will not explore these methods in detail, but below we include some of their names and a brief description. If you want to learn about them, you can refer to the book "Pattern Recognition and Machine Learning" by Christopher Bishop [@ChristopherBishop06].
 
 -   Fuzzy C-means: a variation of k-means where a data point can belong to multiple clusters with different membership levels.
 

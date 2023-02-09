@@ -338,11 +338,12 @@ This time, we will focus on demographic variables related to ethnicity, country 
 df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "OwnedOutright", "OwnedMortgage", "SocialRent", "PrivateRent", "Hh_MedianIncome", "MidYrPop0to15", "MidYrPop16to29", "MidYrPop30to44", "MidYrPop45to64", "MidYrPop65")]
 ```
 
+Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the **kmeans()** function, you should set nstart=20 and iter.max=1000.
+
 ------------------------------------------------------------------------
 
-1.  (formative feedback) Choose a variable from the list of selected demographic variables (different from EthnicBlackAfricanCaribbeanBlackBritish). Create a histogram representing the value of your variable of choice on the *x*-axis, and the number of LSOAs with a certain value of your variable of choice on the *y*-axis. Based on your histogram, can you comment on how your variable of choice is distributed? Are these demographic patterns to be expected?
-2.  (formative feedback) Create a map that helps us visualise the spatial distribution of your variable of choice across all of London's LSOAs. Can you comment on the spatial patterns that you observe? Are these patterns expected for your variable of choice?
-3.  Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary and explain your decision to discard them. Join the resulting data set with the LSOA boundary data.
-4.  Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, what is the optimal number of clusters for a GDC with k-means? Do you think this is an appropriate number of clusters? Decide on the number of clusters for your GDC and justify this decision.
-5.  Map the resulting clusters.
-6.  Finally, generate radial plots for each cluster. Describe what you observe and comment on your results. Do the results of this GDC agree with what you would expect? Justify your answer.
+Essay questions:
+
+1.  Describe how you prepared your data for the GDC. There is no need to include figures, but you should briefly explain how you reached certain decisions. For example, did you discard any variables due to their strong association with other variables in the dataset? How did you pick the number of clusters for your GDC?
+2.  Map the resulting clusters and generate a radial plot for one of the clusters. You should create just one figure with as many subplots as needed.
+3.  Describe what you observe and comment on your results. Do you observe any interesting patterns? Do the results of this GDC agree with what you would expect? Justify your answer.

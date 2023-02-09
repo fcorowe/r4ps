@@ -348,11 +348,12 @@ div.csl-indent {
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-sec31"><span class="header-section-number">3.1</span> Dependencies</h2>
 <p>This chapter uses the libraries below. Ensure they are installed on your machine, then execute the following code chunk to load them:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Support for simple features, a standardised way to encode spatial vector data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Data manipulation</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
@@ -368,16 +369,23 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A system for creating graphics</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Easy viisualisation of a correlation matrix using ggplot2</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Color maps designed to improve graph readability</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: viridisLite</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Alternative way of plotting, useful for radial plots</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Methods for cluster analysis</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Thematic maps can be generated with great flexibility</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Provides some easy-to-use functions to extract and visualize the output of multivariate data analyses</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
 </div>
@@ -441,256 +449,155 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Lower.Super.Output.Area    LSOA11NM MidYearPop MidYearPopAge0to15
-1               E01000907 Camden 001A       1431              20.68
-2               E01000908 Camden 001B       1564              18.16
-3               E01000909 Camden 001C       1602              14.86
-4               E01000912 Camden 001D       1589              16.17
-5               E01000913 Camden 001E       1695              17.23
-6               E01000893 Camden 002A       1563              17.08
-  MidYearPopAge16to29 MidYearPopAge30to44 MidYearPopAge45to64 MidYearPopAge65
-1               17.05               26.62               24.18           11.46
-2               15.41               26.73               26.21           13.49
-3               17.92               20.54               28.34           18.35
-4               22.40               22.22               24.98           14.22
-5               12.74               20.24               30.32           19.47
-6               14.59               27.58               25.59           15.16
-  MidYearPopWorkingAge CensusPop Density2012 HouseholdAll
-1                67.85      1430         136          627
-2                68.35      1581          92          827
-3                66.79      1614          70          661
-4                69.60      1589          18          700
-5                63.30      1710          11          722
-6                67.75      1566          29          715
-  HouseholdCoupleWithDepChildren HouseholdCoupleNoDepChildren
-1                           12.3                         20.1
-2                           11.6                         17.3
-3                           17.9                         29.3
-4                           12.9                         16.6
-5                           19.3                         34.6
-6                           16.8                         23.8
-  HouseholdLoneParent HouseholdOnePerson HouseholdOtherMulti EthnicWhite
-1                21.1               33.0                13.6        73.5
-2                13.2               50.8                 7.1        72.4
-3                 7.3               30.1                15.4        84.1
-4                15.7               38.6                16.3        77.3
-5                 3.7               29.1                13.3        88.2
-6                 5.7               39.3                14.4        88.1
-  EthnicMixedMulti EthnicAsianAsianBritish
-1              7.3                     8.5
-2              8.7                     6.2
-3              5.5                     4.6
-4              5.6                     5.1
-5              5.1                     4.7
-6              4.5                     4.8
-  EthnicBlackAfricanCaribbeanBlackBritish EthnicOther EthnicBAME CountryBirthUK
-1                                     7.9         2.8       26.5           72.2
-2                                     8.0         4.7       27.6           70.5
-3                                     2.9         2.9       15.9           74.7
-4                                     9.2         2.8       22.7           70.4
-5                                     1.3         0.7       11.8           72.0
-6                                     1.0         1.5       11.9           63.5
-  CountryBirthNotUK HouseholdEnglishLanguage HouseholdNotEnglishLanguage
-1              27.8                     88.5                        11.5
-2              29.5                     91.1                         8.9
-3              25.3                     95.3                         4.7
-4              29.6                     92.3                         7.7
-5              28.0                     97.4                         2.6
-6              36.5                     92.0                         8.0
-  ReligionChristian ReligionBuddhist ReligionHindu ReligionJewish
-1              39.3              1.5           0.7            1.3
-2              38.9              1.3           0.5            2.7
-3              37.7              0.9           0.4            5.0
-4              37.6              0.8           0.4            1.3
-5              37.1              0.3           0.5           12.0
-6              31.1              1.6           1.0            7.1
-  ReligionMuslim ReligionSikh ReligionOther ReligionNone ReligionNotStated
-1            8.5          0.1           0.6         32.7              15.5
-2            4.2          0.0           1.6         27.5              23.3
-3            2.2          0.2           1.0         34.1              18.5
-4           10.0          0.0           0.9         31.5              17.4
-5            0.9          0.0           0.4         27.5              21.3
-6            1.0          0.0           1.0         38.4              18.8
-  TenureOwnedOutright TenureOwnedMortgageLoan TenureSocialRent
-1                12.6                    18.0             54.4
-2                14.0                    17.7             52.6
-3                38.3                    21.2             18.6
-4                15.3                    14.6             51.3
-5                47.1                    27.6              1.9
-6                39.0                    20.6              4.5
-  TenurePrivateRent DwellingWithUsualResidents DwellingWithNoUsualResidents
-1              13.7                       99.5                          0.5
-2              14.0                       95.2                          4.8
-3              18.8                       97.6                          2.4
-4              15.0                       98.6                          1.4
-5              19.4                       89.7                         10.3
-6              34.1                       92.4                          7.6
-  DwllingDetached DwellingSemiDetached DwellingTerraced DwellingFlat
-1             2.2                  4.1             15.4         78.3
-2             1.7                  9.4              3.8         85.0
-3            11.7                 21.1              9.5         57.8
-4             1.0                  1.8             10.0         87.2
-5            27.1                 12.3             15.3         45.3
-6             1.2                 14.5              7.0         77.4
-  HousePriceMedian HouseSales HouseholdNoAdultInEmploymentWithDependentChildren
-1           415000         11                                                10
-2           282500         21                                                 5
-3           435000         19                                                 2
-4           500000         17                                                 7
-5          1000000         31                                                 1
-6           740000         24                                                 2
-  LoneParentNotInEmployment FullTimeStudent EmploymentRate UnemploymentRate
-1                      55.4            1.82           58.6              9.9
-2                      48.6            1.77           62.3              8.0
-3                      59.1            1.24           65.7              4.9
-4                      47.6            2.96           58.8              8.8
-5                      12.5            1.17           71.8              2.1
-6                      36.4            1.09           74.1              3.6
-  QualificationNone QualificationLevel1 QualificationLevel2
-1              20.0                 9.2                 9.1
-2              15.0                 7.7                10.1
-3               9.6                 5.1                 8.3
-4              18.0                 9.3                 9.4
-5               4.9                 4.9                 9.6
-6               3.7                 2.4                 7.1
-  QualificationApprenticeship QualificationLevel3 QualificationLevel4OrAbove
-1                         1.0                 9.1                       44.2
-2                         0.8                 8.8                       50.4
-3                         0.7                 9.6                       61.9
-4                         1.1                 8.7                       47.2
-5                         0.4                 9.4                       65.2
-6                         0.7                 7.5                       72.6
-  QualificationOther QualificationSchoolchildrenAndFullTimeStudentsOver18
-1                7.5                                                  6.4
-2                7.3                                                  4.8
-3                4.7                                                  4.5
-4                6.2                                                  8.8
-5                5.5                                                  4.0
-6                6.1                                                  4.1
-  HealthDayToDayLimitedALot HealthDayToDayLimitedALittle
-1                      10.8                          9.3
-2                      10.2                          9.1
-3                       7.1                          8.1
-4                       9.8                         10.5
-5                       4.1                          5.5
-6                       4.0                          5.7
-  HealthDayToDayNotLimited HealthVeryGoodOrGood HealthFair HealthBadOrVeryBad
-1                     79.9                 78.0       13.2                8.7
-2                     80.7                 78.2       12.4                9.4
-3                     84.8                 85.6       10.0                4.5
-4                     79.7                 77.2       14.6                8.2
-5                     90.4                 89.6        7.3                3.1
-6                     90.3                 90.2        7.0                2.7
-  HouseholdNoCarOrVan HouseholdOneCarOrVan HouseholdTwoCarOrVan
-1                61.2                 33.0                  4.6
-2                59.5                 34.5                  5.3
-3                36.8                 44.5                 15.1
-4                60.6                 36.1                  3.0
-5                22.3                 42.8                 26.7
-6                43.8                 42.2                 11.6
-  HouseholdThreeCarOrVan HouseholdFourOrMoreCarOrVan CarsPerHousehold
-1                    1.1                         0.0              0.5
-2                    0.5                         0.2              0.5
-3                    2.7                         0.9              0.9
-4                    0.3                         0.0              0.4
-5                    6.0                         2.2              1.2
-6                    1.5                         0.8              0.8
-  PublicTransportAccessibilityAverageScore HouseholdMeanIncome
-1                                      4.6               39985
-2                                      2.9               42394
-3                                      3.3               77370
-4                                      4.6               41737
-5                                      2.8               96649
-6                                      3.2               84878
-  HouseholdMedianIncome
-1                 30223
-2                 32049
-3                 58469
-4                 31551
-5                 73024
-6                 64138</code></pre>
+<pre><code>  Lower.Super.Output.Area    LSOA11NM MidYrPop MidYrPop0to15 MidYrPop16to29
+1               E01000907 Camden 001A     1431         20.68          17.05
+2               E01000908 Camden 001B     1564         18.16          15.41
+3               E01000909 Camden 001C     1602         14.86          17.92
+4               E01000912 Camden 001D     1589         16.17          22.40
+5               E01000913 Camden 001E     1695         17.23          12.74
+6               E01000893 Camden 002A     1563         17.08          14.59
+  MidYrPop30to44 MidYrPop45to64 MidYrPop65 MidYrPopWorking CensusPop
+1          26.62          24.18      11.46           67.85      1430
+2          26.73          26.21      13.49           68.35      1581
+3          20.54          28.34      18.35           66.79      1614
+4          22.22          24.98      14.22           69.60      1589
+5          20.24          30.32      19.47           63.30      1710
+6          27.58          25.59      15.16           67.75      1566
+  Density2012 Hh_All Hh_CoupleDepChildren Hh_CoupleNoDepChildren Hh_LoneParent
+1         136    627                 12.3                   20.1          21.1
+2          92    827                 11.6                   17.3          13.2
+3          70    661                 17.9                   29.3           7.3
+4          18    700                 12.9                   16.6          15.7
+5          11    722                 19.3                   34.6           3.7
+6          29    715                 16.8                   23.8           5.7
+  Hh_OnePerson Hh_OtherMulti White MixedMulti Asian BlackAfricanCaribbean
+1         33.0          13.6  73.5        7.3   8.5                   7.9
+2         50.8           7.1  72.4        8.7   6.2                   8.0
+3         30.1          15.4  84.1        5.5   4.6                   2.9
+4         38.6          16.3  77.3        5.6   5.1                   9.2
+5         29.1          13.3  88.2        5.1   4.7                   1.3
+6         39.3          14.4  88.1        4.5   4.8                   1.0
+  Ethnic_Other BAME BirthUK BirthNotUK Hh_EnglishLang Hh_NotEnglishLang
+1          2.8 26.5    72.2       27.8           88.5              11.5
+2          4.7 27.6    70.5       29.5           91.1               8.9
+3          2.9 15.9    74.7       25.3           95.3               4.7
+4          2.8 22.7    70.4       29.6           92.3               7.7
+5          0.7 11.8    72.0       28.0           97.4               2.6
+6          1.5 11.9    63.5       36.5           92.0               8.0
+  Christian Buddhist Hindu Jewish Muslim Sikh Religion_Other Religion_None
+1      39.3      1.5   0.7    1.3    8.5  0.1            0.6          32.7
+2      38.9      1.3   0.5    2.7    4.2  0.0            1.6          27.5
+3      37.7      0.9   0.4    5.0    2.2  0.2            1.0          34.1
+4      37.6      0.8   0.4    1.3   10.0  0.0            0.9          31.5
+5      37.1      0.3   0.5   12.0    0.9  0.0            0.4          27.5
+6      31.1      1.6   1.0    7.1    1.0  0.0            1.0          38.4
+  Religion_NotStated OwnedOutright OwnedMortgage SocialRent PrivateRent
+1               15.5          12.6          18.0       54.4        13.7
+2               23.3          14.0          17.7       52.6        14.0
+3               18.5          38.3          21.2       18.6        18.8
+4               17.4          15.3          14.6       51.3        15.0
+5               21.3          47.1          27.6        1.9        19.4
+6               18.8          39.0          20.6        4.5        34.1
+  DwellingWUsualRes DwellingWNoUsualRes DwellingDetached DwellingSemiDetached
+1              99.5                 0.5              2.2                  4.1
+2              95.2                 4.8              1.7                  9.4
+3              97.6                 2.4             11.7                 21.1
+4              98.6                 1.4              1.0                  1.8
+5              89.7                10.3             27.1                 12.3
+6              92.4                 7.6              1.2                 14.5
+  DwellingTerraced DwellingFlat H_PriceMedian H_Sales
+1             15.4         78.3        415000      11
+2              3.8         85.0        282500      21
+3              9.5         57.8        435000      19
+4             10.0         87.2        500000      17
+5             15.3         45.3       1000000      31
+6              7.0         77.4        740000      24
+  Hh_NoAdultInEmployWDepChild LoneParentNotInEmploy FullTimeStudent EmployRate
+1                          10                  55.4            1.82       58.6
+2                           5                  48.6            1.77       62.3
+3                           2                  59.1            1.24       65.7
+4                           7                  47.6            2.96       58.8
+5                           1                  12.5            1.17       71.8
+6                           2                  36.4            1.09       74.1
+  UnemployRate Q_None Q_L1 Q_L2 Q_Apprenticeship Q_L3 Q_L4OrAbove Q_Other
+1          9.9   20.0  9.2  9.1              1.0  9.1        44.2     7.5
+2          8.0   15.0  7.7 10.1              0.8  8.8        50.4     7.3
+3          4.9    9.6  5.1  8.3              0.7  9.6        61.9     4.7
+4          8.8   18.0  9.3  9.4              1.1  8.7        47.2     6.2
+5          2.1    4.9  4.9  9.6              0.4  9.4        65.2     5.5
+6          3.6    3.7  2.4  7.1              0.7  7.5        72.6     6.1
+  Q_Sch_FullTimeSt18 Hlth_LimitedALot Hlth_LimitedALittle Hlth_NotLimited
+1                6.4             10.8                 9.3            79.9
+2                4.8             10.2                 9.1            80.7
+3                4.5              7.1                 8.1            84.8
+4                8.8              9.8                10.5            79.7
+5                4.0              4.1                 5.5            90.4
+6                4.1              4.0                 5.7            90.3
+  Hlth_VGoodOrGood Hlth_Fair Hlth_BadOrVBad Hh_NoCarVan Hh_OneCarVan
+1             78.0      13.2            8.7        61.2         33.0
+2             78.2      12.4            9.4        59.5         34.5
+3             85.6      10.0            4.5        36.8         44.5
+4             77.2      14.6            8.2        60.6         36.1
+5             89.6       7.3            3.1        22.3         42.8
+6             90.2       7.0            2.7        43.8         42.2
+  Hh_TwoCarVan Hh_ThreeCarVan Hh_FourOrMoreCarVan CarsPerHh
+1          4.6            1.1                 0.0       0.5
+2          5.3            0.5                 0.2       0.5
+3         15.1            2.7                 0.9       0.9
+4          3.0            0.3                 0.0       0.4
+5         26.7            6.0                 2.2       1.2
+6         11.6            1.5                 0.8       0.8
+  PubTransAccessScore14 Hh_MeanIncome Hh_MedianIncome
+1                   4.6         39985           32049
+2                   2.9         42394           58469
+3                   3.3         77370           31551
+4                   4.6         41737           73024
+5                   2.8         96649           64138
+6                   3.2         84878           72739</code></pre>
 </div>
 </div>
 <p>As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function <strong>names()</strong>, we can get the names of the columns in <em>df_LSOA</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Lower.Super.Output.Area"                             
- [2] "LSOA11NM"                                            
- [3] "MidYearPop"                                          
- [4] "MidYearPopAge0to15"                                  
- [5] "MidYearPopAge16to29"                                 
- [6] "MidYearPopAge30to44"                                 
- [7] "MidYearPopAge45to64"                                 
- [8] "MidYearPopAge65"                                     
- [9] "MidYearPopWorkingAge"                                
-[10] "CensusPop"                                           
-[11] "Density2012"                                         
-[12] "HouseholdAll"                                        
-[13] "HouseholdCoupleWithDepChildren"                      
-[14] "HouseholdCoupleNoDepChildren"                        
-[15] "HouseholdLoneParent"                                 
-[16] "HouseholdOnePerson"                                  
-[17] "HouseholdOtherMulti"                                 
-[18] "EthnicWhite"                                         
-[19] "EthnicMixedMulti"                                    
-[20] "EthnicAsianAsianBritish"                             
-[21] "EthnicBlackAfricanCaribbeanBlackBritish"             
-[22] "EthnicOther"                                         
-[23] "EthnicBAME"                                          
-[24] "CountryBirthUK"                                      
-[25] "CountryBirthNotUK"                                   
-[26] "HouseholdEnglishLanguage"                            
-[27] "HouseholdNotEnglishLanguage"                         
-[28] "ReligionChristian"                                   
-[29] "ReligionBuddhist"                                    
-[30] "ReligionHindu"                                       
-[31] "ReligionJewish"                                      
-[32] "ReligionMuslim"                                      
-[33] "ReligionSikh"                                        
-[34] "ReligionOther"                                       
-[35] "ReligionNone"                                        
-[36] "ReligionNotStated"                                   
-[37] "TenureOwnedOutright"                                 
-[38] "TenureOwnedMortgageLoan"                             
-[39] "TenureSocialRent"                                    
-[40] "TenurePrivateRent"                                   
-[41] "DwellingWithUsualResidents"                          
-[42] "DwellingWithNoUsualResidents"                        
-[43] "DwllingDetached"                                     
-[44] "DwellingSemiDetached"                                
-[45] "DwellingTerraced"                                    
-[46] "DwellingFlat"                                        
-[47] "HousePriceMedian"                                    
-[48] "HouseSales"                                          
-[49] "HouseholdNoAdultInEmploymentWithDependentChildren"   
-[50] "LoneParentNotInEmployment"                           
-[51] "FullTimeStudent"                                     
-[52] "EmploymentRate"                                      
-[53] "UnemploymentRate"                                    
-[54] "QualificationNone"                                   
-[55] "QualificationLevel1"                                 
-[56] "QualificationLevel2"                                 
-[57] "QualificationApprenticeship"                         
-[58] "QualificationLevel3"                                 
-[59] "QualificationLevel4OrAbove"                          
-[60] "QualificationOther"                                  
-[61] "QualificationSchoolchildrenAndFullTimeStudentsOver18"
-[62] "HealthDayToDayLimitedALot"                           
-[63] "HealthDayToDayLimitedALittle"                        
-[64] "HealthDayToDayNotLimited"                            
-[65] "HealthVeryGoodOrGood"                                
-[66] "HealthFair"                                          
-[67] "HealthBadOrVeryBad"                                  
-[68] "HouseholdNoCarOrVan"                                 
-[69] "HouseholdOneCarOrVan"                                
-[70] "HouseholdTwoCarOrVan"                                
-[71] "HouseholdThreeCarOrVan"                              
-[72] "HouseholdFourOrMoreCarOrVan"                         
-[73] "CarsPerHousehold"                                    
-[74] "PublicTransportAccessibilityAverageScore"            
-[75] "HouseholdMeanIncome"                                 
-[76] "HouseholdMedianIncome"                               </code></pre>
+<pre><code> [1] "Lower.Super.Output.Area"     "LSOA11NM"                   
+ [3] "MidYrPop"                    "MidYrPop0to15"              
+ [5] "MidYrPop16to29"              "MidYrPop30to44"             
+ [7] "MidYrPop45to64"              "MidYrPop65"                 
+ [9] "MidYrPopWorking"             "CensusPop"                  
+[11] "Density2012"                 "Hh_All"                     
+[13] "Hh_CoupleDepChildren"        "Hh_CoupleNoDepChildren"     
+[15] "Hh_LoneParent"               "Hh_OnePerson"               
+[17] "Hh_OtherMulti"               "White"                      
+[19] "MixedMulti"                  "Asian"                      
+[21] "BlackAfricanCaribbean"       "Ethnic_Other"               
+[23] "BAME"                        "BirthUK"                    
+[25] "BirthNotUK"                  "Hh_EnglishLang"             
+[27] "Hh_NotEnglishLang"           "Christian"                  
+[29] "Buddhist"                    "Hindu"                      
+[31] "Jewish"                      "Muslim"                     
+[33] "Sikh"                        "Religion_Other"             
+[35] "Religion_None"               "Religion_NotStated"         
+[37] "OwnedOutright"               "OwnedMortgage"              
+[39] "SocialRent"                  "PrivateRent"                
+[41] "DwellingWUsualRes"           "DwellingWNoUsualRes"        
+[43] "DwellingDetached"            "DwellingSemiDetached"       
+[45] "DwellingTerraced"            "DwellingFlat"               
+[47] "H_PriceMedian"               "H_Sales"                    
+[49] "Hh_NoAdultInEmployWDepChild" "LoneParentNotInEmploy"      
+[51] "FullTimeStudent"             "EmployRate"                 
+[53] "UnemployRate"                "Q_None"                     
+[55] "Q_L1"                        "Q_L2"                       
+[57] "Q_Apprenticeship"            "Q_L3"                       
+[59] "Q_L4OrAbove"                 "Q_Other"                    
+[61] "Q_Sch_FullTimeSt18"          "Hlth_LimitedALot"           
+[63] "Hlth_LimitedALittle"         "Hlth_NotLimited"            
+[65] "Hlth_VGoodOrGood"            "Hlth_Fair"                  
+[67] "Hlth_BadOrVBad"              "Hh_NoCarVan"                
+[69] "Hh_OneCarVan"                "Hh_TwoCarVan"               
+[71] "Hh_ThreeCarVan"              "Hh_FourOrMoreCarVan"        
+[73] "CarsPerHh"                   "PubTransAccessScore14"      
+[75] "Hh_MeanIncome"               "Hh_MedianIncome"            </code></pre>
 </div>
 </div>
 <p>The data frame <em>df_LSOA</em> contains many variables. As we can see above, they have summarised names. For a short description of what these names mean, we can load the file called Dictionary-lsoa-data-clean.csv:</p>
@@ -699,29 +606,22 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 Name                                   Description  X X.1 X.2
-1            LSOA11NM                                  Name of LSOA NA  NA  NA
-2          MidYearPop   Mid-year Population Estimates;All Ages;2011 NA  NA  NA
-3  MidYearPopAge0to15  Mid-year Population Estimates;Aged 0-15;2011 NA  NA  NA
-4 MidYearPopAge16to29 Mid-year Population Estimates;Aged 16-29;2011 NA  NA  NA
-5 MidYearPopAge30to44 Mid-year Population Estimates;Aged 30-44;2011 NA  NA  NA
-6 MidYearPopAge45to64 Mid-year Population Estimates;Aged 45-64;2011 NA  NA  NA
-  X.3 X.4 X.5 X.6
-1  NA  NA        
-2  NA  NA       x
-3  NA  NA       x
-4  NA  NA       x
-5  NA  NA       x
-6  NA  NA       x</code></pre>
+<pre><code>           Label                                   Description
+1       LSOA11NM                                  Name of LSOA
+2       MidYrPop   Mid-year Population Estimates;All Ages;2011
+3  MidYrPop0to15  Mid-year Population Estimates;Aged 0-15;2011
+4 MidYrPop16to29 Mid-year Population Estimates;Aged 16-29;2011
+5 MidYrPop30to44 Mid-year Population Estimates;Aged 30-44;2011
+6 MidYrPop45to64 Mid-year Population Estimates;Aged 45-64;2011</code></pre>
 </div>
 </div>
 <p>For the purposes of this chapter, we will focus on just a few of these variables since this will make the results easier to interpret. In particular, we will look at variables related to ethnicity, country of birth, employment status and qualifications. Let us select the fields of interest:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>, <span class="st">"EthnicBAME"</span>, <span class="st">"CountryBirthUK"</span>, <span class="st">"CountryBirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmploymentRate"</span>, <span class="st">"UnemploymentRate"</span>, <span class="st">"QualificationNone"</span>, <span class="st">"QualificationLevel1"</span>, <span class="st">"QualificationLevel2"</span>, <span class="st">"QualificationApprenticeship"</span>, <span class="st">"QualificationLevel3"</span>, <span class="st">"QualificationLevel4OrAbove"</span>, <span class="st">"QualificationOther"</span>, <span class="st">"QualificationSchoolchildrenAndFullTimeStudentsOver18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmployRate"</span>, <span class="st">"UnemployRate"</span>, <span class="st">"Q_None"</span>, <span class="st">"Q_L1"</span>, <span class="st">"Q_L2"</span>, <span class="st">"Q_Apprenticeship"</span>, <span class="st">"Q_L3"</span>, <span class="st">"Q_L4OrAbove"</span>, <span class="st">"Q_Other"</span>, <span class="st">"Q_Sch_FullTimeSt18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can explore the summary statistics for each of the selected fields with the <strong>summary()</strong> function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group ‘Black/African/Caribbean/Black British’, we can run the code below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_LSOA<span class="sc">$</span>EthnicBlackAfricanCaribbeanBlackBritish)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_LSOA<span class="sc">$</span>BlackAfricanCaribbean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    0.10    4.30    9.50   13.05   18.90   63.70 </code></pre>
@@ -730,7 +630,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <p>This tells us that the mean or average percentage of people from this ethnic group in LSOAs within GLA is 13.05%. It also tells us that 63.70% of the population are Black/African/Caribbean/Black British in the LSOA with the maximum proportion of people belonging to this ethnic group.</p>
 <p>To visualise the whole distribution of the variable ‘Percentage of Black/African/Caribbean/Black British’, we can plot a histogram:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_LSOA<span class="sc">$</span>EthnicBlackAfricanCaribbeanBlackBritish, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">xlab=</span><span class="st">"% Black/African/Caribbean/Black British"</span>, <span class="at">ylab=</span><span class="st">'Number of LSOAs'</span>, <span class="at">main=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_LSOA<span class="sc">$</span>BlackAfricanCaribbean, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">xlab=</span><span class="st">"% Black/African/Caribbean/Black British"</span>, <span class="at">ylab=</span><span class="st">'Number of LSOAs'</span>, <span class="at">main=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -742,13 +642,13 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 <p>If we plot the joined data frames using the tmap library functionalities, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>legend_title <span class="ot">=</span> <span class="fu">expression</span>(<span class="st">"% Black, African, </span><span class="sc">\n</span><span class="st">Caribbean or Black British"</span>)</span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>legend_title <span class="ot">=</span> <span class="fu">expression</span>(<span class="st">"% Black, African, Caribbean or Black British"</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>map_ethnic <span class="ot">=</span> <span class="fu">tm_shape</span>(join_LSOA) <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="at">title =</span> legend_title, <span class="at">text.size =</span> <span class="dv">10</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">0.02</span>)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"BlackAfricanCaribbean"</span>, <span class="at">title =</span> legend_title, <span class="at">text.size =</span> <span class="dv">10</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.71</span>, <span class="fl">0.02</span>), <span class="at">legend.title.size=</span><span class="fl">0.7</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.14</span>)) <span class="sc">+</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="dv">1</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.8</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>map_ethnic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
@@ -790,36 +690,32 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>corr_pmat <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat, <span class="at">tl.cex=</span><span class="dv">10</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat, <span class="at">tl.cex=</span><span class="dv">7</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>, <span class="at">lab_size=</span><span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Among the statistically significant values in the correlation matrix, we can see that EthnicBAME and EthnicWhite have a correlation of -1. So do CountryBirthUK and CountryBirthNotUK. We will therefore remove EthnicBAME and CountryBrithUK from our dataset. We also see that QualificationLevel4OrAbove has a strong negative correlation with QualificationNone and QualificationLevel1. We will therefore remove QualificationLevel1.</p>
+<p>Among the statistically significant values in the correlation matrix, we can see that BAME and White have a correlation of -1. So do BirthUK and BirthNotUK. We will therefore remove BAME and BrithUK from our dataset. We also see that Q_L4OrAbove has a strong negative correlation with Q_None and Q_L1. We will therefore remove two of these variables, for example Q_None and Q_L1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Remove EthnicBAME, CountryBirthUK, QualificationLevel1</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> df_std[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>, <span class="st">"CountryBirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmploymentRate"</span>, <span class="st">"UnemploymentRate"</span>, <span class="st">"QualificationNone"</span>, <span class="st">"QualificationLevel2"</span>, <span class="st">"QualificationApprenticeship"</span>, <span class="st">"QualificationLevel3"</span>, <span class="st">"QualificationLevel4OrAbove"</span>, <span class="st">"QualificationOther"</span>, <span class="st">"QualificationSchoolchildrenAndFullTimeStudentsOver18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> df_std</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Remove BAME, BirthUK, Q_None, Q_L1</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_std, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(BAME, BirthUK, Q_None, Q_L1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now perform a join of the resulting dataset with the variable st_LSOA, which stores the geographical units for the LSOAs. We perform this step so that we can later map the results</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>join_data <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(data, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>join_data <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(data, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And once again, we can check the Pearson correlation matrix of the resulting dataset. Obviously, now that we have removed some variables that were strongly correlated to others, the values of the correlation coefficients are not as high as before.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Obtain column names from data</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>colnames_data <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>corr_mat_data <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>corr_pmat_data <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat_data, <span class="at">tl.cex=</span><span class="dv">10</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat_data, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Obtain column names from data</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>colnames_data <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>corr_mat_data <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>corr_pmat_data <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat_data, <span class="at">tl.cex=</span><span class="dv">7</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat_data, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>, <span class="at">lab_size=</span><span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -831,31 +727,31 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <p>More technically, k-means clustering is actually an algorithm of unsupervised learning (we will learn more about this in Chapter 10) that partitions a set of points into k clusters, where k is a user-specified number. The algorithm iteratively assigns each point to the closest cluster, based on the mean of the points in the cluster, until no point can be moved to a different cluster to decrease the sum of squared distances between points and their assigned cluster mean. The result is a partitioning of the points into k clusters, where the points within a cluster are as similar as possible to each other, and as dissimilar as possible from points in other clusters.</p>
 <p>In R, k-means can be easily applied by using the function <strong>k-means()</strong>, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (nstart) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">4</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">4</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="number-of-clusters" class="level3" data-number="3.6.2">
 <h3 data-number="3.6.2" class="anchored" data-anchor-id="number-of-clusters"><span class="header-section-number">3.6.2</span> Number of clusters</h3>
-<p>As mentioned above, the number of clusters k is a parameter of the algorithm that has to be specified by the user. Ultimately, there is really no right or wrong answer to the question of what is the optimum number of clusters? Deciding the value of k in the k-means algorithm is a somewhat subjective process where in most cases, common sense is the most useful approach. For example, you can ask yourself if the obtained groups are meaningful and easy to interpret or if, on the other hand, there are too few or too many clusters, making the results unclear.</p>
+<p>As mentioned above, the number of clusters k is a parameter of the algorithm that has to be specified by the user. Ultimately, there is no right or wrong answer to the question ‘what is the optimum number of clusters?’. Deciding the value of k in the k-means algorithm can be a somewhat subjective process where in most cases, common sense is the most useful approach. For example, you can ask yourself if the obtained groups are meaningful and easy to interpret or if, on the other hand, there are too few or too many clusters, making the results unclear.</p>
 <p>However, there are some techniques and guidelines to help us decide what the right number of clusters is. Here we explore the silhouette score method.</p>
 <p>The <strong>silhouette score</strong> of a data point (in this case an LSOA and its demographic data) is a measure of how similar this data point is to the data points in its own cluster compared to the data points in other clusters. The silhouette score ranges from -1 to 1, with a higher value indicating that the data point is well matched to its own cluster and poorly matched to neighbouring clusters. A score close to 1 means that the data point is distinctly separate from other clusters, whereas a score close to -1 means the data point may have been assigned to the wrong cluster. Given a number of clusters k obtained with k-means, we can compute the average silhouette score over all the data points. Then, we can plot the average silhouette score against k. The optimal value of k will be the one with the highest k score.</p>
 <p>You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 8. The optimum number of clusters is given by the value of k at which the average silhouette is maximised.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>silhouette_score <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers =</span> k, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  ss <span class="ot">&lt;-</span> <span class="fu">silhouette</span>(km<span class="sc">$</span>cluster, <span class="fu">dist</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])]))</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(ss[, <span class="dv">3</span>])</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>avg_sil <span class="ot">&lt;-</span> <span class="fu">sapply</span>(k, silhouette_score)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k, <span class="at">type=</span><span class="st">'b'</span>, avg_sil, <span class="at">xlab=</span><span class="st">'Number of clusters'</span>, <span class="at">ylab=</span><span class="st">'Average Silhouette Scores'</span>, <span class="at">frame=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>silhouette_score <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers =</span> k, <span class="at">nstart=</span><span class="dv">5</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  ss <span class="ot">&lt;-</span> <span class="fu">silhouette</span>(km<span class="sc">$</span>cluster, <span class="fu">dist</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])]))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(ss[, <span class="dv">3</span>])</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>avg_sil <span class="ot">&lt;-</span> <span class="fu">sapply</span>(k, silhouette_score)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k, <span class="at">type=</span><span class="st">'b'</span>, avg_sil, <span class="at">xlab=</span><span class="st">'Number of clusters'</span>, <span class="at">ylab=</span><span class="st">'Average Silhouette Scores'</span>, <span class="at">frame=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>From the figure, we can see that the optimum k is 5, so we will take 5 as the number of clusters. Note, this number might be different when you run the programme since the clustering algorithm involves some random steps.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">5</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">5</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="other-clustering-methods" class="level3" data-number="3.6.3">
@@ -876,38 +772,39 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="mapping-the-clusters"><span class="header-section-number">3.7.1</span> Mapping the clusters</h3>
 <p>Our LSOAs are now grouped into 5 clusters according to the similarity in their demographic characteristics. We can create a final data set based on <em>join_data</em> which includes the cluster where each geographical unit belongs to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="ot">&lt;-</span> join_data</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>join_data_cluster<span class="sc">$</span>cluster <span class="ot">&lt;-</span> Km<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="ot">&lt;-</span> join_data</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>join_data_cluster<span class="sc">$</span>cluster <span class="ot">&lt;-</span> Km<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally, we can plot the results of the clustering process on a map using the functionalities of the tmap library:</p>
+<p>Finally, we can plot the results of the clustering process on a map using functions from the tmap library:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>map_cluster <span class="ot">=</span> <span class="fu">tm_shape</span>(join_data_cluster) <span class="sc">+</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"cluster"</span>, <span class="at">title =</span> <span class="st">"cluster"</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.88</span>, <span class="fl">0.02</span>)) <span class="sc">+</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.5</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>map_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>map_cluster <span class="ot">=</span> <span class="fu">tm_shape</span>(join_data_cluster) <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"cluster"</span>, <span class="at">title =</span> <span class="st">"cluster"</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.88</span>, <span class="fl">0.02</span>)) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.5</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>map_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p><strong>Note:</strong> sometimes, the number of items in a cluster may be very small. In that case, you may want to merge to cluster to make the number of items in each group more homogeneous or perhaps change k in the k-means algorithm.</p>
 </section>
 <section id="cluster-interpretation" class="level3" data-number="3.7.2">
 <h3 data-number="3.7.2" class="anchored" data-anchor-id="cluster-interpretation"><span class="header-section-number">3.7.2</span> Cluster interpretation</h3>
-<p>The map above not only displays the clusters where each LSOA belongs, but it also shows that there is a tendency for LSOAs belonging to the same cluster to be geographically close to each other. We still need to understand what each cluster represents.</p>
+<p>The map above not only displays the clusters where each LSOA belongs, but it also shows that there is a tendency for LSOAs belonging to the same cluster to be geographically close. This indicates that people with similar demographic characteristics live close to each other. However, we still need to understand what each cluster represents.</p>
 <p>The so-called cluster centers (kmCenters) are the data points that, within each cluster, provide a clear indication of the average characteristics the cluster where they belong based, of course, on the variables used in the classification. The data used in the clustering process was Z-score standardized, so the values of each variable corresponding to the cluster centers are still presented as Z-scores. Zero indicates the mean for each variable across all the data points in the sample, and values above or below zero indicate the number of standard deviations from the average. This makes it easy to understand the unique characteristics of each cluster relative to the entire sample. To visualise the characteristics and meaning of the clusters centers and their corresponding clusters, we use radial plots. Below we produce a radial plot for cluster 1. Can you see which variables are higher or lower than average in this cluster? If you want to visualise the radial plot for other clusters, you will need to change the number inside the brackets of <em>KmCenters[1,].</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a radial plot for cluster 1</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxed.radial (False) prevents white boxes forming under labels</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># radlab rotates the labels</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Km<span class="sc">$</span>centers)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(KmCenters)</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">radial.plot</span>(KmCenters[<span class="dv">1</span>,], <span class="at">labels =</span> <span class="fu">colnames</span>(KmCenters),</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="at">boxed.radial =</span> <span class="cn">FALSE</span>, <span class="at">show.grid =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="at">line.col =</span> <span class="st">"blue"</span>, <span class="at">radlab =</span> <span class="cn">TRUE</span>, <span class="at">cex=</span><span class="dv">100</span>, <span class="at">rp.type=</span><span class="st">"p"</span>, <span class="at">label.prop=</span><span class="fl">0.76</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a radial plot for cluster 1</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxed.radial (False) prevents white boxes forming under labels</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># radlab rotates the labels</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Km<span class="sc">$</span>centers)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(KmCenters)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">radial.plot</span>(KmCenters[<span class="dv">1</span>,], <span class="at">labels =</span> <span class="fu">colnames</span>(KmCenters),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="at">boxed.radial =</span> <span class="cn">FALSE</span>, <span class="at">show.grid =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="at">line.col =</span> <span class="st">"blue"</span>, <span class="at">radlab =</span> <span class="cn">TRUE</span>, <span class="at">rp.type=</span><span class="st">"p"</span>, <span class="at">label.prop=</span><span class="fl">0.9</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -916,10 +813,10 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <p>We will evalueate the fit of the k-means model with 5 clusters by creating an <em>x-y</em> plot of the of the first two principal components of each data point. Each point is coloured according to the cluster where it belongs. Remember that the aim of principal component analysis is to create the minimum number of new variables based on a combination of the original variables that can explain the variability in the data. The first principal component is the new variable that captures the most variability.</p>
 <p>In the plot below, we can see the first and second principal components in the x and y axes respectively, with the axis label indicating the amount of variability that these components are able to explain. To create the plot, we use the <strong>fviz_cluster()</strong> function from the factoextra library.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(Km, <span class="at">data =</span> data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse =</span> F, <span class="at">pointsize =</span> <span class="fl">0.5</span>,</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="at">ggtheme =</span> <span class="fu">theme_classic</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(Km, <span class="at">data =</span> data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse =</span> F, <span class="at">pointsize =</span> <span class="fl">0.5</span>,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="at">ggtheme =</span> <span class="fu">theme_classic</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geodemographics_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="geodemographics_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>There are obvious clusters in the plot, but some points are in the overlapping regions of two or more clusters, making it unclear to what cluster they should really belong. This does not mean that our classification is wrong, instead, it is a result of the fact that the plot is only representing two of the principal components, and there are other variables that are not captured in this 2-dimensional representation.</p>
@@ -929,10 +826,10 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h2 data-number="3.8" class="anchored" data-anchor-id="questions"><span class="header-section-number">3.8</span> Questions</h2>
 <p>For this set of questions, we will be using the same datasets that we used for Chapter 3, the London LSOA dataset and the shapefile for the LSOA boundaries:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
   `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
@@ -946,7 +843,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 <p>This time, we will focus on demographic variables related to ethnicity, country of birth, housing ownership status, income and age group. Let us select these demographic variables for the questions below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"EthnicWhite"</span>, <span class="st">"EthnicMixedMulti"</span>, <span class="st">"EthnicAsianAsianBritish"</span>, <span class="st">"EthnicBlackAfricanCaribbeanBlackBritish"</span>, <span class="st">"EthnicOther"</span>, <span class="st">"EthnicBAME"</span>, <span class="st">"CountryBirthUK"</span>, <span class="st">"CountryBirthNotUK"</span>, <span class="st">"TenureOwnedOutright"</span>, <span class="st">"TenureOwnedMortgageLoan"</span>, <span class="st">"TenureSocialRent"</span>, <span class="st">"TenurePrivateRent"</span>, <span class="st">"HouseholdMedianIncome"</span>, <span class="st">"MidYearPopAge0to15"</span>, <span class="st">"MidYearPopAge16to29"</span>, <span class="st">"MidYearPopAge30to44"</span>, <span class="st">"MidYearPopAge45to64"</span>, <span class="st">"MidYearPopAge65"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"OwnedOutright"</span>, <span class="st">"OwnedMortgage"</span>, <span class="st">"SocialRent"</span>, <span class="st">"PrivateRent"</span>, <span class="st">"Hh_MedianIncome"</span>, <span class="st">"MidYrPop0to15"</span>, <span class="st">"MidYrPop16to29"</span>, <span class="st">"MidYrPop30to44"</span>, <span class="st">"MidYrPop45to64"</span>, <span class="st">"MidYrPop65"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <ol type="1">

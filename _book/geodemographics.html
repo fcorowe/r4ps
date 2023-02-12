@@ -349,52 +349,29 @@ div.csl-indent {
 <p>This chapter uses the libraries below. Ensure they are installed on your machine, then execute the following code chunk to load them:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Support for simple features, a standardised way to encode spatial vector data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Data manipulation</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A system for creating graphics</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Easy viisualisation of a correlation matrix using ggplot2</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Color maps designed to improve graph readability</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: viridisLite</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Alternative way of plotting, useful for radial plots</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Methods for cluster analysis</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Thematic maps can be generated with great flexibility</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Provides some easy-to-use functions to extract and visualize the output of multivariate data analyses</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
-</div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Data manipulation</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#A system for creating graphics</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Easy viisualisation of a correlation matrix using ggplot2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Color maps designed to improve graph readability</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Alternative way of plotting, useful for radial plots</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Methods for cluster analysis</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#Thematic maps can be generated with great flexibility</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Provides some easy-to-use functions to extract and visualize the output of multivariate data analyses</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#Obtain the working directory, where we will save the data directory</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#Obtain the working directory, where we will save the data directory</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps"</code></pre>
+<pre><code>[1] "/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps"</code></pre>
 </div>
 </div>
 </section>
@@ -409,16 +386,16 @@ Attaching package: 'dplyr'</code></pre>
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="import-the-data"><span class="header-section-number">3.2.2</span> Import the data</h3>
 <p>In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it <em>df_LSOA</em>. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile <a href="https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london">here</a>. We have also stored this shapefile, called <em>LSOA_2011_Lodnon_gen_MHW.shp</em>, in the data folder of this workbook so you can import it directly as a data frame with simple features using the <strong>st_read()</strong> function from the <strong>sf</strong> package. For more information on the sf package, check the <a href="https://cran.r-project.org/web/packages/sf/index.html">documentation</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA demographic data for GLA</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The raw data can be obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau for this chapter</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.london.gov.uk/dataset/lsoa-atlas</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA demographic data for GLA</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The raw data can be obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau for this chapter</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># https://data.london.gov.uk/dataset/lsoa-atlas</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -435,9 +412,9 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="choice-of-geographic-units"><span class="header-section-number">3.3.1</span> Choice of geographic units</h3>
 <p>Normally, GDCs involve the analysis of aggregated demographic data into geographic units. Very small geographic units of data aggregation can provide more detailed results, but if the counts are too low, this could lead to re-identification issues.</p>
 <p>As mentioned above, the data for this chapter is aggregated into LSOAs. The size of the LSOAs is small enough to produce detailed results and is also a convenient choice, since it is broadly used in the UK Census and other official data-reporting exercises.</p>
-<p>We can visualise the LSOAs within GLA simply by plotting the geometry column of <em>sf_LSOA</em>, which can be selected with the function <strong>st_geometry().</strong></p>
+<p>We can visualise the LSOAs within GLA simply by plotting the geometry column of <em>sf_LSOA</em>, which can be selected with the function <code>st_geometry()</code><strong>.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(st_LSOA), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray20"</span>, <span class="at">alpha.f=</span><span class="fl">0.4</span>), <span class="at">lwd=</span><span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(st_LSOA), <span class="at">border=</span><span class="fu">adjustcolor</span>(<span class="st">"gray20"</span>, <span class="at">alpha.f=</span><span class="fl">0.4</span>), <span class="at">lwd=</span><span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -445,166 +422,34 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </section>
 <section id="variables-of-interest" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="variables-of-interest"><span class="header-section-number">3.3.2</span> Variables of interest</h3>
-<p>Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame <em>df_LSOA</em> contains this data and we can visualise its first few lines by using the function <strong>head()</strong>:</p>
+<p>Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame <em>df_LSOA</em> contains this data and we can visualise its first few lines by using the function <code>head()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_LSOA[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Lower.Super.Output.Area    LSOA11NM MidYrPop MidYrPop0to15 MidYrPop16to29
-1               E01000907 Camden 001A     1431         20.68          17.05
-2               E01000908 Camden 001B     1564         18.16          15.41
-3               E01000909 Camden 001C     1602         14.86          17.92
-4               E01000912 Camden 001D     1589         16.17          22.40
-5               E01000913 Camden 001E     1695         17.23          12.74
-6               E01000893 Camden 002A     1563         17.08          14.59
-  MidYrPop30to44 MidYrPop45to64 MidYrPop65 MidYrPopWorking CensusPop
-1          26.62          24.18      11.46           67.85      1430
-2          26.73          26.21      13.49           68.35      1581
-3          20.54          28.34      18.35           66.79      1614
-4          22.22          24.98      14.22           69.60      1589
-5          20.24          30.32      19.47           63.30      1710
-6          27.58          25.59      15.16           67.75      1566
-  Density2012 Hh_All Hh_CoupleDepChildren Hh_CoupleNoDepChildren Hh_LoneParent
-1         136    627                 12.3                   20.1          21.1
-2          92    827                 11.6                   17.3          13.2
-3          70    661                 17.9                   29.3           7.3
-4          18    700                 12.9                   16.6          15.7
-5          11    722                 19.3                   34.6           3.7
-6          29    715                 16.8                   23.8           5.7
-  Hh_OnePerson Hh_OtherMulti White MixedMulti Asian BlackAfricanCaribbean
-1         33.0          13.6  73.5        7.3   8.5                   7.9
-2         50.8           7.1  72.4        8.7   6.2                   8.0
-3         30.1          15.4  84.1        5.5   4.6                   2.9
-4         38.6          16.3  77.3        5.6   5.1                   9.2
-5         29.1          13.3  88.2        5.1   4.7                   1.3
-6         39.3          14.4  88.1        4.5   4.8                   1.0
-  Ethnic_Other BAME BirthUK BirthNotUK Hh_EnglishLang Hh_NotEnglishLang
-1          2.8 26.5    72.2       27.8           88.5              11.5
-2          4.7 27.6    70.5       29.5           91.1               8.9
-3          2.9 15.9    74.7       25.3           95.3               4.7
-4          2.8 22.7    70.4       29.6           92.3               7.7
-5          0.7 11.8    72.0       28.0           97.4               2.6
-6          1.5 11.9    63.5       36.5           92.0               8.0
-  Christian Buddhist Hindu Jewish Muslim Sikh Religion_Other Religion_None
-1      39.3      1.5   0.7    1.3    8.5  0.1            0.6          32.7
-2      38.9      1.3   0.5    2.7    4.2  0.0            1.6          27.5
-3      37.7      0.9   0.4    5.0    2.2  0.2            1.0          34.1
-4      37.6      0.8   0.4    1.3   10.0  0.0            0.9          31.5
-5      37.1      0.3   0.5   12.0    0.9  0.0            0.4          27.5
-6      31.1      1.6   1.0    7.1    1.0  0.0            1.0          38.4
-  Religion_NotStated OwnedOutright OwnedMortgage SocialRent PrivateRent
-1               15.5          12.6          18.0       54.4        13.7
-2               23.3          14.0          17.7       52.6        14.0
-3               18.5          38.3          21.2       18.6        18.8
-4               17.4          15.3          14.6       51.3        15.0
-5               21.3          47.1          27.6        1.9        19.4
-6               18.8          39.0          20.6        4.5        34.1
-  DwellingWUsualRes DwellingWNoUsualRes DwellingDetached DwellingSemiDetached
-1              99.5                 0.5              2.2                  4.1
-2              95.2                 4.8              1.7                  9.4
-3              97.6                 2.4             11.7                 21.1
-4              98.6                 1.4              1.0                  1.8
-5              89.7                10.3             27.1                 12.3
-6              92.4                 7.6              1.2                 14.5
-  DwellingTerraced DwellingFlat H_PriceMedian H_Sales
-1             15.4         78.3        415000      11
-2              3.8         85.0        282500      21
-3              9.5         57.8        435000      19
-4             10.0         87.2        500000      17
-5             15.3         45.3       1000000      31
-6              7.0         77.4        740000      24
-  Hh_NoAdultInEmployWDepChild LoneParentNotInEmploy FullTimeStudent EmployRate
-1                          10                  55.4            1.82       58.6
-2                           5                  48.6            1.77       62.3
-3                           2                  59.1            1.24       65.7
-4                           7                  47.6            2.96       58.8
-5                           1                  12.5            1.17       71.8
-6                           2                  36.4            1.09       74.1
-  UnemployRate Q_None Q_L1 Q_L2 Q_Apprenticeship Q_L3 Q_L4OrAbove Q_Other
-1          9.9   20.0  9.2  9.1              1.0  9.1        44.2     7.5
-2          8.0   15.0  7.7 10.1              0.8  8.8        50.4     7.3
-3          4.9    9.6  5.1  8.3              0.7  9.6        61.9     4.7
-4          8.8   18.0  9.3  9.4              1.1  8.7        47.2     6.2
-5          2.1    4.9  4.9  9.6              0.4  9.4        65.2     5.5
-6          3.6    3.7  2.4  7.1              0.7  7.5        72.6     6.1
-  Q_Sch_FullTimeSt18 Hlth_LimitedALot Hlth_LimitedALittle Hlth_NotLimited
-1                6.4             10.8                 9.3            79.9
-2                4.8             10.2                 9.1            80.7
-3                4.5              7.1                 8.1            84.8
-4                8.8              9.8                10.5            79.7
-5                4.0              4.1                 5.5            90.4
-6                4.1              4.0                 5.7            90.3
-  Hlth_VGoodOrGood Hlth_Fair Hlth_BadOrVBad Hh_NoCarVan Hh_OneCarVan
-1             78.0      13.2            8.7        61.2         33.0
-2             78.2      12.4            9.4        59.5         34.5
-3             85.6      10.0            4.5        36.8         44.5
-4             77.2      14.6            8.2        60.6         36.1
-5             89.6       7.3            3.1        22.3         42.8
-6             90.2       7.0            2.7        43.8         42.2
-  Hh_TwoCarVan Hh_ThreeCarVan Hh_FourOrMoreCarVan CarsPerHh
-1          4.6            1.1                 0.0       0.5
-2          5.3            0.5                 0.2       0.5
-3         15.1            2.7                 0.9       0.9
-4          3.0            0.3                 0.0       0.4
-5         26.7            6.0                 2.2       1.2
-6         11.6            1.5                 0.8       0.8
-  PubTransAccessScore14 Hh_MeanIncome Hh_MedianIncome
-1                   4.6         39985           32049
-2                   2.9         42394           58469
-3                   3.3         77370           31551
-4                   4.6         41737           73024
-5                   2.8         96649           64138
-6                   3.2         84878           72739</code></pre>
+<pre><code>  Lower.Super.Output.Area    LSOA11NM MidYrPop MidYrPop0to15
+1               E01000907 Camden 001A     1431         20.68
+2               E01000908 Camden 001B     1564         18.16
+3               E01000909 Camden 001C     1602         14.86
+4               E01000912 Camden 001D     1589         16.17
+5               E01000913 Camden 001E     1695         17.23
+6               E01000893 Camden 002A     1563         17.08</code></pre>
 </div>
 </div>
-<p>As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function <strong>names()</strong>, we can get the names of the columns in <em>df_LSOA</em></p>
+<p>As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function <code>names()</code>, we can get the names of the columns in <em>df_LSOA</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_LSOA[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Lower.Super.Output.Area"     "LSOA11NM"                   
- [3] "MidYrPop"                    "MidYrPop0to15"              
- [5] "MidYrPop16to29"              "MidYrPop30to44"             
- [7] "MidYrPop45to64"              "MidYrPop65"                 
- [9] "MidYrPopWorking"             "CensusPop"                  
-[11] "Density2012"                 "Hh_All"                     
-[13] "Hh_CoupleDepChildren"        "Hh_CoupleNoDepChildren"     
-[15] "Hh_LoneParent"               "Hh_OnePerson"               
-[17] "Hh_OtherMulti"               "White"                      
-[19] "MixedMulti"                  "Asian"                      
-[21] "BlackAfricanCaribbean"       "Ethnic_Other"               
-[23] "BAME"                        "BirthUK"                    
-[25] "BirthNotUK"                  "Hh_EnglishLang"             
-[27] "Hh_NotEnglishLang"           "Christian"                  
-[29] "Buddhist"                    "Hindu"                      
-[31] "Jewish"                      "Muslim"                     
-[33] "Sikh"                        "Religion_Other"             
-[35] "Religion_None"               "Religion_NotStated"         
-[37] "OwnedOutright"               "OwnedMortgage"              
-[39] "SocialRent"                  "PrivateRent"                
-[41] "DwellingWUsualRes"           "DwellingWNoUsualRes"        
-[43] "DwellingDetached"            "DwellingSemiDetached"       
-[45] "DwellingTerraced"            "DwellingFlat"               
-[47] "H_PriceMedian"               "H_Sales"                    
-[49] "Hh_NoAdultInEmployWDepChild" "LoneParentNotInEmploy"      
-[51] "FullTimeStudent"             "EmployRate"                 
-[53] "UnemployRate"                "Q_None"                     
-[55] "Q_L1"                        "Q_L2"                       
-[57] "Q_Apprenticeship"            "Q_L3"                       
-[59] "Q_L4OrAbove"                 "Q_Other"                    
-[61] "Q_Sch_FullTimeSt18"          "Hlth_LimitedALot"           
-[63] "Hlth_LimitedALittle"         "Hlth_NotLimited"            
-[65] "Hlth_VGoodOrGood"            "Hlth_Fair"                  
-[67] "Hlth_BadOrVBad"              "Hh_NoCarVan"                
-[69] "Hh_OneCarVan"                "Hh_TwoCarVan"               
-[71] "Hh_ThreeCarVan"              "Hh_FourOrMoreCarVan"        
-[73] "CarsPerHh"                   "PubTransAccessScore14"      
-[75] "Hh_MeanIncome"               "Hh_MedianIncome"            </code></pre>
+<pre><code>[1] "Lower.Super.Output.Area" "LSOA11NM"               
+[3] "MidYrPop"                "MidYrPop0to15"          
+[5] "MidYrPop16to29"          "MidYrPop30to44"         
+[7] "MidYrPop45to64"          "MidYrPop65"             </code></pre>
 </div>
 </div>
 <p>The data frame <em>df_LSOA</em> contains many variables. As we can see above, they have summarised names. For a short description of what these names mean, we can load the file called Dictionary-lsoa-data-clean.csv:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/Dictionary-lsoa-data-clean.csv"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/Dictionary-lsoa-data-clean.csv"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           Label                                   Description
 1       LSOA11NM                                  Name of LSOA
@@ -617,11 +462,11 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 <p>For the purposes of this chapter, we will focus on just a few of these variables since this will make the results easier to interpret. In particular, we will look at variables related to ethnicity, country of birth, employment status and qualifications. Let us select the fields of interest:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmployRate"</span>, <span class="st">"UnemployRate"</span>, <span class="st">"Q_None"</span>, <span class="st">"Q_L1"</span>, <span class="st">"Q_L2"</span>, <span class="st">"Q_Apprenticeship"</span>, <span class="st">"Q_L3"</span>, <span class="st">"Q_L4OrAbove"</span>, <span class="st">"Q_Other"</span>, <span class="st">"Q_Sch_FullTimeSt18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"FullTimeStudent"</span>, <span class="st">"EmployRate"</span>, <span class="st">"UnemployRate"</span>, <span class="st">"Q_None"</span>, <span class="st">"Q_L1"</span>, <span class="st">"Q_L2"</span>, <span class="st">"Q_Apprenticeship"</span>, <span class="st">"Q_L3"</span>, <span class="st">"Q_L4OrAbove"</span>, <span class="st">"Q_Other"</span>, <span class="st">"Q_Sch_FullTimeSt18"</span> )]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can explore the summary statistics for each of the selected fields with the <strong>summary()</strong> function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group ‘Black/African/Caribbean/Black British’, we can run the code below:</p>
+<p>We can explore the summary statistics for each of the selected fields with the <code>summary()</code> function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group ‘Black/African/Caribbean/Black British’, we can run the code below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_LSOA<span class="sc">$</span>BlackAfricanCaribbean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_LSOA<span class="sc">$</span>BlackAfricanCaribbean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    0.10    4.30    9.50   13.05   18.90   63.70 </code></pre>
@@ -630,7 +475,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <p>This tells us that the mean or average percentage of people from this ethnic group in LSOAs within GLA is 13.05%. It also tells us that 63.70% of the population are Black/African/Caribbean/Black British in the LSOA with the maximum proportion of people belonging to this ethnic group.</p>
 <p>To visualise the whole distribution of the variable ‘Percentage of Black/African/Caribbean/Black British’, we can plot a histogram:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_LSOA<span class="sc">$</span>BlackAfricanCaribbean, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">xlab=</span><span class="st">"% Black/African/Caribbean/Black British"</span>, <span class="at">ylab=</span><span class="st">'Number of LSOAs'</span>, <span class="at">main=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df_LSOA<span class="sc">$</span>BlackAfricanCaribbean, <span class="at">breaks=</span><span class="dv">50</span>, <span class="at">xlab=</span><span class="st">"% Black/African/Caribbean/Black British"</span>, <span class="at">ylab=</span><span class="st">'Number of LSOAs'</span>, <span class="at">main=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -638,18 +483,18 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <p>The histogram reveals that many LSOAs have a low proportion of Black/African/Caribbean/Black British people, but there are a few with more than 50% of their population belonging to this ethnic group.</p>
 <p>Now the question is whether the LSOAs with similar proportions of Black/African/Caribbean/Black British are also spatially close. To find out, we need to map the data. We can do this by joining the data frame <em>df_LSOA</em> with the data frame <em>st_LSOA</em> which contains the geographic boundaries of the LSOAs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>join_LSOA <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df_LSOA, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>join_LSOA <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df_LSOA, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If we plot the joined data frames using the tmap library functionalities, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.</p>
+<p>If we plot the joined data frames using the <code>tmap</code> library functionalities, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>legend_title <span class="ot">=</span> <span class="fu">expression</span>(<span class="st">"% Black, African, Caribbean or Black British"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>map_ethnic <span class="ot">=</span> <span class="fu">tm_shape</span>(join_LSOA) <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"BlackAfricanCaribbean"</span>, <span class="at">title =</span> legend_title, <span class="at">text.size =</span> <span class="dv">10</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.71</span>, <span class="fl">0.02</span>), <span class="at">legend.title.size=</span><span class="fl">0.7</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.14</span>)) <span class="sc">+</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.8</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>map_ethnic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>legend_title <span class="ot">=</span> <span class="fu">expression</span>(<span class="st">"% Black, African, Caribbean or Black British"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>map_ethnic <span class="ot">=</span> <span class="fu">tm_shape</span>(join_LSOA) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"BlackAfricanCaribbean"</span>, <span class="at">title =</span> legend_title, <span class="at">text.size =</span> <span class="dv">10</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.71</span>, <span class="fl">0.02</span>), <span class="at">legend.title.size=</span><span class="fl">0.7</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.14</span>)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.8</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>map_ethnic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -666,54 +511,54 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <section id="variable-standardisation" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="variable-standardisation"><span class="header-section-number">3.4.2</span> Variable standardisation</h3>
 <p>Data outliers are often present when analysing data from the real-world. These values are generally extreme and difficult to treat statistically. In GDC, they could end up dominating the classification process. To avoid this, we need to standardise the input variables as well, so that they all contribute equally to the classification process.</p>
-<p>There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e.&nbsp;for variable <span class="math inline">\(X\)</span>, Z-score = <span class="math inline">\(\dfrac{X-mean(X)}{std(X)}\)</span> where <span class="math inline">\(std()\)</span> refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function <strong>scale()</strong>. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:</p>
+<p>There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e.&nbsp;for variable <span class="math inline">\(X\)</span>, Z-score = <span class="math inline">\(\dfrac{X-mean(X)}{std(X)}\)</span> where <span class="math inline">\(std()\)</span> refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function <code>scale()</code>. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a new data frame</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_std <span class="ot">&lt;-</span> df_LSOA</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># extracts column names from df_std</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>colnames_df_std <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df_std)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># loops columns from position 1 : the last column</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span> (df_std)){</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>df_std[, colnames_df_std[i]] <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">as.numeric</span>(df_std[, colnames_df_std[i]]))</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a new data frame</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_std <span class="ot">&lt;-</span> df_LSOA</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># extracts column names from df_std</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>colnames_df_std <span class="ot">&lt;-</span> <span class="fu">colnames</span>(df_std)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># loops columns from position 1 : the last column</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span> (df_std)){</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>df_std[, colnames_df_std[i]] <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">as.numeric</span>(df_std[, colnames_df_std[i]]))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="sec-sec35" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-sec35"><span class="header-section-number">3.5</span> Checking for variable association</h2>
 <p>Before diving into the clustering process, it is necessary to check for variable associations. Two variables that are strongly associated could be conveying essentially the same information. Consequently, excessive weight could be attributed to the phenomenon they refer to in the clustering process. There are different techniques to check for variable association, but here we focus on the Pearson’s correlation matrix.</p>
-<p>Each row and column in a Pearson’s correlation matrix represents a variable. Each entry in the matrix represents the level of correlation between the variables represented by the corresponding row and column. In R, a Pearson’s correlation matrix can be created very easily with the <strong>corr()</strong> function, where the method parameter is set to “pearson”. As a general rule, two variables with correlation coefficient greater than 0.8 or smaller than -0.8 are considered to be highly correlated. If this is the case, we might want to discard one of the two variables since the information they convey is redundant. However, in some cases, it might be reasonable to keep both variables if we can argue that they both have a similar but unique meaning.</p>
-<p>The correlation coefficients by themselves are not enough to conclude whether two variables are correlated. Each correlation coefficient must be computed in combination with its p-value. For this reason, we also apply the <strong>cor_pmat()</strong> function below, which outputs a matrix of p-values corresponding to each correlation coefficient. Here, we set the confidence level at 0.95, therefore, p-values smaller than 0.05 are considered to be statistically significant. In the correlation matrix plot, we add crosses to indicate which correlation coefficients are not significant (i.e.&nbsp;those above 0.05). Those crosses indicate that there is not enough statistical evidence to reject the claim that the variables in the corresponding row and column are uncorrelated.</p>
+<p>Each row and column in a Pearson’s correlation matrix represents a variable. Each entry in the matrix represents the level of correlation between the variables represented by the corresponding row and column. In R, a Pearson’s correlation matrix can be created very easily with the <code>corr()</code> function, where the method parameter is set to “pearson”. As a general rule, two variables with correlation coefficient greater than 0.8 or smaller than -0.8 are considered to be highly correlated. If this is the case, we might want to discard one of the two variables since the information they convey is redundant. However, in some cases, it might be reasonable to keep both variables if we can argue that they both have a similar but unique meaning.</p>
+<p>The correlation coefficients by themselves are not enough to conclude whether two variables are correlated. Each correlation coefficient must be computed in combination with its p-value. For this reason, we also apply the <code>cor_pmat()</code> function below, which outputs a matrix of p-values corresponding to each correlation coefficient. Here, we set the confidence level at 0.95, therefore, p-values smaller than 0.05 are considered to be statistically significant. In the correlation matrix plot, we add crosses to indicate which correlation coefficients are not significant (i.e.&nbsp;those above 0.05). Those crosses indicate that there is not enough statistical evidence to reject the claim that the variables in the corresponding row and column are uncorrelated.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>corr_mat <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>corr_pmat <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat, <span class="at">tl.cex=</span><span class="dv">7</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>, <span class="at">lab_size=</span><span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>corr_mat <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>corr_pmat <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(df_std[,<span class="fu">c</span>(colnames_df_std[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(df_std)])], <span class="at">method =</span> <span class="st">"pearson"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat, <span class="at">tl.cex=</span><span class="dv">7</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>, <span class="at">lab_size=</span><span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Among the statistically significant values in the correlation matrix, we can see that BAME and White have a correlation of -1. So do BirthUK and BirthNotUK. We will therefore remove BAME and BrithUK from our dataset. We also see that Q_L4OrAbove has a strong negative correlation with Q_None and Q_L1. We will therefore remove two of these variables, for example Q_None and Q_L1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Remove BAME, BirthUK, Q_None, Q_L1</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_std, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(BAME, BirthUK, Q_None, Q_L1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Remove BAME, BirthUK, Q_None, Q_L1</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_std, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(BAME, BirthUK, Q_None, Q_L1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now perform a join of the resulting dataset with the variable st_LSOA, which stores the geographical units for the LSOAs. We perform this step so that we can later map the results</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>join_data <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(data, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>join_data <span class="ot">&lt;-</span> st_LSOA <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(data, <span class="at">by=</span><span class="st">'LSOA11NM'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And once again, we can check the Pearson correlation matrix of the resulting dataset. Obviously, now that we have removed some variables that were strongly correlated to others, the values of the correlation coefficients are not as high as before.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Obtain column names from data</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>colnames_data <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>corr_mat_data <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>corr_pmat_data <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat_data, <span class="at">tl.cex=</span><span class="dv">7</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat_data, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>, <span class="at">lab_size=</span><span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Obtain column names from data</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>colnames_data <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of Pearson correlation coefficients</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>corr_mat_data <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix of p-values</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>corr_pmat_data <span class="ot">&lt;-</span> <span class="fu">cor_pmat</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Barring the no significant coefficient</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcorrplot</span>(corr_mat_data, <span class="at">tl.cex=</span><span class="dv">7</span>, <span class="at">hc.order =</span> <span class="cn">TRUE</span>, <span class="at">outline.color =</span> <span class="st">"white"</span>, <span class="at">p.mat =</span> corr_pmat_data, <span class="at">colors =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">3</span>)), <span class="at">lab=</span><span class="cn">TRUE</span>, <span class="at">lab_size=</span><span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -725,33 +570,33 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 data-number="3.6.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">3.6.1</span> K-means</h3>
 <p>K-means clustering is a way of grouping similar items together. To illustrate the method, imagine you have a bag filled with vegetables, and you want to separate them into smaller bags based on their color, size and flavour. K-means would do this for you by first randomly selecting a number k of vegetables (you provide k, e.g.&nbsp;k=4), and then grouping all the other vegetables based on which of the k vegetables selected initially they are closest to in color, size and flavour. This process is repeated a few times until the vegetables are grouped as best as possible. The end result is k smaller bags, each containing veg of similar color, size and flavour. This is similar to how k-means groups similar items in a data set into clusters.</p>
 <p>More technically, k-means clustering is actually an algorithm of unsupervised learning (we will learn more about this in Chapter 10) that partitions a set of points into k clusters, where k is a user-specified number. The algorithm iteratively assigns each point to the closest cluster, based on the mean of the points in the cluster, until no point can be moved to a different cluster to decrease the sum of squared distances between points and their assigned cluster mean. The result is a partitioning of the points into k clusters, where the points within a cluster are as similar as possible to each other, and as dissimilar as possible from points in other clusters.</p>
-<p>In R, k-means can be easily applied by using the function <strong>k-means()</strong>, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (nstart) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:</p>
+<p>In R, k-means can be easily applied by using the function <code>k-means()</code>, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (nstart) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">4</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">4</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="number-of-clusters" class="level3" data-number="3.6.2">
 <h3 data-number="3.6.2" class="anchored" data-anchor-id="number-of-clusters"><span class="header-section-number">3.6.2</span> Number of clusters</h3>
 <p>As mentioned above, the number of clusters k is a parameter of the algorithm that has to be specified by the user. Ultimately, there is no right or wrong answer to the question ‘what is the optimum number of clusters?’. Deciding the value of k in the k-means algorithm can be a somewhat subjective process where in most cases, common sense is the most useful approach. For example, you can ask yourself if the obtained groups are meaningful and easy to interpret or if, on the other hand, there are too few or too many clusters, making the results unclear.</p>
 <p>However, there are some techniques and guidelines to help us decide what the right number of clusters is. Here we explore the silhouette score method.</p>
-<p>The <strong>silhouette score</strong> of a data point (in this case an LSOA and its demographic data) is a measure of how similar this data point is to the data points in its own cluster compared to the data points in other clusters. The silhouette score ranges from -1 to 1, with a higher value indicating that the data point is well matched to its own cluster and poorly matched to neighbouring clusters. A score close to 1 means that the data point is distinctly separate from other clusters, whereas a score close to -1 means the data point may have been assigned to the wrong cluster. Given a number of clusters k obtained with k-means, we can compute the average silhouette score over all the data points. Then, we can plot the average silhouette score against k. The optimal value of k will be the one with the highest k score.</p>
-<p>You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 8. The optimum number of clusters is given by the value of k at which the average silhouette is maximised.</p>
+<p>The <strong>silhouette score</strong> of a data point (in this case an LSOA and its demographic data) is a measure of how similar this data point is to the data points in its own cluster compared to the data points in other clusters. The silhouette score ranges from -1 to 1, with a higher value indicating that the data point is well matched to its own cluster and poorly matched to neighbouring clusters. A score close to 1 means that the data point is distinctly separate from other clusters, whereas a score close to -1 means the data point may have been assigned to the wrong cluster. Given a number of clusters k obtained with k-means, we can compute the average silhouette score over all the data points. Then, we can plot the average silhouette score against k. The optimal value of <em>k</em> will be the one with the highest k score.</p>
+<p>You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 8. The optimum number of clusters is given by the value of <em>k</em> at which the average silhouette is maximised.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>silhouette_score <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers =</span> k, <span class="at">nstart=</span><span class="dv">5</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  ss <span class="ot">&lt;-</span> <span class="fu">silhouette</span>(km<span class="sc">$</span>cluster, <span class="fu">dist</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])]))</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(ss[, <span class="dv">3</span>])</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>avg_sil <span class="ot">&lt;-</span> <span class="fu">sapply</span>(k, silhouette_score)</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k, <span class="at">type=</span><span class="st">'b'</span>, avg_sil, <span class="at">xlab=</span><span class="st">'Number of clusters'</span>, <span class="at">ylab=</span><span class="st">'Average Silhouette Scores'</span>, <span class="at">frame=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>silhouette_score <span class="ot">&lt;-</span> <span class="cf">function</span>(k){</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers =</span> k, <span class="at">nstart=</span><span class="dv">5</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  ss <span class="ot">&lt;-</span> <span class="fu">silhouette</span>(km<span class="sc">$</span>cluster, <span class="fu">dist</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])]))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(ss[, <span class="dv">3</span>])</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>avg_sil <span class="ot">&lt;-</span> <span class="fu">sapply</span>(k, silhouette_score)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(k, <span class="at">type=</span><span class="st">'b'</span>, avg_sil, <span class="at">xlab=</span><span class="st">'Number of clusters'</span>, <span class="at">ylab=</span><span class="st">'Average Silhouette Scores'</span>, <span class="at">frame=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>From the figure, we can see that the optimum k is 5, so we will take 5 as the number of clusters. Note, this number might be different when you run the programme since the clustering algorithm involves some random steps.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">5</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">centers=</span><span class="dv">5</span>, <span class="at">nstart=</span><span class="dv">20</span>, <span class="at">iter.max =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="other-clustering-methods" class="level3" data-number="3.6.3">
@@ -772,18 +617,18 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="mapping-the-clusters"><span class="header-section-number">3.7.1</span> Mapping the clusters</h3>
 <p>Our LSOAs are now grouped into 5 clusters according to the similarity in their demographic characteristics. We can create a final data set based on <em>join_data</em> which includes the cluster where each geographical unit belongs to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="ot">&lt;-</span> join_data</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>join_data_cluster<span class="sc">$</span>cluster <span class="ot">&lt;-</span> Km<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>join_data_cluster <span class="ot">&lt;-</span> join_data</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>join_data_cluster<span class="sc">$</span>cluster <span class="ot">&lt;-</span> Km<span class="sc">$</span>cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we can plot the results of the clustering process on a map using functions from the tmap library:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>map_cluster <span class="ot">=</span> <span class="fu">tm_shape</span>(join_data_cluster) <span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"cluster"</span>, <span class="at">title =</span> <span class="st">"cluster"</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.88</span>, <span class="fl">0.02</span>)) <span class="sc">+</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.5</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>map_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>map_cluster <span class="ot">=</span> <span class="fu">tm_shape</span>(join_data_cluster) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"cluster"</span>, <span class="at">title =</span> <span class="st">"cluster"</span>, <span class="at">palette =</span> <span class="fu">viridis</span>(<span class="dv">256</span>), <span class="at">style =</span> <span class="st">"cont"</span>) <span class="sc">+</span> <span class="co"># add fill</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"white"</span>, <span class="at">lwd =</span> .<span class="dv">01</span>)  <span class="sc">+</span> <span class="co"># add borders</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.88</span>, <span class="fl">0.02</span>)) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>) , <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># add compass</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">text.size =</span> <span class="fl">0.5</span>, <span class="at">position =</span>  <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="co"># add scale bar</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>map_cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -795,14 +640,14 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <p>The map above not only displays the clusters where each LSOA belongs, but it also shows that there is a tendency for LSOAs belonging to the same cluster to be geographically close. This indicates that people with similar demographic characteristics live close to each other. However, we still need to understand what each cluster represents.</p>
 <p>The so-called cluster centers (kmCenters) are the data points that, within each cluster, provide a clear indication of the average characteristics the cluster where they belong based, of course, on the variables used in the classification. The data used in the clustering process was Z-score standardized, so the values of each variable corresponding to the cluster centers are still presented as Z-scores. Zero indicates the mean for each variable across all the data points in the sample, and values above or below zero indicate the number of standard deviations from the average. This makes it easy to understand the unique characteristics of each cluster relative to the entire sample. To visualise the characteristics and meaning of the clusters centers and their corresponding clusters, we use radial plots. Below we produce a radial plot for cluster 1. Can you see which variables are higher or lower than average in this cluster? If you want to visualise the radial plot for other clusters, you will need to change the number inside the brackets of <em>KmCenters[1,].</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a radial plot for cluster 1</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxed.radial (False) prevents white boxes forming under labels</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># radlab rotates the labels</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Km<span class="sc">$</span>centers)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(KmCenters)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">radial.plot</span>(KmCenters[<span class="dv">1</span>,], <span class="at">labels =</span> <span class="fu">colnames</span>(KmCenters),</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="at">boxed.radial =</span> <span class="cn">FALSE</span>, <span class="at">show.grid =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="at">line.col =</span> <span class="st">"blue"</span>, <span class="at">radlab =</span> <span class="cn">TRUE</span>, <span class="at">rp.type=</span><span class="st">"p"</span>, <span class="at">label.prop=</span><span class="fl">0.9</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates a radial plot for cluster 1</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the boxed.radial (False) prevents white boxes forming under labels</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># radlab rotates the labels</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Km<span class="sc">$</span>centers)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>KmCenters <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(KmCenters)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">radial.plot</span>(KmCenters[<span class="dv">1</span>,], <span class="at">labels =</span> <span class="fu">colnames</span>(KmCenters),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="at">boxed.radial =</span> <span class="cn">FALSE</span>, <span class="at">show.grid =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="at">line.col =</span> <span class="st">"blue"</span>, <span class="at">radlab =</span> <span class="cn">TRUE</span>, <span class="at">rp.type=</span><span class="st">"p"</span>, <span class="at">label.prop=</span><span class="fl">0.9</span>, <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -811,10 +656,10 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <section id="testing" class="level3" data-number="3.7.3">
 <h3 data-number="3.7.3" class="anchored" data-anchor-id="testing"><span class="header-section-number">3.7.3</span> Testing</h3>
 <p>We will evalueate the fit of the k-means model with 5 clusters by creating an <em>x-y</em> plot of the of the first two principal components of each data point. Each point is coloured according to the cluster where it belongs. Remember that the aim of principal component analysis is to create the minimum number of new variables based on a combination of the original variables that can explain the variability in the data. The first principal component is the new variable that captures the most variability.</p>
-<p>In the plot below, we can see the first and second principal components in the x and y axes respectively, with the axis label indicating the amount of variability that these components are able to explain. To create the plot, we use the <strong>fviz_cluster()</strong> function from the factoextra library.</p>
+<p>In the plot below, we can see the first and second principal components in the x and y axes respectively, with the axis label indicating the amount of variability that these components are able to explain. To create the plot, we use the <code>fviz_cluster()</code> function from the factoextra library.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(Km, <span class="at">data =</span> data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse =</span> F, <span class="at">pointsize =</span> <span class="fl">0.5</span>,</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="at">ggtheme =</span> <span class="fu">theme_classic</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(Km, <span class="at">data =</span> data[,<span class="fu">c</span>(colnames_data[<span class="dv">2</span><span class="sc">:</span> <span class="fu">ncol</span>(data)])], <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">ellipse =</span> F, <span class="at">pointsize =</span> <span class="fl">0.5</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="at">ggtheme =</span> <span class="fu">theme_classic</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geodemographics_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -826,13 +671,13 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h2 data-number="3.8" class="anchored" data-anchor-id="questions"><span class="header-section-number">3.8</span> Questions</h2>
 <p>For this set of questions, we will be using the same datasets that we used for Chapter 3, the London LSOA dataset and the shapefile for the LSOA boundaries:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/geodemographics/lsoa-data-clean.csv"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import LSOA boundaries for GLA</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -843,9 +688,9 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 <p>This time, we will focus on demographic variables related to ethnicity, country of birth, housing ownership status, income and age group. Let us select these demographic variables for the questions below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"OwnedOutright"</span>, <span class="st">"OwnedMortgage"</span>, <span class="st">"SocialRent"</span>, <span class="st">"PrivateRent"</span>, <span class="st">"Hh_MedianIncome"</span>, <span class="st">"MidYrPop0to15"</span>, <span class="st">"MidYrPop16to29"</span>, <span class="st">"MidYrPop30to44"</span>, <span class="st">"MidYrPop45to64"</span>, <span class="st">"MidYrPop65"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"OwnedOutright"</span>, <span class="st">"OwnedMortgage"</span>, <span class="st">"SocialRent"</span>, <span class="st">"PrivateRent"</span>, <span class="st">"Hh_MedianIncome"</span>, <span class="st">"MidYrPop0to15"</span>, <span class="st">"MidYrPop16to29"</span>, <span class="st">"MidYrPop30to44"</span>, <span class="st">"MidYrPop45to64"</span>, <span class="st">"MidYrPop65"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the <strong>kmeans()</strong> function, you should set nstart=20 and iter.max=1000.</p>
+<p>Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the <code>kmeans()</code> function, you should set nstart=20 and iter.max=1000.</p>
 <hr>
 <p>Essay questions:</p>
 <ol type="1">

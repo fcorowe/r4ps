@@ -14,7 +14,8 @@ Assuming that the geodemographic characteristics of a group are an indicator of 
 
 This chapter uses the libraries below. Ensure they are installed on your machine, then execute the following code chunk to load them:
 
-```{r, results='hide'}
+```{r}
+#| warning: false
 
 #Support for simple features, a standardised way to encode spatial vector data
 library(sf)
@@ -72,7 +73,7 @@ Normally, GDCs involve the analysis of aggregated demographic data into geograph
 
 As mentioned above, the data for this chapter is aggregated into LSOAs. The size of the LSOAs is small enough to produce detailed results and is also a convenient choice, since it is broadly used in the UK Census and other official data-reporting exercises.
 
-We can visualise the LSOAs within GLA simply by plotting the geometry column of *sf_LSOA*, which can be selected with the function **st_geometry().**
+We can visualise the LSOAs within GLA simply by plotting the geometry column of *sf_LSOA*, which can be selected with the function `st_geometry()`**.**
 
 ```{r}
 plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
@@ -80,16 +81,16 @@ plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
 
 ### Variables of interest
 
-Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame *df_LSOA* contains this data and we can visualise its first few lines by using the function **head()**:
+Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame *df_LSOA* contains this data and we can visualise its first few lines by using the function `head()`:
 
 ```{r}
-head(df_LSOA)
+head(df_LSOA[,1:4])
 ```
 
-As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function **names()**, we can get the names of the columns in *df_LSOA*
+As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function `names()`, we can get the names of the columns in *df_LSOA*
 
 ```{r}
-names(df_LSOA)
+names(df_LSOA[,1:8])
 ```
 
 The data frame *df_LSOA* contains many variables. As we can see above, they have summarised names. For a short description of what these names mean, we can load the file called Dictionary-lsoa-data-clean.csv:
@@ -106,7 +107,7 @@ For the purposes of this chapter, we will focus on just a few of these variables
 df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "FullTimeStudent", "EmployRate", "UnemployRate", "Q_None", "Q_L1", "Q_L2", "Q_Apprenticeship", "Q_L3", "Q_L4OrAbove", "Q_Other", "Q_Sch_FullTimeSt18" )]
 ```
 
-We can explore the summary statistics for each of the selected fields with the **summary()** function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group 'Black/African/Caribbean/Black British', we can run the code below:
+We can explore the summary statistics for each of the selected fields with the `summary()` function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group 'Black/African/Caribbean/Black British', we can run the code below:
 
 ```{r}
 summary(df_LSOA$BlackAfricanCaribbean)
@@ -128,7 +129,7 @@ Now the question is whether the LSOAs with similar proportions of Black/African/
 join_LSOA <- st_LSOA %>% left_join(df_LSOA, by='LSOA11NM')
 ```
 
-If we plot the joined data frames using the tmap library functionalities, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.
+If we plot the joined data frames using the `tmap` library functionalities, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.
 
 ```{r}
 
@@ -154,7 +155,7 @@ To counter the effect of variable population sizes across geographic units, we a
 
 Data outliers are often present when analysing data from the real-world. These values are generally extreme and difficult to treat statistically. In GDC, they could end up dominating the classification process. To avoid this, we need to standardise the input variables as well, so that they all contribute equally to the classification process.
 
-There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e. for variable $X$, Z-score = $\dfrac{X-mean(X)}{std(X)}$ where $std()$ refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function **scale()**. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:
+There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e. for variable $X$, Z-score = $\dfrac{X-mean(X)}{std(X)}$ where $std()$ refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function `scale()`. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:
 
 ```{r}
 # creates a new data frame
@@ -171,9 +172,9 @@ df_std[, colnames_df_std[i]] <- scale(as.numeric(df_std[, colnames_df_std[i]]))
 
 Before diving into the clustering process, it is necessary to check for variable associations. Two variables that are strongly associated could be conveying essentially the same information. Consequently, excessive weight could be attributed to the phenomenon they refer to in the clustering process. There are different techniques to check for variable association, but here we focus on the Pearson's correlation matrix.
 
-Each row and column in a Pearson's correlation matrix represents a variable. Each entry in the matrix represents the level of correlation between the variables represented by the corresponding row and column. In R, a Pearson's correlation matrix can be created very easily with the **corr()** function, where the method parameter is set to "pearson". As a general rule, two variables with correlation coefficient greater than 0.8 or smaller than -0.8 are considered to be highly correlated. If this is the case, we might want to discard one of the two variables since the information they convey is redundant. However, in some cases, it might be reasonable to keep both variables if we can argue that they both have a similar but unique meaning.
+Each row and column in a Pearson's correlation matrix represents a variable. Each entry in the matrix represents the level of correlation between the variables represented by the corresponding row and column. In R, a Pearson's correlation matrix can be created very easily with the `corr()` function, where the method parameter is set to "pearson". As a general rule, two variables with correlation coefficient greater than 0.8 or smaller than -0.8 are considered to be highly correlated. If this is the case, we might want to discard one of the two variables since the information they convey is redundant. However, in some cases, it might be reasonable to keep both variables if we can argue that they both have a similar but unique meaning.
 
-The correlation coefficients by themselves are not enough to conclude whether two variables are correlated. Each correlation coefficient must be computed in combination with its p-value. For this reason, we also apply the **cor_pmat()** function below, which outputs a matrix of p-values corresponding to each correlation coefficient. Here, we set the confidence level at 0.95, therefore, p-values smaller than 0.05 are considered to be statistically significant. In the correlation matrix plot, we add crosses to indicate which correlation coefficients are not significant (i.e. those above 0.05). Those crosses indicate that there is not enough statistical evidence to reject the claim that the variables in the corresponding row and column are uncorrelated.
+The correlation coefficients by themselves are not enough to conclude whether two variables are correlated. Each correlation coefficient must be computed in combination with its p-value. For this reason, we also apply the `cor_pmat()` function below, which outputs a matrix of p-values corresponding to each correlation coefficient. Here, we set the confidence level at 0.95, therefore, p-values smaller than 0.05 are considered to be statistically significant. In the correlation matrix plot, we add crosses to indicate which correlation coefficients are not significant (i.e. those above 0.05). Those crosses indicate that there is not enough statistical evidence to reject the claim that the variables in the corresponding row and column are uncorrelated.
 
 ```{r}
 # Matrix of Pearson correlation coefficients
@@ -218,7 +219,7 @@ K-means clustering is a way of grouping similar items together. To illustrate th
 
 More technically, k-means clustering is actually an algorithm of unsupervised learning (we will learn more about this in Chapter 10) that partitions a set of points into k clusters, where k is a user-specified number. The algorithm iteratively assigns each point to the closest cluster, based on the mean of the points in the cluster, until no point can be moved to a different cluster to decrease the sum of squared distances between points and their assigned cluster mean. The result is a partitioning of the points into k clusters, where the points within a cluster are as similar as possible to each other, and as dissimilar as possible from points in other clusters.
 
-In R, k-means can be easily applied by using the function **k-means()**, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (nstart) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:
+In R, k-means can be easily applied by using the function `k-means()`, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (nstart) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:
 
 ```{r}
 Km <- kmeans(data[,c(colnames_data[2: ncol(data)])], centers=4, nstart=20, iter.max = 1000)
@@ -230,9 +231,9 @@ As mentioned above, the number of clusters k is a parameter of the algorithm tha
 
 However, there are some techniques and guidelines to help us decide what the right number of clusters is. Here we explore the silhouette score method.
 
-The **silhouette score** of a data point (in this case an LSOA and its demographic data) is a measure of how similar this data point is to the data points in its own cluster compared to the data points in other clusters. The silhouette score ranges from -1 to 1, with a higher value indicating that the data point is well matched to its own cluster and poorly matched to neighbouring clusters. A score close to 1 means that the data point is distinctly separate from other clusters, whereas a score close to -1 means the data point may have been assigned to the wrong cluster. Given a number of clusters k obtained with k-means, we can compute the average silhouette score over all the data points. Then, we can plot the average silhouette score against k. The optimal value of k will be the one with the highest k score.
+The **silhouette score** of a data point (in this case an LSOA and its demographic data) is a measure of how similar this data point is to the data points in its own cluster compared to the data points in other clusters. The silhouette score ranges from -1 to 1, with a higher value indicating that the data point is well matched to its own cluster and poorly matched to neighbouring clusters. A score close to 1 means that the data point is distinctly separate from other clusters, whereas a score close to -1 means the data point may have been assigned to the wrong cluster. Given a number of clusters k obtained with k-means, we can compute the average silhouette score over all the data points. Then, we can plot the average silhouette score against k. The optimal value of *k* will be the one with the highest k score.
 
-You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 8. The optimum number of clusters is given by the value of k at which the average silhouette is maximised.
+You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 8. The optimum number of clusters is given by the value of *k* at which the average silhouette is maximised.
 
 ```{r}
 silhouette_score <- function(k){
@@ -310,7 +311,7 @@ line.col = "blue", radlab = TRUE, rp.type="p", label.prop=0.9, mar=c(3,3,3,3))
 
 We will evalueate the fit of the k-means model with 5 clusters by creating an *x-y* plot of the of the first two principal components of each data point. Each point is coloured according to the cluster where it belongs. Remember that the aim of principal component analysis is to create the minimum number of new variables based on a combination of the original variables that can explain the variability in the data. The first principal component is the new variable that captures the most variability.
 
-In the plot below, we can see the first and second principal components in the x and y axes respectively, with the axis label indicating the amount of variability that these components are able to explain. To create the plot, we use the **fviz_cluster()** function from the factoextra library.
+In the plot below, we can see the first and second principal components in the x and y axes respectively, with the axis label indicating the amount of variability that these components are able to explain. To create the plot, we use the `fviz_cluster()` function from the factoextra library.
 
 ```{r}
 
@@ -338,7 +339,7 @@ This time, we will focus on demographic variables related to ethnicity, country 
 df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "OwnedOutright", "OwnedMortgage", "SocialRent", "PrivateRent", "Hh_MedianIncome", "MidYrPop0to15", "MidYrPop16to29", "MidYrPop30to44", "MidYrPop45to64", "MidYrPop65")]
 ```
 
-Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the **kmeans()** function, you should set nstart=20 and iter.max=1000.
+Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the `kmeans()` function, you should set nstart=20 and iter.max=1000.
 
 ------------------------------------------------------------------------
 

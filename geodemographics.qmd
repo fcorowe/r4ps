@@ -52,7 +52,7 @@ LSOAs are geographic hierarchies designed to improve the reporting of small area
 
 ### Import the data
 
-In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it *df_LSOA*. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile [here](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london). We have also stored this shapefile, called *LSOA_2011_Lodnon_gen_MHW.shp*, in the data folder of this workbook so you can import it directly as a data frame with simple features using the **st_read()** function from the **sf** package. For more information on the sf package, check the [documentation](https://cran.r-project.org/web/packages/sf/index.html).
+In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it *df_LSOA*. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile [here](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london). We have also stored this shapefile, called *LSOA_2011_Lodnon_gen_MHW.shp*, in the data folder of this workbook so you can import it directly as a data frame with simple features using the `st_read()` function from the `sf` package. For more information on the `sf` package, check the [documentation](https://cran.r-project.org/web/packages/sf/index.html).
 
 ```{r}
 

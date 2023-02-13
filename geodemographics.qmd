@@ -336,7 +336,7 @@ st_LSOA <- st_read("./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_Lo
 This time, we will focus on demographic variables related to ethnicity, country of birth, housing ownership status, income and age group. Let us select these demographic variables for the questions below.
 
 ```{r}
-df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "OwnedOutright", "OwnedMortgage", "SocialRent", "PrivateRent", "Hh_MedianIncome", "MidYrPop0to15", "MidYrPop16to29", "MidYrPop30to44", "MidYrPop45to64", "MidYrPop65")]
+df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "OwnedOutright", "OwnedMortgage", "SocialRent", "PrivateRent", "Hh_MeanIncome", "MidYrPop0to15", "MidYrPop16to29", "MidYrPop30to44", "MidYrPop45to64", "MidYrPop65")]
 ```
 
 Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the `kmeans()` function, you should set nstart=20 and iter.max=1000.

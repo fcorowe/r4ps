@@ -371,7 +371,7 @@ div.csl-indent {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="co">#Obtain the working directory, where we will save the data directory</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps"</code></pre>
+<pre><code>[1] "/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps"</code></pre>
 </div>
 </div>
 </section>
@@ -395,7 +395,7 @@ div.csl-indent {
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -677,7 +677,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -688,7 +688,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 <p>This time, we will focus on demographic variables related to ethnicity, country of birth, housing ownership status, income and age group. Let us select these demographic variables for the questions below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"OwnedOutright"</span>, <span class="st">"OwnedMortgage"</span>, <span class="st">"SocialRent"</span>, <span class="st">"PrivateRent"</span>, <span class="st">"Hh_MedianIncome"</span>, <span class="st">"MidYrPop0to15"</span>, <span class="st">"MidYrPop16to29"</span>, <span class="st">"MidYrPop30to44"</span>, <span class="st">"MidYrPop45to64"</span>, <span class="st">"MidYrPop65"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_LSOA <span class="ot">&lt;-</span> df_LSOA[, <span class="fu">c</span>(<span class="st">"LSOA11NM"</span>, <span class="st">"White"</span>, <span class="st">"MixedMulti"</span>, <span class="st">"Asian"</span>, <span class="st">"BlackAfricanCaribbean"</span>, <span class="st">"Ethnic_Other"</span>, <span class="st">"BAME"</span>, <span class="st">"BirthUK"</span>, <span class="st">"BirthNotUK"</span>, <span class="st">"OwnedOutright"</span>, <span class="st">"OwnedMortgage"</span>, <span class="st">"SocialRent"</span>, <span class="st">"PrivateRent"</span>, <span class="st">"Hh_MeanIncome"</span>, <span class="st">"MidYrPop0to15"</span>, <span class="st">"MidYrPop16to29"</span>, <span class="st">"MidYrPop30to44"</span>, <span class="st">"MidYrPop45to64"</span>, <span class="st">"MidYrPop65"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the <code>kmeans()</code> function, you should set nstart=20 and iter.max=1000.</p>
 <hr>

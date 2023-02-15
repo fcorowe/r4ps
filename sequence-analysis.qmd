@@ -1,0 +1,472 @@
+# Sequence Analysis {#sec-chp4}
+
+This chapter illustrates the use of sequence analysis and [WorldPop](https://www.worldpop.org) raster data to identify trajectories of population decline in Ukraine. Developed in Biology for the analysis of DNA sequencing, sequence analysis offers a novel approach to generate a more holistic understanding of population decline trajectories capturing differences in the ordering, frequency, timing and occurrence of population decline. The *longitudinal* and *categorical* nature is a key feature of the data that can be analysed using sequence analysis. In this chapter, We first show how to manipulate gridded, raster population to create a spatial data frame, and explore national and sub-national population trends and spatial structure of population change. We describe the process of implementing sequence analysis to identify trajectories of population decline in a four-stage process. We first define different levels of population change. Second, we apply measure the difference or similarity between individual area-level trajectories. Third, we use an unsupervised machine learning clustering algorithm to identify representative trajectories. Fourth, we use different visualisation tools to understand key features encoded in trajectories.
+
+The chapter is based on the following references:
+
+@gabadinho2011 describe the functionalities of the `TraMineR` package to visualise and analysis categorical sequence data;
+
+@newsham2022a, @gonzález-leonardo2023 provide empirical applications to identify and study trajectories of population decline across Europe and in Spain;
+
+@tatem2017 provide an overview of the *WorldPop* data project;
+
+@patias2021, @patias2021a provide good examples of the use of sequence analysis to define trajectories of inequality and urban development.
+
+## Dependencies
+
+We use the following libraries:
+
+```{r}
+#| include = FALSE
+# clear memory and adds tufte templates for plots and maps
+rm(list=ls())
+source("data-viz-themes.R")
+```
+
+```{r}
+#| warning: false
+
+# data manipulation
+library(tidyverse)
+# spatial data manipulation
+library(stars)
+library(sf)
+# download world pop data
+library(wpgpDownloadR) # you may need to install this package running `install.packages("devtools")` `devtools::install_github("wpgp/wpgpDownloadR")'
+# data visualisation
+library(viridis)
+library(RColorBrewer)
+library(patchwork)
+library(ggseqplot) # may need to install by running `devtools::install_github("maraab23/ggseqplot")`
+# sequence analysis
+library(TraMineR)
+# cluster analysis
+library(cluster)
+```
+
+Key packages to this chapter are `TraMineR`,`stars` and `ggseqplot`. `TraMineR` is the go-to package in social sciences for exploring, analysing and rendering sequences based on categorical data. `stars` is designed to handle spatio-temporal data in the form of dense arrays, with space and time as dimensions. `stars` provides classes and methods for reading, manipulating, plotting and writing data cubes. It is a very powerful package. It interacts nicely with `sf` and is suggested to be superior to `raster` and `terra`, which are also known for their capacity to work with multilayer rasters. `stars` is suggested to [deal with more complex data types](https://r-spatial.github.io/stars/) and [be faster](https://www.r-bloggers.com/2021/05/a-comparison-of-terra-and-stars-packages/) than `raster` and `terra`. `ggseqplot` provides functionality to visualise categorical sequence data based on `ggplot` capabilities. This differs from `TraMineR` which is based on the base function `plot`. We prefer `ggseqplot` for the wide usage of `ggplot` as a data visualisation tool in R.
+
+## Data
+
+The key aim of this chapter is to define representative trajectories of population decline using sequence analysis and WorldPop data. We use WorldPop data for the period extending from 2000 to 2020. WorldPop offers open access gridded population estimates at a high spatial resolution for all countries in the world. WoldPop produces these gridded datasets using a top-down (i.e. dissagregating administrative area counts into smaller grid cells) or bottom-up (i.e. interpolating data from counts from sample locations into grid cells) approach. You can learn about about these approaches and the data available from [WorldPop](https://www.worldpop.org).
+
+WorldPop population data are available in various formats: 
+* Two spatial resolutions: 100m and 1km;
+* Constrained and unconstrained counts to built settlement areas;
+* Adjusted or unadjusted to United Nations' (UN) national population counts;
+* Two formats i.e. `tiff` and `csv` formats.
+
+We use annual 1km gridded, UN adjusted, unconstrained population count data for Ukraine during 2000-2021 in tiff format. We use tiff formats to illustrate the manipulation of raster data. Such skills will come handy if you ever decide to work with satellite imagery or image data in general.
+
+Before calling the data, let's see how we can use `wpgpDownloadR` package. Let's browse the data catalogue.
+
+```{r}
+wpgpListCountries() %>% 
+  head()
+```
+
+By using the ISO3 country code, let's look for the available datasets for Ukraine.
+
+```{r}
+wpgpListCountryDatasets(ISO3 = "UKR") %>% 
+  head()
+```
+The `wpgpDownloadR` package includes 100m resolution data. To keep things efficient, we use 1km gridded population counts from the [WorldPop data page](https://hub.worldpop.org/geodata/listing?id=75). 
+Obtain population data for Ukraine 2000-2020
+
+```{r}
+#| warning: false
+#| 
+file_list <- fs::dir_ls("./data/sequence-analysis/raster")
+file_list
+
+pop_raster <- read_stars(file_list, quiet = TRUE)
+```
+
+```{r}
+plot(pop_raster[1], col = inferno(100))
+```
+
+```{r}
+# pop2000_df <- wpgpGetPOPTable(ISO3 = "UKR", 
+#                       year = 2000)
+# pop2000_df
+```
+
+We need administrative boundaries in the form of polygons
+
+```{r}
+ukr_shp <- st_read("./data/sequence-analysis/ukr_shp/gadm41_UKR_2.shp") %>% 
+  st_simplify(., 
+              preserveTopology = T,
+              dTolerance = 1000) %>%  # 1km
+  sf::st_make_valid(.) %>% 
+  fortify(.) %>% 
+  st_transform(., "EPSG:4326")
+
+ukr_shp
+```
+
+```{r}
+plot(ukr_shp$geometry)
+```
+
+```{r}
+pop_raster <- st_transform(pop_raster, st_crs(ukr_shp))                      
+```
+
+Aggregate population counts by administrative area
+
+```{r}
+
+system.time({
+
+popbyarea_df = aggregate(x = pop_raster, 
+                                   by = ukr_shp, 
+                                   FUN = sum, 
+                                   na.rm = TRUE) 
+})
+
+popbyarea_df[1]
+```
+
+Sub-national population
+
+```{r}
+# create a function to bind the population data frame to the shapefile
+add_population <- function(x) mutate(ukr_shp, 
+                      population = x)
+
+# obtain sub-national population counts
+ukr_eshp <- lapply(popbyarea_df, add_population)
+
+# create a dataframe with subnational populations
+select_pop <- function(x) dplyr::select(x, GID_2, NAME_2, population)
+population_df <- lapply(ukr_eshp, select_pop) %>% 
+  do.call(rbind, .)
+population_df$year <- rep(seq(2000, 2020, by=1), times = 1)
+rownames(population_df) <- rep(seq(1, nrow(population_df), by=1), times = 1)
+```
+
+National population
+
+```{r}
+# obtain national population counts
+population_count <- map_dbl(ukr_eshp, ~.x %>% 
+          pull(population) %>% 
+          sum(na.rm = TRUE)
+        ) %>% 
+  as.data.frame()
+
+# change labels
+df_names <- c("2000", "2020")
+colnames(population_count) <-  c("population")
+rownames(population_count) <- rep(seq(2000, 2020, by=1), times = 1)
+population_count$year <- rep(seq(2000, 2020, by=1), times = 1)
+
+# national annual population counts
+population_count
+```
+
+### Data Wrangling
+
+Exploratory data analysis to understand the data - time-space data
+
+```{r}
+# visualise national population trends
+pop_level_p <- ggplot(population_count, 
+       aes(x = year, y = population/1000000 )) +
+  geom_line(size = 1) +
+  theme_tufte2() +
+  ylim(0, 48) + 
+  labs(y = "Population \n(million)",
+       x = "Year")
+  
+# visualise percentage change in population
+pop_percent_p <- population_count %>% 
+  mutate(
+    pct_change = ( ( population - 47955683) / 47955683) * 100
+  ) %>% 
+ggplot(aes(x = year, y = pct_change )) +
+  geom_line(size = 1) +
+  theme_tufte2() + 
+  labs(y = "Population \npercentage change (%)",
+       x = "Year") 
+
+pop_level_p | pop_percent_p
+```
+
+Subnational
+
+```{r}
+population_df <- population_df %>% 
+  group_by(GID_2) %>% 
+  arrange(-year, .by_group = TRUE ) %>% 
+  mutate(
+  pct_change = ( population / lead(population) - 1) * 100, # rate of population change
+  pct_change_2000_21 = ( population[year == "2020"] / population[year == "2000"] - 1) * 100, # overall rate of change
+  ave_pct_change_2000_21 = mean(pct_change, na.rm = TRUE)
+) %>% 
+  ungroup()
+
+```
+
+mapping overall change
+
+```{r}
+
+# set colours
+cols <- c("#7f3b08", "#b35806", "#e08214", "#faf0e6", "#8073ac", "#542788", "#2d004b")
+# reverse order
+cols <- rev(cols)
+
+population_df %>% dplyr::filter( year == 2020) %>%
+  drop_na(pct_change_2000_21) %>% 
+    mutate(
+    ove_pop_class = case_when( pct_change_2000_21 <= -3 ~ 'high_decline',
+                           pct_change_2000_21 <= -1.5 & pct_change_2000_21 > -3 ~ 'decline',
+                           pct_change_2000_21 < -.3 & pct_change_2000_21 > -1.5 ~ 'moderate_decline',
+                           pct_change_2000_21 > -0.3 & pct_change_2000_21 < 0.3 ~ 'stable',
+                           pct_change_2000_21 > 0.3 & pct_change_2000_21 < 1.5 ~ 'moderate_growth',
+                           pct_change_2000_21 >= 1.5 & pct_change_2000_21 < 3 ~ 'growth',
+                           pct_change_2000_21 > 3 ~ 'high_growth'),
+    ove_pop_class = factor(ove_pop_class, 
+         levels = c("high_decline", "decline", "moderate_decline", "stable", "moderate_growth", "growth", "high_growth") )
+    ) %>% 
+  ggplot(aes(fill = ove_pop_class)) +
+  geom_sf(col = "white", size = .1) +
+  scale_fill_manual(values = cols,
+                    name = "Population change") +
+  theme_map_tufte() 
+  
+ 
+```
+
+```{r}
+population_df %>% dplyr::filter( ave_pct_change_2000_21 < 0) %>% 
+  tail(., 40*21) %>% 
+  ggplot(data = ., 
+           mapping = aes(x= year, y= reorder(NAME_2, pct_change), fill= pct_change)) +
+  geom_tile() +
+  scale_fill_viridis(name="Population", option ="plasma", begin = .2, end = .8, direction = 1) +
+  theme_tufte2() +
+  labs(title= paste(" "), x="Year", y="Area") +
+  theme(text = element_text(size=14)) + 
+  theme(axis.text.y = element_text(size=8))
+```
+
+```{r}
+# ggplot(data = population_df,
+#             mapping = aes(x = year, y = pct_change,
+#                           group = NAME_2)) +
+#   geom_line()
+```
+
+## Application
+
+Explain intuition and main steps
+
+### Defining outcome process
+
+Define the thresholds that should be used to define the extent / pace of acceleration.
+
+```{r}
+population_loss_df <- population_df %>% 
+  dplyr::filter( pct_change_2000_21 < 0)
+
+population_loss_df %>% 
+  dplyr::filter(pct_change  < 0) %>% 
+  ggplot(data =  ) +
+  geom_density(alpha=0.8, colour="black", fill="lightblue", aes(x = pct_change)) +
+  theme_tufte2()
+```
+
+Follow the definition of
+
+```{r}
+population_loss_df <- population_loss_df %>% 
+  dplyr::filter( year != 2000)
+
+population_loss_df <- population_loss_df %>%
+  mutate(
+    pop_class = case_when( pct_change <= -3 ~ 'high_decline',
+                           pct_change <= -1.5 & pct_change > -3 ~ 'decline',
+                           pct_change < -.3 & pct_change > -1.5 ~ 'moderate_decline',
+                           pct_change > -0.3 & pct_change < 0.3 ~ 'stable',
+                           pct_change > 0.3 & pct_change < 1.5 ~ 'moderate_growth',
+                           pct_change >= 1.5 & pct_change < 3 ~ 'growth',
+                           pct_change > 3 ~ 'high_growth',)
+)
+
+```
+
+### Optimal matching
+
+Computation of distance - intuition \> indel operators \> different OM algorithms \> use optimal matching
+
+Rearrange data from long to wide
+
+```{r}
+wide_population_loss_df <- population_loss_df %>% 
+  as_tibble() %>% 
+  group_by(GID_2) %>% 
+  arrange(year, .by_group = TRUE ) %>%
+  ungroup() %>% 
+  tidyr::pivot_wider(
+  id_cols =  GID_2,
+  names_from = "year",
+  values_from = "pop_class"
+)
+  
+wide_population_loss_df
+```
+
+```{r}
+table(wide_population_loss_df[,2])
+```
+
+```{r}
+seq.alphab <- c("high_growth", "growth", "moderate_growth", "stable", "moderate_decline", "decline", "high_decline")
+
+seq.lab <- c("High growth", "Growth", "Moderate growth", "Stable", "Moderate decline", "Decline", "High decline")
+
+seq.cl <- seqdef(wide_population_loss_df, 
+                 2:21, 
+                 alphabet = seq.alphab,
+                 labels = seq.lab,
+                 cnames = c("2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"),
+                 cpal =c("1" = "#7f3b08", 
+                         "2" = "#b35806",
+                         "3" = "#e08214",
+                         "4" = "#faf0e6",
+                         "5" = "#8073ac",
+                         "6" = "#542788",
+                         "7" = "#2d004b"))
+```
+
+```{r}
+seqplot(seq.cl, 
+        title="State distribution plot", 
+        type = "d",
+        with.legend = "right",
+        border = NA)
+```
+
+```{r}
+# Calculate transition rates
+subs_costs <- seqsubm(seq.cl, 
+                      method = "TRATE",
+                      #time.varying = TRUE
+                      )
+
+subs_costs
+```
+
+```{r}
+seq.trate <- seqtrate(seq.cl)
+round(seq.trate, 2)
+```
+
+When "auto", the indel is set as `max(sm)/2` when sm is a matrix
+
+```{r}
+# Calculate the unique distance matrix
+seq.om <- seqdist(seq.cl,
+                  method = "OM",
+                  indel = "auto",
+                  sm = subs_costs)
+```
+
+If want to apply varying substitution costs, use `method = DHD`
+
+### Clustering
+
+Different cluster algorithms - use of k-meloids
+
+```{r}
+for (k in 2:20)
+  pam_sol <- pam(seq.om, k)
+
+```
+
+Determining the number of clusters
+
+```{r}
+asw <- numeric(20)
+for (k in 2:20)
+  asw[k] <- pam(seq.om, k) $ silinfo $ avg.width
+  k.best <- which.max(asw)
+  cat("silhouette-optimal number of clusters:", k.best, "\n")
+  asw
+```
+
+```{r}
+
+pam_optimal <- pam(seq.om, 7)
+
+```
+
+### Visualising
+
+Individual trajectories
+
+```{r}
+seqplot(seq.cl, 
+        group = pam_optimal$clustering,
+        type = "I",
+        border = NA, 
+        cex.axis = 1.5, 
+        cex.lab = 1.5,
+        sortv = seq.om)
+```
+
+```{r}
+ggseqiplot(seq.cl, 
+        group = pam_optimal$clustering,
+        sortv = seq.om,
+        facet_ncol = 4) +
+  scale_fill_manual(values = rev(cols)) +
+  scale_color_manual(values = rev(cols)) 
+```
+
+Frequency plots
+
+```{r}
+ggseqdplot(seq.cl, 
+        group = pam_optimal$clustering,
+        facet_ncol = 4) +
+  scale_fill_manual(values = rev(cols)) +
+  scale_color_manual(values = rev(cols)) 
+```
+
+Time spent
+
+```{r}
+ggseqmtplot(seq.cl, 
+        group = pam_optimal$clustering,
+        facet_ncol = 4) +
+  scale_fill_manual(values = rev(cols)) +
+  scale_color_manual(values = rev(cols)) +
+  scale_x_discrete(labels=c("high_growth" = "HG", "growth" = "G",
+                              "moderate_growth" = "MG", "stable" = "S", "moderate_decline" = "MD", "decline" = "D", "high_decline" = "HD" ))
+```
+
+Entropy index
+
+```{r}
+ggseqeplot(seq.cl, 
+        group = pam_optimal$clustering) +
+  scale_colour_viridis_d()
+```
+
+## Questions
+
+Francisco to write
+
+This chapter shows the use of sequence analysis to study population decline and draw on the following papers:
+
+-   @rowe2022a
+
+-   @newsham2022a
+
+-   @rowe2022b

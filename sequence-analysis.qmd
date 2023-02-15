@@ -68,50 +68,56 @@ wpgpListCountryDatasets(ISO3 = "UKR") %>%
   head()
 ```
 
-The `wpgpDownloadR` package includes 100m resolution data. To keep things efficient, we use 1km gridded population counts from the [WorldPop data page](https://hub.worldpop.org/geodata/listing?id=75). Obtain population data for Ukraine 2000-2020
+The `wpgpDownloadR` package includes 100m resolution data. To keep things efficient, we use 1km gridded population counts from the [WorldPop data page](https://hub.worldpop.org/geodata/listing?id=75). Obtain population data for Ukraine 2000-2020. We start by reading the set of tiff files using the `read_stars` function from the `star` package.
 
 ```{r}
 #| warning: false
-#| 
+
+# create a list of file names
 file_list <- fs::dir_ls("./data/sequence-analysis/raster")
 file_list
-
+# read a list of raster data
 pop_raster <- read_stars(file_list, quiet = TRUE)
 ```
+
+We map the data for 2000 to get a quick understanding of the data.
 
 ```{r}
 plot(pop_raster[1], col = inferno(100))
 ```
 
-```{r}
-# pop2000_df <- wpgpGetPOPTable(ISO3 = "UKR", 
-#                       year = 2000)
-# pop2000_df
-```
-
-We need administrative boundaries in the form of polygons
+Next we read shapefile of administrative boundaries in the form of polygons. We obtain these data from the [GADM website](https://gadm.org). GADM provides maps and spatial data for individuals countries at the national and sub-national administrative divisions.
 
 ```{r}
+# read spatial data frame
 ukr_shp <- st_read("./data/sequence-analysis/ukr_shp/gadm41_UKR_2.shp") %>% 
-  st_simplify(., 
+  st_simplify(., # simplify boundaries for efficiency
               preserveTopology = T,
               dTolerance = 1000) %>%  # 1km
   sf::st_make_valid(.) %>% 
-  fortify(.) %>% 
-  st_transform(., "EPSG:4326")
+  fortify(.) %>%  # turns maps into a data frame so they can more easily be plotted with ggplot2
+  st_transform(., "EPSG:4326") # set projection system
 
 ukr_shp
 ```
+
+Let's have a quick look at the resolution of the administrative areas we will be working. The areas below represent areas at the administrative area level 2 in the spatial data frame `ukr_shp`.
 
 ```{r}
 plot(ukr_shp$geometry)
 ```
 
+We ensure that the `pop_raster` object is in the same projection system as `ukr_shp`. So we can make both objects to work together.
+
 ```{r}
 pop_raster <- st_transform(pop_raster, st_crs(ukr_shp))                      
 ```
 
-Aggregate population counts by administrative area
+### Data wrangling
+
+For our application, we want to work with administrative areas for three reasons. First, public policy and planning decisions are often made based on administrative areas. These are the areas local governments have jurisdiction, represent and can exert power. Second, migration is a key component of population change and hence directly determines population decline. At a small area, residential mobility may also impact patterns of population potentially adding more complexity and variability to the process. Third, WorldPop data are modelled population estimates with potentially high levels of uncertainty or errors in certain locations. Our aim is to mitigate the potential impacts of these errors.
+
+We therefore recommend working with aggregated data. We aggregate the 1km gridded population data to administrative areas in Ukraine. We use `system.time` to time the duration of the proccess of aggregation which could take some time depending on your local computational environment.
 
 ```{r}
 
@@ -123,10 +129,11 @@ popbyarea_df = aggregate(x = pop_raster,
                                    na.rm = TRUE) 
 })
 
-popbyarea_df[1]
 ```
 
-Sub-national population
+**Sub-national population**
+
+The chunk code above returns a list of raster data. We want to create a spatial data frame containing population counts for individual sub-national areas and years. We achieve this by running the following code:
 
 ```{r}
 # create a function to bind the population data frame to the shapefile
@@ -142,9 +149,14 @@ population_df <- lapply(ukr_eshp, select_pop) %>%
   do.call(rbind, .)
 population_df$year <- rep(seq(2000, 2020, by=1), times = 1)
 rownames(population_df) <- rep(seq(1, nrow(population_df), by=1), times = 1)
+
+# sub-national spatial data frame
+population_df 
 ```
 
-National population
+**National population**
+
+We also create a data frame providing population counts at the national level. 
 
 ```{r}
 # obtain national population counts
@@ -155,7 +167,6 @@ population_count <- map_dbl(ukr_eshp, ~.x %>%
   as.data.frame()
 
 # change labels
-df_names <- c("2000", "2020")
 colnames(population_count) <-  c("population")
 rownames(population_count) <- rep(seq(2000, 2020, by=1), times = 1)
 population_count$year <- rep(seq(2000, 2020, by=1), times = 1)
@@ -164,7 +175,7 @@ population_count$year <- rep(seq(2000, 2020, by=1), times = 1)
 population_count
 ```
 
-### Data Wrangling
+### Exploratory data analysis
 
 Exploratory data analysis to understand the data - time-space data
 

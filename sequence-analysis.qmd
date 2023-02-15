@@ -50,11 +50,7 @@ Key packages to this chapter are `TraMineR`,`stars` and `ggseqplot`. `TraMineR` 
 
 The key aim of this chapter is to define representative trajectories of population decline using sequence analysis and WorldPop data. We use WorldPop data for the period extending from 2000 to 2020. WorldPop offers open access gridded population estimates at a high spatial resolution for all countries in the world. WoldPop produces these gridded datasets using a top-down (i.e. dissagregating administrative area counts into smaller grid cells) or bottom-up (i.e. interpolating data from counts from sample locations into grid cells) approach. You can learn about about these approaches and the data available from [WorldPop](https://www.worldpop.org).
 
-WorldPop population data are available in various formats: 
-* Two spatial resolutions: 100m and 1km;
-* Constrained and unconstrained counts to built settlement areas;
-* Adjusted or unadjusted to United Nations' (UN) national population counts;
-* Two formats i.e. `tiff` and `csv` formats.
+WorldPop population data are available in various formats: \* Two spatial resolutions: 100m and 1km; \* Constrained and unconstrained counts to built settlement areas; \* Adjusted or unadjusted to United Nations' (UN) national population counts; \* Two formats i.e. `tiff` and `csv` formats.
 
 We use annual 1km gridded, UN adjusted, unconstrained population count data for Ukraine during 2000-2021 in tiff format. We use tiff formats to illustrate the manipulation of raster data. Such skills will come handy if you ever decide to work with satellite imagery or image data in general.
 
@@ -71,8 +67,8 @@ By using the ISO3 country code, let's look for the available datasets for Ukrain
 wpgpListCountryDatasets(ISO3 = "UKR") %>% 
   head()
 ```
-The `wpgpDownloadR` package includes 100m resolution data. To keep things efficient, we use 1km gridded population counts from the [WorldPop data page](https://hub.worldpop.org/geodata/listing?id=75). 
-Obtain population data for Ukraine 2000-2020
+
+The `wpgpDownloadR` package includes 100m resolution data. To keep things efficient, we use 1km gridded population counts from the [WorldPop data page](https://hub.worldpop.org/geodata/listing?id=75). Obtain population data for Ukraine 2000-2020
 
 ```{r}
 #| warning: false

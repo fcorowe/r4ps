@@ -86,7 +86,7 @@ We map the data for 2000 to get a quick understanding of the data.
 plot(pop_raster[1], col = inferno(100))
 ```
 
-Next we read shapefile of administrative boundaries in the form of polygons. We obtain these data from the [GADM website](https://gadm.org). GADM provides maps and spatial data for individuals countries at the national and sub-national administrative divisions.
+Next we read shapefile of administrative boundaries in the form of polygons. We obtain these data from the [GADM website](https://gadm.org). GADM provides maps and spatial data for individuals countries at the national and sub-national administrative divisions. In this chapter, we will work with these data as they come directly from the website which provides a more realistic and similar context to which you will probably come across in the "real-world".
 
 ```{r}
 # read spatial data frame
@@ -156,7 +156,7 @@ population_df
 
 **National population**
 
-We also create a data frame providing population counts at the national level. 
+We also create a data frame providing population counts at the national level.
 
 ```{r}
 # obtain national population counts
@@ -177,7 +177,11 @@ population_count
 
 ### Exploratory data analysis
 
-Exploratory data analysis to understand the data - time-space data
+Now we are ready to start analysing the data. Before building complexity on our analysis, conducting some exploratory data analysis to understand the data is generally a good starting point, particularly given the multi-layer nature of the data at hand - capturing space, time and population levels. 
+
+**National patterns**
+
+We first analyse national population trends. We want to know to what extent the population of Ukraine has declined over time over the last 20 years. An effective way to do this is to compute summary statistics and visualise the data. Below we look at year-to-year changes in population levels and as a percentage change. By using `patchwork`, we combine two plots into a single figure.
 
 ```{r}
 # visualise national population trends
@@ -203,11 +207,13 @@ ggplot(aes(x = year, y = pct_change )) +
 pop_level_p | pop_percent_p
 ```
 
-Subnational
+**Sub-national**
+
+We also want to know 
 
 ```{r}
 population_df <- population_df %>% 
-  group_by(GID_2) %>% 
+  dplyr::group_by(GID_2) %>% 
   arrange(-year, .by_group = TRUE ) %>% 
   mutate(
   pct_change = ( population / lead(population) - 1) * 100, # rate of population change

@@ -337,13 +337,18 @@ We measure the extent of dissimilarity between individual sequence of population
 
 *Substitution operations* or costs represent transition costs; that is, the cost for substituting each state with another. Substitution costs are defined in one of two ways [@salmela-aro2011]. One approach is the theory-driven approach. In such approach, substitution costs are grounded in theory suggesting that, for example, transforming state 1 to state 2 should have a greater cost than transforming state 1 to state 3, or performing the opposite operation i.e. transforming state 2 to state 1. An example could be that it is more financially costly to transition from *full-time employment* to *full-time education* than transition from *full-time education* to *full-time employment*.
 
-A second approach and most commonly used in empirical work is a data-driven approach. In this approach, substitution costs are empirically derived from transition rates between states. The cost of substitution is inversely related to the frequency of observed transitions within the data. This means that infrequent transitions between states have a higher substitution cost. For example, as we will see, transitions from the state of decline to moderate decline are rarer than decline to growth in Ukraine.
+A second approach and most commonly used in empirical work is a data-driven approach. In this approach, substitution costs are empirically derived from transition rates between states. The cost of substitution is inversely related to the frequency of observed transitions within the data. This means that infrequent transitions between states have a higher substitution cost. For example, as we will see, transitions from the state of decline to moderate decline are rarer than decline to growth in Ukraine. The transition rate between state $i$ and state $j$ is the probability of observing state $j$ at time $t1$ given that the state $i$ is observed at time $t$ for $i \neq j$. The substitution cost between states $i$ and $j$ is computed as:
 
-Computation of distance - intuition \> indel operators \> different OM algorithms \> use optimal matching
+$$
+2 - {p(i | j) - p(j | i)}
+$$ where $p(i | j)$ is the transition rate between state $i$ and $j$.
 
-Rearrange data from long to wide
+To implement OM, we first need to rearrange the structure of our data from long to wide format. You can now see now that individual rows represent areas (column 1) and columns from 2 to 21 represent years.
+
+-   see @rowe2022e for a description on different spatio-temporal data structures and their manipulation using tidyverse principles.
 
 ```{r}
+# transform from long to wide format
 wide_population_loss_df <- population_loss_df %>% 
   as_tibble() %>% 
   group_by(GID_2) %>% 
@@ -358,15 +363,16 @@ wide_population_loss_df <- population_loss_df %>%
 wide_population_loss_df
 ```
 
-```{r}
-table(wide_population_loss_df[,2])
-```
+Once the data frame has been reshaped into a wide format, we define the data as a state sequence object using the R package `TraMineR`. Key here is to appropriately define the labels and an appropriate palette of colours. Depending on the patterns you are seeking to capture a diverging, sequential or qualitative colour palette may be more appropriate. For this chapter, we use a diverging colour palette as we want to effectively represent areas experiencing diverging patterns of population decline or growth.
+
+> Note: various types of sequence data representation exist in `TraMineR`. These representations vary in the way they capture states or events. Chapter 4 in @gabadinho2009mining describes the various representations that `TraMineR` can handle. In any case, the state sequence representation used in this chapter is the most commonly used and internal format used by `TraMineR`. Hence we focus on it.
 
 ```{r}
+# alphabet
 seq.alphab <- c("high_growth", "growth", "moderate_growth", "stable", "moderate_decline", "decline", "high_decline")
-
+# labels
 seq.lab <- c("High growth", "Growth", "Moderate growth", "Stable", "Moderate decline", "Decline", "High decline")
-
+# define state sequence object
 seq.cl <- seqdef(wide_population_loss_df, 
                  2:21, 
                  alphabet = seq.alphab,
@@ -381,6 +387,8 @@ seq.cl <- seqdef(wide_population_loss_df,
                          "7" = "#2d004b"))
 ```
 
+Using the sequence data object, we create a state distribution plot to get an understanding of the data. The plot shows the distribution of areas across status of population change in individual years. The overall picture emerging from the plots is that while areas in the sample recorded overall population decline between 2000 and 2020, the predominant year-to-year pattern was moderate growth. This suggests that areas may have experienced one or two years of severe population loss resulting in an overall pattern of decline.
+
 ```{r}
 seqplot(seq.cl, 
         title="State distribution plot", 
@@ -388,6 +396,10 @@ seqplot(seq.cl,
         with.legend = "right",
         border = NA)
 ```
+
+We now move on to compute the substitution costs for our population states. From the equation above, you may have realised that transition costs vary between 0 and 2, with the former indicating zero cost. The latter indicates the maximum cost of converting one state into another. The option `TRATE` in method states to derive costs from observed transition rates. That is the data-driven approach discussed above. From the matrix below, you can see that it is more costly to convert a status "high decline" to "decline" than "high decline" to "growth". This is an unexpected result. Intuitively, we could have expected the opposite. We would naturally expect areas to continue their trajectory population of decline, rather than a shift to growth. Though patterns of temporary decline have been identified as a predominant trajectory of population decline across Europe, particularly in Germany [@newsham2022].
+
+> Note we are considering a fixed measure of transition rates. That means that we are using the whole dataset to compute an average transition rate between states. That assumes that the rate of change between states does not change over time. Yet, there may be good reasons to believe they do as areas move across different states. In empirical work, time varying transition rates are more often considered. That means we use temporal slices of the data to compute transition rates; for example, using data from 2001, 2002 and so on. In this way, we end up with potentially different transition rates for every year.
 
 ```{r}
 # Calculate transition rates
@@ -399,36 +411,42 @@ subs_costs <- seqsubm(seq.cl,
 subs_costs
 ```
 
+To understand better the idea of substitution costs, we can have direct look at transition rates underpinning these costs. Transition rates can be computed via `seqtrate` . By definition, transition rates vary between 0 and 1, with zero indicating no probability of a transition occurring. One indicates a 100% probability of a transition taking place. Thus, for example, the matrix below tell us that there is a 66% probability of observing a transition from high decline to growth in our sample. Examining transition rates could provide very valuable information about the process in analysis.
+
 ```{r}
 seq.trate <- seqtrate(seq.cl)
 round(seq.trate, 2)
 ```
 
-When "auto", the indel is set as `max(sm)/2` when sm is a matrix
+Now we focus on the probably most important component of sequence analysis; that is the calculation of dissimilarity. Recall our aim is to identify representative trajectories. To this end, we need a way to measure how similar or different sequences are - which is known as OM. Above, we described that we can use indel and substitution operations to measure the dissimilarity or costs between individual sequences. The code chunk implements OM based on indel and substitution operations. The algorithm takes an individual sequence and compares it with all of the sequences in the dataset, and identifies the sequence with the minimum cost i.e. the most similar sequence. The result of this computing intensive process is a distance matrix encoding the similarity or dissimilarity between individual sequences.
+
+> For indel, `auto` sets the indel as `max(sm)/2` when sm is a matrix. For more details, run `?seqdist` on your console
 
 ```{r}
-# Calculate the unique distance matrix
+# Calculate a distance matrix
 seq.om <- seqdist(seq.cl,
-                  method = "OM",
-                  indel = "auto",
-                  sm = subs_costs)
+                  method = "OM", # specify the method
+                  indel = "auto", # specify indel costs
+                  sm = subs_costs) # specify substitution costs
 ```
 
-If want to apply varying substitution costs, use `method = DHD`
+As highlighted above, if you would like to apply varying substitution costs, you can do this directly here by using the option `method = DHD` .
 
-### Clustering
+### Clustering						
 
-Different cluster algorithms - use of k-meloids
+The resulting distance matrix from OM `seq.om` indicates the degree of similarity between individual sequences. To identify representative trajectories, we then need to a way to group together similar sequences to produce a typology, in this case of population decline trajectories. Unsupervised cluster analysis is generally used for this task. Trusting you have built an understanding of cluster analysis from the previous chapter, we will not provide an elaborate description here. If you would like to know more about cluster analysis, we recommend the introductory book by @kaufman2009finding. We use a clustering method called `k-meloids` . This methods is known to be more robust to noise and outliers than the
+conventional k-means procedure [@backman2020]. This is because the medoid algorithm clusters the data by minimising a sum of pair-wise dissimilarities [@kaufman2009finding], rather than a sum of squared Euclidean distances. We run cluster analyses at different numbers of `k` starting from 2 to 20.
 
 ```{r}
+# run PAMs
 for (k in 2:20)
   pam_sol <- pam(seq.om, k)
-
 ```
 
-Determining the number of clusters
+We then seek to determine the optimal number of clusters `k`. We use silhouette scores, but as we noted @sec-chp3, the optimal number of clusters is better determined by the user given the context and use case. It is an art. There is no wrong or right answer. As can be seen from the results below from the average silhouette score, two clusters is suggested as the optimal solution. However, we could argue that we gain very little from such coarse partition of the data. We suggest to take this as guidance and a starting point to look to identify an appropriate data partition. We suggest to visualise different solution and gain an understanding of what data get split and decide on whether the resulting patterns contribute to the understanding of the process at hand.
 
 ```{r}
+# compute average silhouette scores for all 20 cluster solutions
 asw <- numeric(20)
 for (k in 2:20)
   asw[k] <- pam(seq.om, k) $ silinfo $ avg.width
@@ -437,17 +455,18 @@ for (k in 2:20)
   asw
 ```
 
+We rerun and save the results for a 7k cluster partition. If you inspect the resulting data frame, it provides an identifier for each cluster. Each individual area is attributed to a cluster. Next the question that we seek to answer is what sort of pattern do these clusters capture?
 ```{r}
-
+# rerun pam for k=7
 pam_optimal <- pam(seq.om, 7)
-
 ```
 
 ### Visualising
 
-Individual trajectories
+To understand the representative patterns captured in our data partition, we use visualisation. There is a battery of different visualisation tools to extract information and identify distinctive features of the identified trajectories. We start by using individual sequence plots by trajectory type. They provide a visual representation of how individual areas in each trajectory type moves between states. Recall that we are capturing representative trajectories; hence, there is still quite a bit of variability in terms of the patterns encapsulated in each representative trajectory. Back to the individual sequence plots, each line in these plots represents an area. Time is displayed horizontally and colours encode different states - in our case of population change. Numbers on the y-axis display the number of areas in each cluster. The figure immediate below relies on the base `plot` library, and by default, it is not very visually appealing. 
 
 ```{r}
+# create individual sequence plots
 seqplot(seq.cl, 
         group = pam_optimal$clustering,
         type = "I",
@@ -456,8 +475,14 @@ seqplot(seq.cl,
         cex.lab = 1.5,
         sortv = seq.om)
 ```
+We therefore switch to the R library `ggseqplot` which enables visualisation of sequence data based on `ggplot` functionalities. This package may provide more flexibility if we are more familiar with `ggplot`. 
+
+The figure below offers a clear representation of the systematic sequencing of states that each trajectory captures. It provides information on two key features of trajectories: sequencing and size. For example, trajectory 1 seems to capture a chaotic sequencing pattern of transitions between moderate growth, stability and decline and high decline. Trajectory 4 represents patterns of areas experiencing high population growth followed by a year of high decline, resulting in overall population decline in 2000-2020. From these plots, you can also identify which trajectories tend to be more common. In our example, trajectories 2 and 3 seem to involve the largest number of areas: 132 and 143, respectively.
+
+> Note: the resulting trajectories also raise various questions about the use of modelled data to analyse population trajectories. The data used in this chapter are estimates combining various sources and dissagregating data into small grids. The current results suggest the existence of various sources of noise and uncertainty. We are working with a sample of areas which reported population decline between 2000 and 2020. Yet, the most common pattern across the years is population growth. A closer examination into the data are required. We have revised our code several times and we could not identify any errors in data processing. While we do not discard this 100%, we still think the data need a careful examination.
 
 ```{r}
+# create individual sequence plots based on ggplot
 ggseqiplot(seq.cl, 
         group = pam_optimal$clustering,
         sortv = seq.om,
@@ -465,15 +490,15 @@ ggseqiplot(seq.cl,
   scale_fill_manual(values = rev(cols)) +
   scale_color_manual(values = rev(cols)) 
 ```
-
-Frequency plots
+We can also get a better understanding of the resulting trajectories by analysing state frequency plots. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e. looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.
 
 ```{r}
+# create individual sequence plots based on ggplot
 ggseqdplot(seq.cl, 
         group = pam_optimal$clustering,
         facet_ncol = 4) +
-  scale_fill_manual(values = rev(cols)) +
-  scale_color_manual(values = rev(cols)) 
+  scale_fill_manual(values = cols) +
+  scale_color_manual(values = cols) 
 ```
 
 Time spent

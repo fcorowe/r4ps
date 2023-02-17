@@ -463,10 +463,11 @@ pam_optimal <- pam(seq.om, 7)
 
 ### Visualising
 
-To understand the representative patterns captured in our data partition, we use visualisation. There is a battery of different visualisation tools to extract information and identify distinctive features of the identified trajectories. We start by using individual sequence plots by trajectory type. They provide a visual representation of how individual areas in each trajectory type moves between states. Recall that we are capturing representative trajectories; hence, there is still quite a bit of variability in terms of the patterns encapsulated in each representative trajectory. Back to the individual sequence plots, each line in these plots represents an area. Time is displayed horizontally and colours encode different states - in our case of population change. Numbers on the y-axis display the number of areas in each cluster. The figure immediate below relies on the base `plot` library, and by default, it is not very visually appealing. 
+To understand the representative patterns captured in our data partition, we use visualisation. There is a battery of different visualisation tools to extract information and identify distinctive features of the identified trajectories. We start by using *individual sequence plots* by trajectory type. They provide a visual representation of how individual areas in each trajectory type moves between states. Recall that we are capturing representative trajectories; hence, there is still quite a bit of variability in terms of the patterns encapsulated in each representative trajectory. Back to the individual sequence plots, each line in these plots represents an area. Time is displayed horizontally and colours encode different states - in our case of population change. Numbers on the y-axis display the number of areas in each cluster. The figure immediate below relies on the base `plot` library, and by default, it is not very visually appealing. 
 
 ```{r}
 # create individual sequence plots
+par(mar=c(1,1,1,1))
 seqplot(seq.cl, 
         group = pam_optimal$clustering,
         type = "I",
@@ -490,20 +491,20 @@ ggseqiplot(seq.cl,
   scale_fill_manual(values = rev(cols)) +
   scale_color_manual(values = rev(cols)) 
 ```
-We can also get a better understanding of the resulting trajectories by analysing state frequency plots. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e. looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.
+We can also get a better understanding of the resulting trajectories by analysing *state frequency plots*. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e. looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.
 
 ```{r}
-# create individual sequence plots based on ggplot
+# create state frequency plots based on ggplot
 ggseqdplot(seq.cl, 
         group = pam_optimal$clustering,
         facet_ncol = 4) +
   scale_fill_manual(values = cols) +
   scale_color_manual(values = cols) 
 ```
-
-Time spent
+We can also examine time spent in individual states in each trajectory. *Time spent plots* report the average time spent in each state. The measure of time depends on the original data used in the analysis. We use years so the y-axis refers to the average number of years that a given status appears in a representative trajectory type. For example, a score over 5 for stable in trajectory 1 indicates that the average number of years that areas in that typology are classified in that category is over 5.
 
 ```{r}
+# create time spent plots based on ggplot
 ggseqmtplot(seq.cl, 
         group = pam_optimal$clustering,
         facet_ncol = 4) +
@@ -512,10 +513,10 @@ ggseqmtplot(seq.cl,
   scale_x_discrete(labels=c("high_growth" = "HG", "growth" = "G",
                               "moderate_growth" = "MG", "stable" = "S", "moderate_decline" = "MD", "decline" = "D", "high_decline" = "HD" ))
 ```
-
-Entropy index
+Finally we analyse *entropy index plots*. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory. In other word, it indicates that there was more diversity of states.
 
 ```{r}
+# create entropy index plots based on ggplot
 ggseqeplot(seq.cl, 
         group = pam_optimal$clustering) +
   scale_colour_viridis_d()
@@ -523,12 +524,20 @@ ggseqeplot(seq.cl,
 
 ## Questions
 
-Francisco to write
+For the first assignment, we will continue to focus on London as our area of analysis. We will use population count estimates from the Office of National Statistics (ONS). The dataset provides information on area, population numbers and population density at national, regional and smaller sub-national area level, including Unitary Authority, Metropolitan County, Metropolitan District, County, Non-metropolitan District, London Borough, Council Area and Local Government District for the period from 2001 to 2020.
 
-This chapter shows the use of sequence analysis to study population decline and draw on the following papers:
+```{r}
+#| warning: false
+pop_df <- read_csv("./data/sequence-analysis/population_uk/population-uk-2011_20.csv")
+pop_df
+```
 
--   @rowe2022a
+For the assignment, you should only work with smaller sub-national areas. Filter out country and regional area. You should address the following questions: 
 
--   @newsham2022a
+1. Use sequence analysis to identify representative trajectories of population change and discuss the type of trajectories identified in London Boroughs. 
 
--   @rowe2022b
+2. Use individual sequence plot to identify distinctive features in the resulting trajectories.
+
+For the analysis, aim to focus on the area of London so you can link your narrative to the rest of analyses you will be conducting. 
+
+Ensure you justify the number of optimal clusters you will use in your analysis and provide a brief description of the trajectories identified. Describe how they are unique.

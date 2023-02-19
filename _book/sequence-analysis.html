@@ -361,7 +361,7 @@ div.csl-indent {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//Rtmpmg0W6N/wpgpDatasets.md5'</code></pre>
+'/var/folders/n7/k_dfmxgn3k79tvpfzffhhpqw0000gn/T//RtmpRgHelM/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ISO ISO3            Country
@@ -379,7 +379,7 @@ div.csl-indent {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//Rtmpmg0W6N/wpgpDatasets.md5'</code></pre>
+'/var/folders/n7/k_dfmxgn3k79tvpfzffhhpqw0000gn/T//RtmpRgHelM/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     ISO ISO3 Country Covariate
@@ -527,7 +527,7 @@ First 10 features:
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
- 63.794  11.082  75.280 </code></pre>
+104.751  44.563 155.147 </code></pre>
 </div>
 </div>
 <p><strong>Sub-national population</strong></p>
@@ -919,9 +919,6 @@ First 10 features:
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"d"</span>,</span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">with.legend =</span> <span class="st">"right"</span>,</span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [!!] In .main() : title is deprecated, use main instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="sequence-analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -931,18 +928,13 @@ First 10 features:
 <p>Note we are considering a fixed measure of transition rates. That means that we are using the whole dataset to compute an average transition rate between states. That assumes that the rate of change between states does not change over time. Yet, there may be good reasons to believe they do as areas move across different states. In empirical work, time varying transition rates are more often considered. That means we use temporal slices of the data to compute transition rates; for example, using data from 2001, 2002 and so on. In this way, we end up with potentially different transition rates for every year.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate transition rates</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>subs_costs <span class="ot">&lt;-</span> <span class="fu">seqsubm</span>(seq.cl, </span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method =</span> <span class="st">"TRATE"</span>,</span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                      <span class="co">#time.varying = TRUE</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] creating substitution-cost matrix using transition rates ...</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] computing transition probabilities for states high_growth/growth/moderate_growth/stable/moderate_decline/decline/high_decline ...</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>subs_costs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate transition rates</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>subs_costs <span class="ot">&lt;-</span> <span class="fu">seqsubm</span>(seq.cl, </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">method =</span> <span class="st">"TRATE"</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>                      <span class="co">#time.varying = TRUE</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>                      )</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>subs_costs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 high_growth   growth moderate_growth   stable moderate_decline
 high_growth         0.000000 1.847966        1.870644 1.855502         1.837147
@@ -964,11 +956,11 @@ high_decline     1.980392     0.000000</code></pre>
 </div>
 <p>To understand better the idea of substitution costs, we can have direct look at transition rates underpinning these costs. Transition rates can be computed via <code>seqtrate</code> . By definition, transition rates vary between 0 and 1, with zero indicating no probability of a transition occurring. One indicates a 100% probability of a transition taking place. Thus, for example, the matrix below tell us that there is a 66% probability of observing a transition from high decline to growth in our sample. Examining transition rates could provide very valuable information about the process in analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>seq.trate <span class="ot">&lt;-</span> <span class="fu">seqtrate</span>(seq.cl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>seq.trate <span class="ot">&lt;-</span> <span class="fu">seqtrate</span>(seq.cl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code> [&gt;] computing transition probabilities for states high_growth/growth/moderate_growth/stable/moderate_decline/decline/high_decline ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(seq.trate, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(seq.trate, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      [-&gt; high_growth] [-&gt; growth] [-&gt; moderate_growth]
 [high_growth -&gt;]                  0.16        0.14                 0.13
@@ -1001,29 +993,11 @@ high_decline     1.980392     0.000000</code></pre>
 <p>For indel, <code>auto</code> sets the indel as <code>max(sm)/2</code> when sm is a matrix. For more details, run <code>?seqdist</code> on your console</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate a distance matrix</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>seq.om <span class="ot">&lt;-</span> <span class="fu">seqdist</span>(seq.cl,</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"OM"</span>, <span class="co"># specify the method</span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">indel =</span> <span class="st">"auto"</span>, <span class="co"># specify indel costs</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sm =</span> subs_costs) <span class="co"># specify substitution costs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] 522 sequences with 7 distinct states</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] checking 'sm' (size and triangle inequality)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] 441 distinct  sequences </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] min/max sequence lengths: 20/20</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] computing distances using the OM metric</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] elapsed time: 0.093 secs</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate a distance matrix</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>seq.om <span class="ot">&lt;-</span> <span class="fu">seqdist</span>(seq.cl,</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"OM"</span>, <span class="co"># specify the method</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">indel =</span> <span class="st">"auto"</span>, <span class="co"># specify indel costs</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sm =</span> subs_costs) <span class="co"># specify substitution costs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As highlighted above, if you would like to apply varying substitution costs, you can do this directly here by using the option <code>method = DHD</code> .</p>
 </section>
@@ -1031,22 +1005,22 @@ high_decline     1.980392     0.000000</code></pre>
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="clustering"><span class="header-section-number">4.3.3</span> Clustering</h3>
 <p>The resulting distance matrix from OM <code>seq.om</code> indicates the degree of similarity between individual sequences. To identify representative trajectories, we then need to a way to group together similar sequences to produce a typology, in this case of population decline trajectories. Unsupervised cluster analysis is generally used for this task. Trusting you have built an understanding of cluster analysis from the previous chapter, we will not provide an elaborate description here. If you would like to know more about cluster analysis, we recommend the introductory book by <span class="citation" data-cites="kaufman2009finding">Kaufman and Rousseeuw (<a href="references.html#ref-kaufman2009finding" role="doc-biblioref">2009</a>)</span>. We use a clustering method called <code>k-meloids</code> . This methods is known to be more robust to noise and outliers than the conventional k-means procedure <span class="citation" data-cites="backman2020">(<a href="references.html#ref-backman2020" role="doc-biblioref">Backman, Lopez, and Rowe 2020</a>)</span>. This is because the medoid algorithm clusters the data by minimising a sum of pair-wise dissimilarities <span class="citation" data-cites="kaufman2009finding">(<a href="references.html#ref-kaufman2009finding" role="doc-biblioref">Kaufman and Rousseeuw 2009</a>)</span>, rather than a sum of squared Euclidean distances. We run cluster analyses at different numbers of <code>k</code> starting from 2 to 20.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run PAMs</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>)</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  pam_sol <span class="ot">&lt;-</span> <span class="fu">pam</span>(seq.om, k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run PAMs</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  pam_sol <span class="ot">&lt;-</span> <span class="fu">pam</span>(seq.om, k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We then seek to determine the optimal number of clusters <code>k</code>. We use silhouette scores, but as we noted <a href="geodemographics.html"><span>Chapter&nbsp;3</span></a>, the optimal number of clusters is better determined by the user given the context and use case. It is an art. There is no wrong or right answer. As can be seen from the results below from the average silhouette score, two clusters is suggested as the optimal solution. However, we could argue that we gain very little from such coarse partition of the data. We suggest to take this as guidance and a starting point to look to identify an appropriate data partition. We suggest to visualise different solution and gain an understanding of what data get split and decide on whether the resulting patterns contribute to the understanding of the process at hand.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute average silhouette scores for all 20 cluster solutions</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>asw <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">20</span>)</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>)</span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  asw[k] <span class="ot">&lt;-</span> <span class="fu">pam</span>(seq.om, k) <span class="sc">$</span> silinfo <span class="sc">$</span> avg.width</span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  k.best <span class="ot">&lt;-</span> <span class="fu">which.max</span>(asw)</span>
-<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"silhouette-optimal number of clusters:"</span>, k.best, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute average silhouette scores for all 20 cluster solutions</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>asw <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">20</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  asw[k] <span class="ot">&lt;-</span> <span class="fu">pam</span>(seq.om, k) <span class="sc">$</span> silinfo <span class="sc">$</span> avg.width</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  k.best <span class="ot">&lt;-</span> <span class="fu">which.max</span>(asw)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"silhouette-optimal number of clusters:"</span>, k.best, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>silhouette-optimal number of clusters: 2 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>  asw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>  asw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 0.0000000 0.5584480 0.5369175 0.5103584 0.4989714 0.4094865 0.3950388
  [8] 0.4190322 0.4234781 0.4143383 0.4047555 0.3961153 0.3338910 0.3280279
@@ -1055,23 +1029,23 @@ high_decline     1.980392     0.000000</code></pre>
 </div>
 <p>We rerun and save the results for a 7k cluster partition. If you inspect the resulting data frame, it provides an identifier for each cluster. Each individual area is attributed to a cluster. Next the question that we seek to answer is what sort of pattern do these clusters capture?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rerun pam for k=7</span></span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>pam_optimal <span class="ot">&lt;-</span> <span class="fu">pam</span>(seq.om, <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rerun pam for k=7</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>pam_optimal <span class="ot">&lt;-</span> <span class="fu">pam</span>(seq.om, <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualising" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="visualising"><span class="header-section-number">4.3.4</span> Visualising</h3>
 <p>To understand the representative patterns captured in our data partition, we use visualisation. There is a battery of different visualisation tools to extract information and identify distinctive features of the identified trajectories. We start by using <em>individual sequence plots</em> by trajectory type. They provide a visual representation of how individual areas in each trajectory type moves between states. Recall that we are capturing representative trajectories; hence, there is still quite a bit of variability in terms of the patterns encapsulated in each representative trajectory. Back to the individual sequence plots, each line in these plots represents an area. Time is displayed horizontally and colours encode different states - in our case of population change. Numbers on the y-axis display the number of areas in each cluster. The figure immediate below relies on the base <code>plot</code> library, and by default, it is not very visually appealing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create individual sequence plots</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">seqplot</span>(seq.cl, </span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"I"</span>,</span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>, </span>
-<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.axis =</span> <span class="fl">1.5</span>, </span>
-<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> <span class="fl">1.5</span>,</span>
-<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">sortv =</span> seq.om)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create individual sequence plots</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">seqplot</span>(seq.cl, </span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"I"</span>,</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">border =</span> <span class="cn">NA</span>, </span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.axis =</span> <span class="fl">1.5</span>, </span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.lab =</span> <span class="fl">1.5</span>,</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">sortv =</span> seq.om)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="sequence-analysis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1082,13 +1056,13 @@ high_decline     1.980392     0.000000</code></pre>
 <p>Note: the resulting trajectories also raise various questions about the use of modelled data to analyse population trajectories. The data used in this chapter are estimates combining various sources and dissagregating data into small grids. The current results suggest the existence of various sources of noise and uncertainty. We are working with a sample of areas which reported population decline between 2000 and 2020. Yet, the most common pattern across the years is population growth. A closer examination into the data are required. We have revised our code several times and we could not identify any errors in data processing. While we do not discard this 100%, we still think the data need a careful examination.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create individual sequence plots based on ggplot</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqiplot</span>(seq.cl, </span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sortv =</span> seq.om,</span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
-<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create individual sequence plots based on ggplot</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqiplot</span>(seq.cl, </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">sortv =</span> seq.om,</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
@@ -1101,12 +1075,12 @@ Adding another scale for colour, which will replace the existing scale.</code></
 </div>
 <p>We can also get a better understanding of the resulting trajectories by analysing <em>state frequency plots</em>. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e.&nbsp;looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create state frequency plots based on ggplot</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqdplot</span>(seq.cl, </span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span></span>
-<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create state frequency plots based on ggplot</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqdplot</span>(seq.cl, </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.</code></pre>
@@ -1117,14 +1091,14 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 <p>We can also examine time spent in individual states in each trajectory. <em>Time spent plots</em> report the average time spent in each state. The measure of time depends on the original data used in the analysis. We use years so the y-axis refers to the average number of years that a given status appears in a representative trajectory type. For example, a score over 5 for stable in trajectory 1 indicates that the average number of years that areas in that typology are classified in that category is over 5.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create time spent plots based on ggplot</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqmtplot</span>(seq.cl, </span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
-<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
-<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"high_growth"</span> <span class="ot">=</span> <span class="st">"HG"</span>, <span class="st">"growth"</span> <span class="ot">=</span> <span class="st">"G"</span>,</span>
-<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"moderate_growth"</span> <span class="ot">=</span> <span class="st">"MG"</span>, <span class="st">"stable"</span> <span class="ot">=</span> <span class="st">"S"</span>, <span class="st">"moderate_decline"</span> <span class="ot">=</span> <span class="st">"MD"</span>, <span class="st">"decline"</span> <span class="ot">=</span> <span class="st">"D"</span>, <span class="st">"high_decline"</span> <span class="ot">=</span> <span class="st">"HD"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create time spent plots based on ggplot</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqmtplot</span>(seq.cl, </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"high_growth"</span> <span class="ot">=</span> <span class="st">"HG"</span>, <span class="st">"growth"</span> <span class="ot">=</span> <span class="st">"G"</span>,</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"moderate_growth"</span> <span class="ot">=</span> <span class="st">"MG"</span>, <span class="st">"stable"</span> <span class="ot">=</span> <span class="st">"S"</span>, <span class="st">"moderate_decline"</span> <span class="ot">=</span> <span class="st">"MD"</span>, <span class="st">"decline"</span> <span class="ot">=</span> <span class="st">"D"</span>, <span class="st">"high_decline"</span> <span class="ot">=</span> <span class="st">"HD"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.</code></pre>
@@ -1135,10 +1109,10 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 <p>Finally we analyse <em>entropy index plots</em>. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory. In other word, it indicates that there was more diversity of states.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create entropy index plots based on ggplot</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqeplot</span>(seq.cl, </span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering) <span class="sc">+</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create entropy index plots based on ggplot</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqeplot</span>(seq.cl, </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for colour is already present.
 Adding another scale for colour, which will replace the existing scale.</code></pre>
@@ -1153,8 +1127,8 @@ Adding another scale for colour, which will replace the existing scale.</code></
 <h2 data-number="4.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">4.4</span> Questions</h2>
 <p>For the first assignment, we will continue to focus on London as our area of analysis. We will use population count estimates from the Office of National Statistics (ONS). The dataset provides information on area, population numbers and population density at national, regional and smaller sub-national area level, including Unitary Authority, Metropolitan County, Metropolitan District, County, Non-metropolitan District, London Borough, Council Area and Local Government District for the period from 2001 to 2020.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/sequence-analysis/population_uk/population-uk-2011_20.csv"</span>)</span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>pop_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/sequence-analysis/population_uk/population-uk-2011_20.csv"</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>pop_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 420 × 44
    Code    Name  Geogr…¹ Area …² Estim…³ 2020 …⁴ Estim…⁵ 2019 …⁶ Estim…⁷ 2018 …⁸

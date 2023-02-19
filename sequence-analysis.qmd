@@ -390,6 +390,8 @@ seq.cl <- seqdef(wide_population_loss_df,
 Using the sequence data object, we create a state distribution plot to get an understanding of the data. The plot shows the distribution of areas across status of population change in individual years. The overall picture emerging from the plots is that while areas in the sample recorded overall population decline between 2000 and 2020, the predominant year-to-year pattern was moderate growth. This suggests that areas may have experienced one or two years of severe population loss resulting in an overall pattern of decline.
 
 ```{r}
+#| warning: false
+
 seqplot(seq.cl, 
         title="State distribution plot", 
         type = "d",
@@ -402,6 +404,8 @@ We now move on to compute the substitution costs for our population states. From
 > Note we are considering a fixed measure of transition rates. That means that we are using the whole dataset to compute an average transition rate between states. That assumes that the rate of change between states does not change over time. Yet, there may be good reasons to believe they do as areas move across different states. In empirical work, time varying transition rates are more often considered. That means we use temporal slices of the data to compute transition rates; for example, using data from 2001, 2002 and so on. In this way, we end up with potentially different transition rates for every year.
 
 ```{r}
+#| warning: false
+
 # Calculate transition rates
 subs_costs <- seqsubm(seq.cl, 
                       method = "TRATE",
@@ -423,6 +427,8 @@ Now we focus on the probably most important component of sequence analysis; that
 > For indel, `auto` sets the indel as `max(sm)/2` when sm is a matrix. For more details, run `?seqdist` on your console
 
 ```{r}
+#| warning: false
+
 # Calculate a distance matrix
 seq.om <- seqdist(seq.cl,
                   method = "OM", # specify the method
@@ -432,10 +438,9 @@ seq.om <- seqdist(seq.cl,
 
 As highlighted above, if you would like to apply varying substitution costs, you can do this directly here by using the option `method = DHD` .
 
-### Clustering						
+### Clustering
 
-The resulting distance matrix from OM `seq.om` indicates the degree of similarity between individual sequences. To identify representative trajectories, we then need to a way to group together similar sequences to produce a typology, in this case of population decline trajectories. Unsupervised cluster analysis is generally used for this task. Trusting you have built an understanding of cluster analysis from the previous chapter, we will not provide an elaborate description here. If you would like to know more about cluster analysis, we recommend the introductory book by @kaufman2009finding. We use a clustering method called `k-meloids` . This methods is known to be more robust to noise and outliers than the
-conventional k-means procedure [@backman2020]. This is because the medoid algorithm clusters the data by minimising a sum of pair-wise dissimilarities [@kaufman2009finding], rather than a sum of squared Euclidean distances. We run cluster analyses at different numbers of `k` starting from 2 to 20.
+The resulting distance matrix from OM `seq.om` indicates the degree of similarity between individual sequences. To identify representative trajectories, we then need to a way to group together similar sequences to produce a typology, in this case of population decline trajectories. Unsupervised cluster analysis is generally used for this task. Trusting you have built an understanding of cluster analysis from the previous chapter, we will not provide an elaborate description here. If you would like to know more about cluster analysis, we recommend the introductory book by @kaufman2009finding. We use a clustering method called `k-meloids` . This methods is known to be more robust to noise and outliers than the conventional k-means procedure [@backman2020]. This is because the medoid algorithm clusters the data by minimising a sum of pair-wise dissimilarities [@kaufman2009finding], rather than a sum of squared Euclidean distances. We run cluster analyses at different numbers of `k` starting from 2 to 20.
 
 ```{r}
 # run PAMs
@@ -456,6 +461,7 @@ for (k in 2:20)
 ```
 
 We rerun and save the results for a 7k cluster partition. If you inspect the resulting data frame, it provides an identifier for each cluster. Each individual area is attributed to a cluster. Next the question that we seek to answer is what sort of pattern do these clusters capture?
+
 ```{r}
 # rerun pam for k=7
 pam_optimal <- pam(seq.om, 7)
@@ -463,7 +469,7 @@ pam_optimal <- pam(seq.om, 7)
 
 ### Visualising
 
-To understand the representative patterns captured in our data partition, we use visualisation. There is a battery of different visualisation tools to extract information and identify distinctive features of the identified trajectories. We start by using *individual sequence plots* by trajectory type. They provide a visual representation of how individual areas in each trajectory type moves between states. Recall that we are capturing representative trajectories; hence, there is still quite a bit of variability in terms of the patterns encapsulated in each representative trajectory. Back to the individual sequence plots, each line in these plots represents an area. Time is displayed horizontally and colours encode different states - in our case of population change. Numbers on the y-axis display the number of areas in each cluster. The figure immediate below relies on the base `plot` library, and by default, it is not very visually appealing. 
+To understand the representative patterns captured in our data partition, we use visualisation. There is a battery of different visualisation tools to extract information and identify distinctive features of the identified trajectories. We start by using *individual sequence plots* by trajectory type. They provide a visual representation of how individual areas in each trajectory type moves between states. Recall that we are capturing representative trajectories; hence, there is still quite a bit of variability in terms of the patterns encapsulated in each representative trajectory. Back to the individual sequence plots, each line in these plots represents an area. Time is displayed horizontally and colours encode different states - in our case of population change. Numbers on the y-axis display the number of areas in each cluster. The figure immediate below relies on the base `plot` library, and by default, it is not very visually appealing.
 
 ```{r}
 # create individual sequence plots
@@ -476,7 +482,8 @@ seqplot(seq.cl,
         cex.lab = 1.5,
         sortv = seq.om)
 ```
-We therefore switch to the R library `ggseqplot` which enables visualisation of sequence data based on `ggplot` functionalities. This package may provide more flexibility if we are more familiar with `ggplot`. 
+
+We therefore switch to the R library `ggseqplot` which enables visualisation of sequence data based on `ggplot` functionalities. This package may provide more flexibility if we are more familiar with `ggplot`.
 
 The figure below offers a clear representation of the systematic sequencing of states that each trajectory captures. It provides information on two key features of trajectories: sequencing and size. For example, trajectory 1 seems to capture a chaotic sequencing pattern of transitions between moderate growth, stability and decline and high decline. Trajectory 4 represents patterns of areas experiencing high population growth followed by a year of high decline, resulting in overall population decline in 2000-2020. From these plots, you can also identify which trajectories tend to be more common. In our example, trajectories 2 and 3 seem to involve the largest number of areas: 132 and 143, respectively.
 
@@ -491,6 +498,7 @@ ggseqiplot(seq.cl,
   scale_fill_manual(values = rev(cols)) +
   scale_color_manual(values = rev(cols)) 
 ```
+
 We can also get a better understanding of the resulting trajectories by analysing *state frequency plots*. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e. looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.
 
 ```{r}
@@ -501,6 +509,7 @@ ggseqdplot(seq.cl,
   scale_fill_manual(values = cols) +
   scale_color_manual(values = cols) 
 ```
+
 We can also examine time spent in individual states in each trajectory. *Time spent plots* report the average time spent in each state. The measure of time depends on the original data used in the analysis. We use years so the y-axis refers to the average number of years that a given status appears in a representative trajectory type. For example, a score over 5 for stable in trajectory 1 indicates that the average number of years that areas in that typology are classified in that category is over 5.
 
 ```{r}
@@ -513,6 +522,7 @@ ggseqmtplot(seq.cl,
   scale_x_discrete(labels=c("high_growth" = "HG", "growth" = "G",
                               "moderate_growth" = "MG", "stable" = "S", "moderate_decline" = "MD", "decline" = "D", "high_decline" = "HD" ))
 ```
+
 Finally we analyse *entropy index plots*. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory. In other word, it indicates that there was more diversity of states.
 
 ```{r}
@@ -532,12 +542,12 @@ pop_df <- read_csv("./data/sequence-analysis/population_uk/population-uk-2011_20
 pop_df
 ```
 
-For the assignment, you should only work with smaller sub-national areas. Filter out country and regional area. You should address the following questions: 
+For the assignment, you should only work with smaller sub-national areas. Filter out country and regional area. You should address the following questions:
 
-1. Use sequence analysis to identify representative trajectories of population change and discuss the type of trajectories identified in London Boroughs. 
+1.  Use sequence analysis to identify representative trajectories of population change and discuss the type of trajectories identified in London Boroughs.
 
-2. Use individual sequence plot to identify distinctive features in the resulting trajectories.
+2.  Use individual sequence plot to identify distinctive features in the resulting trajectories.
 
-For the analysis, aim to focus on the area of London so you can link your narrative to the rest of analyses you will be conducting. 
+For the analysis, aim to focus on the area of London so you can link your narrative to the rest of analyses you will be conducting.
 
 Ensure you justify the number of optimal clusters you will use in your analysis and provide a brief description of the trajectories identified. Describe how they are unique.

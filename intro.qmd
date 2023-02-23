@@ -76,10 +76,12 @@ The list of libraries used in this book is provided below:
 -   `plotrix`
 -   `cluster`
 -   `factoextra`
+-   `igraph`
+-   `stringr`
 
 You need to ensure you have installed the list of libraries used in this book, running the following code:
 
-> list.of.packages.cran \<- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra")
+> list.of.packages.cran \<- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr")
 
 > new.packages.cran \<- list.of.packages.cran\[!(list.of.packages.cran %in% installed.packages()\[,"Package"\])\] if(length(new.packages.cran)) install.packages(new.packages.cran)
 

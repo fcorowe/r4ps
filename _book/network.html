@@ -439,7 +439,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 7/7 vertices, named, from 3478d6b:
+<pre><code>+ 7/7 vertices, named, from 2d08eab:
 [1] City 1 City 2 City 3 City 4 City 5 City 6 City 7</code></pre>
 </div>
 </div>
@@ -458,7 +458,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 6/6 edges from 3478d6b (vertex names):
+<pre><code>+ 6/6 edges from 2d08eab (vertex names):
 [1] City 1-&gt;City 2 City 2-&gt;City 3 City 1-&gt;City 4 City 4-&gt;City 1 City 4-&gt;City 2
 [6] City 4-&gt;City 5</code></pre>
 </div>
@@ -617,7 +617,7 @@ $population
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_sub)<span class="sc">$</span>inflow <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">as.matrix</span>(g_sub[]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Below we set the node size based on the inflow attribute. Note the formula <em>0.4*(V(gsub)$inflow)^0.4</em>, where the power of 0.4 is chosen to scale the size of the nodes in such a way that the largest ones do not get excessively large and the smallest ones do not get excessively small. We also set the edge width based on its weight, which is the total number of people migrating from the origin and destination cities that it connects.</p>
+<p>Below we set the node size based on the inflow attribute. Note the formula <span class="math inline">\(0.4\times(V(gsub)\$inflow)^{0.4}\)</span>, where the power of 0.4 is chosen to scale the size of the nodes in such a way that the largest ones do not get excessively large and the smallest ones do not get excessively small. We also set the edge width based on its weight, which is the total number of people migrating from the origin and destination cities that it connects.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set node size based on inflow of migrants:</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g_sub)<span class="sc">$</span>size <span class="ot">&lt;-</span> <span class="fl">0.4</span><span class="sc">*</span>(<span class="fu">V</span>(g_sub)<span class="sc">$</span>inflow)<span class="sc">^</span><span class="fl">0.4</span></span>
@@ -781,13 +781,13 @@ Geodetic CRS:  NAD83</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$vpath
 $vpath[[1]]
-+ 2/402 vertices, named, from ff8053b:
++ 2/402 vertices, named, from b082325:
 [1] New York-Newark-Jersey City, NY-NJ-PA Los Angeles-Long Beach-Anaheim, CA   
 
 
 $epath
 $epath[[1]]
-+ 1/52930 edge from ff8053b (vertex names):
++ 1/52930 edge from b082325 (vertex names):
 [1] New York-Newark-Jersey City, NY-NJ-PA-&gt;Los Angeles-Long Beach-Anaheim, CA
 
 

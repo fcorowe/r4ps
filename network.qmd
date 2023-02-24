@@ -53,8 +53,6 @@ df$MSA_Current_Code <- as.character(df$MSA_Current_Code)
 df$MSA_Previous_Name_State <- paste0(df$MSA_Previous_Name, ', ', df$MSA_Previous_State)
 df$MSA_Current_Name_State <- paste0(df$MSA_Current_Name, ', ', df$MSA_Current_State)
 
-#Examine the first few rows of the dataset
-head(df) 
 ```
 
 Each row corresponds to an origin-destination pair, so we can obtain the total number of reported migratory movements with the following command:
@@ -133,7 +131,7 @@ E(g3)
 and add edge attributes, such as the number of people moving from an origin to a destination city in two consecutive years. We call this attribute the *weight* of the edge, since if there is a lot of people going from one city to another, the connection between these cities has more importance or "weight" in the network.
 
 ```{r}
-{E(g3)$weight <- c(2000, 3000, 5000, 1000, 1000, 4000)}
+E(g3)$weight <- c(2000, 3000, 5000, 1000, 1000, 4000)
 ```
 
 We can examine the adjacency matrix of the network, which represents the presence of edges between different pairs of nodes. In this case, each row corresponds to an origin city and each column to a destination:
@@ -211,7 +209,7 @@ plot(g_US)
 
 ### Filtering the data to create a subgraph
 
-We will dedicate the entirety of next section to explore tools that can help us improve the visualisation of networks, since it is one of the most important aspects of network analysis. To facilitate the visualisation in the examples shown in @sec-sec_visualise, we will work with a subset of the full network called *g_US*. A way to create a subnetwork is to filter the original data frame. In particular, we will filter *df* to only include cities from a state, in this case, Minnesota. To filter, we use the **grepl()** function, which stands for grep logical. Both **grep()** and **grepl()** allow us to check whether a pattern is present in a character string or vector of a character string. While the **grep()** function returns a vector of indices of the element if a pattern exists in that vector, the **grepl()** function returns TRUE if the given pattern is present in the vector. Otherwise, it returns FALSE. In this case, we are filtering the dataset so that only the rows where the field MSA_Current_State is WA, which is the official abbreviation for Washington state.
+We will dedicate the entirety of next section to explore tools that can help us improve the visualisation of networks, since it is one of the most important aspects of network analysis. To facilitate the visualisation in the examples shown in @sec-sec_visualise, we will work with a subset of the full network called *g_US*. A way to create a subnetwork is to filter the original data frame. In particular, we will filter *df* to only include cities from a state, in this case, Washington. To filter, we use the **grepl()** function, which stands for grep logical. Both **grep()** and **grepl()** allow us to check whether a pattern is present in a character string or vector of a character string. While the **grep()** function returns a vector of indices of the element if a pattern exists in that vector, the **grepl()** function returns TRUE if the given pattern is present in the vector. Otherwise, it returns FALSE. In this case, we are filtering the dataset so that only the rows where the field MSA_Current_State is WA, which is the official abbreviation for Washington state.
 
 ```{r}
 # Filter the original data frame
@@ -388,7 +386,7 @@ Here we define some of the most important metrics that help us quantify differen
 
 ### Density
 
-The network **density** is defined as the proportion of existing edges out of all the possible edges. In a network with $n$ nodes, the total number of possible edges is \$n\\times(n-1)\$, i.e. the number of edges if each node was connected to all the other nodes. A density equal to $1$ corresponds to a situation where $n\times(n-1)$ edges are present. A network with no edges at all would have density equal to $0$. The line of code below tells us that the density of *g_sub* is approximately 0.33, meaning that about 33% of all the possible edges are present, or in other words, that there are migratory movements between almost a third of every pair of cities.
+The network **density** is defined as the proportion of existing edges out of all the possible edges. In a network with $n$ nodes, the total number of possible edges is $n\times(n-1)$, i.e. the number of edges if each node was connected to all the other nodes. A density equal to $1$ corresponds to a situation where $n\times(n-1)$ edges are present. A network with no edges at all would have density equal to $0$. The line of code below tells us that the density of *g_sub* is approximately 0.33, meaning that about 33% of all the possible edges are present, or in other words, that there are migratory movements between almost a third of every pair of cities.
 
 ```{r}
 edge_density(g_US, loops=FALSE)

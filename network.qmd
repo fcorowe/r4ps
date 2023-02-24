@@ -287,7 +287,7 @@ But there are few more things we can do not only to improve the look of the diag
 V(g_sub)$inflow <- rowSums(as.matrix(g_sub[]))
 ```
 
-Below we set the node size based on the inflow attribute. Note the formula *0.4\*(V(gsub)\$inflow)\^0.4*, where the power of 0.4 is chosen to scale the size of the nodes in such a way that the largest ones do not get excessively large and the smallest ones do not get excessively small. We also set the edge width based on its weight, which is the total number of people migrating from the origin and destination cities that it connects.
+Below we set the node size based on the inflow attribute. Note the formula $0.4\times(V(gsub)\$inflow)^{0.4}$, where the power of 0.4 is chosen to scale the size of the nodes in such a way that the largest ones do not get excessively large and the smallest ones do not get excessively small. We also set the edge width based on its weight, which is the total number of people migrating from the origin and destination cities that it connects.
 
 ```{r}
 

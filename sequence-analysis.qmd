@@ -147,7 +147,7 @@ ukr_eshp <- lapply(popbyarea_df, add_population)
 select_pop <- function(x) dplyr::select(x, GID_2, NAME_2, population)
 population_df <- lapply(ukr_eshp, select_pop) %>% 
   do.call(rbind, .)
-population_df$year <- rep(seq(2000, 2020, by=1), times = 1)
+population_df$year <- rep(seq(2000, 2020), times = 1, each = nrow(ukr_shp))
 rownames(population_df) <- rep(seq(1, nrow(population_df), by=1), times = 1)
 
 # sub-national spatial data frame
@@ -227,7 +227,7 @@ population_df <- population_df %>%
 
 ```
 
-Let's map the overall percentage change in population between 2000 and 2020. We see a wide spread pattern of population decline across Ukraine. We observe a large spatial cluster of population decline around the capital city of Kiev and moderate population decline across most of the country. Administrative areas containing large cities seem to record overall population growth between 2000 and 2020, potentially absorbing population movements from the rest of the country. What else do you think may be driving population growth in cities? And in contrast, what do you think is contributing to population decline in other parts of Ukraine?
+Let's map the overall percentage change in population between 2000 and 2020. We see a wide spread pattern of population decline across Ukraine. We observe a large spatial cluster of high population decline across the country with moderate population decline in some areas. Administrative areas containing large cities seem to record overall population growth between 2000 and 2020, potentially absorbing population movements from the rest of the country. What else do you think may be driving population growth in cities? And in contrast, what do you think is contributing to population decline in most of Ukraine?
 
 ```{r}
 
@@ -273,7 +273,7 @@ population_df %>% dplyr::filter( ave_pct_change_2000_21 < 0) %>%
   theme(axis.text.y = element_text(size=8))
 ```
 
-The Hovmöller Plot shows that most of the selected areas tend to experience moderate annual percentage changes in population between -5 and 5. Though, it also reveals sudden large losses in specific years. Thus, while Hovmöller Plots provide some understanding of the annual population changes, they are limited in that we can only analyse a handful of areas at the time and it is therefore difficult to identify systematic representative patterns. Here we have selected 40 areas of a total of 629. Displaying the total number of areas in a Hovmöller Plot will not produce readable results. Even if that was the case, it would be difficult to identify systematic patterns. As we will seek to persuade you below, sequence analysis provides a very novel way to define representative trajectories in the data, identify systematic patterns and extract distinctive features characterising those trajectories.
+The Hovmöller Plot shows that most of the selected areas tend to experience annual population decline, with varying spells of population growth. Percentage population changes range between 1 and -2.5. We also observe areas with consistent trajectories of annual population decline, like Zolochivs'kyi and Barvinkivs'kyi, and areas with strong decline in the first few years between 2000 and 2005 but moderate decline later on, such as Novovorontsovk'kyi. Yet, Hovmöller Plots provide a limited understanding of the annual population changes for a handful of areas at the time and it is therefore difficult to identify systematic representative patterns. Here we have selected 40 areas of a total of 629. Displaying the total number of areas in a Hovmöller Plot will not produce readable results. Even if that was the case, it would be difficult to identify systematic patterns. As we will seek to persuade you below, sequence analysis provides a very novel way to define representative trajectories in the data, identify systematic patterns and extract distinctive features characterising those trajectories.
 
 ## Application
 
@@ -337,7 +337,7 @@ We measure the extent of dissimilarity between individual sequence of population
 
 *Substitution operations* or costs represent transition costs; that is, the cost for substituting each state with another. Substitution costs are defined in one of two ways [@salmela-aro2011]. One approach is the theory-driven approach. In such approach, substitution costs are grounded in theory suggesting that, for example, transforming state 1 to state 2 should have a greater cost than transforming state 1 to state 3, or performing the opposite operation i.e. transforming state 2 to state 1. An example could be that it is more financially costly to transition from *full-time employment* to *full-time education* than transition from *full-time education* to *full-time employment*.
 
-A second approach and most commonly used in empirical work is a data-driven approach. In this approach, substitution costs are empirically derived from transition rates between states. The cost of substitution is inversely related to the frequency of observed transitions within the data. This means that infrequent transitions between states have a higher substitution cost. For example, as we will see, transitions from the state of decline to moderate decline are rarer than decline to growth in Ukraine. The transition rate between state $i$ and state $j$ is the probability of observing state $j$ at time $t1$ given that the state $i$ is observed at time $t$ for $i \neq j$. The substitution cost between states $i$ and $j$ is computed as:
+A second approach and most commonly used in empirical work is a data-driven approach. In this approach, substitution costs are empirically derived from transition rates between states. The cost of substitution is inversely related to the frequency of observed transitions within the data. This means that infrequent transitions between states have a higher substitution cost. For example, as we will see, transitions from the state of high decline to high growth are rarer than from high growth to high decline in Ukraine. The transition rate between state $i$ and state $j$ is the probability of observing state $j$ at time $t1$ given that the state $i$ is observed at time $t$ for $i \neq j$. The substitution cost between states $i$ and $j$ is computed as:
 
 $$
 2 - {p(i | j) - p(j | i)}
@@ -387,7 +387,7 @@ seq.cl <- seqdef(wide_population_loss_df,
                          "7" = "#2d004b"))
 ```
 
-Using the sequence data object, we create a state distribution plot to get an understanding of the data. The plot shows the distribution of areas across status of population change in individual years. The overall picture emerging from the plots is that while areas in the sample recorded overall population decline between 2000 and 2020, the predominant year-to-year pattern was moderate growth. This suggests that areas may have experienced one or two years of severe population loss resulting in an overall pattern of decline.
+Using the sequence data object, we create a state distribution plot to get an understanding of the data. The plot shows the distribution of areas across status of population change in individual years. The overall picture emerging from the plot is an overall pattern of population decline between 2000 and 2020, predominantly moderate decline and limited spells of high population decline or growth. This aligns with the predominant trajectory of population decline observed in Ukrain based on more aggregate data at the regional level [@newsham2022].
 
 ```{r}
 #| warning: false
@@ -399,7 +399,7 @@ seqplot(seq.cl,
         border = NA)
 ```
 
-We now move on to compute the substitution costs for our population states. From the equation above, you may have realised that transition costs vary between 0 and 2, with the former indicating zero cost. The latter indicates the maximum cost of converting one state into another. The option `TRATE` in method states to derive costs from observed transition rates. That is the data-driven approach discussed above. From the matrix below, you can see that it is more costly to convert a status "high decline" to "decline" than "high decline" to "growth". This is an unexpected result. Intuitively, we could have expected the opposite. We would naturally expect areas to continue their trajectory population of decline, rather than a shift to growth. Though patterns of temporary decline have been identified as a predominant trajectory of population decline across Europe, particularly in Germany [@newsham2022].
+We now move on to compute the substitution costs for our population states. From the equation above, you may have realised that transition costs vary between 0 and 2, with the former indicating zero cost. The latter indicates the maximum cost of converting one state into another. The option `TRATE` in method states to derive costs from observed transition rates. That is the data-driven approach discussed above. From the matrix below, you can see that it is more costly to convert a status "high growth" to "moderate decline" than from "growth" to "moderate". This makes sense. We expect gradual changes in population along a given trajectory if they were to occur due to natural causes.
 
 > Note we are considering a fixed measure of transition rates. That means that we are using the whole dataset to compute an average transition rate between states. That assumes that the rate of change between states does not change over time. Yet, there may be good reasons to believe they do as areas move across different states. In empirical work, time varying transition rates are more often considered. That means we use temporal slices of the data to compute transition rates; for example, using data from 2001, 2002 and so on. In this way, we end up with potentially different transition rates for every year.
 
@@ -415,14 +415,14 @@ subs_costs <- seqsubm(seq.cl,
 subs_costs
 ```
 
-To understand better the idea of substitution costs, we can have direct look at transition rates underpinning these costs. Transition rates can be computed via `seqtrate` . By definition, transition rates vary between 0 and 1, with zero indicating no probability of a transition occurring. One indicates a 100% probability of a transition taking place. Thus, for example, the matrix below tell us that there is a 66% probability of observing a transition from high decline to growth in our sample. Examining transition rates could provide very valuable information about the process in analysis.
+To understand better the idea of substitution costs, we can have direct look at transition rates underpinning these costs. Transition rates can be computed via `seqtrate` . By definition, transition rates vary between 0 and 1, with zero indicating no probability of a transition occurring. One indicates a 100% probability of a transition taking place. Thus, for example, the matrix below tell us that there is a 5% probability of observing a transition from "high growth" to "moderate decline" in our sample. Examining transition rates could provide very valuable information about the process in analysis.
 
 ```{r}
 seq.trate <- seqtrate(seq.cl)
 round(seq.trate, 2)
 ```
 
-Now we focus on the probably most important component of sequence analysis; that is the calculation of dissimilarity. Recall our aim is to identify representative trajectories. To this end, we need a way to measure how similar or different sequences are - which is known as OM. Above, we described that we can use indel and substitution operations to measure the dissimilarity or costs between individual sequences. The code chunk implements OM based on indel and substitution operations. The algorithm takes an individual sequence and compares it with all of the sequences in the dataset, and identifies the sequence with the minimum cost i.e. the most similar sequence. The result of this computing intensive process is a distance matrix encoding the similarity or dissimilarity between individual sequences.
+Now we focus on the probably most important component of sequence analysis; that is, the calculation of dissimilarity. Recall our aim is to identify representative trajectories. To this end, we need a way to measure how similar or different sequences are - which is known as OM. Above, we described that we can use indel and substitution operations to measure the dissimilarity or costs between individual sequences. The code chunk implements OM based on indel and substitution operations. The algorithm takes an individual sequence and compares it with all of the sequences in the dataset, and identifies the sequence with the minimum cost i.e. the most similar sequence. The result of this computing intensive process is a distance matrix encoding the similarity or dissimilarity between individual sequences.
 
 > For indel, `auto` sets the indel as `max(sm)/2` when sm is a matrix. For more details, run `?seqdist` on your console
 
@@ -485,9 +485,7 @@ seqplot(seq.cl,
 
 We therefore switch to the R library `ggseqplot` which enables visualisation of sequence data based on `ggplot` functionalities. This package may provide more flexibility if we are more familiar with `ggplot`.
 
-The figure below offers a clear representation of the systematic sequencing of states that each trajectory captures. It provides information on two key features of trajectories: sequencing and size. For example, trajectory 1 seems to capture a chaotic sequencing pattern of transitions between moderate growth, stability and decline and high decline. Trajectory 4 represents patterns of areas experiencing high population growth followed by a year of high decline, resulting in overall population decline in 2000-2020. From these plots, you can also identify which trajectories tend to be more common. In our example, trajectories 2 and 3 seem to involve the largest number of areas: 132 and 143, respectively.
-
-> Note: the resulting trajectories also raise various questions about the use of modelled data to analyse population trajectories. The data used in this chapter are estimates combining various sources and dissagregating data into small grids. The current results suggest the existence of various sources of noise and uncertainty. We are working with a sample of areas which reported population decline between 2000 and 2020. Yet, the most common pattern across the years is population growth. A closer examination into the data are required. We have revised our code several times and we could not identify any errors in data processing. While we do not discard this 100%, we still think the data need a careful examination.
+The figure below offers a clear representation of the systematic sequencing of states that each trajectory captures. It provides information on two key features of trajectories: sequencing and size. For example, trajectory 1 seems to capture a sequencing pattern of transitions from moderate population decline to stability and back to moderate decline. Trajectory 2 shows a pattern high population decline during the first few years and then consistent moderate decline. Trajectory 3 displays a predominant pattern of moderate population decline. Trajectory 4 represents patterns of areas experiencing decline with spells of high population decline. Trajectory 5 shows a pattern of decline in the first few years followed by moderate decline and decline again. Trajectory 6 shows a similar pattern with more prevalent spells of population decline across the entire period. Trajectory 7 displays a trend of temporary decline, with spells of population growth and stability. From these plots, you can also identify which trajectories tend to be more common. In our example, trajectory and 3 accounts the largest number of areas: 189.
 
 ```{r}
 # create individual sequence plots based on ggplot
@@ -499,7 +497,7 @@ ggseqiplot(seq.cl,
   scale_color_manual(values = rev(cols)) 
 ```
 
-We can also get a better understanding of the resulting trajectories by analysing *state frequency plots*. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e. looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.
+We can also get a better understanding of the resulting trajectories by analysing *state frequency plots*. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e. looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, for example, we observe that moderate decline was the predominant state between 2000 and 2007 and stability became equally prevalent during 2008 and 2015.
 
 ```{r}
 # create state frequency plots based on ggplot
@@ -523,7 +521,7 @@ ggseqmtplot(seq.cl,
                               "moderate_growth" = "MG", "stable" = "S", "moderate_decline" = "MD", "decline" = "D", "high_decline" = "HD" ))
 ```
 
-Finally we analyse *entropy index plots*. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory. In other word, it indicates that there was more diversity of states.
+Finally we analyse *entropy index plots*. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory, reflecting the fact that areas experiencing this trajectory moves between states of decline, stability and growth. In other word, it indicates that there was more diversity of states.
 
 ```{r}
 # create entropy index plots based on ggplot

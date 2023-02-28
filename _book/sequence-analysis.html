@@ -361,7 +361,7 @@ div.csl-indent {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/cv/qsnf_ss97130g432qm297h3r0000gn/T//RtmpoNXqca/wpgpDatasets.md5'</code></pre>
+'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//RtmpVn3akj/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ISO ISO3            Country
@@ -379,7 +379,7 @@ div.csl-indent {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/cv/qsnf_ss97130g432qm297h3r0000gn/T//RtmpoNXqca/wpgpDatasets.md5'</code></pre>
+'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//RtmpVn3akj/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     ISO ISO3 Country Covariate
@@ -451,7 +451,7 @@ div.csl-indent {
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="st">"EPSG:4326"</span>) <span class="co"># set projection system</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `gadm41_UKR_2' from data source 
-  `/Users/carmen/Library/CloudStorage/OneDrive-TheUniversityofLiverpool/GitHub/r4ps/data/sequence-analysis/ukr_shp/gadm41_UKR_2.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202223/r4ps/data/sequence-analysis/ukr_shp/gadm41_UKR_2.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 629 features and 13 fields
 Geometry type: MULTIPOLYGON
@@ -527,7 +527,7 @@ First 10 features:
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
- 67.067  10.516  77.804 </code></pre>
+ 61.449   8.965  70.462 </code></pre>
 </div>
 </div>
 <p><strong>Sub-national population</strong></p>
@@ -544,7 +544,7 @@ First 10 features:
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>select_pop <span class="ot">&lt;-</span> <span class="cf">function</span>(x) dplyr<span class="sc">::</span><span class="fu">select</span>(x, GID_2, NAME_2, population)</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>population_df <span class="ot">&lt;-</span> <span class="fu">lapply</span>(ukr_eshp, select_pop) <span class="sc">%&gt;%</span> </span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, .)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>population_df<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">2000</span>, <span class="dv">2020</span>, <span class="at">by=</span><span class="dv">1</span>), <span class="at">times =</span> <span class="dv">1</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>population_df<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">2000</span>, <span class="dv">2020</span>), <span class="at">times =</span> <span class="dv">1</span>, <span class="at">each =</span> <span class="fu">nrow</span>(ukr_shp))</span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(population_df) <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(population_df), <span class="at">by=</span><span class="dv">1</span>), <span class="at">times =</span> <span class="dv">1</span>)</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co"># sub-national spatial data frame</span></span>
@@ -558,15 +558,15 @@ Geodetic CRS:  WGS 84
 First 10 features:
        GID_2            NAME_2 population                       geometry year
 1          ?                 ?  301849.00 POLYGON ((30.59574 50.40547... 2000
-2  UKR.1.1_1        Cherkas'ka  280917.39 POLYGON ((32.1715 49.43881,... 2001
-3  UKR.1.2_1       Cherkas'kyi   89116.78 POLYGON ((32.03393 49.49881... 2002
-4  UKR.1.3_1   Chornobaivs'kyi   50096.24 POLYGON ((32.17991 49.44486... 2003
-5  UKR.1.4_1     Chyhyryns'kyi   36646.73 POLYGON ((32.26144 49.20893... 2004
-6  UKR.1.5_1       Drabivs'kyi   42467.86 POLYGON ((32.41852 49.83724... 2005
-7  UKR.1.6_1 Horodyshchens'kyi   49886.59 POLYGON ((31.56959 49.42509... 2006
-8  UKR.1.7_1       Kamians'kyi   35587.28 POLYGON ((32.19797 49.20946... 2007
-9  UKR.1.8_1         Kanivs'ka   14406.93 MULTIPOLYGON (((31.4459 49.... 2008
-10 UKR.1.9_1        Kanivs'kyi   37495.04 POLYGON ((31.5851 49.62482,... 2009</code></pre>
+2  UKR.1.1_1        Cherkas'ka  280917.39 POLYGON ((32.1715 49.43881,... 2000
+3  UKR.1.2_1       Cherkas'kyi   89116.78 POLYGON ((32.03393 49.49881... 2000
+4  UKR.1.3_1   Chornobaivs'kyi   50096.24 POLYGON ((32.17991 49.44486... 2000
+5  UKR.1.4_1     Chyhyryns'kyi   36646.73 POLYGON ((32.26144 49.20893... 2000
+6  UKR.1.5_1       Drabivs'kyi   42467.86 POLYGON ((32.41852 49.83724... 2000
+7  UKR.1.6_1 Horodyshchens'kyi   49886.59 POLYGON ((31.56959 49.42509... 2000
+8  UKR.1.7_1       Kamians'kyi   35587.28 POLYGON ((32.19797 49.20946... 2000
+9  UKR.1.8_1         Kanivs'ka   14406.93 MULTIPOLYGON (((31.4459 49.... 2000
+10 UKR.1.9_1        Kanivs'kyi   37495.04 POLYGON ((31.5851 49.62482,... 2000</code></pre>
 </div>
 </div>
 <p><strong>National population</strong></p>
@@ -661,7 +661,7 @@ First 10 features:
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s map the overall percentage change in population between 2000 and 2020. We see a wide spread pattern of population decline across Ukraine. We observe a large spatial cluster of population decline around the capital city of Kiev and moderate population decline across most of the country. Administrative areas containing large cities seem to record overall population growth between 2000 and 2020, potentially absorbing population movements from the rest of the country. What else do you think may be driving population growth in cities? And in contrast, what do you think is contributing to population decline in other parts of Ukraine?</p>
+<p>Let’s map the overall percentage change in population between 2000 and 2020. We see a wide spread pattern of population decline across Ukraine. We observe a large spatial cluster of high population decline across the country with moderate population decline in some areas. Administrative areas containing large cities seem to record overall population growth between 2000 and 2020, potentially absorbing population movements from the rest of the country. What else do you think may be driving population growth in cities? And in contrast, what do you think is contributing to population decline in most of Ukraine?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set colours</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#7f3b08"</span>, <span class="st">"#b35806"</span>, <span class="st">"#e08214"</span>, <span class="st">"#faf0e6"</span>, <span class="st">"#8073ac"</span>, <span class="st">"#542788"</span>, <span class="st">"#2d004b"</span>)</span>
@@ -706,7 +706,7 @@ First 10 features:
 <p><img src="sequence-analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The Hovmöller Plot shows that most of the selected areas tend to experience moderate annual percentage changes in population between -5 and 5. Though, it also reveals sudden large losses in specific years. Thus, while Hovmöller Plots provide some understanding of the annual population changes, they are limited in that we can only analyse a handful of areas at the time and it is therefore difficult to identify systematic representative patterns. Here we have selected 40 areas of a total of 629. Displaying the total number of areas in a Hovmöller Plot will not produce readable results. Even if that was the case, it would be difficult to identify systematic patterns. As we will seek to persuade you below, sequence analysis provides a very novel way to define representative trajectories in the data, identify systematic patterns and extract distinctive features characterising those trajectories.</p>
+<p>The Hovmöller Plot shows that most of the selected areas tend to experience annual population decline, with varying spells of population growth. Percentage population changes range between 1 and -2.5. We also observe areas with consistent trajectories of annual population decline, like Zolochivs’kyi and Barvinkivs’kyi, and areas with strong decline in the first few years between 2000 and 2005 but moderate decline later on, such as Novovorontsovk’kyi. Yet, Hovmöller Plots provide a limited understanding of the annual population changes for a handful of areas at the time and it is therefore difficult to identify systematic representative patterns. Here we have selected 40 areas of a total of 629. Displaying the total number of areas in a Hovmöller Plot will not produce readable results. Even if that was the case, it would be difficult to identify systematic patterns. As we will seek to persuade you below, sequence analysis provides a very novel way to define representative trajectories in the data, identify systematic patterns and extract distinctive features characterising those trajectories.</p>
 </section>
 </section>
 <section id="application" class="level2" data-number="4.3">
@@ -791,7 +791,7 @@ First 10 features:
 </tbody>
 </table>
 <p><em>Substitution operations</em> or costs represent transition costs; that is, the cost for substituting each state with another. Substitution costs are defined in one of two ways <span class="citation" data-cites="salmela-aro2011">(<a href="references.html#ref-salmela-aro2011" role="doc-biblioref">Salmela-Aro et al. 2011</a>)</span>. One approach is the theory-driven approach. In such approach, substitution costs are grounded in theory suggesting that, for example, transforming state 1 to state 2 should have a greater cost than transforming state 1 to state 3, or performing the opposite operation i.e.&nbsp;transforming state 2 to state 1. An example could be that it is more financially costly to transition from <em>full-time employment</em> to <em>full-time education</em> than transition from <em>full-time education</em> to <em>full-time employment</em>.</p>
-<p>A second approach and most commonly used in empirical work is a data-driven approach. In this approach, substitution costs are empirically derived from transition rates between states. The cost of substitution is inversely related to the frequency of observed transitions within the data. This means that infrequent transitions between states have a higher substitution cost. For example, as we will see, transitions from the state of decline to moderate decline are rarer than decline to growth in Ukraine. The transition rate between state <span class="math inline">\(i\)</span> and state <span class="math inline">\(j\)</span> is the probability of observing state <span class="math inline">\(j\)</span> at time <span class="math inline">\(t1\)</span> given that the state <span class="math inline">\(i\)</span> is observed at time <span class="math inline">\(t\)</span> for <span class="math inline">\(i \neq j\)</span>. The substitution cost between states <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> is computed as:</p>
+<p>A second approach and most commonly used in empirical work is a data-driven approach. In this approach, substitution costs are empirically derived from transition rates between states. The cost of substitution is inversely related to the frequency of observed transitions within the data. This means that infrequent transitions between states have a higher substitution cost. For example, as we will see, transitions from the state of high decline to high growth are rarer than from high growth to high decline in Ukraine. The transition rate between state <span class="math inline">\(i\)</span> and state <span class="math inline">\(j\)</span> is the probability of observing state <span class="math inline">\(j\)</span> at time <span class="math inline">\(t1\)</span> given that the state <span class="math inline">\(i\)</span> is observed at time <span class="math inline">\(t\)</span> for <span class="math inline">\(i \neq j\)</span>. The substitution cost between states <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> is computed as:</p>
 <p><span class="math display">\[
 2 - {p(i | j) - p(j | i)}
 \]</span> where <span class="math inline">\(p(i | j)\)</span> is the transition rate between state <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>.</p>
@@ -814,20 +814,20 @@ First 10 features:
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>wide_population_loss_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 522 × 21
+<pre><code># A tibble: 571 × 21
    GID_2   `2001` `2002` `2003` `2004` `2005` `2006` `2007` `2008` `2009` `2010`
    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
- 1 UKR.1.… moder… moder… moder… moder… moder… growth growth growth moder… growth
- 2 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
+ 1 UKR.1.… moder… moder… moder… moder… moder… moder… stable moder… moder… stable
+ 2 UKR.1.… decli… moder… decli… decli… decli… moder… moder… moder… moder… moder…
  3 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
- 4 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… growth
- 5 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
- 6 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
+ 4 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
+ 5 UKR.1.… decli… decli… moder… decli… moder… moder… moder… moder… moder… moder…
+ 6 UKR.1.… decli… decli… moder… decli… moder… moder… moder… moder… moder… moder…
  7 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
- 8 UKR.1.… moder… moder… moder… moder… moder… stable moder… moder… moder… moder…
- 9 UKR.1.… growth growth growth growth growth growth growth growth growth growth
-10 UKR.1.… moder… moder… moder… stable stable stable stable growth stable stable
-# … with 512 more rows, and 10 more variables: `2011` &lt;chr&gt;, `2012` &lt;chr&gt;,
+ 8 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
+ 9 UKR.1.… moder… moder… moder… moder… moder… moder… moder… moder… moder… moder…
+10 UKR.1.… decli… decli… decli… decli… decli… decli… decli… decli… moder… decli…
+# … with 561 more rows, and 10 more variables: `2011` &lt;chr&gt;, `2012` &lt;chr&gt;,
 #   `2013` &lt;chr&gt;, `2014` &lt;chr&gt;, `2015` &lt;chr&gt;, `2016` &lt;chr&gt;, `2017` &lt;chr&gt;,
 #   `2018` &lt;chr&gt;, `2019` &lt;chr&gt;, `2020` &lt;chr&gt;</code></pre>
 </div>
@@ -906,13 +906,13 @@ First 10 features:
 <pre><code>     7  high_decline     high_decline     High decline</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code> [&gt;] 522 sequences in the data set</code></pre>
+<pre><code> [&gt;] 571 sequences in the data set</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code> [&gt;] min/max sequence length: 20/20</code></pre>
 </div>
 </div>
-<p>Using the sequence data object, we create a state distribution plot to get an understanding of the data. The plot shows the distribution of areas across status of population change in individual years. The overall picture emerging from the plots is that while areas in the sample recorded overall population decline between 2000 and 2020, the predominant year-to-year pattern was moderate growth. This suggests that areas may have experienced one or two years of severe population loss resulting in an overall pattern of decline.</p>
+<p>Using the sequence data object, we create a state distribution plot to get an understanding of the data. The plot shows the distribution of areas across status of population change in individual years. The overall picture emerging from the plot is an overall pattern of population decline between 2000 and 2020, predominantly moderate decline and limited spells of high population decline or growth. This aligns with the predominant trajectory of population decline observed in Ukrain based on more aggregate data at the regional level <span class="citation" data-cites="newsham2022">(<a href="references.html#ref-newsham2022" role="doc-biblioref">Newsham and Rowe 2022a</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seqplot</span>(seq.cl, </span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">title=</span><span class="st">"State distribution plot"</span>, </span>
@@ -923,7 +923,7 @@ First 10 features:
 <p><img src="sequence-analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We now move on to compute the substitution costs for our population states. From the equation above, you may have realised that transition costs vary between 0 and 2, with the former indicating zero cost. The latter indicates the maximum cost of converting one state into another. The option <code>TRATE</code> in method states to derive costs from observed transition rates. That is the data-driven approach discussed above. From the matrix below, you can see that it is more costly to convert a status “high decline” to “decline” than “high decline” to “growth”. This is an unexpected result. Intuitively, we could have expected the opposite. We would naturally expect areas to continue their trajectory population of decline, rather than a shift to growth. Though patterns of temporary decline have been identified as a predominant trajectory of population decline across Europe, particularly in Germany <span class="citation" data-cites="newsham2022">(<a href="references.html#ref-newsham2022" role="doc-biblioref">Newsham and Rowe 2022a</a>)</span>.</p>
+<p>We now move on to compute the substitution costs for our population states. From the equation above, you may have realised that transition costs vary between 0 and 2, with the former indicating zero cost. The latter indicates the maximum cost of converting one state into another. The option <code>TRATE</code> in method states to derive costs from observed transition rates. That is the data-driven approach discussed above. From the matrix below, you can see that it is more costly to convert a status “high growth” to “moderate decline” than from “growth” to “moderate”. This makes sense. We expect gradual changes in population along a given trajectory if they were to occur due to natural causes.</p>
 <blockquote class="blockquote">
 <p>Note we are considering a fixed measure of transition rates. That means that we are using the whole dataset to compute an average transition rate between states. That assumes that the rate of change between states does not change over time. Yet, there may be good reasons to believe they do as areas move across different states. In empirical work, time varying transition rates are more often considered. That means we use temporal slices of the data to compute transition rates; for example, using data from 2001, 2002 and so on. In this way, we end up with potentially different transition rates for every year.</p>
 </blockquote>
@@ -937,24 +937,24 @@ First 10 features:
 <span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>subs_costs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 high_growth   growth moderate_growth   stable moderate_decline
-high_growth         0.000000 1.847966        1.870644 1.855502         1.837147
-growth              1.847966 0.000000        1.696672 1.925177         1.841392
-moderate_growth     1.870644 1.696672        0.000000 1.556781         1.566771
-stable              1.855502 1.925177        1.556781 0.000000         1.689740
-moderate_decline    1.837147 1.841392        1.566771 1.689740         0.000000
-decline             1.790673 1.879887        1.800011 1.639568         1.821239
-high_decline        1.702113 1.672678        1.293439 1.943686         1.988414
+high_growth         0.000000 1.975000        1.940066 1.949203         1.949277
+growth              1.975000 0.000000        1.867730 1.867946         1.634772
+moderate_growth     1.940066 1.867730        0.000000 1.709425         1.547832
+stable              1.949203 1.867946        1.709425 0.000000         1.501723
+moderate_decline    1.949277 1.634772        1.547832 1.501723         0.000000
+decline             1.847681 1.848052        1.826810 1.915740         1.643018
+high_decline        1.288462 1.700000        1.773408 1.917223         1.805088
                   decline high_decline
-high_growth      1.790673     1.702113
-growth           1.879887     1.672678
-moderate_growth  1.800011     1.293439
-stable           1.639568     1.943686
-moderate_decline 1.821239     1.988414
-decline          0.000000     1.980392
-high_decline     1.980392     0.000000</code></pre>
+high_growth      1.847681     1.288462
+growth           1.848052     1.700000
+moderate_growth  1.826810     1.773408
+stable           1.915740     1.917223
+moderate_decline 1.643018     1.805088
+decline          0.000000     1.844570
+high_decline     1.844570     0.000000</code></pre>
 </div>
 </div>
-<p>To understand better the idea of substitution costs, we can have direct look at transition rates underpinning these costs. Transition rates can be computed via <code>seqtrate</code> . By definition, transition rates vary between 0 and 1, with zero indicating no probability of a transition occurring. One indicates a 100% probability of a transition taking place. Thus, for example, the matrix below tell us that there is a 66% probability of observing a transition from high decline to growth in our sample. Examining transition rates could provide very valuable information about the process in analysis.</p>
+<p>To understand better the idea of substitution costs, we can have direct look at transition rates underpinning these costs. Transition rates can be computed via <code>seqtrate</code> . By definition, transition rates vary between 0 and 1, with zero indicating no probability of a transition occurring. One indicates a 100% probability of a transition taking place. Thus, for example, the matrix below tell us that there is a 5% probability of observing a transition from “high growth” to “moderate decline” in our sample. Examining transition rates could provide very valuable information about the process in analysis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>seq.trate <span class="ot">&lt;-</span> <span class="fu">seqtrate</span>(seq.cl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -963,32 +963,32 @@ high_decline     1.980392     0.000000</code></pre>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(seq.trate, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      [-&gt; high_growth] [-&gt; growth] [-&gt; moderate_growth]
-[high_growth -&gt;]                  0.16        0.14                 0.13
-[growth -&gt;]                       0.01        0.64                 0.22
-[moderate_growth -&gt;]              0.00        0.09                 0.78
-[stable -&gt;]                       0.01        0.05                 0.38
-[moderate_decline -&gt;]             0.05        0.14                 0.42
-[decline -&gt;]                      0.14        0.12                 0.20
-[high_decline -&gt;]                 0.05        0.23                 0.66
+[high_growth -&gt;]                  0.12        0.03                 0.05
+[growth -&gt;]                       0.00        0.05                 0.11
+[moderate_growth -&gt;]              0.01        0.02                 0.09
+[stable -&gt;]                       0.00        0.00                 0.04
+[moderate_decline -&gt;]             0.00        0.00                 0.02
+[decline -&gt;]                      0.00        0.01                 0.02
+[high_decline -&gt;]                 0.16        0.10                 0.18
                       [-&gt; stable] [-&gt; moderate_decline] [-&gt; decline]
-[high_growth -&gt;]             0.14                  0.11         0.07
-[growth -&gt;]                  0.03                  0.02         0.00
-[moderate_growth -&gt;]         0.07                  0.02         0.00
-[stable -&gt;]                  0.46                  0.07         0.01
-[moderate_decline -&gt;]        0.24                  0.12         0.02
-[decline -&gt;]                 0.35                  0.16         0.02
-[high_decline -&gt;]            0.04                  0.01         0.00
+[high_growth -&gt;]             0.05                  0.05         0.15
+[growth -&gt;]                  0.13                  0.36         0.15
+[moderate_growth -&gt;]         0.25                  0.43         0.15
+[stable -&gt;]                  0.46                  0.42         0.05
+[moderate_decline -&gt;]        0.08                  0.82         0.08
+[decline -&gt;]                 0.03                  0.28         0.65
+[high_decline -&gt;]            0.07                  0.19         0.15
                       [-&gt; high_decline]
-[high_growth -&gt;]                   0.25
-[growth -&gt;]                        0.09
-[moderate_growth -&gt;]               0.04
-[stable -&gt;]                        0.02
+[high_growth -&gt;]                   0.55
+[growth -&gt;]                        0.20
+[moderate_growth -&gt;]               0.05
+[stable -&gt;]                        0.01
 [moderate_decline -&gt;]              0.00
-[decline -&gt;]                       0.02
-[high_decline -&gt;]                  0.01</code></pre>
+[decline -&gt;]                       0.01
+[high_decline -&gt;]                  0.15</code></pre>
 </div>
 </div>
-<p>Now we focus on the probably most important component of sequence analysis; that is the calculation of dissimilarity. Recall our aim is to identify representative trajectories. To this end, we need a way to measure how similar or different sequences are - which is known as OM. Above, we described that we can use indel and substitution operations to measure the dissimilarity or costs between individual sequences. The code chunk implements OM based on indel and substitution operations. The algorithm takes an individual sequence and compares it with all of the sequences in the dataset, and identifies the sequence with the minimum cost i.e.&nbsp;the most similar sequence. The result of this computing intensive process is a distance matrix encoding the similarity or dissimilarity between individual sequences.</p>
+<p>Now we focus on the probably most important component of sequence analysis; that is, the calculation of dissimilarity. Recall our aim is to identify representative trajectories. To this end, we need a way to measure how similar or different sequences are - which is known as OM. Above, we described that we can use indel and substitution operations to measure the dissimilarity or costs between individual sequences. The code chunk implements OM based on indel and substitution operations. The algorithm takes an individual sequence and compares it with all of the sequences in the dataset, and identifies the sequence with the minimum cost i.e.&nbsp;the most similar sequence. The result of this computing intensive process is a distance matrix encoding the similarity or dissimilarity between individual sequences.</p>
 <blockquote class="blockquote">
 <p>For indel, <code>auto</code> sets the indel as <code>max(sm)/2</code> when sm is a matrix. For more details, run <code>?seqdist</code> on your console</p>
 </blockquote>
@@ -1022,9 +1022,9 @@ high_decline     1.980392     0.000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>  asw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.0000000 0.5584480 0.5369175 0.5103584 0.4989714 0.4094865 0.3950388
- [8] 0.4190322 0.4234781 0.4143383 0.4047555 0.3961153 0.3338910 0.3280279
-[15] 0.3118651 0.3095253 0.2909311 0.3099763 0.3101910 0.3087775</code></pre>
+<pre><code> [1] 0.0000000 0.5729062 0.5363097 0.4923203 0.4629785 0.4425575 0.4417958
+ [8] 0.4559577 0.4597152 0.4569222 0.4682526 0.4832332 0.4359832 0.4365490
+[15] 0.4249453 0.4193369 0.4317815 0.4323037 0.4333972 0.4463586</code></pre>
 </div>
 </div>
 <p>We rerun and save the results for a 7k cluster partition. If you inspect the resulting data frame, it provides an identifier for each cluster. Each individual area is attributed to a cluster. Next the question that we seek to answer is what sort of pattern do these clusters capture?</p>
@@ -1051,10 +1051,7 @@ high_decline     1.980392     0.000000</code></pre>
 </div>
 </div>
 <p>We therefore switch to the R library <code>ggseqplot</code> which enables visualisation of sequence data based on <code>ggplot</code> functionalities. This package may provide more flexibility if we are more familiar with <code>ggplot</code>.</p>
-<p>The figure below offers a clear representation of the systematic sequencing of states that each trajectory captures. It provides information on two key features of trajectories: sequencing and size. For example, trajectory 1 seems to capture a chaotic sequencing pattern of transitions between moderate growth, stability and decline and high decline. Trajectory 4 represents patterns of areas experiencing high population growth followed by a year of high decline, resulting in overall population decline in 2000-2020. From these plots, you can also identify which trajectories tend to be more common. In our example, trajectories 2 and 3 seem to involve the largest number of areas: 132 and 143, respectively.</p>
-<blockquote class="blockquote">
-<p>Note: the resulting trajectories also raise various questions about the use of modelled data to analyse population trajectories. The data used in this chapter are estimates combining various sources and dissagregating data into small grids. The current results suggest the existence of various sources of noise and uncertainty. We are working with a sample of areas which reported population decline between 2000 and 2020. Yet, the most common pattern across the years is population growth. A closer examination into the data are required. We have revised our code several times and we could not identify any errors in data processing. While we do not discard this 100%, we still think the data need a careful examination.</p>
-</blockquote>
+<p>The figure below offers a clear representation of the systematic sequencing of states that each trajectory captures. It provides information on two key features of trajectories: sequencing and size. For example, trajectory 1 seems to capture a sequencing pattern of transitions from moderate population decline to stability and back to moderate decline. Trajectory 2 shows a pattern high population decline during the first few years and then consistent moderate decline. Trajectory 3 displays a predominant pattern of moderate population decline. Trajectory 4 represents patterns of areas experiencing decline with spells of high population decline. Trajectory 5 shows a pattern of decline in the first few years followed by moderate decline and decline again. Trajectory 6 shows a similar pattern with more prevalent spells of population decline across the entire period. Trajectory 7 displays a trend of temporary decline, with spells of population growth and stability. From these plots, you can also identify which trajectories tend to be more common. In our example, trajectory and 3 accounts the largest number of areas: 189.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create individual sequence plots based on ggplot</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqiplot</span>(seq.cl, </span>
@@ -1063,16 +1060,6 @@ high_decline     1.980392     0.000000</code></pre>
 <span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
 <span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
 <span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There was 1 warning in `dplyr::mutate()`.
-ℹ In argument: `states = forcats::fct_explicit_na(.data$states, na_level =
-  "Missing")`.
-Caused by warning:
-! `fct_explicit_na()` was deprecated in forcats 1.0.0.
-ℹ Please use `fct_na_value_to_level()` instead.
-ℹ The deprecated feature was likely used in the ggseqplot package.
-  Please report the issue at &lt;]8;;https://github.com/maraab23/ggseqplot/issueshttps://github.com/maraab23/ggseqplot/issues]8;;&gt;.</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
@@ -1083,14 +1070,14 @@ Adding another scale for colour, which will replace the existing scale.</code></
 <p><img src="sequence-analysis_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We can also get a better understanding of the resulting trajectories by analysing <em>state frequency plots</em>. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e.&nbsp;looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, we observe that moderate growth was the predominant state in 2006-07 but declined the following year.</p>
+<p>We can also get a better understanding of the resulting trajectories by analysing <em>state frequency plots</em>. They show the number of occurrences of a given state in individual years. These plots examine the data from a vertical perspective i.e.&nbsp;looking at individual years across areas, rather than at individual areas over time. State frequency plots reveal that predominant states in each year and changes in their prevalence. Focusing on trajectory 1, for example, we observe that moderate decline was the predominant state between 2000 and 2007 and stability became equally prevalent during 2008 and 2015.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create state frequency plots based on ggplot</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqdplot</span>(seq.cl, </span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span></span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create state frequency plots based on ggplot</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqdplot</span>(seq.cl, </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cols) <span class="sc">+</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> cols) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.</code></pre>
@@ -1101,14 +1088,14 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 <p>We can also examine time spent in individual states in each trajectory. <em>Time spent plots</em> report the average time spent in each state. The measure of time depends on the original data used in the analysis. We use years so the y-axis refers to the average number of years that a given status appears in a representative trajectory type. For example, a score over 5 for stable in trajectory 1 indicates that the average number of years that areas in that typology are classified in that category is over 5.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create time spent plots based on ggplot</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqmtplot</span>(seq.cl, </span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"high_growth"</span> <span class="ot">=</span> <span class="st">"HG"</span>, <span class="st">"growth"</span> <span class="ot">=</span> <span class="st">"G"</span>,</span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"moderate_growth"</span> <span class="ot">=</span> <span class="st">"MG"</span>, <span class="st">"stable"</span> <span class="ot">=</span> <span class="st">"S"</span>, <span class="st">"moderate_decline"</span> <span class="ot">=</span> <span class="st">"MD"</span>, <span class="st">"decline"</span> <span class="ot">=</span> <span class="st">"D"</span>, <span class="st">"high_decline"</span> <span class="ot">=</span> <span class="st">"HD"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create time spent plots based on ggplot</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqmtplot</span>(seq.cl, </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering,</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">facet_ncol =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(cols)) <span class="sc">+</span></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"high_growth"</span> <span class="ot">=</span> <span class="st">"HG"</span>, <span class="st">"growth"</span> <span class="ot">=</span> <span class="st">"G"</span>,</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"moderate_growth"</span> <span class="ot">=</span> <span class="st">"MG"</span>, <span class="st">"stable"</span> <span class="ot">=</span> <span class="st">"S"</span>, <span class="st">"moderate_decline"</span> <span class="ot">=</span> <span class="st">"MD"</span>, <span class="st">"decline"</span> <span class="ot">=</span> <span class="st">"D"</span>, <span class="st">"high_decline"</span> <span class="ot">=</span> <span class="st">"HD"</span> ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.</code></pre>
@@ -1117,12 +1104,12 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <p><img src="sequence-analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Finally we analyse <em>entropy index plots</em>. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory. In other word, it indicates that there was more diversity of states.</p>
+<p>Finally we analyse <em>entropy index plots</em>. Entropy is a measure of diversity. The greater the score, the greater the entropy or diversity of states. The plot below displays the entropy index computed for individual trajectories each year. Each line represents the entropy index for a trajectory in each year. The top yellow line in 2001 indicates that in 2001 areas following a trajectory 7 type were distributed across a larger number of states than any other trajectory, reflecting the fact that areas experiencing this trajectory moves between states of decline, stability and growth. In other word, it indicates that there was more diversity of states.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create entropy index plots based on ggplot</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqeplot</span>(seq.cl, </span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering) <span class="sc">+</span></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create entropy index plots based on ggplot</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseqeplot</span>(seq.cl, </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> pam_optimal<span class="sc">$</span>clustering) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for colour is already present.
 Adding another scale for colour, which will replace the existing scale.</code></pre>
@@ -1137,8 +1124,8 @@ Adding another scale for colour, which will replace the existing scale.</code></
 <h2 data-number="4.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">4.4</span> Questions</h2>
 <p>For the first assignment, we will continue to focus on London as our area of analysis. We will use population count estimates from the Office of National Statistics (ONS). The dataset provides information on area, population numbers and population density at national, regional and smaller sub-national area level, including Unitary Authority, Metropolitan County, Metropolitan District, County, Non-metropolitan District, London Borough, Council Area and Local Government District for the period from 2001 to 2020.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/sequence-analysis/population_uk/population-uk-2011_20.csv"</span>)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>pop_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>pop_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/sequence-analysis/population_uk/population-uk-2011_20.csv"</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>pop_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 420 × 44
    Code    Name  Geogr…¹ Area …² Estim…³ 2020 …⁴ Estim…⁵ 2019 …⁶ Estim…⁷ 2018 …⁸

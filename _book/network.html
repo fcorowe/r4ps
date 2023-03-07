@@ -315,7 +315,7 @@ div.csl-indent {
   <li><a href="#centrality" id="toc-centrality" class="nav-link" data-scroll-target="#centrality"><span class="toc-section-number">5.6.5</span>  Centrality</a></li>
   <li><a href="#hubs-and-authorities" id="toc-hubs-and-authorities" class="nav-link" data-scroll-target="#hubs-and-authorities"><span class="toc-section-number">5.6.6</span>  Hubs and authorities</a></li>
   </ul></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">6</span>  Questions</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">5.7</span>  Questions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/network.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -346,7 +346,7 @@ div.csl-indent {
 <li><p>Network analysis with R and igraph: NetSci X Tutorial <span class="citation" data-cites="Ognyanova16">(<a href="references.html#ref-Ognyanova16" role="doc-biblioref">Ognyanova 2016</a>)</span>.</p></li>
 <li><p><a href="https://igraph.org/">igraph</a> - The network analysis package.</p></li>
 </ul>
-<p>The book Networks by Mark Newman <span class="citation" data-cites="Newman18">(<a href="references.html#ref-Newman18" role="doc-biblioref">Newman 2018</a>)</span> is an excellent resource to learn more about network analysis, which covers the basics but also the more advanced concepts and methods.</p>
+<p>The book Networks by <span class="citation" data-cites="Newman18">Newman (<a href="references.html#ref-Newman18" role="doc-biblioref">2018</a>)</span> is an excellent resource to learn more about network analysis, which covers the basics but also the more advanced concepts and methods.</p>
 <section id="sec-sec_dependencies" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="sec-sec_dependencies"><span class="header-section-number">5.1</span> Dependencies</h2>
 <p>To run the code in the rest of this workbook, we will need to load the following R packages:</p>
@@ -439,7 +439,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 7/7 vertices, named, from e286a5a:
+<pre><code>+ 7/7 vertices, named, from 737d8d9:
 [1] City 1 City 2 City 3 City 4 City 5 City 6 City 7</code></pre>
 </div>
 </div>
@@ -458,7 +458,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ 6/6 edges from e286a5a (vertex names):
+<pre><code>+ 6/6 edges from 737d8d9 (vertex names):
 [1] City 1-&gt;City 2 City 2-&gt;City 3 City 1-&gt;City 4 City 4-&gt;City 1 City 4-&gt;City 2
 [6] City 4-&gt;City 5</code></pre>
 </div>
@@ -781,13 +781,13 @@ Geodetic CRS:  NAD83</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>$vpath
 $vpath[[1]]
-+ 2/402 vertices, named, from 5f9cc7a:
++ 2/402 vertices, named, from 007f5f1:
 [1] New York-Newark-Jersey City, NY-NJ-PA Los Angeles-Long Beach-Anaheim, CA   
 
 
 $epath
 $epath[[1]]
-+ 1/52930 edge from 5f9cc7a (vertex names):
++ 1/52930 edge from 007f5f1 (vertex names):
 [1] New York-Newark-Jersey City, NY-NJ-PA-&gt;Los Angeles-Long Beach-Anaheim, CA
 
 
@@ -876,8 +876,8 @@ NULL</code></pre>
 </div>
 </section>
 </section>
-<section id="questions" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Questions</h1>
+<section id="questions" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="questions"><span class="header-section-number">5.7</span> Questions</h2>
 <p>In this set of questions, we will use internal migration data corresponding to the London boroughs. The original data can be found on the UK Office for National Statistics <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset">website</a>. The data set that we use below corresponds for the year ending in June 2019 and has already been cleaned for you. You can import it with the following line of code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/networks/LA_to_LA_2019_London_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

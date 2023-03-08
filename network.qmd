@@ -10,7 +10,7 @@ The chapter is based on the following references:
 
 -   [igraph](https://igraph.org/) - The network analysis package.
 
-The book Networks by Mark Newman [@Newman18] is an excellent resource to learn more about network analysis, which covers the basics but also the more advanced concepts and methods.
+The book Networks by @Newman18 is an excellent resource to learn more about network analysis, which covers the basics but also the more advanced concepts and methods.
 
 ## Dependencies {#sec-sec_dependencies}
 
@@ -515,7 +515,7 @@ as <- authority_score(g_US, weights=NULL)$vector
 hist(as, breaks = 50, main="Histogram of authority score")
 ```
 
-# Questions
+## Questions
 
 In this set of questions, we will use internal migration data corresponding to the London boroughs. The original data can be found on the UK Office for National Statistics [website](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset). The data set that we use below corresponds for the year ending in June 2019 and has already been cleaned for you. You can import it with the following line of code:
 

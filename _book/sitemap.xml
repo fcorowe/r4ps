@@ -2,58 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.population-science.net/index.html</loc>
-    <lastmod>2023-02-28T11:31:58.433Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.021Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/intro.html</loc>
-    <lastmod>2023-02-28T11:31:58.434Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.022Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/intro-population-science.html</loc>
-    <lastmod>2023-02-28T11:31:58.435Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.024Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/geodemographics.html</loc>
-    <lastmod>2023-02-28T11:31:58.437Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.029Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/sequence-analysis.html</loc>
-    <lastmod>2023-02-28T11:31:58.441Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.037Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/network.html</loc>
+<<<<<<< HEAD
     <lastmod>2023-03-06T17:29:51.922Z</lastmod>
+=======
+    <lastmod>2023-03-07T10:00:54.044Z</lastmod>
+>>>>>>> 47a0a7006868d513883287bfb4ebff35c0be88c0
   </url>
   <url>
     <loc>https://www.population-science.net/sentiment-analysis.html</loc>
-    <lastmod>2023-02-28T11:31:58.443Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.045Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/topic-modelling.html</loc>
+<<<<<<< HEAD
     <lastmod>2023-03-08T17:02:41.810Z</lastmod>
+=======
+    <lastmod>2023-03-07T10:00:54.046Z</lastmod>
+>>>>>>> 47a0a7006868d513883287bfb4ebff35c0be88c0
   </url>
   <url>
     <loc>https://www.population-science.net/longitudinal-1.html</loc>
-    <lastmod>2023-02-28T11:31:58.444Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.047Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/longitudinal-2.html</loc>
-    <lastmod>2023-02-28T11:31:58.444Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.048Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/machine-learning.html</loc>
-    <lastmod>2023-02-28T11:31:58.444Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.049Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/data-sets.html</loc>
-    <lastmod>2023-02-28T11:31:58.444Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.050Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/references.html</loc>
-    <lastmod>2023-02-28T11:31:58.445Z</lastmod>
+    <lastmod>2023-03-07T10:00:54.051Z</lastmod>
   </url>
   <url>
     <loc>https://www.population-science.net/Population-Science.pdf</loc>
-    <lastmod>2023-02-28T11:31:58.051Z</lastmod>
+    <lastmod>2023-03-07T10:00:53.344Z</lastmod>
   </url>
 </urlset>

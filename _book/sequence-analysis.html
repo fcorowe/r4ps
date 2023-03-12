@@ -353,7 +353,13 @@ div.csl-indent {
 <section id="data" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="data"><span class="header-section-number">4.2</span> Data</h2>
 <p>The key aim of this chapter is to define representative trajectories of population decline using sequence analysis and WorldPop data. We use WorldPop data for the period extending from 2000 to 2020. WorldPop offers open access gridded population estimates at a high spatial resolution for all countries in the world. WoldPop produces these gridded datasets using a top-down (i.e.&nbsp;dissagregating administrative area counts into smaller grid cells) or bottom-up (i.e.&nbsp;interpolating data from counts from sample locations into grid cells) approach. You can learn about about these approaches and the data available from <a href="https://www.worldpop.org">WorldPop</a>.</p>
-<p>WorldPop population data are available in various formats: * Two spatial resolutions: 100m and 1km; * Constrained and unconstrained counts to built settlement areas; * Adjusted or unadjusted to United Nations’ (UN) national population counts; * Two formats i.e.&nbsp;<code>tiff</code> and <code>csv</code> formats.</p>
+<p>WorldPop population data are available in various formats:</p>
+<ul>
+<li><p>Two spatial resolutions: 100m and 1km;</p></li>
+<li><p>Constrained and unconstrained counts to built settlement areas;</p></li>
+<li><p>Adjusted or unadjusted to United Nations’ (UN) national population counts;</p></li>
+<li><p>Two formats i.e.&nbsp;<code>tiff</code> and <code>csv</code> formats.</p></li>
+</ul>
 <p>We use annual 1km gridded, UN adjusted, unconstrained population count data for Ukraine during 2000-2021 in tiff format. We use tiff formats to illustrate the manipulation of raster data. Such skills will come handy if you ever decide to work with satellite imagery or image data in general.</p>
 <p>Before calling the data, let’s see how we can use <code>wpgpDownloadR</code> package. Let’s browse the data catalogue.</p>
 <div class="cell">
@@ -361,7 +367,7 @@ div.csl-indent {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/n7/k_dfmxgn3k79tvpfzffhhpqw0000gn/T//RtmpFBz387/wpgpDatasets.md5'</code></pre>
+'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//RtmpNaqE2E/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ISO ISO3            Country
@@ -379,7 +385,7 @@ div.csl-indent {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/n7/k_dfmxgn3k79tvpfzffhhpqw0000gn/T//RtmpFBz387/wpgpDatasets.md5'</code></pre>
+'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//RtmpNaqE2E/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     ISO ISO3 Country Covariate
@@ -527,7 +533,7 @@ First 10 features:
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
- 99.924  40.837 142.951 </code></pre>
+ 65.250   8.676  73.932 </code></pre>
 </div>
 </div>
 <p><strong>Sub-national population</strong></p>

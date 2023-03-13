@@ -369,7 +369,7 @@ $ text       &lt;chr&gt; "@anonymous @anonymous @anonymous @anonymous @anonymous
 <p>String: Text can be stored as strings, i.e., character vectors, within R, and often text data is first read into memory in this form.</p>
 <p>Corpus: These types of objects typically contain raw strings annotated with additional metadata and details.</p>
 <p>Document-term matrix: This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count.</p>
-<p>TidyText: This is a novel approach developed by <span class="citation" data-cites="silge2022welcome">(<a href="references.html#ref-silge2022welcome" role="doc-biblioref"><strong>silge2022welcome?</strong></a>)</span>. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. The R <code>tidytext</code> package provides full functionality to implement the approach and manipulate text with the standard <code>tidyverse</code> ecosystem.</p>
+<p>TidyText: This is a novel approach developed by <span class="citation" data-cites="silgerobison2022">Sielge and Robinson (<a href="references.html#ref-silgerobison2022" role="doc-biblioref">2022</a>)</span>. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. The R <code>tidytext</code> package provides full functionality to implement the approach and manipulate text with the standard <code>tidyverse</code> ecosystem.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># converting to a tidytext data representation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tidy_tweets_df <span class="ot">&lt;-</span> tweets_df <span class="sc">%&gt;%</span></span>
@@ -1163,6 +1163,9 @@ Rowe, Francisco, Michael Mahony, Eduardo Graells-Garrido, Marzia Rango, and Nikl
 </div>
 <div id="ref-Rowe2021b" class="csl-entry" role="doc-biblioentry">
 Rowe, Francisco, Michael Mahony, Niklas Sievers, Marzia Rango, and Eduardo Graells-Garrido. 2021. <span>“<span class="nocase">Sentiment towards Migration during COVID-19. What Twitter Data Can Tell Us</span>.”</span> <em>IOM Publications</em>.
+</div>
+<div id="ref-silgerobison2022" class="csl-entry" role="doc-biblioentry">
+Sielge, Jullia, and David Robinson. 2022. <em>Welcome to Text Mining with r</em>. <span>O’Reilly</span>. <a href="https://www.tidytextmining.com">https://www.tidytextmining.com</a>.
 </div>
 <div id="ref-stopthe2020" class="csl-entry" role="doc-biblioentry">
 <span>“Stop the Coronavirus Stigma Now.”</span> 2020. <em>Nature</em> 580 (7802): 165–65. <a href="https://doi.org/10.1038/d41586-020-01009-0">https://doi.org/10.1038/d41586-020-01009-0</a>.

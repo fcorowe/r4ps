@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -197,7 +216,13 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#an-introduction-to-topic-modelling" id="toc-an-introduction-to-topic-modelling" class="nav-link active" data-scroll-target="#an-introduction-to-topic-modelling"><span class="toc-section-number">7.1</span>  An Introduction to Topic Modelling</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/topic-modelling.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -219,9 +244,40 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>In progress</p>
+<section id="an-introduction-to-topic-modelling" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="an-introduction-to-topic-modelling"><span class="header-section-number">7.1</span> An Introduction to Topic Modelling</h2>
+<p><strong>Topic modelling</strong> is part of the larger topic of text data mining. Text mining is the process of transforming unstructured text into a structured format to identify meaningful patterns. In text mining, we often have collections of documents, such as news articles, blog posts, academic papers and much more. We often want to divide these documents into natural groups so that we can understand them separately. <strong>Topic modeling</strong> is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items - instead of counting them individually - even when we are not sure what we are looking for. Topic modeling is not the only method that does this– cluster analysis, latent semantic analysis, and other techniques have also been used to identify clustering within texts (Bail, <a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">2020</a>).</p>
+<p>Topic models offer two significant advantages over simple forms of cluster analysis such as k-means clustering. Unlike k-means clustering, which assigns each document to only one cluster, topic models are mixture models that assign a probability to each document indicating its likelihood of belonging to a latent theme or topic.</p>
+<p>Additionally, topic models use more advanced iterative Bayesian techniques to determine the probability of each document being associated with a particular theme or topic. Initially, documents are assigned a random probability of topic assignment, but the accuracy of these probabilities improves as more data is processed.</p>
+<p>Topic Modelling has been used in population studies on various occasions to analyse demographic processes such as fertility and migration. <span class="citation" data-cites="marshall2013defining">Marshall (<a href="references.html#ref-marshall2013defining" role="doc-biblioref">2013</a>)</span> for example, uses topic modelling to show the set of concepts relevant to the study of fertility was defined differently in France and Great Britain. Findings indicate that bith cultural and institutional differences were present in the research agendas around the understandings of fertility decline. This chapter will illustrate Topic Modelling with <a href="https://www.reddit.com/r/unitedkingdom/">Reddit data</a>.</p>
+<p>Specifically it will investigate what reddit data can tell us about discussions around fertility and the pandemic’s influence on fertility rates. Does the data shed any light on theories on the increase in fertility associated with rising wage inequality <span class="citation" data-cites="bar2018did">Bar et al. (<a href="references.html#ref-bar2018did" role="doc-biblioref">2018</a>)</span>? Or on the <a href="https://www.stlouisfed.org/on-the-economy/2021/november/pandemic-influence-us-fertility-rates">negative impact of the pandemic</a> on the fertility of women of prime childbearing age—30- to 34-year-olds?</p>
+<p>This chapter is based on:</p>
+<ul>
+<li><p>The <a href="https://www.tidytextmining.com/topicmodeling.html">Topic modelling</a> chapter in Silge, J. and Robinson, D, 2022. <a href="https://www.tidytextmining.com/">Text Mining with R: A Tidy Approach</a></p></li>
+<li><p>Bail, C. 2020’s <a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Topic Modelling</a> chapter in <em>Text as DATA</em>. Computational Social Science</p></li>
+</ul>
+<p><strong>Latent Dirichlet Allocation</strong></p>
+<p>A widely used approach for creating a topic model is Latent Dirichlet Allocation (LDA). LDA considers</p>
+<ul>
+<li><p>Each document as a combination of topics. We imagine that each document may contain words from several topics in particular proportions. For instance, in a two-topic model we could say Document 1 is 80% about <em>migration</em> and 20% about <em>refugees</em>, while Document 2 is 40% about <em>migration</em> and 60% about <em>increased work-force</em>.</p></li>
+<li><p>Each topic as a blend of words. For example, we could imagine a two-topic model of a twitter-feed, with one topic for “migration” and one for “refugees.” The most common words in the migration topic might be “migrant”, “origin”, and “destination”, while the refugee topic may be made up of words such as “armed conflict”, “persecution”, and “camp”. Importantly, words can be shared between topics; a word like “destination” might appear in both equally.</p></li>
+</ul>
+<p>This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. <span class="citation" data-cites="blei2003latent">Blei, Ng, and Jordan (<a href="references.html#ref-blei2003latent" role="doc-biblioref">2003</a>)</span> describe LDA’s in detail.</p>
+<p>For more on LDA’s see Bail’s chapter on <a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Topic Modelling</a>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-bar2018did" class="csl-entry" role="doc-biblioentry">
+Bar, Michael, Moshe Hazan, Oksana Leukhina, David Weiss, and Hosny Zoabi. 2018. <span>“Why Did Rich Families Increase Their Fertility? Inequality and Marketization of Child Care.”</span> <em>Journal of Economic Growth</em> 23: 427–63.
+</div>
+<div id="ref-blei2003latent" class="csl-entry" role="doc-biblioentry">
+Blei, David M, Andrew Y Ng, and Michael I Jordan. 2003. <span>“Latent Dirichlet Allocation.”</span> <em>Journal of Machine Learning Research</em> 3 (Jan): 993–1022.
+</div>
+<div id="ref-marshall2013defining" class="csl-entry" role="doc-biblioentry">
+Marshall, Emily A. 2013. <span>“Defining Population Problems: Using Topic Models for Cross-National Comparison of Disciplinary Development.”</span> <em>Poetics</em> 41 (6): 701–24.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

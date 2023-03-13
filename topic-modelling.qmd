@@ -1,3 +1,31 @@
 # Topic Modelling {#sec-chp7}
 
-In progress
+## An Introduction to Topic Modelling
+
+**Topic modelling** is part of the larger topic of text data mining. Text mining is the process of transforming unstructured text into a structured format to identify meaningful patterns. In text mining, we often have collections of documents, such as news articles, blog posts, academic papers and much more. We often want to divide these documents into natural groups so that we can understand them separately. **Topic modeling** is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items - instead of counting them individually - even when we are not sure what we are looking for. Topic modeling is not the only method that does this-- cluster analysis, latent semantic analysis, and other techniques have also been used to identify clustering within texts (Bail, [2020](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html)).
+
+Topic models offer two significant advantages over simple forms of cluster analysis such as k-means clustering. Unlike k-means clustering, which assigns each document to only one cluster, topic models are mixture models that assign a probability to each document indicating its likelihood of belonging to a latent theme or topic.
+
+Additionally, topic models use more advanced iterative Bayesian techniques to determine the probability of each document being associated with a particular theme or topic. Initially, documents are assigned a random probability of topic assignment, but the accuracy of these probabilities improves as more data is processed.
+
+Topic Modelling has been used in population studies on various occasions to analyse demographic processes such as fertility and migration. @marshall2013defining for example, uses topic modelling to show the set of concepts relevant to the study of fertility was defined differently in France and Great Britain. Findings indicate that bith cultural and institutional differences were present in the research agendas around the understandings of fertility decline. This chapter will illustrate Topic Modelling with [Reddit data](https://www.reddit.com/r/unitedkingdom/).
+
+Specifically it will investigate what reddit data can tell us about discussions around fertility and the pandemic's influence on fertility rates. Does the data shed any light on theories on the increase in fertility associated with rising wage inequality @bar2018did? Or on the [negative impact of the pandemic](https://www.stlouisfed.org/on-the-economy/2021/november/pandemic-influence-us-fertility-rates) on the fertility of women of prime childbearing age---30- to 34-year-olds?
+
+This chapter is based on:
+
+-   The [Topic modelling](https://www.tidytextmining.com/topicmodeling.html) chapter in Silge, J. and Robinson, D, 2022. [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
+
+-   Bail, C. 2020's [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html) chapter in *Text as DATA*. Computational Social Science 
+
+**Latent Dirichlet Allocation**
+
+A widely used approach for creating a topic model is Latent Dirichlet Allocation (LDA). LDA considers
+
+-   Each document as a combination of topics. We imagine that each document may contain words from several topics in particular proportions. For instance, in a two-topic model we could say Document 1 is 80% about *migration* and 20% about *refugees*, while Document 2 is 40% about *migration* and 60% about *increased work-force*.
+
+-   Each topic as a blend of words. For example, we could imagine a two-topic model of a twitter-feed, with one topic for "migration" and one for "refugees." The most common words in the migration topic might be "migrant", "origin", and "destination", while the refugee topic may be made up of words such as "armed conflict", "persecution", and "camp". Importantly, words can be shared between topics; a word like "destination" might appear in both equally.
+
+This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. @blei2003latent describe LDA's in detail.
+
+For more on LDA's see Bail's chapter on [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html).

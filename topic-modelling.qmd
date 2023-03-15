@@ -1,7 +1,5 @@
 # Topic Modelling {#sec-chp7}
 
-## An Introduction to Topic Modelling
-
 **Topic modelling** is part of the larger topic of text data mining. Text mining is the process of transforming unstructured text into a structured format to identify meaningful patterns. In text mining, we often have collections of documents, such as news articles, blog posts, academic papers and much more. We often want to divide these documents into natural groups so that we can understand them separately. **Topic modeling** is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items - instead of counting them individually - even when we are not sure what we are looking for. Topic modeling is not the only method that does this-- cluster analysis, latent semantic analysis, and other techniques have also been used to identify clustering within texts (Bail, [2020](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html)).
 
 Topic models offer two significant advantages over simple forms of cluster analysis such as k-means clustering. Unlike k-means clustering, which assigns each document to only one cluster, topic models are mixture models that assign a probability to each document indicating its likelihood of belonging to a latent theme or topic.
@@ -16,7 +14,7 @@ This chapter is based on:
 
 -   The [Topic modelling](https://www.tidytextmining.com/topicmodeling.html) chapter in Silge, J. and Robinson, D, 2022. [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
 
--   Bail, C. 2020's [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html) chapter in *Text as DATA*. Computational Social Science 
+-   Bail, C. 2020's [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html) chapter in *Text as DATA*. Computational Social Science
 
 **Latent Dirichlet Allocation**
 
@@ -29,3 +27,347 @@ A widely used approach for creating a topic model is Latent Dirichlet Allocation
 This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. @blei2003latent describe LDA's in detail.
 
 For more on LDA's see Bail's chapter on [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html).
+
+## Dependencies
+
+As shown in the Figure below by we can use tidy text principles to approach topic modeling with the same set of tidy tools used for other data analysis in R. In this chapter, we'll learn to work with LDA objects from the `topicmodels` package, tidying such models so that they can be analysed with the help of `ggplot2` and `dplyr`.
+
+![Silge & Robinson 2022: A flowchart of a text analysis that incorporates topic modeling. The topicmodels package takes a Document-Term Matrix as input and produces a model that can be tided by tidytext, such that it can be manipulated and visualized with dplyr and ggplot2.](./figs/chp7/tmwr_0601.png){width="80%"}
+
+We use the libraries below.
+
+```{r dependencies}
+#| warning: false
+#| message: FALSE
+
+#Topic models package that allows tidying such models with ggplot2 and dplyr
+library(topicmodels)
+#A framework for text mining applications within R.
+library(tm)
+#The Life-Changing Magic of Tidying Text
+library(tidytext)
+# Snowball Stemmers Based on the C 'libstemmer' UTF-8 Library
+library(SnowballC)
+# Data manipulation
+library(tidyverse)
+#Create Elegant Data Visualisations Using the Grammar of Graphics
+library(ggplot2)
+library(ggthemes)
+# Reddit Data Extraction Toolkit
+library(RedditExtractoR)
+# Flexibly Reshape Data
+library(reshape2)
+# Estimation of Structural Topic Models
+library (stm)
+```
+
+## Data
+
+Reddit is a social news website where you can find posts about almost anything. Reddit has a huge user base and is increasingly used One of the most interesting aspects of Reddit is the comments that accompany posts. Redditors are known for their brutal honesty and often provide interesting opinions that you wouldn't otherwise find. Reddit also has a **plug-n-play** R package which makes is very easy to `get` Reddit data via API.
+
+The key is to find URLs to Reddit threads of interest. There are 2 available search strategies: by keywords and by home page. Using a set of *keywords* can help you narrow down your search to a topic of interest that crosses multiple subreddits whereas searching by *home page* can help you find, for example, top posts within a specific subreddit.
+
+If you want to source your own Reddit data, comment out the code below and change keywords.
+
+```{r calling data}
+#This function takes a collection of URLs and returns a list with 2 data frames: 1. a data frame containing meta data describing each thread 2. a data frame with comments found in all threads
+#urls <- find_thread_urls(keywords = "fertility", sort_by = "top", subreddit = NA, period = "year" )
+
+#This function GETs the data. 
+#fertility_data <- get_thread_content(urls$url)
+
+# The below code simply creates data frames for the threads and the comments and saves them as csvs for later use. 
+
+#threads <- pandemic_babies_data$threads
+#comments <- pandemic_babies_data$comments
+#write.csv(threads, "data/topic-modelling/threads.csv", row.names = FALSE)
+#write.csv(comments, "data/topic-modelling/comments.csv", row.names = FALSE)
+```
+
+First we import the data we will be working with. You can either use the same data as used below or find other data sourced from reddit [here](https://github.com/fcorowe/r4ps/tree/main/data/topic_modelling).
+
+```{r load data}
+comments <- read.csv("data/topic-modelling/comments.csv", header = TRUE)
+
+head(comments)
+```
+
+We now have a data frame with authors, dates and comments.
+
+### Text data structures
+
+However, we need to create a Corpus style object to preserve both both the full text of our Reddit comments and the metadata to eventually move to a Document-Term matrix used Topic Modelling. We are going to be using the package `tidytext`.
+
+```{r create data frame}
+tidy_fertility_reddit <- comments %>% # Takes comments dataframe
+  select(timestamp, comment) %>% # Breaks out the timestamp (like a unique idenified) and the text variables 
+  unnest_tokens("word", comment) # Passes the "word" token and the name of the variable which is 'comment'
+
+head(tidy_fertility_reddit) # Checks out the first 5 words and the dataframe format
+```
+
+The `tidytext` format is very useful because once the text has been tidy-ed, regular R functions can be used to analyze it instead of the specialized functions. For example, to count the most popular words in our Reddit, we can can un-comment the following:
+
+```{r raw data}
+#tidy_fertility_reddit %>%
+#  count(word) %>%
+#  arrange(desc(n))
+```
+
+### Basic text data principles
+
+Before we can run any type of analysis, we first need to decide precisely which type of text should be included in our analyses. For example, as the code above showed, common words such as "the", "and" and "that" are most likely not very informative. Usually, words such as "the" will not be informative for our quantitative text analysis, but how many times reddit comments use the word "abortion" might be very relevant to an analysis about pro-choice discourses.
+
+`Stopwords`
+
+```{r stopwords}
+data("stop_words") # Stopwords in tidytext package 
+tidy_fertility_reddit_clean <- tidy_fertility_reddit %>%
+  anti_join(stop_words) #using anti-join to remove words
+```
+
+`Punctuation and numbers`
+
+An advantage of `tidytext` is that it removes punctuation automatically. There is also very easy in `tidytext` to remove all numeric digits. We can use basic grep commands (note the "\\b\\d+\\b" text here tells R to remove all numeric digits and the '-' sign means grep excludes them rather than includes them). Grep (Global Regular Expression print) commands are used in searching and matching text files contained in the regular expressions.
+
+```{r punctuation}
+tidy_fertility_reddit_clean<-tidy_fertility_reddit_clean[-grep("\\b\\d+\\b", tidy_fertility_reddit_clean$word),]
+
+# Eliminate some specific words
+tidy_fertility_reddit_clean <- tidy_fertility_reddit_clean %>% 
+  filter(!(word %in% c("https", "www.reddit.com", "comments", "gt", "don", "roe", "post", "didn", "oop", "ve", "x200b", "op", "nta", "fuck", "yeah"))) 
+
+# Replace some words with others (manual cleaning)
+tidy_fertility_reddit_clean <- tidy_fertility_reddit_clean %>%
+  mutate(word = if_else(word == "children", "child", word)) %>%
+  mutate(word = if_else(word == "kids", "child", word)) %>%
+  mutate(word = if_else(word == "pregnancy", "pregnant", word))
+```
+
+We could always do more cleaning.
+
+`Stemming`
+
+Stemming reduces words to most basic forms. A final common step in text-pre processing is stemming. Stemming a word refers to replacing it with its most basic conjugate form. For example the stem of the word "typing" is "type." Stemming is common practice because we don't want the words "type" and "typing" to convey different meanings to algorithms that we will soon use to extract latent themes from unstructured texts. `Tidytext` includes the `wordStem` function:
+
+```{r stemming}
+  tidy_fertility_reddit_clean<-tidy_fertility_reddit_clean %>%
+      mutate_at("word", ~wordStem(., language = "en"))
+```
+
+Analysing word frequencies is often the first stop in text analysis. We can easily do this using ggplot. Like in sentiment analysis, let's visualise the 20 most common words used on reddit regarding fertility-related topics.
+
+```{r}
+tidy_fertility_reddit_clean %>% 
+  count(word) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:20) %>%
+  ggplot( aes(x= reorder(word, n), y= n/1000, fill = n/1000)) +
+  geom_bar( position="stack", 
+            stat = "identity"
+            ) +
+  theme_tufte() +
+  scale_fill_gradient(low = "white", 
+                      high = "darkblue") +
+  theme(axis.text.x = element_text(angle = 90, 
+                                   hjust = 1)) +
+  ylab("Number of occurrences ('000)") +
+  xlab("") +
+  labs(fill = "Word occurrences") +
+  coord_flip()
+```
+
+`The Document-Term Matrix (DTM)`
+
+Finally, we transform our data into a document-term matrix which is the format we will be needing for quantitative text analysis. This is a matrix where each word is a row and each column is a document. The number within each cell describes the number of times the word appears in the document. Many of the most popular forms of text analysis, such as topic models, require a document-term matrix.
+
+To create a DTM in `tidytext` we can use the following code:
+
+```{r dtm}
+tidy_fertility_DTM<-
+  tidy_fertility_reddit_clean %>%
+  count(timestamp, word) %>%
+  cast_dtm(timestamp, word, n)
+
+inspect(tidy_fertility_DTM[1:5,3:8])
+```
+
+## Topic Modelling
+
+After pre-processing out text, we can focus on the key of this chapter: discussions around fertility and the pandemic's influence on fertility rates. We do this by using topic modelling.
+
+To start, we will use the DTM we created from the reddit data and the `LDA()` function from the `topicmodels` package, setting k = 5, to create a five-topic LDA model. Almost any topic model in practice will use a larger k, but we will soon see that this analysis approach extends to a larger number of topics.
+
+This function returns an object containing the full details of the model fit, such as how words are associated with topics and how topics are associated with documents.
+
+```{r topic modelling}
+# set a seed so that the output of the model is predictable
+
+Reddit_topic_model <- LDA(tidy_fertility_DTM,
+              k = 5, # number of presumed topics
+              control = list(seed = 541)) # important if you want this to be reproducible, (321)
+
+Reddit_topic_model
+```
+
+Fitting the model was the "easy part": the rest of the analysis will involve exploring and interpreting the model using `tidy` functions from the `tidytext` package.
+
+### Word-topic probabilities
+
+We can use the `tidy()` function, originally from the broom package [Robinson 2017](https://cran.r-project.org/web/packages/broom/index.html), for tidying model objects. The `tidytext` package provides this method for extracting the per-topic-per-word probabilities, called β ("beta"), from the model.
+
+```{r}
+ap_topics <- tidy(Reddit_topic_model, matrix = "beta")
+ap_topics
+```
+
+This has turned the model into a one-topic-per-term-per-row format. For each combination, the model computes the probability of that term being generated from that topic. CHANGE: For example, the term "aaron" has a 1.686917 × 10−12 probability of being generated from topic 1, but a 3.8959408 × 10−5 probability of being generated from topic 2.
+
+Then there are different options. We could use dplyr's slice_max() to find the 10 terms that are most common within each topic. As a tidy data frame, this lends itself well to a ggplot2 visualization.
+
+```{r}
+ap_top_terms <- ap_topics %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 10) %>% 
+  ungroup() %>%
+  arrange(topic, -beta)
+
+ap_top_terms %>%
+  mutate(term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(beta, term, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  scale_y_reordered()
+```
+
+Have we defined too many topics? Do we need to increase the number of words per topic. We can see that the Topic 1 focuses on "pregancy" and "adoption", while Topic 3 is probably addressing "legal" questions around fertility. We would need to clean the data further to identify better patterns.
+
+### Greatest differences in $\beta$
+
+We can consider the terms that had the greatest difference in β between Topic 1 and Topic 3. This can be estimated based on the log ratio of the two: $\log_2(\frac{\beta_2}{\beta_1})$ (a log ratio is useful because it makes the difference symmetrical: $\beta_2$ being twice as large leads to a log ratio of 1, while $\beta_1$ being twice as large results in -1). To make sure we pick up relevant words, we can filter for relatively common words, such as those that have a $\beta$ greater than 1/1000 in at least one topic.
+
+```{r}
+ap_topics <- ap_topics %>%
+  filter(topic == 1 | topic == 5) # Keeping just the topics of interest
+
+beta_wide <- ap_topics %>%
+  mutate(topic = paste0("topic", topic)) %>%
+  pivot_wider(names_from = topic, values_from = beta) %>% 
+  filter(topic1 > .001 | topic5 > .001) %>% # Beta greater than 1/1000 in at least one topic
+  mutate(log_ratio = log2(topic5 / topic1)) # Calculate Log ratio
+
+beta_wide
+```
+
+The words with the greatest differences between the Topic 1 and Topic 3:
+
+```{r beta_difference}
+beta_wide %>%
+  group_by(direction = log_ratio > 0) %>%
+  slice_max(abs(log_ratio), n = 10) %>% 
+  ungroup() %>%
+  mutate(term = reorder(term, log_ratio)) %>%
+  ggplot(aes(log_ratio, term)) +
+  geom_col() +
+  labs(x = "Log2 ratio of beta in topic 5 / topic 1", y = NULL)
+```
+
+We can see that the words more common in topic 3 include words such as "sperm", "embryo" and "response" suggesting we may be picking up medical discussion around fertility. Whereas Topic 1 is more centred around "pregnancy", "parents" and "divorce" suggesting socio-economic .... More exploration would be warranted here...
+
+### Structural Topic Modelling
+
+The `stm` package has some text pre-processing functions integrated in it. Similar to the steps we did manually in the previous section. The `textProcessor` function automatically removes a) punctuation; b) stop words; c) numbers, and d) stems each word. The function requires us to specify the part of the dataframe where the documents we want to analyze are documents), and requires us to name the dataset where the rest of the meta data live (pandemic_threads). Notice what happens in your console while function `textProcessor`.
+
+```{r}
+pandemic_threads <- read.csv("data/topic-modelling/pandemicthreads.csv", header = TRUE)
+
+head(pandemic_threads)
+
+processed <- textProcessor(pandemic_threads$text, metadata = pandemic_threads)
+```
+
+The `stm` package also requires us to store the documents, meta data, and "vocab" in separate objects, essentially a list of words described in the documents.
+
+```{r}
+# Eliminates both extremely common terms and extremely rare terms, since such terms make word-topic assignment more difficult.
+out <- prepDocuments(processed$documents, processed$vocab, processed$meta)
+
+docs <- out$documents
+vocab <- out$vocab
+meta <-out$meta
+```
+
+Then have to make another decision about the number of topics we might expect to find in the corpus. Let's start out with 10. We also need to specify how we want to use the meta data. This model uses the number of "comments". It's important to recognize that the variables selected in this stage can have significant ramifications. If we make the wrong choice, we could potentially miss identifying certain topics that are discussed on both liberal and conservative blogs or mistakenly categorize them as distinct subjects.
+
+In addition, the `stm` package offers an argument that permits the specification of the desired type of initialization or randomization. For our purposes, we have chosen to use spectral initialization. Please see [Bail, C. 2020](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html) for more.
+
+This below code may take some time if you are running it on a large body. You can read more about each function in the [package documentation](https://www.rdocumentation.org/packages/stm/versions/1.3.6/topics/stm).
+
+```{r}
+First_STM <- stm(documents = out$documents, vocab = out$vocab,
+              K = 10, 
+              prevalence =~ comments,
+              max.em.its = 75, data = out$meta,
+              init.type = "Spectral", verbose = FALSE)
+```
+
+We start by inspecting our results by browsing the top words associated with each topic. The `stm` package has a useful function that visualizes these results called plot:
+
+```{r}
+plot(First_STM)
+```
+
+The visualization provides information on both the occurrence rate of the topic across the entire corpus and the top three words that are linked to the topic. As you will notice, in a second iteration of the model we may want to exclude words such as "like".
+
+Some topics seem plausible, but many that do not seem very coherent or meaningful. You may want to improve your topic classification with more than one variable in the `prevalence` comments. Please see [Bail, C. 2020](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html) for more.
+
+### Limitations of Topic Models
+
+For various reasons, topic models have become a conventional tool for quantitative text analysis. Depending on the application, they can be more advantageous than simplistic word frequency or dictionary-based methods. Generally, topic models yield optimal outcomes when utilized on texts that are moderately lengthy and have a regular format.
+
+On the other hand, topic models have a number of important limitations. To start, the term "topic" is somewhat vague, and it is now evident that topic models cannot generate extremely refined classifications of texts. Furthermore, if topic models are incorrectly perceived as an unbiased depiction of a text's meaning, they can be easily misused. Once more, these instruments might be more accurately depicted as "tools for reading." It is not advisable to excessively interpret the outcomes of topic models unless the researcher has solid theoretical prior knowledge regarding the number of topics in a particular corpus, or if the researcher has thoroughly verified the results of a topic model using both quantitative and qualitative methodologies described earlier.
+
+## Questions
+
+For the second assignment, we will focus on the United Kingdom as our geographical area of analysis. As for [Sentiment Analysis chapter](https://www.population-science.net/sentiment-analysis.html), we will use a dataset of tweets about migration posted by users in the United Kingdom during February 24th 2021 to July 1st 2022.
+
+```{r}
+twitter_df <- readRDS("./data/sentiment-analysis/uk_tweets_24022021_01072022.rds")
+```
+
+1.  Prepare the twitter data so that it can be analyzed in the `topicmodels` package
+
+2.  Run three models and try to identify an appropriate value for k (the number of topics).
+
+3.  Create a chart of greatest differences between two relevant topics you have identified.
+
+4.  Use the `full_place_name` or `lat` and `long` variables as meta data to create classification between different types of places in the UK. For example: urban/rural, classified by population/density, or simply between different regions. There are plenty of ways you can divide the tweets geographically, see some easy examples [here](https://statistics.ukdataservice.ac.uk/dataset/2011-census-geography-boundaries-local-authorities/resource/928039eb-e75a-4648-814e-32498dcc5db6). Then explore whether there are differences in topics according to different locations in the UK using the `stm` package.
+
+5.  BONUS QUESTION: Discuss the limitations of topic models on short texts, such as Tweets. There have been a number of recent attempts to address this problem, and Graham Tierney has developed a very nice solution called [stLDA-C](https://github.com/g-tierney/stLDA-C_public).
+
+**The below code helps you geo-localise the twitter data.** You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.
+
+```{r}
+#| message: FALSE
+library(sf)
+
+# subset the data frame to remove rows with missing values in x and y columns
+twitter_df_clean <- twitter_df[complete.cases(twitter_df[, c("lat", "long")]), ]
+
+twitter_df_clean <- twitter_df_clean %>% 
+  sf::st_as_sf(coords = c(4,5))  %>%  # create pts from coordinates
+  st_set_crs(4326)  # set the original CRS
+
+plot(twitter_df_clean$geometry)
+
+# Example spatial join. You can also specify other join types such as st_contains, st_within, and st_touches depending on your analysis requirements.
+# cities <- st_join(point, cities, join = st_intersects)
+```
+
+## References
+
+Bail, C. 2020, Computational Social Science [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html)
+
+Silge, J. and Robinson, D, 2022. [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
+
+[Release Memory in R](https://stackoverflow.com/questions/15561331/release-memory-in-r)

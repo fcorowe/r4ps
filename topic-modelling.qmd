@@ -22,7 +22,7 @@ A widely used approach for creating a topic model is Latent Dirichlet Allocation
 
 -   Each document as a combination of topics. We imagine that each document may contain words from several topics in particular proportions. For instance, in a two-topic model we could say Document 1 is 80% about *migration* and 20% about *refugees*, while Document 2 is 40% about *migration* and 60% about *increased work-force*.
 
--   Each topic as a blend of words. For example, we could imagine a two-topic model of a twitter-feed, with one topic for "migration" and one for "refugees." The most common words in the migration topic might be "migrant", "origin", and "destination", while the refugee topic may be made up of words such as "armed conflict", "persecution", and "camp". Importantly, words can be shared between topics; a word like "destination" might appear in both equally.
+-   Each topic as a blend of words. For example, we could imagine a two-topic model of a Twitter-feed, with one topic for "migration" and one for "refugees." The most common words in the migration topic might be "migrant", "origin", and "destination", while the refugee topic may be made up of words such as "armed conflict", "persecution", and "camp". Importantly, words can be shared between topics; a word like "destination" might appear in both equally.
 
 This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. @blei2003latent describe LDA's in detail.
 
@@ -35,6 +35,12 @@ As shown in the Figure below by we can use tidy text principles to approach topi
 ![Silge & Robinson 2022: A flowchart of a text analysis that incorporates topic modeling. The topicmodels package takes a Document-Term Matrix as input and produces a model that can be tided by tidytext, such that it can be manipulated and visualized with dplyr and ggplot2.](./figs/chp7/tmwr_0601.png){width="80%"}
 
 We use the libraries below.
+
+```{r}
+#| include = FALSE
+rm(list=ls())
+source("data-viz-themes.R")
+```
 
 ```{r dependencies}
 #| warning: false
@@ -166,7 +172,7 @@ tidy_fertility_reddit_clean %>%
   geom_bar( position="stack", 
             stat = "identity"
             ) +
-  theme_tufte() +
+  theme_tufte2() +
   scale_fill_gradient(low = "white", 
                       high = "darkblue") +
   theme(axis.text.x = element_text(angle = 90, 
@@ -237,7 +243,8 @@ ap_top_terms %>%
   ggplot(aes(beta, term, fill = factor(topic))) +
   geom_col(show.legend = FALSE) +
   facet_wrap(~ topic, scales = "free") +
-  scale_y_reordered()
+  scale_y_reordered() +
+  theme_tufte2()
 ```
 
 Have we defined too many topics? Do we need to increase the number of words per topic. We can see that the Topic 1 focuses on "pregancy" and "adoption", while Topic 3 is probably addressing "legal" questions around fertility. We would need to clean the data further to identify better patterns.
@@ -269,7 +276,8 @@ beta_wide %>%
   mutate(term = reorder(term, log_ratio)) %>%
   ggplot(aes(log_ratio, term)) +
   geom_col() +
-  labs(x = "Log2 ratio of beta in topic 5 / topic 1", y = NULL)
+  labs(x = "Log2 ratio of beta in topic 5 / topic 1", y = NULL) +
+  theme_tufte2()
 ```
 
 We can see that the words more common in topic 3 include words such as "sperm", "embryo" and "response" suggesting we may be picking up medical discussion around fertility. Whereas Topic 1 is more centred around "pregnancy", "parents" and "divorce" suggesting socio-economic .... More exploration would be warranted here...
@@ -279,6 +287,8 @@ We can see that the words more common in topic 3 include words such as "sperm", 
 The `stm` package has some text pre-processing functions integrated in it. Similar to the steps we did manually in the previous section. The `textProcessor` function automatically removes a) punctuation; b) stop words; c) numbers, and d) stems each word. The function requires us to specify the part of the dataframe where the documents we want to analyze are documents), and requires us to name the dataset where the rest of the meta data live (pandemic_threads). Notice what happens in your console while function `textProcessor`.
 
 ```{r}
+#| message: false
+#| warning: false
 pandemic_threads <- read.csv("data/topic-modelling/pandemicthreads.csv", header = TRUE)
 
 head(pandemic_threads)
@@ -335,7 +345,7 @@ For the second assignment, we will focus on the United Kingdom as our geographic
 twitter_df <- readRDS("./data/sentiment-analysis/uk_tweets_24022021_01072022.rds")
 ```
 
-1.  Prepare the twitter data so that it can be analyzed in the `topicmodels` package
+1.  Prepare the Twitter data so that it can be analyzed in the `topicmodels` package
 
 2.  Run three models and try to identify an appropriate value for k (the number of topics).
 
@@ -345,7 +355,7 @@ twitter_df <- readRDS("./data/sentiment-analysis/uk_tweets_24022021_01072022.rds
 
 5.  BONUS QUESTION: Discuss the limitations of topic models on short texts, such as Tweets. There have been a number of recent attempts to address this problem, and Graham Tierney has developed a very nice solution called [stLDA-C](https://github.com/g-tierney/stLDA-C_public).
 
-**The below code helps you geo-localise the twitter data.** You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.
+**The below code helps you geo-localise the Twitter data.** You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.
 
 ```{r}
 #| message: FALSE
@@ -363,11 +373,3 @@ plot(twitter_df_clean$geometry)
 # Example spatial join. You can also specify other join types such as st_contains, st_within, and st_touches depending on your analysis requirements.
 # cities <- st_join(point, cities, join = st_intersects)
 ```
-
-## References
-
-Bail, C. 2020, Computational Social Science [Topic Modelling](https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html)
-
-Silge, J. and Robinson, D, 2022. [Text Mining with R: A Tidy Approach](https://www.tidytextmining.com/)
-
-[Release Memory in R](https://stackoverflow.com/questions/15561331/release-memory-in-r)

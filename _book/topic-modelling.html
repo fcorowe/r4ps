@@ -298,7 +298,6 @@ div.csl-indent {
   <li><a href="#limitations-of-topic-models" id="toc-limitations-of-topic-models" class="nav-link" data-scroll-target="#limitations-of-topic-models"><span class="toc-section-number">7.3.4</span>  Limitations of Topic Models</a></li>
   </ul></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">7.4</span>  Questions</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">7.5</span>  References</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/topic-modelling.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -336,7 +335,7 @@ div.csl-indent {
 <p>A widely used approach for creating a topic model is Latent Dirichlet Allocation (LDA). LDA considers</p>
 <ul>
 <li><p>Each document as a combination of topics. We imagine that each document may contain words from several topics in particular proportions. For instance, in a two-topic model we could say Document 1 is 80% about <em>migration</em> and 20% about <em>refugees</em>, while Document 2 is 40% about <em>migration</em> and 60% about <em>increased work-force</em>.</p></li>
-<li><p>Each topic as a blend of words. For example, we could imagine a two-topic model of a twitter-feed, with one topic for “migration” and one for “refugees.” The most common words in the migration topic might be “migrant”, “origin”, and “destination”, while the refugee topic may be made up of words such as “armed conflict”, “persecution”, and “camp”. Importantly, words can be shared between topics; a word like “destination” might appear in both equally.</p></li>
+<li><p>Each topic as a blend of words. For example, we could imagine a two-topic model of a Twitter-feed, with one topic for “migration” and one for “refugees.” The most common words in the migration topic might be “migrant”, “origin”, and “destination”, while the refugee topic may be made up of words such as “armed conflict”, “persecution”, and “camp”. Importantly, words can be shared between topics; a word like “destination” might appear in both equally.</p></li>
 </ul>
 <p>This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. <span class="citation" data-cites="blei2003latent">Blei, Ng, and Jordan (<a href="references.html#ref-blei2003latent" role="doc-biblioref">2003</a>)</span> describe LDA’s in detail.</p>
 <p>For more on LDA’s see Bail’s chapter on <a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Topic Modelling</a>.</p>
@@ -498,7 +497,7 @@ div.csl-indent {
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>( <span class="at">position=</span><span class="st">"stack"</span>, </span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">stat =</span> <span class="st">"identity"</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte2</span>() <span class="sc">+</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, </span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">high =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
@@ -508,7 +507,7 @@ div.csl-indent {
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Word occurrences"</span>) <span class="sc">+</span></span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="topic-modelling_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="topic-modelling_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><code>The Document-Term Matrix (DTM)</code></p>
@@ -594,9 +593,10 @@ Docs         act aren awkward dis normal wish
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(beta, term, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>() <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="topic-modelling_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="topic-modelling_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Have we defined too many topics? Do we need to increase the number of words per topic. We can see that the Topic 1 focuses on “pregancy” and “adoption”, while Topic 3 is probably addressing “legal” questions around fertility. We would need to clean the data further to identify better patterns.</p>
@@ -641,7 +641,8 @@ Docs         act aren awkward dis normal wish
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder</span>(term, log_ratio)) <span class="sc">%&gt;%</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(log_ratio, term)) <span class="sc">+</span></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Log2 ratio of beta in topic 5 / topic 1"</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Log2 ratio of beta in topic 5 / topic 1"</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte2</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="topic-modelling_files/figure-html/beta_difference-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -736,7 +737,7 @@ Your corpus now has 218 documents, 5347 terms and 64554 tokens.</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(First_STM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="topic-modelling_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="topic-modelling_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The visualization provides information on both the occurrence rate of the topic across the entire corpus and the top three words that are linked to the topic. As you will notice, in a second iteration of the model we may want to exclude words such as “like”.</p>
@@ -755,13 +756,13 @@ Your corpus now has 218 documents, 5347 terms and 64554 tokens.</code></pre>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>twitter_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/sentiment-analysis/uk_tweets_24022021_01072022.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li><p>Prepare the twitter data so that it can be analyzed in the <code>topicmodels</code> package</p></li>
+<li><p>Prepare the Twitter data so that it can be analyzed in the <code>topicmodels</code> package</p></li>
 <li><p>Run three models and try to identify an appropriate value for k (the number of topics).</p></li>
 <li><p>Create a chart of greatest differences between two relevant topics you have identified.</p></li>
 <li><p>Use the <code>full_place_name</code> or <code>lat</code> and <code>long</code> variables as meta data to create classification between different types of places in the UK. For example: urban/rural, classified by population/density, or simply between different regions. There are plenty of ways you can divide the tweets geographically, see some easy examples <a href="https://statistics.ukdataservice.ac.uk/dataset/2011-census-geography-boundaries-local-authorities/resource/928039eb-e75a-4648-814e-32498dcc5db6">here</a>. Then explore whether there are differences in topics according to different locations in the UK using the <code>stm</code> package.</p></li>
 <li><p>BONUS QUESTION: Discuss the limitations of topic models on short texts, such as Tweets. There have been a number of recent attempts to address this problem, and Graham Tierney has developed a very nice solution called <a href="https://github.com/g-tierney/stLDA-C_public">stLDA-C</a>.</p></li>
 </ol>
-<p><strong>The below code helps you geo-localise the twitter data.</strong> You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.</p>
+<p><strong>The below code helps you geo-localise the Twitter data.</strong> You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -774,17 +775,11 @@ Your corpus now has 218 documents, 5347 terms and 64554 tokens.</code></pre>
 <span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(twitter_df_clean<span class="sc">$</span>geometry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="topic-modelling_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="topic-modelling_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example spatial join. You can also specify other join types such as st_contains, st_within, and st_touches depending on your analysis requirements.</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># cities &lt;- st_join(point, cities, join = st_intersects)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="references" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="references"><span class="header-section-number">7.5</span> References</h2>
-<p>Bail, C. 2020, Computational Social Science <a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Topic Modelling</a></p>
-<p>Silge, J. and Robinson, D, 2022. <a href="https://www.tidytextmining.com/">Text Mining with R: A Tidy Approach</a></p>
-<p><a href="https://stackoverflow.com/questions/15561331/release-memory-in-r">Release Memory in R</a></p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">

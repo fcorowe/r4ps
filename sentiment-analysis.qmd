@@ -27,10 +27,11 @@ source("data-viz-themes.R")
 ```{r}
 #| warning: false
 
+# text data manipulation
 library(tidytext) # text data tidy approach
 library(tm) # creating data corpus
 library(SnowballC) # stemming text
-library(tidyverse) # data manipulation
+library(tidyverse) # manipulate data
 
 # sentiment analysis
 library(vader)
@@ -58,9 +59,7 @@ glimpse(tweets_df)
 
 ### Text data structures
 
-General data frame object has a specific structure: Each variable is a column Each observation is a row Each type of observational unit is a table
-
-Different approaches to storing and manipulating text data exist:
+Different approaches to storing and manipulating text data exist. General formats include:
 
 String: Text can be stored as strings, i.e., character vectors, within R, and often text data is first read into memory in this form.
 
@@ -68,7 +67,7 @@ Corpus: These types of objects typically contain raw strings annotated with addi
 
 Document-term matrix: This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count.
 
-TidyText: This is a novel approach developed by @silgerobison2022. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. The R `tidytext` package provides full functionality to implement the approach and manipulate text with the standard `tidyverse` ecosystem.
+TidyText: This is a novel approach developed by @silgerobison2022. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. Tidy data has a specific structure. Each variable is a column. Each observation is a row and each type of observational unit is a table, The R `tidytext` package provides full functionality to implement the tidytext approach and manipulate text with the standard `tidyverse` ecosystem.
 
 ```{r}
 # converting to a tidytext data representation
@@ -109,19 +108,19 @@ You can also use the function `str_detect` from the `stringr` package to identif
 :::
 
 ```{r}
-grepl("&gt", tweets_df$text[1:50])
+grepl("&gt", tweets_df$text[40:50])
 ```
 
 Let's see one of those tweets:
 
 ```{r}
-tweets_df$text[30]
+tweets_df$text[48]
 ```
 
-We may now want to remove the regular expression `&gt`. We can do this by using `gsub` from the `grep` library. In `gsub`, you add the pattern you want to replace (i.e. `&gt`), followed by the expression you want to use to replace this pattern with (nothing), and the data object (the tweet:`tweets_df$text[30]`).
+We may now want to remove the regular expression `&gt`. We can do this by using `gsub` from the `grep` library. In `gsub`, you add the pattern you want to replace (i.e. `---&gt`), followed by the expression you want to use to replace this pattern with (nothing), and the data object (the tweet:`tweets_df$text[48]`).
 
 ```{r}
-gsub("&gt", "", tweets_df$text[30])
+gsub("---&gt", "", tweets_df$text[48])
 ```
 
 `grep` functions can also be very helpful in identifying a word and prefix in a string of words. We recommend consulting the [Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/regex.pdf) for basic regular expressions in R put together by Ian Kopacka, to get familiar with the various character expressions and functions.
@@ -236,7 +235,7 @@ tidy_tweets_df[-grep("https|t.co|amp",
 We could also use `str_detect` from the `stringr` package.
 
 ```{r}
-coding_words <- c("https|t.co|amp")
+coding_words <- c("https|http|t.co|amp|anonymous|url_removed|http://url_removed")
 
 tidy_tweets_df <- tidy_tweets_df %>%
   filter(!str_detect(word, coding_words)) 
@@ -270,13 +269,13 @@ tidy_tweets_df %>%
 
 ## Sentiment Analysis
 
-After pre-processing our text, we can focus on the key of this chapter; that is, measuring migration sentiment. We do this by using sentiment analysis, which as described in the introduction of this chapter, enables identifying, measuring and analysing emotional states and subjective information. It computationally infers the polarity of text, that is, whether the underpinning semantics of an opinion is positive, negative or neutral.A variety of methods and dictionaries for evaluating the opinion or emotion in text exists. We will explore four different lexicon-based approaches: `AFFIN` (REF), `bing` (REF), `nrc` (REF) and `VADER`.
+After pre-processing our text, we can focus on the key of this chapter; that is, measuring migration sentiment. We do this by using sentiment analysis, which as described in the introduction of this chapter, enables identifying, measuring and analysing emotional states and subjective information. It computationally infers the polarity of text, that is, whether the underpinning semantics of an opinion is positive, negative or neutral. A variety of methods and dictionaries for evaluating the opinion or emotion in text exists. We will explore four different lexicon-based approaches: [`AFFIN`](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html), [`bing`](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html), [`nrc`](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm) and [`VADER`](https://github.com/cjhutto/vaderSentiment).
 
 ### Dictionary-based methods
 
 `AFFIN`, `bing` and `nrc` are dictionary- or lexicon-based approaches. Sentiment lexicons include key words which are typically used to express emotions or feelings, and are assigned a numeric score for positive and negative sentiment. They may also contain scores for emotions, such as joy, anger and sadness. Sentiment lexicons can thus be used to measure the valence of a given text by searching for words that describe affect or opinion. Dictionaries can be created by examining text-based evaluations of products in online forums to ratings systems from a variety of sources. They can also be created via systematic observations about different emotions in the field of psychology or related fields.
 
-The package `tidytext` provides access to all three lexicons. The `nrc` lexicon classifies words in a binary way into categories of positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise and trust. `nrc` constructed via Amazon Mechanical Turk (i.e. people manually labelling the emotional valence of words). The `bing` lexicon classifies words in a binary classification of positive and negative, and is based on words identified on online forums. The `AFINN` lexicon assigns words with a score ranging between -5 and 5 to capture the intensity of negative and positive sentiment.`AFINN` includes a list of sentiment-laden words used during discussions about climate change on Twitter.
+The package `tidytext` provides access to all three lexicons. The `nrc` lexicon classifies words in a binary way into categories of positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise and trust. `nrc` constructed via Amazon Mechanical Turk (i.e. people manually labelling the emotional valence of words). The `bing` lexicon classifies words in a binary classification of positive and negative, and is based on words identified on online forums. The `AFINN` lexicon assigns words with a score ranging between -5 and 5 to capture the intensity of negative and positive sentiment. `AFINN` includes a list of sentiment-laden words used during discussions about climate change on Twitter.
 
 ::: callout-note
 Note that not all words are in the lexicons and they only contain words in the English language.
@@ -422,9 +421,7 @@ Note that for this example we will use the tweet text as VADER can handle variou
 #| eval: false
 
 # tweet level 
-  tweet_vader_scores <- tweets_df %>% 
-    select(text) %>% 
-    vader_df(text)
+tweet_vader_scores <- vader_df(tweets_df$text)
 ```
 
 ```{r}
@@ -479,6 +476,7 @@ We can also explore the temporal evolution of sentiment towards migration over t
 
 ```{r}
 #| message: false
+#| warning: false
 
 # plot sentiment scores by day
 p3 <- ggplot(tweets_scores_df, 

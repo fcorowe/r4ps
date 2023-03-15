@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -331,19 +331,20 @@ div.csl-indent {
 <section id="dependencies" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="dependencies"><span class="header-section-number">6.1</span> Dependencies</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext) <span class="co"># text data tidy approach</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm) <span class="co"># creating data corpus</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SnowballC) <span class="co"># stemming text</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># data manipulation</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sentiment analysis</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vader)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># download twitter data (no used)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># design plots</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># text data manipulation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext) <span class="co"># text data tidy approach</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm) <span class="co"># creating data corpus</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SnowballC) <span class="co"># stemming text</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># manipulate data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># sentiment analysis</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vader)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># download twitter data (no used)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># design plots</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data" class="level2" data-number="6.2">
@@ -354,22 +355,21 @@ div.csl-indent {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tweets_df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/sentiment-analysis/usa_tweets_01122019_01052020.rds"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tweets_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 47,950
+<pre><code>Rows: 224,611
 Columns: 4
-$ id         &lt;dbl&gt; 176661, 176662, 176663, 176664, 176665, 176666, 176667, 176…
-$ created_at &lt;dttm&gt; 2020-03-30 23:02:04, 2020-03-30 23:02:18, 2020-03-30 23:03…
-$ status_id  &lt;dbl&gt; 1.244762e+18, 1.244762e+18, 1.244762e+18, 1.244763e+18, 1.2…
-$ text       &lt;chr&gt; "@anonymous @anonymous @anonymous @anonymous @anonymous @an…</code></pre>
+$ id         &lt;dbl&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1…
+$ created_at &lt;dttm&gt; 2019-12-01 00:00:18, 2019-12-01 00:00:23, 2019-12-01 00:00…
+$ status_id  &lt;dbl&gt; 1.200928e+18, 1.200928e+18, 1.200928e+18, 1.200928e+18, 1.2…
+$ text       &lt;chr&gt; "Another example @anonymous are the TRUE protectors of sanc…</code></pre>
 </div>
 </div>
 <section id="text-data-structures" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="text-data-structures"><span class="header-section-number">6.2.1</span> Text data structures</h3>
-<p>General data frame object has a specific structure: Each variable is a column Each observation is a row Each type of observational unit is a table</p>
-<p>Different approaches to storing and manipulating text data exist:</p>
+<p>Different approaches to storing and manipulating text data exist. General formats include:</p>
 <p>String: Text can be stored as strings, i.e., character vectors, within R, and often text data is first read into memory in this form.</p>
 <p>Corpus: These types of objects typically contain raw strings annotated with additional metadata and details.</p>
 <p>Document-term matrix: This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count.</p>
-<p>TidyText: This is a novel approach developed by <span class="citation" data-cites="silgerobison2022">Sielge and Robinson (<a href="references.html#ref-silgerobison2022" role="doc-biblioref">2022</a>)</span>. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. The R <code>tidytext</code> package provides full functionality to implement the approach and manipulate text with the standard <code>tidyverse</code> ecosystem.</p>
+<p>TidyText: This is a novel approach developed by <span class="citation" data-cites="silgerobison2022">Sielge and Robinson (<a href="references.html#ref-silgerobison2022" role="doc-biblioref">2022</a>)</span>. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. Tidy data has a specific structure. Each variable is a column. Each observation is a row and each type of observational unit is a table, The R <code>tidytext</code> package provides full functionality to implement the tidytext approach and manipulate text with the standard <code>tidyverse</code> ecosystem.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># converting to a tidytext data representation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tidy_tweets_df <span class="ot">&lt;-</span> tweets_df <span class="sc">%&gt;%</span></span>
@@ -383,20 +383,20 @@ $ text       &lt;chr&gt; "@anonymous @anonymous @anonymous @anonymous @anonymous
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 50,583 × 2
+<pre><code># A tibble: 129,554 × 2
    word             n
    &lt;chr&gt;        &lt;int&gt;
- 1 anonymous   102087
- 2 the          47883
- 3 to           36734
- 4 http         29758
- 5 url_removed  28382
- 6 and          24126
- 7 of           23356
- 8 in           19748
- 9 a            18451
-10 is           16069
-# … with 50,573 more rows</code></pre>
+ 1 anonymous   449611
+ 2 the         215293
+ 3 to          163434
+ 4 http        143377
+ 5 url_removed 136774
+ 6 and         112320
+ 7 of          106244
+ 8 in           93216
+ 9 a            92763
+10 is           75237
+# … with 129,544 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -424,27 +424,23 @@ Note
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">"&amp;gt"</span>, tweets_df<span class="sc">$</span>text[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grepl</span>(<span class="st">"&amp;gt"</span>, tweets_df<span class="sc">$</span>text[<span class="dv">40</span><span class="sc">:</span><span class="dv">50</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-[49] FALSE FALSE</code></pre>
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
 </div>
 </div>
 <p>Let’s see one of those tweets:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweets_df<span class="sc">$</span>text[<span class="dv">30</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tweets_df<span class="sc">$</span>text[<span class="dv">48</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "@anonymous @anonymous @anonymous @anonymous @anonymous @anonymous @anonymous @anonymous Exactly."</code></pre>
+<pre><code>[1] "Job Lead! ---&amp;gt; LIFE Program Assistant, International Institute of Los Angeles http://url_removed#nonprofit #jobs #Immigration #multitasking"</code></pre>
 </div>
 </div>
-<p>We may now want to remove the regular expression <code>&amp;gt</code>. We can do this by using <code>gsub</code> from the <code>grep</code> library. In <code>gsub</code>, you add the pattern you want to replace (i.e.&nbsp;<code>&amp;gt</code>), followed by the expression you want to use to replace this pattern with (nothing), and the data object (the tweet:<code>tweets_df$text[30]</code>).</p>
+<p>We may now want to remove the regular expression <code>&amp;gt</code>. We can do this by using <code>gsub</code> from the <code>grep</code> library. In <code>gsub</code>, you add the pattern you want to replace (i.e.&nbsp;<code>---&amp;gt</code>), followed by the expression you want to use to replace this pattern with (nothing), and the data object (the tweet:<code>tweets_df$text[48]</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="st">"&amp;gt"</span>, <span class="st">""</span>, tweets_df<span class="sc">$</span>text[<span class="dv">30</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="st">"---&amp;gt"</span>, <span class="st">""</span>, tweets_df<span class="sc">$</span>text[<span class="dv">48</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "@anonymous @anonymous @anonymous @anonymous @anonymous @anonymous @anonymous @anonymous Exactly."</code></pre>
+<pre><code>[1] "Job Lead! ; LIFE Program Assistant, International Institute of Los Angeles http://url_removed#nonprofit #jobs #Immigration #multitasking"</code></pre>
 </div>
 </div>
 <p><code>grep</code> functions can also be very helpful in identifying a word and prefix in a string of words. We recommend consulting the <a href="https://github.com/rstudio/cheatsheets/blob/main/regex.pdf">Cheat Sheet</a> for basic regular expressions in R put together by Ian Kopacka, to get familiar with the various character expressions and functions.</p>
@@ -468,20 +464,20 @@ Note
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(created_at, text) <span class="sc">%&gt;%</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_tokens</span>(ngram, text, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,369 × 2
-   created_at          ngram              
-   &lt;dttm&gt;              &lt;chr&gt;              
- 1 2020-03-30 23:02:04 anonymous anonymous
- 2 2020-03-30 23:02:04 anonymous anonymous
- 3 2020-03-30 23:02:04 anonymous anonymous
- 4 2020-03-30 23:02:04 anonymous anonymous
- 5 2020-03-30 23:02:04 anonymous anonymous
- 6 2020-03-30 23:02:04 anonymous anonymous
- 7 2020-03-30 23:02:04 anonymous no       
- 8 2020-03-30 23:02:04 no one             
- 9 2020-03-30 23:02:04 one is             
-10 2020-03-30 23:02:04 is above           
-# … with 1,359 more rows</code></pre>
+<pre><code># A tibble: 1,296 × 2
+   created_at          ngram                
+   &lt;dttm&gt;              &lt;chr&gt;                
+ 1 2019-12-01 00:00:18 another example      
+ 2 2019-12-01 00:00:18 example anonymous    
+ 3 2019-12-01 00:00:18 anonymous are        
+ 4 2019-12-01 00:00:18 are the              
+ 5 2019-12-01 00:00:18 the true             
+ 6 2019-12-01 00:00:18 true protectors      
+ 7 2019-12-01 00:00:18 protectors of        
+ 8 2019-12-01 00:00:18 of sanctuary         
+ 9 2019-12-01 00:00:18 sanctuary communities
+10 2019-12-01 00:00:18 communities when     
+# … with 1,286 more rows</code></pre>
 </div>
 </div>
 <div class="callout-tip callout callout-style-default callout-captioned">
@@ -517,13 +513,18 @@ Tip
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
+<pre><code># A tibble: 9 × 2
   word            n
   &lt;chr&gt;       &lt;int&gt;
-1 anonymous       7
-2 law             1
-3 people          1
-4 threatening     1</code></pre>
+1 trust           2
+2 anonymous       1
+3 citizens        1
+4 communities     1
+5 ice             1
+6 police          1
+7 protectors      1
+8 sanctuary       1
+9 true            1</code></pre>
 </div>
 </div>
 <p>We can see words, such as “t.co” and “https” which may not add much to our analysis and we may consider to remove them using <code>grep</code> functions. We will illustrate this below.</p>
@@ -546,20 +547,20 @@ Tip
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                  text, </span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">to_lower =</span> <span class="cn">FALSE</span>) <span class="co"># preserve upper case</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 243 × 2
-   created_at          word     
-   &lt;dttm&gt;              &lt;chr&gt;    
- 1 2020-03-30 23:02:04 anonymous
- 2 2020-03-30 23:02:04 anonymous
- 3 2020-03-30 23:02:04 anonymous
- 4 2020-03-30 23:02:04 anonymous
- 5 2020-03-30 23:02:04 anonymous
- 6 2020-03-30 23:02:04 anonymous
- 7 2020-03-30 23:02:04 anonymous
- 8 2020-03-30 23:02:04 No       
- 9 2020-03-30 23:02:04 one      
-10 2020-03-30 23:02:04 is       
-# … with 233 more rows</code></pre>
+<pre><code># A tibble: 282 × 2
+   created_at          word       
+   &lt;dttm&gt;              &lt;chr&gt;      
+ 1 2019-12-01 00:00:18 Another    
+ 2 2019-12-01 00:00:18 example    
+ 3 2019-12-01 00:00:18 anonymous  
+ 4 2019-12-01 00:00:18 are        
+ 5 2019-12-01 00:00:18 the        
+ 6 2019-12-01 00:00:18 TRUE       
+ 7 2019-12-01 00:00:18 protectors 
+ 8 2019-12-01 00:00:18 of         
+ 9 2019-12-01 00:00:18 sanctuary  
+10 2019-12-01 00:00:18 communities
+# … with 272 more rows</code></pre>
 </div>
 </div>
 <p><em><code>White spaces</code></em></p>
@@ -569,10 +570,10 @@ Tip
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>     <span class="st">""</span>,</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>     tidy_tweets_df<span class="sc">$</span>word[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "anonymous"   "anonymous"   "anonymous"   "anonymous"   "anonymous"  
- [6] "anonymous"   "anonymous"   "law"         "people"      "threatening"
-[11] "republican"  "government"  "president"   "arrested"    "http"       
-[16] "url_removed" "anonymous"   "approve"     "ice"         "delivers"   </code></pre>
+<pre><code> [1] "anonymous"   "true"        "protectors"  "sanctuary"   "communities"
+ [6] "citizens"    "trust"       "police"      "trust"       "ice"        
+[11] "politics"    "ahead"       "public"      "safety"      "http"       
+[16] "url_removed" "218th"       "illegal"     "immigrant"   "child"      </code></pre>
 </div>
 </div>
 <p><em><code>Stemming</code></em></p>
@@ -595,28 +596,28 @@ Tip
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 2
-   created_at          word      
-   &lt;dttm&gt;              &lt;chr&gt;     
- 1 2020-03-30 23:02:04 anonym    
- 2 2020-03-30 23:02:04 anonym    
- 3 2020-03-30 23:02:04 anonym    
- 4 2020-03-30 23:02:04 anonym    
- 5 2020-03-30 23:02:04 anonym    
- 6 2020-03-30 23:02:04 anonym    
- 7 2020-03-30 23:02:04 anonym    
- 8 2020-03-30 23:02:04 law       
- 9 2020-03-30 23:02:04 peopl     
-10 2020-03-30 23:02:04 threaten  
-11 2020-03-30 23:02:04 republican
-12 2020-03-30 23:02:04 govern    
-13 2020-03-30 23:02:04 presid    
-14 2020-03-30 23:02:04 arrest    
-15 2020-03-30 23:02:04 http      
-16 2020-03-30 23:02:04 url_remov 
-17 2020-03-30 23:02:18 anonym    
-18 2020-03-30 23:02:18 approv    
-19 2020-03-30 23:02:18 ice       
-20 2020-03-30 23:02:18 deliv     </code></pre>
+   created_at          word     
+   &lt;dttm&gt;              &lt;chr&gt;    
+ 1 2019-12-01 00:00:18 anonym   
+ 2 2019-12-01 00:00:18 true     
+ 3 2019-12-01 00:00:18 protector
+ 4 2019-12-01 00:00:18 sanctuari
+ 5 2019-12-01 00:00:18 communiti
+ 6 2019-12-01 00:00:18 citizen  
+ 7 2019-12-01 00:00:18 trust    
+ 8 2019-12-01 00:00:18 polic    
+ 9 2019-12-01 00:00:18 trust    
+10 2019-12-01 00:00:18 ice      
+11 2019-12-01 00:00:18 polit    
+12 2019-12-01 00:00:18 ahead    
+13 2019-12-01 00:00:18 public   
+14 2019-12-01 00:00:18 safeti   
+15 2019-12-01 00:00:18 http     
+16 2019-12-01 00:00:18 url_remov
+17 2019-12-01 00:00:23 218th    
+18 2019-12-01 00:00:23 illeg    
+19 2019-12-01 00:00:23 immigr   
+20 2019-12-01 00:00:23 child    </code></pre>
 </div>
 </div>
 <p><em><code>Coding characters</code></em></p>
@@ -627,25 +628,25 @@ Tip
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 47,991 × 2
-   word              n
-   &lt;chr&gt;         &lt;int&gt;
- 1 anonymous    102087
- 2 http          29758
- 3 url_removed   28382
- 4 immigration    9034
- 5 covid19        6115
- 6 coronavirus    5190
- 7 china          5149
- 8 people         4991
- 9 chinesevirus   4963
-10 chinavirus     4951
-# … with 47,981 more rows</code></pre>
+<pre><code># A tibble: 123,886 × 2
+   word             n
+   &lt;chr&gt;        &lt;int&gt;
+ 1 anonymous   449611
+ 2 http        143377
+ 3 url_removed 136774
+ 4 immigration  51480
+ 5 people       19523
+ 6 ice          19397
+ 7 immigrant    18898
+ 8 trump        17861
+ 9 virus        16162
+10 illegals     14392
+# … with 123,876 more rows</code></pre>
 </div>
 </div>
 <p>We could also use <code>str_detect</code> from the <code>stringr</code> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>coding_words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"https|t.co|amp"</span>)</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>coding_words <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"https|http|t.co|amp|anonymous|url_removed|http://url_removed"</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>tidy_tweets_df <span class="ot">&lt;-</span> tidy_tweets_df <span class="sc">%&gt;%</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, coding_words)) </span>
@@ -654,20 +655,20 @@ Tip
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 47,991 × 2
-   word              n
-   &lt;chr&gt;         &lt;int&gt;
- 1 anonymous    102087
- 2 http          29758
- 3 url_removed   28382
- 4 immigration    9034
- 5 covid19        6115
- 6 coronavirus    5190
- 7 china          5149
- 8 people         4991
- 9 chinesevirus   4963
-10 chinavirus     4951
-# … with 47,981 more rows</code></pre>
+<pre><code># A tibble: 123,191 × 2
+   word            n
+   &lt;chr&gt;       &lt;int&gt;
+ 1 immigration 51480
+ 2 people      19523
+ 3 ice         19397
+ 4 immigrant   18898
+ 5 trump       17861
+ 6 virus       16162
+ 7 illegals    14392
+ 8 china       12750
+ 9 coronavirus 12318
+10 chinese     11258
+# … with 123,181 more rows</code></pre>
 </div>
 </div>
 <p>Analysing word frequencies is often the first stop in text analysis. We can easily do this using <code>ggplot</code>. Let’s visualise the 20 most common words used on Twitter to express public opinions about migration-related topics.</p>
@@ -697,11 +698,11 @@ Tip
 </section>
 <section id="sentiment-analysis" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sentiment-analysis"><span class="header-section-number">6.3</span> Sentiment Analysis</h2>
-<p>After pre-processing our text, we can focus on the key of this chapter; that is, measuring migration sentiment. We do this by using sentiment analysis, which as described in the introduction of this chapter, enables identifying, measuring and analysing emotional states and subjective information. It computationally infers the polarity of text, that is, whether the underpinning semantics of an opinion is positive, negative or neutral.A variety of methods and dictionaries for evaluating the opinion or emotion in text exists. We will explore four different lexicon-based approaches: <code>AFFIN</code> (REF), <code>bing</code> (REF), <code>nrc</code> (REF) and <code>VADER</code>.</p>
+<p>After pre-processing our text, we can focus on the key of this chapter; that is, measuring migration sentiment. We do this by using sentiment analysis, which as described in the introduction of this chapter, enables identifying, measuring and analysing emotional states and subjective information. It computationally infers the polarity of text, that is, whether the underpinning semantics of an opinion is positive, negative or neutral. A variety of methods and dictionaries for evaluating the opinion or emotion in text exists. We will explore four different lexicon-based approaches: <a href="http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html"><code>AFFIN</code></a>, <a href="https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html"><code>bing</code></a>, <a href="http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm"><code>nrc</code></a> and <a href="https://github.com/cjhutto/vaderSentiment"><code>VADER</code></a>.</p>
 <section id="dictionary-based-methods" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="dictionary-based-methods"><span class="header-section-number">6.3.1</span> Dictionary-based methods</h3>
 <p><code>AFFIN</code>, <code>bing</code> and <code>nrc</code> are dictionary- or lexicon-based approaches. Sentiment lexicons include key words which are typically used to express emotions or feelings, and are assigned a numeric score for positive and negative sentiment. They may also contain scores for emotions, such as joy, anger and sadness. Sentiment lexicons can thus be used to measure the valence of a given text by searching for words that describe affect or opinion. Dictionaries can be created by examining text-based evaluations of products in online forums to ratings systems from a variety of sources. They can also be created via systematic observations about different emotions in the field of psychology or related fields.</p>
-<p>The package <code>tidytext</code> provides access to all three lexicons. The <code>nrc</code> lexicon classifies words in a binary way into categories of positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise and trust. <code>nrc</code> constructed via Amazon Mechanical Turk (i.e.&nbsp;people manually labelling the emotional valence of words). The <code>bing</code> lexicon classifies words in a binary classification of positive and negative, and is based on words identified on online forums. The <code>AFINN</code> lexicon assigns words with a score ranging between -5 and 5 to capture the intensity of negative and positive sentiment.<code>AFINN</code> includes a list of sentiment-laden words used during discussions about climate change on Twitter.</p>
+<p>The package <code>tidytext</code> provides access to all three lexicons. The <code>nrc</code> lexicon classifies words in a binary way into categories of positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise and trust. <code>nrc</code> constructed via Amazon Mechanical Turk (i.e.&nbsp;people manually labelling the emotional valence of words). The <code>bing</code> lexicon classifies words in a binary classification of positive and negative, and is based on words identified on online forums. The <code>AFINN</code> lexicon assigns words with a score ranging between -5 and 5 to capture the intensity of negative and positive sentiment. <code>AFINN</code> includes a list of sentiment-laden words used during discussions about climate change on Twitter.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -810,12 +811,12 @@ Note
 <pre><code># A tibble: 6 × 5
   created_at          word      date       sentiment method
   &lt;dttm&gt;              &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt; 
-1 2020-03-30 23:02:04 anonymous 2020-03-30 negative  nrc   
-2 2020-03-30 23:02:04 anonymous 2020-03-30 negative  nrc   
-3 2020-03-30 23:02:04 anonymous 2020-03-30 negative  nrc   
-4 2020-03-30 23:02:04 anonymous 2020-03-30 negative  nrc   
-5 2020-03-30 23:02:04 anonymous 2020-03-30 negative  nrc   
-6 2020-03-30 23:02:04 anonymous 2020-03-30 negative  nrc   </code></pre>
+1 2019-12-01 00:00:18 true      2019-12-01 positive  nrc   
+2 2019-12-01 00:00:18 sanctuary 2019-12-01 positive  nrc   
+3 2019-12-01 00:00:18 police    2019-12-01 positive  nrc   
+4 2019-12-01 00:00:18 ahead     2019-12-01 positive  nrc   
+5 2019-12-01 00:00:18 public    2019-12-01 positive  nrc   
+6 2019-12-01 00:00:23 illegal   2019-12-01 negative  nrc   </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -828,14 +829,14 @@ Note
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>bing_scores <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
-  created_at          word        date       sentiment method
-  &lt;dttm&gt;              &lt;chr&gt;       &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt; 
-1 2020-03-30 23:02:04 threatening 2020-03-30 negative  bing  
-2 2020-03-30 23:02:18 approve     2020-03-30 positive  bing  
-3 2020-03-30 23:05:46 emergency   2020-03-30 negative  bing  
-4 2020-03-30 23:08:48 idiots      2020-03-30 negative  bing  
-5 2020-03-30 23:08:48 kill        2020-03-30 negative  bing  
-6 2020-03-30 23:09:45 integral    2020-03-30 positive  bing  </code></pre>
+  created_at          word    date       sentiment method
+  &lt;dttm&gt;              &lt;chr&gt;   &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt; 
+1 2019-12-01 00:00:18 trust   2019-12-01 positive  bing  
+2 2019-12-01 00:00:18 trust   2019-12-01 positive  bing  
+3 2019-12-01 00:00:23 illegal 2019-12-01 negative  bing  
+4 2019-12-01 00:00:23 abuse   2019-12-01 negative  bing  
+5 2019-12-01 00:00:41 threats 2019-12-01 negative  bing  
+6 2019-12-01 00:00:41 protect 2019-12-01 positive  bing  </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -848,14 +849,14 @@ Note
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>afinn_scores <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
-  created_at          word        date       value method
-  &lt;dttm&gt;              &lt;chr&gt;       &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt; 
-1 2020-03-30 23:02:04 threatening 2020-03-30    -2 afinn 
-2 2020-03-30 23:02:04 arrested    2020-03-30    -3 afinn 
-3 2020-03-30 23:03:04 aboard      2020-03-30     1 afinn 
-4 2020-03-30 23:05:46 join        2020-03-30     1 afinn 
-5 2020-03-30 23:05:46 emergency   2020-03-30    -2 afinn 
-6 2020-03-30 23:08:48 kill        2020-03-30    -3 afinn </code></pre>
+  created_at          word    date       value method
+  &lt;dttm&gt;              &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt; 
+1 2019-12-01 00:00:18 true    2019-12-01     2 afinn 
+2 2019-12-01 00:00:18 trust   2019-12-01     1 afinn 
+3 2019-12-01 00:00:18 trust   2019-12-01     1 afinn 
+4 2019-12-01 00:00:18 safety  2019-12-01     1 afinn 
+5 2019-12-01 00:00:23 illegal 2019-12-01    -3 afinn 
+6 2019-12-01 00:00:23 arrests 2019-12-01    -2 afinn </code></pre>
 </div>
 </div>
 <p>As you can see, the output of the various algorithm differs. <code>nrc</code> and <code>bing</code> provides sentiment scores classified into positive and negative. <code>afinn</code> returns a value from -5 to 5. An important feature of the three approaches explored so far is that they are based on unigrams; that is, single words. As a result, these methods do not take into account qualifiers before a word, such as in “no good” or “not true”. Additionally, these methods cannot appropriately handle negations, contractions, slang, emoticons, emojis, initialisms, acronyms, punctuation and word-shape (e.g., capitalization) as a signal of sentiment polarity and intensity <span class="citation" data-cites="hutto2014">(<a href="references.html#ref-hutto2014" role="doc-biblioref">Hutto and Gilbert 2014</a>)</span> . Most commonly, lexicon-based approaches only capture differences in sentiment polarity (i.e., positive or negative) but do not identify differences in sentiment intensity (strongly positive vs.&nbsp;moderately positive) or contrasting statements. We note that accurate identification and scoring of sarcastic statements remain a key challenge in natural language processing.</p>
@@ -959,9 +960,7 @@ Note
 <p>Note that for this example we will use the tweet text as VADER can handle various of the issues that would be a problem using the previous three approaches (as we have described above). Nonetheless, for your our work you may want to explore the influence of regular expressions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tweet level </span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  tweet_vader_scores <span class="ot">&lt;-</span> tweets_df <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(text) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vader_df</span>(text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>tweet_vader_scores <span class="ot">&lt;-</span> <span class="fu">vader_df</span>(tweets_df<span class="sc">$</span>text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># combine vader scores,tweet ids and dates</span></span>
@@ -1020,12 +1019,6 @@ Note
 <span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a>p3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 rows containing non-finite values (`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 rows containing missing values (`geom_point()`).</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="sentiment-analysis_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1033,41 +1026,41 @@ Note
 <p><em>Composition</em></p>
 <p>Analysing the coumpound conceals the composition of sentiment in tweets, particularly potential rises in strongly negative sentiment. We then analyse the composition of tweets classifying our sentiment score into “Strongly Negative”, “Negative”, “Neutral”, “Positive” and “Strongly Positive” as shown below. The results indicate that the composition remained largely stable over time with 50% of all tweets being negative, of which around 25% were strongly negative.In contrast, less than 20% of all tweets were strongly positive. These results suggest that anti-migration sentiment tends to use a stronger rethoric than pro-migration sentiment.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sentiment categories</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>tweets_scores_df <span class="ot">&lt;-</span> tweets_scores_df <span class="sc">%&gt;%</span> </span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stance_group =</span></span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">case_when</span>(</span>
-<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&gt;=</span> <span class="sc">-</span>.<span class="dv">05</span> <span class="sc">&amp;</span> compound <span class="sc">&lt;=</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">05</span> <span class="sc">&amp;</span> compound <span class="sc">&gt;=</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&gt;</span> .<span class="dv">05</span> <span class="sc">&amp;</span> compound <span class="sc">&lt;=</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&gt;</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
-<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>           )</span>
-<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a><span class="co"># count in each sentiment category by day</span></span>
-<span id="cb76-14"><a href="#cb76-14" aria-hidden="true" tabindex="-1"></a>composition_tab <span class="ot">&lt;-</span> tweets_scores_df <span class="sc">%&gt;%</span> </span>
-<span id="cb76-15"><a href="#cb76-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">%&gt;%</span> </span>
-<span id="cb76-16"><a href="#cb76-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(date, stance_group) <span class="sc">%&gt;%</span> </span>
-<span id="cb76-17"><a href="#cb76-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(stance_group, n)</span>
-<span id="cb76-18"><a href="#cb76-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-19"><a href="#cb76-19" aria-hidden="true" tabindex="-1"></a><span class="co"># percentage in each sentiment category by day</span></span>
-<span id="cb76-20"><a href="#cb76-20" aria-hidden="true" tabindex="-1"></a>composition_percent_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(composition_tab[,<span class="dv">1</span>], (composition_tab[,<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>] <span class="sc">/</span> <span class="fu">rowSums</span>(composition_tab[,<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>]) <span class="sc">*</span> <span class="dv">100</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb76-21"><a href="#cb76-21" aria-hidden="true" tabindex="-1"></a>  .[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>)] <span class="sc">%&gt;%</span> </span>
-<span id="cb76-22"><a href="#cb76-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(stance, percent, <span class="sc">-</span>date)</span>
-<span id="cb76-23"><a href="#cb76-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-24"><a href="#cb76-24" aria-hidden="true" tabindex="-1"></a><span class="co"># composition of sentiment score by day</span></span>
-<span id="cb76-25"><a href="#cb76-25" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(composition_percent_tab , </span>
-<span id="cb76-26"><a href="#cb76-26" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">fill =</span> stance, <span class="at">y =</span> percent, <span class="at">x =</span> date)) <span class="sc">+</span> </span>
-<span id="cb76-27"><a href="#cb76-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"stack"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span> </span>
-<span id="cb76-28"><a href="#cb76-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_tufte2</span>() <span class="sc">+</span> </span>
-<span id="cb76-29"><a href="#cb76-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
-<span id="cb76-30"><a href="#cb76-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkred"</span>,<span class="st">"#d7191c"</span>, <span class="st">"#f7f7f7"</span>, <span class="st">"#2c7bb6"</span>, <span class="st">"darkblue"</span>),</span>
-<span id="cb76-31"><a href="#cb76-31" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Strongly Negative"</span>, <span class="st">"Negative"</span>, <span class="st">"Neutral"</span>, <span class="st">"Positive"</span>, <span class="st">"Strongly Positive"</span>)) <span class="sc">+</span></span>
-<span id="cb76-32"><a href="#cb76-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Day"</span>,</span>
-<span id="cb76-33"><a href="#cb76-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percent"</span>)</span>
-<span id="cb76-34"><a href="#cb76-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-35"><a href="#cb76-35" aria-hidden="true" tabindex="-1"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sentiment categories</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>tweets_scores_df <span class="ot">&lt;-</span> tweets_scores_df <span class="sc">%&gt;%</span> </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stance_group =</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">case_when</span>(</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&gt;=</span> <span class="sc">-</span>.<span class="dv">05</span> <span class="sc">&amp;</span> compound <span class="sc">&lt;=</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">05</span> <span class="sc">&amp;</span> compound <span class="sc">&gt;=</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&gt;</span> .<span class="dv">05</span> <span class="sc">&amp;</span> compound <span class="sc">&lt;=</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>           compound <span class="sc">&gt;</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">5</span>,</span>
+<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>           )</span>
+<span id="cb74-11"><a href="#cb74-11" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb74-12"><a href="#cb74-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-13"><a href="#cb74-13" aria-hidden="true" tabindex="-1"></a><span class="co"># count in each sentiment category by day</span></span>
+<span id="cb74-14"><a href="#cb74-14" aria-hidden="true" tabindex="-1"></a>composition_tab <span class="ot">&lt;-</span> tweets_scores_df <span class="sc">%&gt;%</span> </span>
+<span id="cb74-15"><a href="#cb74-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-16"><a href="#cb74-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(date, stance_group) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-17"><a href="#cb74-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(stance_group, n)</span>
+<span id="cb74-18"><a href="#cb74-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-19"><a href="#cb74-19" aria-hidden="true" tabindex="-1"></a><span class="co"># percentage in each sentiment category by day</span></span>
+<span id="cb74-20"><a href="#cb74-20" aria-hidden="true" tabindex="-1"></a>composition_percent_tab <span class="ot">&lt;-</span> <span class="fu">cbind</span>(composition_tab[,<span class="dv">1</span>], (composition_tab[,<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>] <span class="sc">/</span> <span class="fu">rowSums</span>(composition_tab[,<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>]) <span class="sc">*</span> <span class="dv">100</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb74-21"><a href="#cb74-21" aria-hidden="true" tabindex="-1"></a>  .[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>)] <span class="sc">%&gt;%</span> </span>
+<span id="cb74-22"><a href="#cb74-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(stance, percent, <span class="sc">-</span>date)</span>
+<span id="cb74-23"><a href="#cb74-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-24"><a href="#cb74-24" aria-hidden="true" tabindex="-1"></a><span class="co"># composition of sentiment score by day</span></span>
+<span id="cb74-25"><a href="#cb74-25" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(composition_percent_tab , </span>
+<span id="cb74-26"><a href="#cb74-26" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">fill =</span> stance, <span class="at">y =</span> percent, <span class="at">x =</span> date)) <span class="sc">+</span> </span>
+<span id="cb74-27"><a href="#cb74-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"stack"</span>, <span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span> </span>
+<span id="cb74-28"><a href="#cb74-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_tufte2</span>() <span class="sc">+</span> </span>
+<span id="cb74-29"><a href="#cb74-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb74-30"><a href="#cb74-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkred"</span>,<span class="st">"#d7191c"</span>, <span class="st">"#f7f7f7"</span>, <span class="st">"#2c7bb6"</span>, <span class="st">"darkblue"</span>),</span>
+<span id="cb74-31"><a href="#cb74-31" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Strongly Negative"</span>, <span class="st">"Negative"</span>, <span class="st">"Neutral"</span>, <span class="st">"Positive"</span>, <span class="st">"Strongly Positive"</span>)) <span class="sc">+</span></span>
+<span id="cb74-32"><a href="#cb74-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Day"</span>,</span>
+<span id="cb74-33"><a href="#cb74-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Percent"</span>)</span>
+<span id="cb74-34"><a href="#cb74-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-35"><a href="#cb74-35" aria-hidden="true" tabindex="-1"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="sentiment-analysis_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1099,8 +1092,8 @@ Note
 <li><p>text: text content of tweet</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>tweets_qdf <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/sentiment-analysis/uk_tweets_24022021_01072022.rds"</span>)</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tweets_qdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>tweets_qdf <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/sentiment-analysis/uk_tweets_24022021_01072022.rds"</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tweets_qdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 34,490
 Columns: 6

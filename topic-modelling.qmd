@@ -355,6 +355,8 @@ twitter_df <- readRDS("./data/sentiment-analysis/uk_tweets_24022021_01072022.rds
 
 5.  BONUS QUESTION: Discuss the limitations of topic models on short texts, such as Tweets. There have been a number of recent attempts to address this problem, and Graham Tierney has developed a very nice solution called [stLDA-C](https://github.com/g-tierney/stLDA-C_public).
 
+Analyse and discuss: a) whether there are different topics related to migration that emerge, and what these are. b) how migration topics vary spatially.
+
 **The below code helps you geo-localise the Twitter data.** You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.
 
 ```{r}

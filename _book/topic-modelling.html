@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.2.269">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -762,6 +762,7 @@ Your corpus now has 218 documents, 5347 terms and 64554 tokens.</code></pre>
 <li><p>Use the <code>full_place_name</code> or <code>lat</code> and <code>long</code> variables as meta data to create classification between different types of places in the UK. For example: urban/rural, classified by population/density, or simply between different regions. There are plenty of ways you can divide the tweets geographically, see some easy examples <a href="https://statistics.ukdataservice.ac.uk/dataset/2011-census-geography-boundaries-local-authorities/resource/928039eb-e75a-4648-814e-32498dcc5db6">here</a>. Then explore whether there are differences in topics according to different locations in the UK using the <code>stm</code> package.</p></li>
 <li><p>BONUS QUESTION: Discuss the limitations of topic models on short texts, such as Tweets. There have been a number of recent attempts to address this problem, and Graham Tierney has developed a very nice solution called <a href="https://github.com/g-tierney/stLDA-C_public">stLDA-C</a>.</p></li>
 </ol>
+<p>Analyse and discuss: a) whether there are different topics related to migration that emerge, and what these are. b) how migration topics vary spatially.</p>
 <p><strong>The below code helps you geo-localise the Twitter data.</strong> You could then perform a spatial join to another sf objects that has population density or classifies areas in the UK.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>

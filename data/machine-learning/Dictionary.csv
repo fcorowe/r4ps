@@ -1,0 +1,53 @@
+Dictionary,
+,
+Name,Key
+Lives in household (% persons),inHH
+Lives in communal establishment (% persons),inCE
+Never married or civil partnership (% persons),SING
+Married or in civil partnership (% persons),MARRIED
+Separated (% persons),SEP
+Divorced or civil partnership dissolved (% persons),DIV
+Widowed or surviving civil partner (% persons),WIDOW
+Birth UK (% persons),UK
+Birth Europe Not UK (% persons),EU
+Birth Africa (% persons),AFR
+Birth Middle East and Asia (% persons),AS
+Brith Americas and Caribbean (% persons),AM
+Birth Antarctica and Oceania and Other (% persons),OC
+Birth British Overseas (% persons),BO
+Population Density,DENSITY
+Aged 14 and under (% persons),Y14orUNDER
+Aged 15 to 19 (% persons),Y15to19
+Aged 20 to 24 (% persons),Y20to24
+Aged 25 to 29 (% persons),Y25to29
+Aged 30 to 34 (% persons),Y30to34
+Aged 35 to 39 (% persons),Y35to49
+Aged 40 to 44 (% persons),Y40to44
+Aged 45 to 49 (% persons),Y45to49
+Aged 50 to 54 (% persons),Y50to54
+Aged 55 to 59 (% persons),Y55to59
+Aged 60 to 64 (% persons),Y60to64
+Aged 65 and over (% persons),Y65orOVER
+Female (% persons),F
+Male (% persons),M
+Household size 1 (% housholds),HH1
+Household size 2 (% housholds),HH2
+Household size 3 (% housholds),HH3
+Household size 4 (% housholds),HH4
+Household size 5 (% housholds),HH5
+Household size 6 or over (% housholds),HH6
+Address 1yr ago same as current (% persons),ADD1YagoSAME
+Address 1yr ago student term-time or boarding in the UK (% persons),ADD1YagoSTUDENT
+Address 1yr ago in the UK (% persons),ADD1YagoUK
+Address 1yr ago outside the UK (% persons),ADD1YagoNONUK
+Number of households (% housholds),NHH
+Owns outright (% housholds),OWN
+Owns with mortgage or loan (% housholds),MORTGAGE
+Shared ownership (% housholds),SHAREDOWN
+Rents from council or LA (% housholds),RENTfromCOUNCIL
+Other social rented (% housholds),RENTotherSOCIAL
+Rents from landlord or letting agency (% housholds),RENTprivate
+Other private rented (% housholds),RENTprivateOTHER
+Lives rent free (% housholds),RENTfree
+Net annual household income,INCOME
+Median price paid (year ending Jun 2021),HOUSEPRICE

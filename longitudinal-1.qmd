@@ -443,7 +443,7 @@ Start by loading both the csv and geojsons.
 ```{r load spatial data UK}
 mobility_gb <- read.csv("data/longitudinal-1/2021_GB_Region_Mobility_Report.csv", header = TRUE)
 
-#uk_iso3166 <- st_read("data/longitudinal-1/italy_projected_simplified.geojson")
+uk_iso3166 <- st_read("data/longitudinal-1/uk_projected_simplified.geojson")
 
 ```
 

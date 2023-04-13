@@ -10,11 +10,18 @@ This chapter will introduce modelling time descriptively using linear trends, qu
 #| warning: false
 #| message: FALSE
 
+# Data
 library(sf)
-library(splines)
 library(readr)
 library(tidyverse)
+
+# Dates and Times
 library(lubridate)
+
+# Regression Spline Functions and Classes
+library(splines)
+
+# graphs
 library(ggplot2)
 library(dygraphs)
 library(plotly)

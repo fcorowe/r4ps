@@ -608,31 +608,21 @@ summary_table
 For the assignment, you will continue to use Google
 Mobility data for the UK for 2021.
 For details on the timeline you can have a look
-[here](https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf).
+[here](https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf). You will need to do a bit of digging on when lockdowns or other COVID-19 related shock happened in 2021 to set up a diff-in-diff strategy. Have a look at @brodeur2021covid to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being. 
 
-Have a look at @brodeur2021covid to get some inspiration on 
-
-We use Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being related topic search-terms. 
-
-
-
-Start by loading both the csv and geojsons.
+Start by loading both the csv 
 
 ```{r load spatial data UK}
 mobility_gb <- read.csv("data/longitudinal-1/2021_GB_Region_Mobility_Report.csv", header = TRUE)
 
-uk_iso3166 <- st_read("data/longitudinal-1/uk_projected_simplified.geojson")
-
 ```
 
-1.  
+1.  Visualize the data with `ggplot` and identify what section of the data could be used to evaluate a COVID-19 intervention. Examples of these interventions could be a regional lockdown, school closures, travel restrictions or vaccine rollouts. Generate a clean `ggplot` which indicates which intervention you are going to examine.
 
-2.  
+2.  Explore differences in means through a `frequency table` and a graph of these averages. Chose whichever suits your purposes best.
 
-3.  
+3.  Define and estimage a diff-in-diff regression. What do the results suggest? Was the intervention you chose effective? Discuss the reasons why it was or was not. 
 
-4.  
+4.  Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results. 
 
-Analyse and discuss what insights you obtain into people's attitudes,
-concerns, and behaviors during the pandemic, as well as their response
-to interventions and policies.
+Analyse and discuss what insights you obtain into people's changes in behaviors during the pandemic in responde to an intervention.

@@ -167,7 +167,7 @@ both dataframes to have 4 variables:
 
 -   `cases`: number of COVID-19 cases that day
 
--   `area` : Lombardia or London
+-   `area` : Lazio (Rome) or London
 
 ```{r}
 # Rename the variables in the Lombardia data frame

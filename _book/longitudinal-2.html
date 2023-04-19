@@ -551,7 +551,7 @@ div.csl-indent {
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>covid_combined_filtered <span class="ot">&lt;-</span> covid_combined <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-09-01"</span> <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> <span class="st">"2021-01-01"</span>)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a dummy variable to indicate the time when the treatment started (8 March 2020)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a dummy variable to indicate the time when the treatment started (5 Nov 2020)</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>covid_combined_filtered <span class="ot">&lt;-</span> covid_combined_filtered <span class="sc">%&gt;%</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">after_5nov =</span> <span class="fu">ifelse</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-11-05"</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="co">#changed to 05 Nov</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

@@ -386,7 +386,7 @@ will also limit the time-span of our data.
 covid_combined_filtered <- covid_combined %>%
   filter(date >= "2020-09-01" & date <= "2021-01-01")
 
-# create a dummy variable to indicate the time when the treatment started (8 March 2020)
+# create a dummy variable to indicate the time when the treatment started (5 Nov 2020)
 covid_combined_filtered <- covid_combined_filtered %>%
   mutate(after_5nov = ifelse(date >= "2020-11-05", 1, 0)) #changed to 05 Nov
 ```
@@ -394,9 +394,8 @@ covid_combined_filtered <- covid_combined_filtered %>%
 ```{r}
 #| echo: FALSE
 
-# create a dummy variable to indicate the time when the treatment started (8 March 2020)
 covid_combined_filtered <- covid_combined_filtered %>%
-  mutate(after_5nov = ifelse(date >= "2020-12-15", 1, 0)) #changed to 05 Nov
+  mutate(after_5nov = ifelse(date >= "2020-12-15", 1, 0))
 ```
 
 ```{r}

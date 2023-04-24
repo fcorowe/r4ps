@@ -1,7 +1,5 @@
 ---
-editor: 
-  markdown: 
-    wrap: 72
+prefer-html: true
 ---
 
 # Assessing Interventions {#sec-chp9}

@@ -317,7 +317,7 @@ test_rmse <- sqrt(rf_oob_compare$test$mse)
 x=1:rf_oob_compare$ntree
 plot(x, oob_rmse, type="l", col='blue', lwd=2, xlab = "No. of trees", ylab = "RMSE", main = "Comparison of RMSE")
 lines(x, test_rmse, type="l", col='red', lwd=2)
-legend(350, 5000, c("OOB","test"), lwd=c(2,2), col=c("blue","red"))
+legend(350, 4500, c("OOB","test"), lwd=c(2,2), col=c("blue","red"))
 ```
 
 ### Tuning

@@ -496,14 +496,14 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, df_test<span class="sc">$</span>INCOME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4682.424</code></pre>
+<pre><code>[1] 4635.949</code></pre>
 </div>
 </div>
 <p>This value does not have much meaning in isolation. A good or bad RMSE is always relative to the specific data set. For this reason, we need to establish a baseline RMSE that we can compare it with. Here we establish this baseline as the RMSE that would be obtained from a naive tree that merely predicts the mean annual household income value across all the data entries in the training set. If the fitted model achieves an RSME lower than the naive model, we say that the fitted model “has skill”. The following line of code confirms that our fitted model is better than the naive model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, <span class="fu">mean</span>(df_train<span class="sc">$</span>INCOME))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5390.608</code></pre>
+<pre><code>[1] 5338.573</code></pre>
 </div>
 </div>
 </section>
@@ -535,11 +535,11 @@ div.csl-indent {
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 4461, 4461, 4460, 4461, 4461, 4459, ... 
+Summary of sample sizes: 4459, 4461, 4461, 4460, 4460, 4462, ... 
 Resampling results:
 
   RMSE      Rsquared   MAE     
-  4177.234  0.6503076  3138.898</code></pre>
+  4201.928  0.6545194  3153.439</code></pre>
 </div>
 </div>
 <p>We see that the cross-validated value of RMSE with bagging is lower than that associated with the single decision tree that we trained with <code>rcart</code>. This indicates that the predictive performance is estimated to be better. We can compare the cross-validated value of the RMSE with the RMSE from the test set. These two quantities should be close:</p>
@@ -547,7 +547,7 @@ Resampling results:
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>predict_bagged_unseen <span class="ot">&lt;-</span> <span class="fu">predict</span>(bagged, df_test)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_bagged_unseen, df_test<span class="sc">$</span>INCOME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4253.962</code></pre>
+<pre><code>[1] 4108.28</code></pre>
 </div>
 </div>
 <p>The library <code>caret</code> has an additional function <code>varImp()</code> that helps us understand the variable importance across the bagged trees, i.e.&nbsp;the variables that are most relevant to determine the predictions of MSOA net annual household income. You are welcome to check the <code>caret</code> documentation to learn more about how the variable importance is determined. We can plot a rank of variable importance by running the code below.</p>
@@ -586,8 +586,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 16
 
-          Mean of squared residuals: 9981668
-                    % Var explained: 79.52</code></pre>
+          Mean of squared residuals: 10384268
+                    % Var explained: 79.14</code></pre>
 </div>
 </div>
 <p>As we can see from above, the mean of squared residuals, which is the same as the MSE, is 9903736 for 500 trees and therefore, RMSE = 3147. This metric is computed by averaging residuals from the OOB samples. To illustrate how the MSE varies as more bootstrap samples are added to the model, we can plot the fitted model:</p>
@@ -601,14 +601,14 @@ No. of variables tried at each split: 16
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 500</code></pre>
+<pre><code>[1] 449</code></pre>
 </div>
 </div>
 <p>By computing the RMSE, we can compare the performance of this model with performance of the models in the previous sections:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(fit_rf<span class="sc">$</span>mse[<span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3159.378</code></pre>
+<pre><code>[1] 3220.265</code></pre>
 </div>
 </div>
 <p>This is a much lower value than what we obtained with just a single tree and even after applying bagging! Remember, this RMSE is based on the OOB samples, but we could also obtain it from the test set. <code>randomForest()</code> allows us to easily compare the RMSE obtained from OOB data and from the test set.</p>
@@ -630,7 +630,7 @@ No. of variables tried at each split: 16
 <span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="dv">1</span><span class="sc">:</span>rf_oob_compare<span class="sc">$</span>ntree</span>
 <span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, oob_rmse, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">"No. of trees"</span>, <span class="at">ylab =</span> <span class="st">"RMSE"</span>, <span class="at">main =</span> <span class="st">"Comparison of RMSE"</span>)</span>
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, test_rmse, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">'red'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">350</span>, <span class="dv">5000</span>, <span class="fu">c</span>(<span class="st">"OOB"</span>,<span class="st">"test"</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">350</span>, <span class="dv">4500</span>, <span class="fu">c</span>(<span class="st">"OOB"</span>,<span class="st">"test"</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="machine-learning_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -682,7 +682,7 @@ No. of variables tried at each split: 16
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hyper_grid[<span class="fu">which.min</span>(hyper_grid<span class="sc">$</span>OOB_RMSE),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   mtry sample.fraction min.node.size OOB_RMSE
-53   18            0.75             5 3160.543</code></pre>
+23   18            0.75             3 3222.303</code></pre>
 </div>
 </div>
 <p><code>mtry</code>= 14, <code>sample.fraction</code> =0.8 and <code>min.node.size</code>=3. The OOB RMSE is 3141.089, slightly lower than the error we obtained with the default model for random forest with no tuning, yay!</p>

@@ -14,7 +14,7 @@ In this chapter we will focus only on two ML techniques which are, however, very
 
 This chapter is based, among others, on the following references:
 
--   Hands-on Machine Learning with R. Chapter 9: Decision trees [@boehmke2019].
+-   Hands-on Machine Learning with R. Chapter 9: Decision trees [@boemkhe2019].
 
 -   UC Business Analytics R Programming Guide, developed by Brad Boehmke. Specifically, the chapters on Regression Trees & Bagging and Random Forests, which can be found [here](http://uc-r.github.io/predictive).
 
@@ -41,7 +41,7 @@ suppressMessages(library(ranger))
 
 ## Data
 
-As mentioned above, we will learn about decision trees and random forest through a practical example where the goal is to predict the net annual household income across different regions of the UK. Given that UK censuses take place separately in Northern Ireland, Scotland and England & Wales, we will focus only on England & Wales for simplicity.
+As mentioned above, we will learn about decision trees and random forests through a practical example where the goal is to predict the net annual household income across different regions of the UK. Given that UK censuses take place separately in Northern Ireland, Scotland and England & Wales, we will focus only on England & Wales for simplicity.
 
 In the code chunk below, we load a data set that has already been prepared for this notebook. It includes a variety of variables related to demographic characteristics of the population, aggregated at the Middle-Layer Super Output Area (MSOA) level. All the variables, except for the average annual household income, are derived from the 2021 census and the raw data can be downloaded from [here](https://www.nomisweb.co.uk/census/2021/bulk). The annual household income data is from the Annual Survey of Hours and Earnings and can be downloaded from this [link](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/smallareaincomeestimatesformiddlelayersuperoutputareasenglandandwales).
 
@@ -71,7 +71,7 @@ For most supervised learning problems, the goal is to find an algorithm or model
 
 As a rule of thumb, the data should be split so that 70% of the samples are in the training set and 30% in the test set, although this percentages might vary slightly according to the size of the original data set. Furthermore, to ensure generalisability, the data split should be done so that the distribution of outputs in both the training and test set is approximately the same.
 
-The function `create_train_test` below (borrowed from [@https://www.guru99.com/r-decision-trees.html]) allows us to select samples from the data to create the training set (when the train parameter is set to `TRUE`) and the test set (when the train parameter is set to `FALSE`).
+The function `create_train_test` below (borrowed from [here](https://www.guru99.com/r-decision-trees.html)) allows us to select samples from the data to create the training set (when the train parameter is set to `TRUE`) and the test set (when the train parameter is set to `FALSE`).
 
 ```{r}
 create_train_test <- function(data, size = 0.7, train = TRUE) {
@@ -146,7 +146,7 @@ In essence, a decision tree is like a flowchart that helps us make a decision ba
 
 The decision tree to predict the annual household income of an MSOA based on its demographic features will be a lot more complex than the one depicted above. The branches will lead to leaf nodes representing the predicted values of annual household income. The internal nodes will represent conditions for the demographic variables (e.g. is the percentage of people aged 65 or over in this MSOA greater than *X* %?). Not all the demographic variables will be equally relevant to predict the annual household income at the MSOA level. To optimise the prediction process, conditions on the most relevant variables should be near the root of the tree so the most determining questions can be asked at the beginning of the decision-making process. The internal nodes that are further from the tree will help fine-tune the final predictions. But, how can we choose which are the most relevant variables? And, what are the right questions to ask in each internal node (e.g. if we are asking 'is the percentage of people aged 65 or over in this MSOA greater than *X* %?', what should be the value of *X* ?).
 
-Luckily, nowadays there are many off-the-shelf software packages available that can help us build decision trees with just a line of code. Here, we use the R package `rpart`, which is based on the Classification And Regression Tree (CART) algorithm proposed by Breiman [@breiman2017]. In particular, we can use the function `rpart()` to find the decision tree that best fits the training set. This function requires to use the formula method for expressing the model. In this case, the formula is `INCOME ~.`, which means that we regard the variable `INCOME` as a function of all the other variables in the training data set. For more information on the formula method, you can check the [R documentation](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/formula). The function `rpart()` also requires to specify the method for fitting. Since we are performing a regression task (as opposed to classification), we need to set method to `'anova'`.
+Luckily, nowadays there are many off-the-shelf software packages available that can help us build decision trees with just a line of code. Here, we use the R package `rpart`, which is based on the Classification And Regression Tree (CART) algorithm proposed by Breiman [@breiman1984]. In particular, we can use the function `rpart()` to find the decision tree that best fits the training set. This function requires to use the formula method for expressing the model. In this case, the formula is `INCOME ~.`, which means that we regard the variable `INCOME` as a function of all the other variables in the training data set. For more information on the formula method, you can check the [R documentation](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/formula). The function `rpart()` also requires to specify the method for fitting. Since we are performing a regression task (as opposed to classification), we need to set method to `'anova'`.
 
 ```{r}
 
@@ -264,7 +264,7 @@ Random forests optimally reduce the variance of the predicted values by minimisi
 
 1.  Like in bagging, different trees are fitted from bootstrap samples.
 
-2.  However, when a split is to be performed in a given tree, the search for the optimal split variable is limited to only a random subset of the explanatory variables. By default, the number of variables in these subsets is one-third of the total number of variables, although this proportion is considered a tuning parameter for the model.
+2.  However, when an internal node is to be created in a given tree, the search for the optimal variable in that node is limited to only a random subset of the explanatory variables. By default, the number of variables in these subsets is one-third of the total number of variables, although this proportion is considered a tuning parameter for the model.
 
 ### Basic implementation
 

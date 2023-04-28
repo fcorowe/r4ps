@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.306">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -151,11 +122,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./machine-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -163,141 +139,159 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Population Science</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/fcorowe/r4ps" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./Population-Science.pdf">
-            <i class="bi bi-bi-file-pdf pe-1"></i>
-          Download PDF
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./Population-Science.epub">
-            <i class="bi bi-bi-journal pe-1"></i>
-          Download ePub
-          </a>
-        </li>
-    </ul>
-    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-    </ul>
+    <a href="https://github.com/fcorowe/r4ps" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Population-Science.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Population-Science.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-population-science.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Population Science</span></a>
+  <a href="./intro-population-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Population Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geodemographics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Geodemographics</span></a>
+  <a href="./geodemographics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Geodemographics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sequence-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sequence Analysis</span></a>
+  <a href="./sequence-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sequence Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./network.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Network Analysis</span></a>
+  <a href="./network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Network Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sentiment-analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sentiment Analysis</span></a>
+  <a href="./sentiment-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sentiment Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic-modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  <a href="./topic-modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./longitudinal-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modelling Time</span></a>
+  <a href="./longitudinal-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modelling Time</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./longitudinal-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Assessing Interventions</span></a>
+  <a href="./longitudinal-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Assessing Interventions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./machine-learning.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></a>
+  <a href="./machine-learning.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-sets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data sets</span></a>
+  <a href="./data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data sets</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#dependencies" id="toc-dependencies" class="nav-link active" data-scroll-target="#dependencies"><span class="toc-section-number">10.1</span>  Dependencies</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="toc-section-number">10.2</span>  Data</a></li>
-  <li><a href="#splitting-the-data" id="toc-splitting-the-data" class="nav-link" data-scroll-target="#splitting-the-data"><span class="toc-section-number">10.3</span>  Splitting the data</a></li>
-  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="toc-section-number">10.4</span>  Decision trees</a>
+  <li><a href="#dependencies" id="toc-dependencies" class="nav-link active" data-scroll-target="#dependencies"><span class="header-section-number">10.1</span> Dependencies</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">10.2</span> Data</a></li>
+  <li><a href="#splitting-the-data" id="toc-splitting-the-data" class="nav-link" data-scroll-target="#splitting-the-data"><span class="header-section-number">10.3</span> Splitting the data</a></li>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">10.4</span> Decision trees</a>
   <ul class="collapse">
-  <li><a href="#fitting-the-training-data" id="toc-fitting-the-training-data" class="nav-link" data-scroll-target="#fitting-the-training-data"><span class="toc-section-number">10.4.1</span>  Fitting the training data</a></li>
-  <li><a href="#measuring-the-performance-of-regression-models" id="toc-measuring-the-performance-of-regression-models" class="nav-link" data-scroll-target="#measuring-the-performance-of-regression-models"><span class="toc-section-number">10.4.2</span>  Measuring the performance of regression models</a></li>
-  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging"><span class="toc-section-number">10.4.3</span>  Bagging</a></li>
+  <li><a href="#fitting-the-training-data" id="toc-fitting-the-training-data" class="nav-link" data-scroll-target="#fitting-the-training-data"><span class="header-section-number">10.4.1</span> Fitting the training data</a></li>
+  <li><a href="#measuring-the-performance-of-regression-models" id="toc-measuring-the-performance-of-regression-models" class="nav-link" data-scroll-target="#measuring-the-performance-of-regression-models"><span class="header-section-number">10.4.2</span> Measuring the performance of regression models</a></li>
+  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging"><span class="header-section-number">10.4.3</span> Bagging</a></li>
   </ul></li>
-  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests"><span class="toc-section-number">10.5</span>  Random forests</a>
+  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests"><span class="header-section-number">10.5</span> Random forests</a>
   <ul class="collapse">
-  <li><a href="#basic-implementation" id="toc-basic-implementation" class="nav-link" data-scroll-target="#basic-implementation"><span class="toc-section-number">10.5.1</span>  Basic implementation</a></li>
-  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="toc-section-number">10.5.2</span>  Tuning</a></li>
+  <li><a href="#basic-implementation" id="toc-basic-implementation" class="nav-link" data-scroll-target="#basic-implementation"><span class="header-section-number">10.5.1</span> Basic implementation</a></li>
+  <li><a href="#tuning" id="toc-tuning" class="nav-link" data-scroll-target="#tuning"><span class="header-section-number">10.5.2</span> Tuning</a></li>
   </ul></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">10.6</span>  Questions</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">10.6</span> Questions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/machine-learning.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -306,7 +300,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-chp10" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></h1>
+<h1 class="title"><span id="sec-chp10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></h1>
 </div>
 
 
@@ -331,7 +325,7 @@ div.csl-indent {
 <p>In this chapter we will focus only on two ML techniques which are, however, very versatile since they can be used for classification, regression and other tasks. The first and most basic of the techniques that we will explore is <strong>decision trees</strong>. Building on these, we will then explore <strong>random forests</strong>. Both methods belong to the supervised learning approach. To illustrate the usage of these techniques within the context of population science, we will look at predicting the annual household income across the UK geography based on demographic data obtained from the census.</p>
 <p>This chapter is based, among others, on the following references:</p>
 <ul>
-<li><p>Hands-on Machine Learning with R. Chapter 9: Decision trees <span class="citation" data-cites="boehmke2019">(<a href="references.html#ref-boehmke2019" role="doc-biblioref"><strong>boehmke2019?</strong></a>)</span>.</p></li>
+<li><p>Hands-on Machine Learning with R. Chapter 9: Decision trees <span class="citation" data-cites="boemkhe2019">(<a href="references.html#ref-boemkhe2019" role="doc-biblioref">Boehmke 2019</a>)</span>.</p></li>
 <li><p>UC Business Analytics R Programming Guide, developed by Brad Boehmke. Specifically, the chapters on Regression Trees &amp; Bagging and Random Forests, which can be found <a href="http://uc-r.github.io/predictive">here</a>.</p></li>
 </ul>
 <section id="dependencies" class="level2" data-number="10.1">
@@ -357,7 +351,7 @@ div.csl-indent {
 </section>
 <section id="data" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="data"><span class="header-section-number">10.2</span> Data</h2>
-<p>As mentioned above, we will learn about decision trees and random forest through a practical example where the goal is to predict the net annual household income across different regions of the UK. Given that UK censuses take place separately in Northern Ireland, Scotland and England &amp; Wales, we will focus only on England &amp; Wales for simplicity.</p>
+<p>As mentioned above, we will learn about decision trees and random forests through a practical example where the goal is to predict the net annual household income across different regions of the UK. Given that UK censuses take place separately in Northern Ireland, Scotland and England &amp; Wales, we will focus only on England &amp; Wales for simplicity.</p>
 <p>In the code chunk below, we load a data set that has already been prepared for this notebook. It includes a variety of variables related to demographic characteristics of the population, aggregated at the Middle-Layer Super Output Area (MSOA) level. All the variables, except for the average annual household income, are derived from the 2021 census and the raw data can be downloaded from <a href="https://www.nomisweb.co.uk/census/2021/bulk">here</a>. The annual household income data is from the Annual Survey of Hours and Earnings and can be downloaded from this <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/smallareaincomeestimatesformiddlelayersuperoutputareasenglandandwales">link</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
@@ -389,7 +383,7 @@ div.csl-indent {
 <h2 data-number="10.3" class="anchored" data-anchor-id="splitting-the-data"><span class="header-section-number">10.3</span> Splitting the data</h2>
 <p>For most supervised learning problems, the goal is to find an algorithm or model that not only fits well known data, but also accurately predicts unknown values of the average annual household income based on a set of inputs. In other words, we want the algorithm to be generalisable. In order to measure the generalisability of the optimal algorithm, we can split the data into a training set containing input and output data and a test set. The training set is used to teach the algorithm how to map inputs to outputs, and the test set is used to estimate the prediction error of the final algorithm, which quantifies the generalisability of the model. The test set should never be used during the training stage.</p>
 <p>As a rule of thumb, the data should be split so that 70% of the samples are in the training set and 30% in the test set, although this percentages might vary slightly according to the size of the original data set. Furthermore, to ensure generalisability, the data split should be done so that the distribution of outputs in both the training and test set is approximately the same.</p>
-<p>The function <code>create_train_test</code> below (borrowed from <span class="citation" data-cites="https://www.guru99.com/r-decision-trees.html">(<a href="references.html#ref-https://www.guru99.com/r-decision-trees.html" role="doc-biblioref"><strong>https://www.guru99.com/r-decision-trees.html?</strong></a>)</span>) allows us to select samples from the data to create the training set (when the train parameter is set to <code>TRUE</code>) and the test set (when the train parameter is set to <code>FALSE</code>).</p>
+<p>The function <code>create_train_test</code> below (borrowed from <a href="https://www.guru99.com/r-decision-trees.html">here</a>) allows us to select samples from the data to create the training set (when the train parameter is set to <code>TRUE</code>) and the test set (when the train parameter is set to <code>FALSE</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>create_train_test <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">size =</span> <span class="fl">0.7</span>, <span class="at">train =</span> <span class="cn">TRUE</span>) {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> n_row <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
@@ -457,7 +451,7 @@ div.csl-indent {
 </figure>
 </div>
 <p>The decision tree to predict the annual household income of an MSOA based on its demographic features will be a lot more complex than the one depicted above. The branches will lead to leaf nodes representing the predicted values of annual household income. The internal nodes will represent conditions for the demographic variables (e.g.&nbsp;is the percentage of people aged 65 or over in this MSOA greater than <em>X</em> %?). Not all the demographic variables will be equally relevant to predict the annual household income at the MSOA level. To optimise the prediction process, conditions on the most relevant variables should be near the root of the tree so the most determining questions can be asked at the beginning of the decision-making process. The internal nodes that are further from the tree will help fine-tune the final predictions. But, how can we choose which are the most relevant variables? And, what are the right questions to ask in each internal node (e.g.&nbsp;if we are asking ‘is the percentage of people aged 65 or over in this MSOA greater than <em>X</em> %?’, what should be the value of <em>X</em> ?).</p>
-<p>Luckily, nowadays there are many off-the-shelf software packages available that can help us build decision trees with just a line of code. Here, we use the R package <code>rpart</code>, which is based on the Classification And Regression Tree (CART) algorithm proposed by Breiman <span class="citation" data-cites="breiman2017">(<a href="references.html#ref-breiman2017" role="doc-biblioref"><strong>breiman2017?</strong></a>)</span>. In particular, we can use the function <code>rpart()</code> to find the decision tree that best fits the training set. This function requires to use the formula method for expressing the model. In this case, the formula is <code>INCOME ~.</code>, which means that we regard the variable <code>INCOME</code> as a function of all the other variables in the training data set. For more information on the formula method, you can check the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/formula">R documentation</a>. The function <code>rpart()</code> also requires to specify the method for fitting. Since we are performing a regression task (as opposed to classification), we need to set method to <code>'anova'</code>.</p>
+<p>Luckily, nowadays there are many off-the-shelf software packages available that can help us build decision trees with just a line of code. Here, we use the R package <code>rpart</code>, which is based on the Classification And Regression Tree (CART) algorithm proposed by Breiman <span class="citation" data-cites="breiman1984">(<a href="references.html#ref-breiman1984" role="doc-biblioref">Breiman 1984</a>)</span>. In particular, we can use the function <code>rpart()</code> to find the decision tree that best fits the training set. This function requires to use the formula method for expressing the model. In this case, the formula is <code>INCOME ~.</code>, which means that we regard the variable <code>INCOME</code> as a function of all the other variables in the training data set. For more information on the formula method, you can check the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/formula">R documentation</a>. The function <code>rpart()</code> also requires to specify the method for fitting. Since we are performing a regression task (as opposed to classification), we need to set method to <code>'anova'</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">rpart</span>(INCOME <span class="sc">~</span>., <span class="at">data =</span> df_train, <span class="at">method =</span> <span class="st">'anova'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -502,14 +496,14 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, df_test<span class="sc">$</span>INCOME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4710.474</code></pre>
+<pre><code>[1] 4682.424</code></pre>
 </div>
 </div>
 <p>This value does not have much meaning in isolation. A good or bad RMSE is always relative to the specific data set. For this reason, we need to establish a baseline RMSE that we can compare it with. Here we establish this baseline as the RMSE that would be obtained from a naive tree that merely predicts the mean annual household income value across all the data entries in the training set. If the fitted model achieves an RSME lower than the naive model, we say that the fitted model “has skill”. The following line of code confirms that our fitted model is better than the naive model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, <span class="fu">mean</span>(df_train<span class="sc">$</span>INCOME))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5463.428</code></pre>
+<pre><code>[1] 5390.608</code></pre>
 </div>
 </div>
 </section>
@@ -541,11 +535,11 @@ div.csl-indent {
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 4459, 4459, 4462, 4461, 4461, 4460, ... 
+Summary of sample sizes: 4461, 4461, 4460, 4461, 4461, 4459, ... 
 Resampling results:
 
   RMSE      Rsquared   MAE     
-  4128.645  0.6624109  3085.935</code></pre>
+  4177.234  0.6503076  3138.898</code></pre>
 </div>
 </div>
 <p>We see that the cross-validated value of RMSE with bagging is lower than that associated with the single decision tree that we trained with <code>rcart</code>. This indicates that the predictive performance is estimated to be better. We can compare the cross-validated value of the RMSE with the RMSE from the test set. These two quantities should be close:</p>
@@ -553,7 +547,7 @@ Resampling results:
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>predict_bagged_unseen <span class="ot">&lt;-</span> <span class="fu">predict</span>(bagged, df_test)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_bagged_unseen, df_test<span class="sc">$</span>INCOME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4215.89</code></pre>
+<pre><code>[1] 4253.962</code></pre>
 </div>
 </div>
 <p>The library <code>caret</code> has an additional function <code>varImp()</code> that helps us understand the variable importance across the bagged trees, i.e.&nbsp;the variables that are most relevant to determine the predictions of MSOA net annual household income. You are welcome to check the <code>caret</code> documentation to learn more about how the variable importance is determined. We can plot a rank of variable importance by running the code below.</p>
@@ -572,7 +566,7 @@ Resampling results:
 <p>Random forests optimally reduce the variance of the predicted values by minimising the tree correlation. This is achieved in two steps:</p>
 <ol type="1">
 <li><p>Like in bagging, different trees are fitted from bootstrap samples.</p></li>
-<li><p>However, when a split is to be performed in a given tree, the search for the optimal split variable is limited to only a random subset of the explanatory variables. By default, the number of variables in these subsets is one-third of the total number of variables, although this proportion is considered a tuning parameter for the model.</p></li>
+<li><p>However, when an internal node is to be created in a given tree, the search for the optimal variable in that node is limited to only a random subset of the explanatory variables. By default, the number of variables in these subsets is one-third of the total number of variables, although this proportion is considered a tuning parameter for the model.</p></li>
 </ol>
 <section id="basic-implementation" class="level3" data-number="10.5.1">
 <h3 data-number="10.5.1" class="anchored" data-anchor-id="basic-implementation"><span class="header-section-number">10.5.1</span> Basic implementation</h3>
@@ -592,8 +586,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 16
 
-          Mean of squared residuals: 9930136
-                    % Var explained: 79.84</code></pre>
+          Mean of squared residuals: 9981668
+                    % Var explained: 79.52</code></pre>
 </div>
 </div>
 <p>As we can see from above, the mean of squared residuals, which is the same as the MSE, is 9903736 for 500 trees and therefore, RMSE = 3147. This metric is computed by averaging residuals from the OOB samples. To illustrate how the MSE varies as more bootstrap samples are added to the model, we can plot the fitted model:</p>
@@ -607,14 +601,14 @@ No. of variables tried at each split: 16
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 458</code></pre>
+<pre><code>[1] 500</code></pre>
 </div>
 </div>
 <p>By computing the RMSE, we can compare the performance of this model with performance of the models in the previous sections:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(fit_rf<span class="sc">$</span>mse[<span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3148.733</code></pre>
+<pre><code>[1] 3159.378</code></pre>
 </div>
 </div>
 <p>This is a much lower value than what we obtained with just a single tree and even after applying bagging! Remember, this RMSE is based on the OOB samples, but we could also obtain it from the test set. <code>randomForest()</code> allows us to easily compare the RMSE obtained from OOB data and from the test set.</p>
@@ -688,7 +682,7 @@ No. of variables tried at each split: 16
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hyper_grid[<span class="fu">which.min</span>(hyper_grid<span class="sc">$</span>OOB_RMSE),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   mtry sample.fraction min.node.size OOB_RMSE
-27   14             0.8             3 3162.626</code></pre>
+53   18            0.75             5 3160.543</code></pre>
 </div>
 </div>
 <p><code>mtry</code>= 14, <code>sample.fraction</code> =0.8 and <code>min.node.size</code>=3. The OOB RMSE is 3141.089, slightly lower than the error we obtained with the default model for random forest with no tuning, yay!</p>
@@ -716,9 +710,15 @@ No. of variables tried at each split: 16
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-ChristopherBishop06" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-ChristopherBishop06" class="csl-entry" role="listitem">
 Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. Information Science and Statistics. New York: Springer.
+</div>
+<div id="ref-boemkhe2019" class="csl-entry" role="listitem">
+Boehmke, Brad. 2019. <span>“Hands-on Machine Learning with r. Chapter 9: Decision Trees.”</span> <a href="https://bradleyboehmke.github.io/HOML/DT.html">https://bradleyboehmke.github.io/HOML/DT.html</a>.
+</div>
+<div id="ref-breiman1984" class="csl-entry" role="listitem">
+Breiman, L. 1984. <em>Classification and <span>Regression</span> <span>Trees</span> (1st Ed.)</em>. Routledge.
 </div>
 </div>
 </section>
@@ -751,9 +751,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -818,6 +832,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -873,6 +973,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Population Science was written by Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani.</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

@@ -78,10 +78,17 @@ The list of libraries used in this book is provided below:
 -   `factoextra`
 -   `igraph`
 -   `stringr`
+-   `rpart`
+-   `rpart.plot`
+-   `ggplot2`
+-   `Metrics`
+-   `caret`
+-   `randomForest`
+-   `ranger`
 
 You need to ensure you have installed the list of libraries used in this book, running the following code:
 
-> list.of.packages.cran \<- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr")
+> list.of.packages.cran \<- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger")
 
 > new.packages.cran \<- list.of.packages.cran\[!(list.of.packages.cran %in% installed.packages()\[,"Package"\])\] if(length(new.packages.cran)) install.packages(new.packages.cran)
 

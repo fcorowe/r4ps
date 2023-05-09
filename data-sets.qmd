@@ -1,3 +1,48 @@
 # Data sets {#sec-chp11}
 
-In progress
+```{r}
+library(sf)
+```
+
+## Greater London Authority LSOA Atlas
+
+### Availability {.unnumbered}
+
+The dataset is stored on a csv file that can be found, within the structure of this project, under:
+
+```{r}
+df_lsoa_atlas <- read.csv("data/geodemographics/lsoa-data-clean.csv")
+```
+
+### Variables {.unnumbered}
+
+A description of all the variables included in this dataset can be found in a dictionary csv file, which can be imported as a data frame from:
+
+```{r}
+df_lsoa_atlas_dictionary <- read.csv("data/geodemographics/Dictionary-lsoa-data-clean.csv")
+```
+
+### Source & Pre-processing {.unnumbered}
+
+The data was sourced from [London Datastore's LSOA Atlas](https://data.london.gov.uk/dataset/lsoa-atlas) and cleaned on Microsoft Excel.
+
+## England and Wales administrative boundaries (LSOAs, MSOAs and LAs)
+
+## Worldpop population count data for Ukraine
+
+## Census population count data for UK
+
+## Ukraine's administrative boundaries
+
+## Internal migration flows between US metropolitan areas and between London boroughs
+
+## Twitter data on public opinion originated in the US and in the UK
+
+## Reddit data
+
+## Google mobility data for Italy and the UK
+
+## COVID-19 cases data for London and Rome
+
+## Census MSOA data for England and Wales
+

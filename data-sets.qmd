@@ -2,6 +2,7 @@
 
 ```{r}
 library(sf)
+library(dplyr)
 ```
 
 ## Greater London Authority LSOA Atlas
@@ -26,7 +27,91 @@ df_lsoa_atlas_dictionary <- read.csv("data/geodemographics/Dictionary-lsoa-data-
 
 The data was sourced from [London Datastore's LSOA Atlas](https://data.london.gov.uk/dataset/lsoa-atlas) and cleaned on Microsoft Excel.
 
-## England and Wales administrative boundaries (LSOAs, MSOAs and LAs)
+## British administrative boundaries (LSOAs and LAs)
+
+### Availability {.unnumbered}
+
+The dataset for the boundaries of the lower-layer super-output areas (LSOAs) within London is stored as a shapefile that can be found under:
+
+```{r}
+st_LSOA <- st_read("data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
+```
+
+The dataset for the boundaries of the local authority distrits (LADs) for the UK is stored as a shapefile that can be found under:
+
+```{r}
+LA_UK <- st_read("./data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp")
+```
+
+### Variables {.unnumbered}
+
+For each of the 4,835 LSOAs, the following characteristics are available:
+
+```{r}
+names(st_LSOA)
+```
+
+where:
+
+-   `LSOA11CD`: Lower-Layer Super-Output Area code
+-   `LSOA11NM`: Lower-Layer Super-Output Area code
+-   `MSOA11CD`: Medium-Layer Super-Output Area code
+-   `MSOA11NM`: Medium-Layer Super-Output Area code
+-   `LAD11CD`: Local Authority District code
+-   `LAD11NM`: Local Authority District name
+-   `RGN11CD`: Region code
+-   `RGN11NM`: Region name
+-   `USUALRES`: Usual residents
+-   `HHOLDRES`: Household residents
+-   `COMESTRES`: Communal Establishment residents
+-   `POPDEN`: Population density
+-   `HHOLDS`: Number of households
+-   `AVHHOLDSZ`: Average household size
+-   `geometry`: Polygon of LSOA
+
+For each of the 374 LADs, the following characteristics are available:
+
+```{r}
+names(LA_UK)
+```
+
+where:
+
+-   `OBJECTID`: object identifier
+-   `LAD22CD`: Local Authority District code
+-   `LAD22NM`: Local Authority District name
+-   `BNG_E`: Location Easting
+-   `BNG_N`: Location Northing
+-   `LONG`: Location Longitude
+-   `LAT`: Location Latitude
+-   `GlobalID`: Global Identifier
+-   `SHAPE_Leng`: Boundary length
+-   `SHAPE_Area`: Area within boundary
+-   `geometry`: Polygon of LAD
+
+### Projection {.unnumbered}
+
+The shapes of each LSOA are stored as polygons an expressed in the OSGB36 projection:
+
+```{r}
+st_crs(st_LSOA)
+```
+
+Similarly, the shapes of each LAD are stored as polygons an expressed in the OSGB36 projection:
+
+```{r}
+st_crs(LA_UK)
+```
+
+### Source & Pre-processing {.unnumbered}
+
+The boundaries for the LSOAs within London can be found directly from the [London Datastore](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london) website.
+
+The boundaries for the LADs for the UK can be found on the ONS Open Geography Portal [website](https://geoportal.statistics.gov.uk/search?collection=Dataset&sort=name&tags=all(BDY_LAD%2CDEC_2022)). To filter for the London LADs, i.e. the London boroughs, we run the following line of code:
+
+```{r}
+LND_boroughs <- LA_UK %>% filter(grepl('E09', LAD22CD)) 
+```
 
 ## Worldpop population count data for Ukraine
 
@@ -35,6 +120,53 @@ The data was sourced from [London Datastore's LSOA Atlas](https://data.london.go
 ## Ukraine's administrative boundaries
 
 ## Internal migration flows between US metropolitan areas and between London boroughs
+
+### Availability {.unnumbered}
+
+The dataset for the migration flows between US metropolitan areas can be found as a csv file under:
+
+```{r}
+df_metro <- read.csv("./data/networks/metro_to_metro_2015_2019_US_migration.csv")
+```
+
+The dataset for the migration flows between London boroughs can be found as a csv file under:
+
+```{r}
+df_borough <- read.csv("./data/networks/LA_to_LA_2019_London_clean.csv")
+```
+
+### Variables {.unnumbered}
+
+For each of the 52,930 movements recorded on the dataset for the migration flows between US metropolitan areas, the following fields are available:
+
+```{r}
+names(df_metro)
+```
+
+All the fields that start with `MSA_Current_` or `MSA_Previous_` refer to the characteristics of the origin and destination metropolican areas. The relevant fields for the analysis in this book are:
+
+-   `Movers_Metro_to_Metro_Flow_Estimate`: Estimate of number of people moving between origin and destination
+-   `Movers_Metro_to_Metro_Flow_MOE`: Margin of error for the above estimate
+
+More details on the methodology to obtain the estimates and the margin of error for each population movement can be found on the [US Census Bureau website](https://www.census.gov/programs-surveys/acs/methodology.html).
+
+For each of the 1,053 movements recorded on the dataset for the migration flows between London boroughs, the following fields are available:
+
+```{r}
+names(df_borough)
+```
+
+where:
+
+-   `OutLA` is the code corresponding to the origin borough
+-   `InLA` is the code corresponding to the destination borough
+-   `Moves` is the number of internal migration moves within each flow. Note that the numbers are not integers. This is because of the various scaling processes used to produce the dataset, which are described in more detail in the latest methodology document, which can be found [here](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset).
+
+### Source & pre-processing {.unnumbered}
+
+The dataset for the migration flows between US metropolitan areas can be downloaded from the [US Census Bureau website](https://www.census.gov/data/tables/2019/demo/geographic-mobility/metro-to-metro-migration.html). The data was cleaned on Microsoft Excel.
+
+The dataset for the migration flows between London boroughs can be downloaded from the [ONS website](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset). The data was cleaned on Microsoft Excel.
 
 ## Twitter data on public opinion originated in the US and in the UK
 
@@ -46,3 +178,39 @@ The data was sourced from [London Datastore's LSOA Atlas](https://data.london.go
 
 ## Census MSOA data for England and Wales
 
+### Availability {.unnumbered}
+
+The dataset for the demographic census data of each MSOA in England and Wales can be loaded as a csv file from:
+
+```{r}
+df_MSOA <- read.csv("./data/machine-learning/census2021-msoa-income.csv")
+```
+
+A very similar dataset for the demographic census data of each MSOA in England and Wales which also contains data on the median house price can be loaded as a csv file from:
+
+```{r}
+df_housing <- read.csv("./data/machine-learning/census2021-msoa-houseprice.csv")
+```
+
+### Variables {.unnumbered}
+
+For each of the 7,080 MSOAs recorded in England and Wales, the following fields are available:
+
+```{r}
+names(df_MSOA)
+```
+
+For a description of the variables in the columns of df_MSOA, we can load a dictionary for these variables:
+
+```{r}
+df_dictionary <- read.csv("./data/machine-learning/Dictionary.csv")
+head(df_dictionary)
+```
+
+### Source & pre-processing {.unnumbered}
+
+Data on the the census characteristics for different MSOAs can be downloaded from the [Nomis website](https://www.nomisweb.co.uk/census/2021/bulk). Data on the average net household income can be obtained from the [ONS website](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/smallareaincomeestimatesformiddlelayersuperoutputareasenglandandwales).
+
+Data on the median houseprice for different MSOAs can be downloaded from the [ONS website](https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/hpssadataset2medianhousepricebymsoaquarterlyrollingyear).
+
+All the data has been pre-processed on Microsoft Excel.

@@ -5,27 +5,23 @@ library(sf)
 library(dplyr)
 ```
 
-## Greater London Authority LSOA Atlas
+## Greater Machester land use data
 
 ### Availability {.unnumbered}
 
-The dataset is stored on a csv file that can be found, within the structure of this project, under:
+The dataset is stored on a gpkg file that can be found, within the structure of this project, under:
 
 ```{r}
-df_lsoa_atlas <- read.csv("data/geodemographics/lsoa-data-clean.csv")
+st_LSOA <- st_read("./data/geodemographics/manchester_land_cover_2011.gpkg")
 ```
 
 ### Variables {.unnumbered}
 
-A description of all the variables included in this dataset can be found in a dictionary csv file, which can be imported as a data frame from:
-
-```{r}
-df_lsoa_atlas_dictionary <- read.csv("data/geodemographics/Dictionary-lsoa-data-clean.csv")
-```
+The variables included in this dataset follow the land use classification of the CORINE Land Cover dataset.
 
 ### Source & Pre-processing {.unnumbered}
 
-The data was sourced from [London Datastore's LSOA Atlas](https://data.london.gov.uk/dataset/lsoa-atlas) and cleaned on Microsoft Excel.
+The data was sourced from [What do 'left behind' areas look like over time?](https://github.com/GDSL-UL/APPG-LBA/blob/main/README.md) and cleaned on Python.
 
 ## British administrative boundaries (LSOAs and LAs)
 
@@ -34,7 +30,7 @@ The data was sourced from [London Datastore's LSOA Atlas](https://data.london.go
 The dataset for the boundaries of the lower-layer super-output areas (LSOAs) within London is stored as a shapefile that can be found under:
 
 ```{r}
-st_LSOA <- st_read("data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
+st_LSOA <- st_read("data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
 ```
 
 The dataset for the boundaries of the local authority distrits (LADs) for the UK is stored as a shapefile that can be found under:

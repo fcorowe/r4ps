@@ -1,0 +1,76 @@
+﻿Label,Description
+LSOA11NM,Name of LSOA
+MidYrPop,Mid-year Population Estimates;All Ages;2011
+MidYrPop0to15,Mid-year Population Estimates;Aged 0-15;2011
+MidYrPop16to29,Mid-year Population Estimates;Aged 16-29;2011
+MidYrPop30to44,Mid-year Population Estimates;Aged 30-44;2011
+MidYrPop45to64,Mid-year Population Estimates;Aged 45-64;2011
+MidYrPop65,Mid-year Population Estimates;Aged 65+;2011
+MidYrPopWorking,Mid-year Population Estimates;Working-age;2011
+CensusPop,2011 Census Population;Age Structure;All Ages
+Density2012,Population Density;Persons per hectare;2012
+Hh_All,Households;All households;2011
+Hh_CoupleDepChildren,Household Composition;% Couple household with dependent children;2011
+Hh_CoupleNoDepChildren,Household Composition;% Couple household without dependent children;2011
+Hh_LoneParent,Household Composition;% Lone parent household;2011
+Hh_OnePerson,Household Composition;% One person household;2011
+Hh_OtherMulti,Household Composition;% Other multi person household;2011
+White,Ethnic Group;White (%);2011
+MixedMulti,Ethnic Group;Mixed/multiple ethnic groups (%);2011
+Asian,Ethnic Group;Asian/Asian British (%);2011
+BlackAfricanCaribbean,Ethnic Group;Black/African/Caribbean/Black British (%);2011
+Ethnic_Other,Ethnic Group;Other ethnic group (%);2011
+BAME,Ethnic Group;BAME (%);2011
+BirthUK,Country of Birth;% United Kingdom;2011
+BirthNotUK,Country of Birth;% Not United Kingdom;2011
+Hh_EnglishLang,Household Language;% of households with at least one person aged 16 or over with English as a main language;2011
+Hh_NotEnglishLang,Household Language;% of households where no people aged 16 or over have English as a main language;2011
+Christian,Religion;Christian (%);2011
+Buddhist,Religion;Buddhist (%);2011
+Hindu,Religion;Hindu (%);2011
+Jewish,Religion;Jewish (%);2011
+Muslim,Religion;Muslim (%);2011
+Sikh,Religion;Sikh (%);2011
+Religion_Other,Religion;Other religion (%);2011
+Religion_None,Religion;No religion (%);2011
+Religion_NotStated,Religion;Religion not stated (%);2011
+OwnedOutright,Tenure;Owned outright (%);2011
+OwnedMortgage,Tenure;Owned with a mortgage or loan (%);2011
+SocialRent,Tenure;Social rented (%);2011
+PrivateRent,Tenure;Private rented (%);2011
+DwellingWUsualRes,Dwelling type;Household spaces with at least one usual resident (%);2011
+DwellingWNoUsualRes,Dwelling type;Household spaces with no usual residents (%);2011
+DwellingDetached,Dwelling type;Whole house or bungalow: Detached (%);2011
+DwellingSemiDetached,Dwelling type;Whole house or bungalow: Semi-detached (%);2011
+DwellingTerraced,Dwelling type;Whole house or bungalow: Terraced (including end-terrace) (%);2011
+DwellingFlat,"Dwelling type;Flat, maisonette or apartment (%);2011"
+H_PriceMedian,House Prices;Median Price (£);2011
+H_Sales,House Prices;Sales;2011
+Hh_NoAdultInEmployWDepChild,Adults in Employment;% of households with no adults in employment: With dependent children;2011
+LoneParentNotInEmploy,Lone Parents;Lone parent not in employment %;2011
+FullTimeStudent,Economic Activity;Economically active: Full-time student %;2011
+EmployRate,Economic Activity;Employment Rate;2011
+UnemployRate,Economic Activity;Unemployment Rate;2011
+Q_None,Qualifications;% No qualifications;2011
+Q_L1,Qualifications;% Highest level of qualification: Level 1 qualifications;2011
+Q_L2,Qualifications;% Highest level of qualification: Level 2 qualifications;2011
+Q_Apprenticeship,Qualifications;% Highest level of qualification: Apprenticeship;2011
+Q_L3,Qualifications;% Highest level of qualification: Level 3 qualifications;2011
+Q_L4OrAbove,Qualifications;% Highest level of qualification: Level 4 qualifications and above;2011
+Q_Other,Qualifications;% Highest level of qualification: Other qualifications;2011
+Q_Sch_FullTimeSt18,Qualifications;% Schoolchildren and full-time students: Age 18 and over;2011
+Hlth_LimitedALot,Health;Day-to-day activities limited a lot (%);2011
+Hlth_LimitedALittle,Health;Day-to-day activities limited a little (%);2011
+Hlth_NotLimited,Health;Day-to-day activities not limited (%);2011
+Hlth_VGoodOrGood,Health;Very good or Good health (%);2011
+Hlth_Fair,Health;Fair health (%);2011
+Hlth_BadOrVBad,Health;Bad or Very Bad health (%);2011
+Hh_NoCarVan,Car or van availability;No cars or vans in household (%);2011
+Hh_OneCarVan,Car or van availability;1 car or van in household (%);2011
+Hh_TwoCarVan,Car or van availability;2 cars or vans in household (%);2011
+Hh_ThreeCarVan,Car or van availability;3 cars or vans in household (%);2011
+Hh_FourOrMoreCarVan,Car or van availability;4 or more cars or vans in household (%);2011
+CarsPerHh,Car or van availability;Cars per household;2011
+PubTransAccessScore14,Public Transport Accessibility Levels (2014);Average Score;
+Hh_MeanIncome,"Household Income, 2011/12;Mean Annual Household Income estimate (£)"
+Hh_MedianIncome,"Household Income, 2011/12;Median Annual Household Income estimate (£)"

@@ -6,7 +6,7 @@ In this chapter we introduce the topic of geodemographics and geodemographic cla
 
 -   [Lecture 10](https://jo-wilkin.github.io/GEOG0030/coursebook/geodemographic-classification.html) of the 2020-21 Work Book for the module GEOG0030 on Geocomputation, delivered at UCL Department of Geography.
 
-Geodemographics is the statistical study of human populations based on their locations. It includes the application of geodemographic classifications (GDCs) or profiling whereby different locations are classified into groups based on the similarity in their demographic characteristics.
+Geodemographics is the statistical study of populations based on the characteristics of their location. It includes the application of geodemographic classifications (GDCs) or profiling whereby different locations are classified into groups based on the similarity in their characteristics.
 
 Assuming that the geodemographic characteristics of a group are an indicator of how the people in that group behave, GDC can be a very useful tool to predict the behavioral patterns of different regions. For this reason, geodemographics and GDC have applications in many areas, from marketing and retail to public health or service planning industries.
 
@@ -44,128 +44,118 @@ getwd()
 
 ## Data {#sec-sec32}
 
-### Demographic data for Greater London Authority
+### Land use data for Greater Manchester
 
-In this Chapter we will be looking at data provided by [London Datastore](https://data.london.gov.uk/), a website created by the Greater London Authority (GLA) to distribute openly and freely London's data. In particular, we have prepared the file lsoa-data-clean.csv based on the [LSOA Atlas](https://data.london.gov.uk/dataset/lsoa-atlas), which contains demographic and related data for each Lower Layer Super Output Area (LSOA) in Greater London.
+Land use patterns offer insights into the demographic characteristics and needs of a population within a specific area. How residents use their land reflects their preferences, demands, and activities. The extent of residential land indicates the size, density, and distribution of the population, as well as housing preferences and household sizes. The extent of commercial and industrial land use relates to economic activities, employment opportunities, and the overall economic vitality of a region. Agricultural land use might indicate the food demands and production capabilities of the population. Additionally, land designated for public services, education, healthcare, and recreation showcases the amenities and social infrastructure necessary to support the population's needs and quality of life. Classifying regions by their similarity in their land use can therefore provide valuable insights into the lifestyle, economic status, and social requirements of the residents in a given area.
+
+In this Chapter we will be looking at land use data provided by [What do 'left behind' areas look like over time?](https://github.com/GDSL-UL/APPG-LBA/blob/main/README.md), a project created by the Geographic Data Science Lab at the University of Liverpool to host open reproducible code and resulting data for the Briefing: "What do 'left behind' areas look like over time?". The land use data is based on digital data from the CORINE Land Cover (CLC) dataset. This well-known dataset is compiled and maintained by the European Environment Agency (EEA) and derived from satellite imagery and aerial photographs, using remote sensing technology and image analysis techniques.
+
+In particular, we use the file `manchester_land_cover_2011.gpkg` based on the file `lsoa_land_cover.csv` available [here](https://github.com/GDSL-UL/APPG-LBA/blob/main/data/lsoa_land_cover.csv), which contains land use data for each Lower Layer Super Output Area (LSOA) in Greater Manchester.
 
 LSOAs are geographic hierarchies designed to improve the reporting of small area statistics in England and Wales. LSOAs are built from groups of contiguous Output Areas (OAs) and have been automatically generated to be as consistent as possible in population size, with a minimum population of 1,000. For this reason, their spatial extent varies depending on how densely populated a region is. The average population of an LSOA in London in 2010 was 1,722.
 
 ### Import the data
 
-In the code chunk below we load the dataset described above, lsoa-data-clean.csv as a data frame and call it *df_LSOA*. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data can be found in the form of a shapefile [here](https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london). We have also stored this shapefile, called *LSOA_2011_Lodnon_gen_MHW.shp*, in the data folder of this workbook so you can import it directly as a data frame with simple features using the `st_read()` function from the `sf` package. For more information on the `sf` package, check the [documentation](https://cran.r-project.org/web/packages/sf/index.html).
+In the code chunk below we load the dataset described above, `manchester_land_cover_2011.gpkg` as a simple feature object and call it `sf_LSOA`. We will be generating some maps to show the geographical distribution of our data and results. To do this, we need the data that defines the geographical boundaries of the LSOAs. This data is included in the `sf_LSOA` variable, in the column called `geom`.
 
 ```{r}
 
-# Import LSOA demographic data for GLA
 # The raw data can be obtained from link below, but it has been cleaned by Carmen Cabrera-Arnau for this chapter
-# https://data.london.gov.uk/dataset/lsoa-atlas
-df_LSOA <- read.csv("./data/geodemographics/lsoa-data-clean.csv")
+# https://github.com/GDSL-UL/APPG-LBA/blob/main/data/lsoa_land_cover.csv
 
-# Import LSOA boundaries for GLA
-st_LSOA <- st_read("./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
+sf_LSOA <- st_read("./data/geodemographics/manchester_land_cover_2011.gpkg")
 ```
 
 ## Preparing the data for GDC {#sec-sec34}
 
 ### Choice of geographic units
 
-Normally, GDCs involve the analysis of aggregated demographic data into geographic units. Very small geographic units of data aggregation can provide more detailed results, but if the counts are too low, this could lead to re-identification issues.
+Normally, GDCs involve the analysis of aggregated data into geographic units. Very small geographic units of data aggregation can provide more detailed results, but if the counts are too low, this could lead to re-identification issues.
 
 As mentioned above, the data for this chapter is aggregated into LSOAs. The size of the LSOAs is small enough to produce detailed results and is also a convenient choice, since it is broadly used in the UK Census and other official data-reporting exercises.
 
-We can visualise the LSOAs within GLA simply by plotting the geometry column of *sf_LSOA*, which can be selected with the function `st_geometry()`**.**
+We can visualise the LSOAs within Greater Manchester simply by plotting the geometry column of `st_LSOA`, which can be selected with the function `st_geometry()`. More sophisticated ways of visualising geographical data are available in R as we will see in forthcoming sections.
 
 ```{r}
-plot(st_geometry(st_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
+plot(st_geometry(sf_LSOA), border=adjustcolor("gray20", alpha.f=0.4), lwd=0.6)
 ```
 
 ### Variables of interest
 
-Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are demographic characteristics of the population located in the geographic units under study. In this case, we have prepared the file lsoa-data-clean.csv to contain some interesting demographic data corresponding to each LSOA. The data frame *df_LSOA* contains this data and we can visualise its first few lines by using the function `head()`:
+Any classification task must be based on certain criteria that determines how elements are grouped into classes. For GDC, these criteria are characteristics of the spatial units under study. In this case, we have prepared the file `manchester_land_cover_2011.gpkg` to contain some interesting land use data corresponding to each LSOA. The data frame `sf_LSOA` contains this data and we can visualise its first few lines by using the function `head()` and first four columns by subsetting the simple feature object:
 
 ```{r}
-head(df_LSOA[,1:4])
+head(sf_LSOA[,1:4])
 ```
 
-As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function `names()`, we can get the names of the columns in *df_LSOA*
+As we can see, each row contains information about an LSOA and each column (starting from the third column) represents a demographic characteristic of the LSOA and the people living there. With the function `names()`, we can get the names of the columns in `sf_LSOA`
 
 ```{r}
-names(df_LSOA[,1:8])
+names(sf_LSOA)
 ```
 
-The data frame *df_LSOA* contains many variables. As we can see above, they have summarised names. For a short description of what these names mean, we can load the file called Dictionary-lsoa-data-clean.csv:
+We can explore the summary statistics for each of the variables with the `summary()` function applied on the variable of interest. For example, to obtain the summary statistics for the proportion of land dedicated to discontinuous urban fabric in 20212 `Discontinuous.urban.fabric..112...2012`, we can run the code below:
 
 ```{r}
-df_dictionary <- read.csv("./data/geodemographics/Dictionary-lsoa-data-clean.csv")
-
-head(df_dictionary)
+summary(sf_LSOA$Discontinuous.urban.fabric..112...2012.)
 ```
 
-For the purposes of this chapter, we will focus on just a few of these variables since this will make the results easier to interpret. In particular, we will look at variables related to ethnicity, country of birth, employment status and qualifications. Let us select the fields of interest:
+This tells us that the mean or average proportion of land dedicated to discontinuous urban fabric in LSOAs within Greater Manchester is 0.6823. It also tells us that 1 is the proportion of land dedicated to discontinuous urban fabric in the LSOA with the maximum proportion of land dedicated to this use.
+
+To visualise the whole distribution of the variable `Discontinuous.urban.fabric..112...2012.`, we can plot a histogram:
 
 ```{r}
-df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "FullTimeStudent", "EmployRate", "UnemployRate", "Q_None", "Q_L1", "Q_L2", "Q_Apprenticeship", "Q_L3", "Q_L4OrAbove", "Q_Other", "Q_Sch_FullTimeSt18" )]
+hist(sf_LSOA$Discontinuous.urban.fabric..112...2012., breaks=15, xlab="% Discontinuous.urban.fabric..112...2012.", ylab='Number of LSOAs', main=NULL)
 ```
 
-We can explore the summary statistics for each of the selected fields with the `summary()` function applied on the field of interest. For example, to obtain the summary statistics for the percentage of people belonging to the ethnic group 'Black/African/Caribbean/Black British', we can run the code below:
+The histogram reveals that many LSOAs have a high proportion of discontinuous urban fabric, but there are a few with more than 50% of their land dedicated to this use.
 
-```{r}
-summary(df_LSOA$BlackAfricanCaribbean)
-```
-
-This tells us that the mean or average percentage of people from this ethnic group in LSOAs within GLA is 13.05%. It also tells us that 63.70% of the population are Black/African/Caribbean/Black British in the LSOA with the maximum proportion of people belonging to this ethnic group.
-
-To visualise the whole distribution of the variable 'Percentage of Black/African/Caribbean/Black British', we can plot a histogram:
-
-```{r}
-hist(df_LSOA$BlackAfricanCaribbean, breaks=50, xlab="% Black/African/Caribbean/Black British", ylab='Number of LSOAs', main=NULL)
-```
-
-The histogram reveals that many LSOAs have a low proportion of Black/African/Caribbean/Black British people, but there are a few with more than 50% of their population belonging to this ethnic group.
-
-Now the question is whether the LSOAs with similar proportions of Black/African/Caribbean/Black British are also spatially close. To find out, we need to map the data. We can do this by joining the data frame *df_LSOA* with the data frame *st_LSOA* which contains the geographic boundaries of the LSOAs:
-
-```{r}
-join_LSOA <- st_LSOA %>% left_join(df_LSOA, by='LSOA11NM')
-```
-
-If we plot the joined data frames using the `tmap` library functionalities, we can observe that, indeed there are specific regions within GLA with a high proportion of Black/African/Caribbean/Black British people.
+Now the question is whether the LSOAs with similar proportions of discontinuous urban fabric are also spatially close. To find out, we need to map the data. We can do this by using the `tmap` library functions. We observe that, LSOAs in the South of Greater Manchester tend to have high proportions of discontinuous urban fabric, while LSOAs in the peripheries have a low proportion of this type of land use.
 
 ```{r}
 
-legend_title = expression("% Black, African, Caribbean or Black British")
-map_ethnic = tm_shape(join_LSOA) +
-  tm_fill(col = "BlackAfricanCaribbean", title = legend_title, text.size = 10, palette = viridis(256), style = "cont") + # add fill
-  tm_layout(legend.position = c(0.71, 0.02), legend.title.size=0.7, inner.margins=c(0.05, 0.05, 0.05, 0.14)) +
+legend_title = expression("% Discontinuous urban fabric (2012)")
+map_discountinuous = tm_shape(sf_LSOA) +
+  tm_fill(col = "Discontinuous.urban.fabric..112...2012.", title = legend_title, text.size = 28, palette = viridis(256), style = "cont") + # add fill
+  tm_layout(legend.position = c(0.69, 0.02), legend.title.size=0.9, inner.margins=c(0.05, 0.05, 0.05, 0.26)) +
   tm_borders(col = "white", lwd = .01)  + # add borders
-  tm_compass(type = "arrow", position = c("right", "top") , size = 1) + # add compass
-  tm_scale_bar(breaks = c(0,1,2,3), text.size = 0.8, position =  c("left", "bottom")) # add scale bar
-map_ethnic
+  tm_compass(type = "arrow", position = c("right", "top") , size = 2) + # add compass
+  tm_scale_bar(breaks = c(0,2,4,6,8,10), text.size = 0.8, position =  c("left", "bottom")) # add scale bar
+
+map_discountinuous
 ```
 
 ## Standardisation {#sec-sec3}
 
 ### Across geographic units
 
-Although LSOAs have been designed to have similar population sizes, the population figures fluctuate. And of course, if the population of a place is bigger or smaller, this can affect the figures corresponding to demographic characteristics (e.g. presumably, the larger the total population, the higher the number of people who are unemployed).
+LSOAs have been designed to have similar population sizes, so their area fluctuates. If the area of an LSOA is bigger or smaller, this can affect the figures corresponding to land use (e.g. presumably, the larger the total area, the hectares will be dedicated to a certain use).
 
-To counter the effect of variable population sizes across geographic units, we always need to standardise the data so it is given as a proportion or a percentage. This has already done in the dataset lsoa-data-clean.csv, however, if you were to create your own dataset, you need to take this into account. To compute the right percentages, it is important to consider the right denominator. For example, if we are computing the percentage of people over the age of 65 in a given geographic unit, we can divide the number of people over 65 by the total population in that geographic unit, then multiply by 100. However, if we are computing the percentage of single-person households, we need to divide the number of single-person households by the total number of households (and not by the total population), then multiply by 100.
+To counter the effect of varying sizes across geographic units, we always need to standardise the data so it is given as a proportion or a percentage. This has already been done in the dataset `manchester_land_cover_2011.gpkg`, however, if you were to create your own dataset, you need to take this into account. To compute the right percentages, it is important to consider the right denominator. For example, if we are computing the percentage of people over the age of 65 in a given geographic unit, we can divide the number of people over 65 by the total population in that geographic unit, then multiply by 100. However, if we are computing the percentage of single-person households, we need to divide the number of single-person households by the total number of households (and not by the total population), then multiply by 100.
 
 ### Variable standardisation
 
 Data outliers are often present when analysing data from the real-world. These values are generally extreme and difficult to treat statistically. In GDC, they could end up dominating the classification process. To avoid this, we need to standardise the input variables as well, so that they all contribute equally to the classification process.
 
-There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e. for variable $X$, Z-score = $\dfrac{X-mean(X)}{std(X)}$ where $std()$ refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function `scale()`. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise:
+There are different methods for variable standardisation, but here we will achieve this by computing the Z-scores for each variable, i.e. for variable $X$, Z-score = $\dfrac{X-mean(X)}{std(X)}$ where $std()$ refers to standard deviation. In R, obtaining the Z-score of a variable is very simple with the function `scale()`. Since we want to obtain the Z-scores of all the variables under consideration, we can loop over the columns corresponding to the variables that we want to standardise. Before doing this, we create a dataframe based on `sf_LSOA` but dropping the geometry column:
 
 ```{r}
-# creates a new data frame
-df_std <- df_LSOA
+# creates a new data frame based on sf_LSOA
+df_std <- sf_LSOA %>% st_drop_geometry()
 # extracts column names from df_std
 colnames_df_std <- colnames(df_std)
-# loops columns from position 1 : the last column
-for(i in 2: ncol (df_std)){
-df_std[, colnames_df_std[i]] <- scale(as.numeric(df_std[, colnames_df_std[i]]))
+
+# loops columns from position 3 : the last column
+for(i in 3: 38){
+df_std[[c(colnames_df_std[i])]] <- scale(as.numeric(df_std[, colnames_df_std[i]]))
 }
+```
+
+After the standardisation, some columns in `df_std` contain NaN. For simplicity, we will remove these columns from the resulting dataframe as below, and we will redefine the variable containing the column names so that it only stores the column names corresponding to landuse variables:
+
+```{r}
+df_std <- df_std %>% select_if(~ !any(is.na(.)))
+colnames_df_std <- colnames(df_std)[3:(ncol(df_std)-6)]
 ```
 
 ## Checking for variable association {#sec-sec35}
@@ -174,42 +164,18 @@ Before diving into the clustering process, it is necessary to check for variable
 
 Each row and column in a Pearson's correlation matrix represents a variable. Each entry in the matrix represents the level of correlation between the variables represented by the corresponding row and column. In R, a Pearson's correlation matrix can be created very easily with the `corr()` function, where the method parameter is set to "pearson". As a general rule, two variables with correlation coefficient greater than 0.8 or smaller than -0.8 are considered to be highly correlated. If this is the case, we might want to discard one of the two variables since the information they convey is redundant. However, in some cases, it might be reasonable to keep both variables if we can argue that they both have a similar but unique meaning.
 
-The correlation coefficients by themselves are not enough to conclude whether two variables are correlated. Each correlation coefficient must be computed in combination with its p-value. For this reason, we also apply the `cor_pmat()` function below, which outputs a matrix of p-values corresponding to each correlation coefficient. Here, we set the confidence level at 0.95, therefore, p-values smaller than 0.05 are considered to be statistically significant. In the correlation matrix plot, we add crosses to indicate which correlation coefficients are not significant (i.e. those above 0.05). Those crosses indicate that there is not enough statistical evidence to reject the claim that the variables in the corresponding row and column are uncorrelated.
+The correlation coefficients by themselves are not enough to conclude whether two variables are correlated. Each correlation coefficient must be computed in combination with its p-value. For this reason, we also apply the `cor_pmat()` function below, which outputs a matrix of p-values corresponding to each correlation coefficient. Here, we set the confidence level at 0.9, therefore, p-values smaller than 0.1 are considered to be statistically significant. In the correlation matrix plot, we add crosses to indicate which correlation coefficients are not significant (i.e. those above 0.1). Those crosses indicate that there is not enough statistical evidence to reject the claim that the variables in the corresponding row and column are uncorrelated.
 
 ```{r}
 # Matrix of Pearson correlation coefficients
-corr_mat <- cor(df_std[,c(colnames_df_std[2: ncol(df_std)])], method = "pearson")
+corr_mat <- cor(df_std[,c(colnames_df_std)], method = "pearson")
 # Matrix of p-values
-corr_pmat <- cor_pmat(df_std[,c(colnames_df_std[2: ncol(df_std)])], method = "pearson", conf.level = 0.95)
+corr_pmat <- cor_pmat(df_std[,c(colnames_df_std)], method = "pearson", conf.level = 0.95)
 # Barring the no significant coefficient
-ggcorrplot(corr_mat, tl.cex=7, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat, colors = c(viridis(3)), lab=TRUE, lab_size=1.6)
+ggcorrplot(corr_mat, tl.cex=5, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat, colors = c(viridis(3)), lab=TRUE, lab_size=1.5)
 ```
 
-Among the statistically significant values in the correlation matrix, we can see that BAME and White have a correlation of -1. So do BirthUK and BirthNotUK. We will therefore remove BAME and BrithUK from our dataset. We also see that Q_L4OrAbove has a strong negative correlation with Q_None and Q_L1. We will therefore remove two of these variables, for example Q_None and Q_L1.
-
-```{r}
-#  Remove BAME, BirthUK, Q_None, Q_L1
-data <- subset(df_std, select = -c(BAME, BirthUK, Q_None, Q_L1))
-```
-
-We can now perform a join of the resulting dataset with the variable st_LSOA, which stores the geographical units for the LSOAs. We perform this step so that we can later map the results
-
-```{r}
-join_data <- st_LSOA %>% left_join(data, by='LSOA11NM')
-```
-
-And once again, we can check the Pearson correlation matrix of the resulting dataset. Obviously, now that we have removed some variables that were strongly correlated to others, the values of the correlation coefficients are not as high as before.
-
-```{r}
-#Obtain column names from data
-colnames_data <- colnames(data)
-# Matrix of Pearson correlation coefficients
-corr_mat_data <- cor(data[,c(colnames_data[2: ncol(data)])], method = "pearson")
-# Matrix of p-values
-corr_pmat_data <- cor_pmat(data[,c(colnames_data[2: ncol(data)])], method = "pearson")
-# Barring the no significant coefficient
-ggcorrplot(corr_mat_data, tl.cex=7, hc.order = TRUE, outline.color = "white", p.mat = corr_pmat_data, colors = c(viridis(3)), lab=TRUE, lab_size=1.6)
-```
+Among the statistically significant values in the correlation matrix, we can see that none of the variables display a strong correlation (i.e. close to -1 or 1), except of course, each variable with itself (as shown in the diagonal cells of the correlogram). In fact, many of the measured correlations are not significant. Therefore, we do not need to remove any variables from the analysis. However, if we had found a strong correlation between a pair of variables which is statistically significant, we could remove one of the two variables, since they would be both capturing very similar information.
 
 ## The clustering process {#sec-sec36}
 
@@ -219,10 +185,10 @@ K-means clustering is a way of grouping similar items together. To illustrate th
 
 More technically, k-means clustering is actually an algorithm of unsupervised learning (we will learn more about this in Chapter 10) that partitions a set of points into k clusters, where k is a user-specified number. The algorithm iteratively assigns each point to the closest cluster, based on the mean of the points in the cluster, until no point can be moved to a different cluster to decrease the sum of squared distances between points and their assigned cluster mean. The result is a partitioning of the points into k clusters, where the points within a cluster are as similar as possible to each other, and as dissimilar as possible from points in other clusters.
 
-In R, k-means can be easily applied by using the function `k-means()`, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (nstart) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:
+In R, k-means can be easily applied by using the function `k-means()`, where some of the required arguments are: the dataset, the number of clusters (which is called centers), the number of random sets to choose (`nstart`) or the maximum number of iterations allowed. For example, for a 4-cluster classification, we would run the following line of code:
 
 ```{r}
-Km <- kmeans(data[,c(colnames_data[2: ncol(data)])], centers=4, nstart=20, iter.max = 1000)
+Km <- kmeans(df_std[,c(colnames_df_std)], centers=4, nstart=20, iter.max = 1000)
 ```
 
 ### Number of clusters
@@ -233,24 +199,30 @@ However, there are some techniques and guidelines to help us decide what the rig
 
 The **silhouette score** of a data point (in this case an LSOA and its demographic data) is a measure of how similar this data point is to the data points in its own cluster compared to the data points in other clusters. The silhouette score ranges from -1 to 1, with a higher value indicating that the data point is well matched to its own cluster and poorly matched to neighbouring clusters. A score close to 1 means that the data point is distinctly separate from other clusters, whereas a score close to -1 means the data point may have been assigned to the wrong cluster. Given a number of clusters k obtained with k-means, we can compute the average silhouette score over all the data points. Then, we can plot the average silhouette score against k. The optimal value of *k* will be the one with the highest k score.
 
-You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 8. The optimum number of clusters is given by the value of *k* at which the average silhouette is maximised.
+You can run the code below to compute the average silhouette score corresponding to different values of k ranging from 2 to 20. The optimum number of clusters is given by the value of *k* at which the average silhouette is maximised.
 
 ```{r}
+
+# Specify a random number generator seed for reproducibility
+set.seed(123) 
+
 silhouette_score <- function(k){
-  km <- kmeans(data[,c(colnames_data[2: ncol(data)])], centers = k, nstart=5, iter.max = 1000)
-  ss <- silhouette(km$cluster, dist(data[,c(colnames_data[2: ncol(data)])]))
+  km <- kmeans(df_std[,c(colnames_df_std)], centers = k, nstart=5, iter.max = 1000)
+  ss <- silhouette(km$cluster, dist(df_std[,c(colnames_df_std)]))
   mean(ss[, 3])
 }
-k <- 2:8
+k <- 2:20
 avg_sil <- sapply(k, silhouette_score)
 plot(k, type='b', avg_sil, xlab='Number of clusters', ylab='Average Silhouette Scores', frame=FALSE)
 
 ```
 
-From the figure, we can see that the optimum k is 5, so we will take 5 as the number of clusters. Note, this number might be different when you run the programme since the clustering algorithm involves some random steps.
+From the figure, we can see that the optimum k is 12. Note, this number might be different when you run the programme since the clustering algorithm involves some random steps, unless you set the seed to 123 as we did above. A number of clusters of k=12 is too high for our results to be insightful and interpretable. Therefore, to keep our interpretations simpler, we will pick a lower number of clusters to help us undertand our data better, such as 5.
 
 ```{r}
-Km <- kmeans(data[,c(colnames_data[2: ncol(data)])], centers=5, nstart=20, iter.max = 1000)
+# Specify a random number generator seed for reproducibility
+set.seed(123) 
+Km <- kmeans(df_std[,c(colnames_df_std)], centers=5, nstart=20, iter.max = 1000)
 ```
 
 ### Other clustering methods
@@ -269,32 +241,43 @@ There are several other clustering methods apart from k-means. Each method has i
 
 ### Mapping the clusters
 
-Our LSOAs are now grouped into 5 clusters according to the similarity in their demographic characteristics. We can create a final data set based on *join_data* which includes the cluster where each geographical unit belongs to:
+Our LSOAs are now grouped into 5 clusters according to the similarity in their land use characteristics. We can include to our dataset the cluster where each geographical unit belongs to:
 
 ```{r}
-join_data_cluster <- join_data
-join_data_cluster$cluster <- Km$cluster
+df_std$cluster <- Km$cluster
 ```
 
-Finally, we can plot the results of the clustering process on a map using functions from the tmap library:
+To map the results from clustering, we add the spatial inforamtion which we recover from `sf_LSOA`.
 
 ```{r}
-map_cluster = tm_shape(join_data_cluster) +
-  tm_fill(col = "cluster", title = "cluster", palette = viridis(256), style = "cont") + # add fill
+
+# Get the geometry column from the sf object
+geometry_column <- st_geometry(sf_LSOA)
+
+# Set the geometry column in the dataframe which becomes a simple feature object
+sf_std <- st_set_geometry(df_std, geometry_column)
+```
+
+Finally, we can plot the results of the clustering process on a map using functions from the `tmap` library:
+
+```{r}
+map_cluster = tm_shape(sf_std) +
+  tm_fill(col = "cluster", title = "Cluster", palette = viridis(256), style = "cont") + # add fill
   tm_borders(col = "white", lwd = .01)  + # add borders
-  tm_layout(legend.position = c(0.88, 0.02)) +
-  tm_compass(type = "arrow", position = c("right", "top") , size = 1) + # add compass
-  tm_scale_bar(breaks = c(0,1,2,3), text.size = 0.5, position =  c("left", "bottom")) # add scale bar
+  tm_layout(legend.position = c(0.9, 0.02), legend.title.size=0.9, inner.margins=c(0.05, 0.05, 0.05, 0.05)) +
+  tm_compass(type = "arrow", position = c("right", "top") , size = 2) + # add compass
+  tm_scale_bar(breaks = c(0,2,4,6,8,10), text.size = 0.8, position =  c("left", "bottom")) # add scale bar
+
 map_cluster
 ```
 
-**Note:** sometimes, the number of items in a cluster may be very small. In that case, you may want to merge to cluster to make the number of items in each group more homogeneous or perhaps change k in the k-means algorithm.
+**Note:** sometimes, the number of items in a cluster may be very small. In that case, you may want to merge two clusterx to make the number of items in each group more homogeneous or perhaps change k in the k-means algorithm.
 
 ### Cluster interpretation
 
-The map above not only displays the clusters where each LSOA belongs, but it also shows that there is a tendency for LSOAs belonging to the same cluster to be geographically close. This indicates that people with similar demographic characteristics live close to each other. However, we still need to understand what each cluster represents.
+The map above not only displays the clusters where each LSOA belongs, but it also shows that there is a tendency for LSOAs belonging to the same cluster to be geographically close. This indicates that LSOAs with similar land use characteristics are close to each other. However, we still need to understand what each cluster represents.
 
-The so-called cluster centers (kmCenters) are the data points that, within each cluster, provide a clear indication of the average characteristics the cluster where they belong based, of course, on the variables used in the classification. The data used in the clustering process was Z-score standardized, so the values of each variable corresponding to the cluster centers are still presented as Z-scores. Zero indicates the mean for each variable across all the data points in the sample, and values above or below zero indicate the number of standard deviations from the average. This makes it easy to understand the unique characteristics of each cluster relative to the entire sample. To visualise the characteristics and meaning of the clusters centers and their corresponding clusters, we use radial plots. Below we produce a radial plot for cluster 1. Can you see which variables are higher or lower than average in this cluster? If you want to visualise the radial plot for other clusters, you will need to change the number inside the brackets of *KmCenters\[1,\].*
+The so-called cluster centers (kmCenters) are the data points that, within each cluster, provide a clear indication of the average characteristics of the cluster where they belong based on the variables used in the classification. The data used in the clustering process was Z-score standardised, so the values of each variable corresponding to the cluster centers are still presented as Z-scores. Zero indicates the mean for each variable across all the data points in the sample, and values above or below zero indicate the number of standard deviations from the average. This makes it easy to understand the unique characteristics of each cluster relative to the entire sample. To visualise the characteristics and meaning of the clusters centers and their corresponding clusters, we use radial plots. Below we produce a radial plot for cluster 1. Can you see which variables are higher or lower than average in this cluster? If you want to visualise the radial plot for other clusters, you will need to change the number inside the brackets of `KmCenters\[1,\]`.
 
 ```{r}
 # creates a radial plot for cluster 1
@@ -304,7 +287,10 @@ KmCenters <- as.matrix(Km$centers)
 KmCenters <- as.data.frame(KmCenters)
 radial.plot(KmCenters[1,], labels = colnames(KmCenters),
 boxed.radial = FALSE, show.grid = TRUE,
-line.col = "blue", radlab = TRUE, rp.type="p", label.prop=0.9, mar=c(3,3,3,3))
+line.col = "blue", radlab = TRUE, rp.type="p", label.prop=1, mar=c(3,3,3,3))
+
+
+
 ```
 
 ### Testing
@@ -315,31 +301,23 @@ In the plot below, we can see the first and second principal components in the x
 
 ```{r}
 
-fviz_cluster(Km, data = data[,c(colnames_data[2: ncol(data)])], geom = "point", ellipse = F, pointsize = 0.5,
+fviz_cluster(Km, data = df_std[,c(colnames_df_std)], geom = "point", ellipse = F, pointsize = 0.5,
 ggtheme = theme_classic())
 ```
 
-There are obvious clusters in the plot, but some points are in the overlapping regions of two or more clusters, making it unclear to what cluster they should really belong. This does not mean that our classification is wrong, instead, it is a result of the fact that the plot is only representing two of the principal components, and there are other variables that are not captured in this 2-dimensional representation.
+There are obvious clusters in the plot, but some points are in the overlapping regions of two or more clusters, making it unclear to what cluster they should really belong. This is a result of the fact that the plot is only representing two of the principal components, and there are other variables that are not captured in this 2-dimensional representation.
 
 ## Questions
 
-For this set of questions, we will be using the same datasets that we used for Chapter 3, the London LSOA dataset and the shapefile for the LSOA boundaries:
+For this set of questions, we will be using the same dataset that we used for Chapter 3, but for Greater London:
 
 ```{r}
 
-df_LSOA <- read.csv("./data/geodemographics/lsoa-data-clean.csv")
+sf_LSOA <- st_read("./data/geodemographics/london_land_cover_2011.gpkg")
 
-# Import LSOA boundaries for GLA
-st_LSOA <- st_read("./data/geodemographics/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
 ```
 
-This time, we will focus on demographic variables related to ethnicity, country of birth, housing ownership status, income and age group. Let us select these demographic variables for the questions below.
-
-```{r}
-df_LSOA <- df_LSOA[, c("LSOA11NM", "White", "MixedMulti", "Asian", "BlackAfricanCaribbean", "Ethnic_Other", "BAME", "BirthUK", "BirthNotUK", "OwnedOutright", "OwnedMortgage", "SocialRent", "PrivateRent", "Hh_MeanIncome", "MidYrPop0to15", "MidYrPop16to29", "MidYrPop30to44", "MidYrPop45to64", "MidYrPop65")]
-```
-
-Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the selected variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Join the resulting dataset with the LSOA boundary data. Now you should be ready to group the data into clusters using the k-means algorithm. Based on the average silhouette score method, select the number of clusters for a GDC with k-means. Every time you apply the `kmeans()` function, you should set nstart=20 and iter.max=1000.
+Prepare your data for a geodemographic classification (GDC). To do this, start by standardising the land use variables. Then, check for variable association using a correlation matrix. Discard any variables if necessary. Now you should be ready to group the data into clusters using the k-means algorithm. Report the optimal number of clusters based on the average silhouette score method. Select the number of clusters for a GDC with k-means according to this method or otherwise. Join the resulting dataset with the LSOA boundary data. Every time you apply the `kmeans()` function, you should set nstart=20 and iter.max=1000.
 
 ------------------------------------------------------------------------
 

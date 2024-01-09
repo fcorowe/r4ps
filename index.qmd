@@ -11,8 +11,10 @@ The website is *free to use* and is licensed under the [Attribution-NonCommercia
 
 ## Contact {.unnumbered}
 
-> Francisco Rowe - f.rowe-gonzalez \[at\] liverpool.ac.uk Professor in Population Data Science, Office 507, Roxby Building, University of Liverpool, Liverpool, L69 7ZT, United Kingdom.
+-   **Module lead:** ***Carmen Cabrera-Arnau*** - c.cabrera-arnau \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science
 
-> Carmen Cabrera-Arnau - c.cabrera-arnau \[at\] liverpool.ac.uk Lecturer in Geographic Data Science, Office 1/016, Roxby Building, University of Liverpool, Liverpool, L69 7ZT, United Kingdom.
+-   *Francisco Rowe* - f.rowe-gonzalez \[at\] liverpool.ac.uk - Professor in Population Data Science
 
-> Elisabetta Pietrostefani - e.pietrostefani \[at\] liverpool.ac.uk Lecturer in Geographic Data Science, Office 6xx, Roxby Building, University of Liverpool, Liverpool, L69 7ZT, United Kingdom.
+-   *Elisabetta Pietrostefani* - e.pietrostefani \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science
+
+    Find us in Roxby Building, University of Liverpool, UK

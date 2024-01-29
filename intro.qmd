@@ -88,11 +88,21 @@ The list of libraries used in this book is provided below:
 
 You need to ensure you have installed the list of libraries used in this book, running the following code:
 
-> list.of.packages.cran \<- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger")
+```{r}
+#| eval: false
 
-> new.packages.cran \<- list.of.packages.cran\[!(list.of.packages.cran %in% installed.packages()\[,"Package"\])\] if(length(new.packages.cran)) install.packages(new.packages.cran)
+# package names
+packages <- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger", "wpgpDownloadR", "devtools", "ggseqplot", "tidytext", "tm", "textdata", "topicmodels", "RedditExtractoR", "stm", "dygraphs", "plotly", "ggpmisc", "ggformula", "ggimage", "modelsummary", "gtools")
 
-> for(i in 1:length(list.of.packages.cran)) { library(list.of.packages.cran\[i\], character.only = T) }
+# install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# packages loading
+invisible(lapply(packages, library, character.only = TRUE))
+```
 
 ## Assessment
 

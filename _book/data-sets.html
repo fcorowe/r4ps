@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.543">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -324,25 +324,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="greater-machester-land-use-data" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="greater-machester-land-use-data"><span class="header-section-number">11.1</span> Greater Machester land use data</h2>
@@ -350,10 +333,10 @@ Attaching package: 'dplyr'</code></pre>
 <h3 class="unnumbered anchored" data-anchor-id="availability">Availability</h3>
 <p>The dataset is stored on a gpkg file that can be found, within the structure of this project, under:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/manchester_land_cover_2011.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/manchester_land_cover_2011.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `manchester_land_cover_2011' from data source 
-  `/Users/carmen/Documents/GitHub/r4ps/data/geodemographics/manchester_land_cover_2011.gpkg' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202324/r4ps/data/geodemographics/manchester_land_cover_2011.gpkg' 
   using driver `GPKG'
 Simple feature collection with 1673 features and 44 fields
 Geometry type: MULTIPOLYGON
@@ -378,10 +361,10 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 class="unnumbered anchored" data-anchor-id="availability-1">Availability</h3>
 <p>The dataset for the boundaries of the lower-layer super-output areas (LSOAs) within London is stored as a shapefile that can be found under:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/carmen/Documents/GitHub/r4ps/data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202324/r4ps/data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -392,10 +375,10 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </div>
 <p>The dataset for the boundaries of the local authority distrits (LADs) for the UK is stored as a shapefile that can be found under:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>LA_UK <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>LA_UK <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LAD_DEC_2022_UK_BFC' from data source 
-  `/Users/carmen/Documents/GitHub/r4ps/data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202324/r4ps/data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 374 features and 10 fields
 Geometry type: MULTIPOLYGON
@@ -409,7 +392,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 class="unnumbered anchored" data-anchor-id="variables-1">Variables</h3>
 <p>For each of the 4,835 LSOAs, the following characteristics are available:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(st_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(st_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "LSOA11CD"  "LSOA11NM"  "MSOA11CD"  "MSOA11NM"  "LAD11CD"   "LAD11NM"  
  [7] "RGN11CD"   "RGN11NM"   "USUALRES"  "HHOLDRES"  "COMESTRES" "POPDEN"   
@@ -436,7 +419,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 </ul>
 <p>For each of the 374 LADs, the following characteristics are available:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(LA_UK)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(LA_UK)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "OBJECTID"   "LAD22CD"    "LAD22NM"    "BNG_E"      "BNG_N"     
  [6] "LONG"       "LAT"        "GlobalID"   "SHAPE_Leng" "SHAPE_Area"
@@ -462,7 +445,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <h3 class="unnumbered anchored" data-anchor-id="projection">Projection</h3>
 <p>The shapes of each LSOA are stored as polygons an expressed in the OSGB36 projection:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(st_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(st_LSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coordinate Reference System:
   User input: OSGB36 / British National Grid 
@@ -506,7 +489,7 @@ PROJCRS["OSGB36 / British National Grid",
 </div>
 <p>Similarly, the shapes of each LAD are stored as polygons an expressed in the OSGB36 projection:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(LA_UK)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(LA_UK)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coordinate Reference System:
   User input: OSGB36 / British National Grid 
@@ -557,7 +540,7 @@ PROJCRS["OSGB36 / British National Grid",
 <p>The boundaries for the LSOAs within London can be found directly from the <a href="https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london">London Datastore</a> website.</p>
 <p>The boundaries for the LADs for the UK can be found on the ONS Open Geography Portal <a href="https://geoportal.statistics.gov.uk/search?collection=Dataset&amp;sort=name&amp;tags=all(BDY_LAD%2CDEC_2022)">website</a>. To filter for the London LADs, i.e.&nbsp;the London boroughs, we run the following line of code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>LND_boroughs <span class="ot">&lt;-</span> LA_UK <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'E09'</span>, LAD22CD)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>LND_boroughs <span class="ot">&lt;-</span> LA_UK <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'E09'</span>, LAD22CD)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -576,18 +559,18 @@ PROJCRS["OSGB36 / British National Grid",
 <h3 class="unnumbered anchored" data-anchor-id="availability-2">Availability</h3>
 <p>The dataset for the migration flows between US metropolitan areas can be found as a csv file under:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_metro <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/networks/metro_to_metro_2015_2019_US_migration.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_metro <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/networks/metro_to_metro_2015_2019_US_migration.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The dataset for the migration flows between London boroughs can be found as a csv file under:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_borough <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/networks/LA_to_LA_2019_London_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_borough <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/networks/LA_to_LA_2019_London_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="variables-2" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="variables-2">Variables</h3>
 <p>For each of the 52,930 movements recorded on the dataset for the migration flows between US metropolitan areas, the following fields are available:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_metro)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_metro)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "MSA_Current_Code"                                
  [2] "MSA_Current_Name"                                
@@ -611,7 +594,7 @@ PROJCRS["OSGB36 / British National Grid",
 <p>More details on the methodology to obtain the estimates and the margin of error for each population movement can be found on the <a href="https://www.census.gov/programs-surveys/acs/methodology.html">US Census Bureau website</a>.</p>
 <p>For each of the 1,053 movements recorded on the dataset for the migration flows between London boroughs, the following fields are available:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_borough)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_borough)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "OutLA" "InLA"  "Moves"</code></pre>
 </div>
@@ -647,18 +630,18 @@ PROJCRS["OSGB36 / British National Grid",
 <h3 class="unnumbered anchored" data-anchor-id="availability-3">Availability</h3>
 <p>The dataset for the demographic census data of each MSOA in England and Wales can be loaded as a csv file from:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_MSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-income.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_MSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-income.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A very similar dataset for the demographic census data of each MSOA in England and Wales which also contains data on the median house price can be loaded as a csv file from:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-houseprice.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-houseprice.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="variables-3" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="variables-3">Variables</h3>
 <p>For each of the 7,080 MSOAs recorded in England and Wales, the following fields are available:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_MSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_MSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "X"                "date"             "geography"        "geography.code"  
  [5] "inHH"             "inCE"             "SING"             "MARRIED"         
@@ -678,8 +661,8 @@ PROJCRS["OSGB36 / British National Grid",
 </div>
 <p>For a description of the variables in the columns of df_MSOA, we can load a dictionary for these variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/Dictionary.csv"</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/Dictionary.csv"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                      Dictionary       X
 1                                                       

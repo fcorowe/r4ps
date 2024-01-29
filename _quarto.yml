@@ -46,8 +46,9 @@ format:
   html:
     theme: ember.scss
     css: styles.css
-  pdf:
-    documentclass: scrreprt
+    prefer-html: true
+#  pdf:
+#    documentclass: scrreprt
 
 editor: visual
 

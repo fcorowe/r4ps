@@ -1,6 +1,7 @@
 # Data sets {#sec-chp11}
 
 ```{r}
+#| message: false
 library(sf)
 library(dplyr)
 ```

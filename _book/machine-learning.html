@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,7 +58,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -101,13 +100,7 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -116,7 +109,6 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -133,12 +125,12 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./machine-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./machine-learning.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -148,12 +140,12 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Population Science</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/fcorowe/r4ps" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/fcorowe/r4ps" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -279,7 +271,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -302,7 +294,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">10.6</span> Questions</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/fcorowe/r4ps/edit/main/machine-learning.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/machine-learning.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -322,21 +314,19 @@ div.csl-indent {
   </div>
   
 
-
 </header>
-
 
 <p>Machine learning (ML) is one of the most wanted skills in today’s job market. It has very wide applications in many areas, from developing software for self-driving cars to early detection of deadly diseases such as cancer, but also in the studies of populations and human geography. Although the term <strong>machine learning</strong> has become a lot more popular in the last few years thanks to the increased capabilities to analyse larger amounts of data, many ML techniques have existed for decades in other fields such as statistics and computer science.</p>
 <p>Just like in regression problems, ML algorithms build models based on sample data in order to make predictions or decisions about other unseen data. In fact, linear regression can be regarded as a very simple case of a neural network. There are different approaches to ML according to the type of feedback available to the ML algorithms:</p>
 <ul>
 <li><p>Supervised learning: we give the algorithm data where the inputs and outputs are already mapped, then the algorithm learns patterns of this mapping to be applied on new unseen data sets. Linear regression is an example of supervised learning.</p></li>
 <li><p>Unsupervised learning: we give the algorithm data where the inputs have no matched outputs. The task of the algorithm is to learn patterns in the data or processes to achieve a certain goal. An example of this is the k-means clustering algorithm that you explored in previous chapters.</p></li>
-<li><p>Reinforcement learning: the algorithm must achieve a goal while interacting with a dynamic environment. While navigating the environment, the algorithm is provided with feedback in the form of rewards which it tries to maximise <span class="citation" data-cites="ChristopherBishop06">(<a href="references.html#ref-ChristopherBishop06" role="doc-biblioref">Bishop 2006</a>)</span>. An example of this would be some of the software involved in self-driving cars.</p></li>
+<li><p>Reinforcement learning: the algorithm must achieve a goal while interacting with a dynamic environment. While navigating the environment, the algorithm is provided with feedback in the form of rewards which it tries to maximise <span class="citation" data-cites="ChristopherBishop06">(<a href="#ref-ChristopherBishop06" role="doc-biblioref">Bishop 2006</a>)</span>. An example of this would be some of the software involved in self-driving cars.</p></li>
 </ul>
 <p>In this chapter we will focus only on two ML techniques which are, however, very versatile since they can be used for classification, regression and other tasks. The first and most basic of the techniques that we will explore is <strong>decision trees</strong>. Building on these, we will then explore <strong>random forests</strong>. Both methods belong to the supervised learning approach. To illustrate the usage of these techniques within the context of population science, we will look at predicting the annual household income across the UK geography based on demographic data obtained from the census.</p>
 <p>This chapter is based, among others, on the following references:</p>
 <ul>
-<li><p>Hands-on Machine Learning with R. Chapter 9: Decision trees <span class="citation" data-cites="boemkhe2019">(<a href="references.html#ref-boemkhe2019" role="doc-biblioref">Boehmke 2019</a>)</span>.</p></li>
+<li><p>Hands-on Machine Learning with R. Chapter 9: Decision trees <span class="citation" data-cites="boemkhe2019">(<a href="#ref-boemkhe2019" role="doc-biblioref">Boehmke 2019</a>)</span>.</p></li>
 <li><p>UC Business Analytics R Programming Guide, developed by Brad Boehmke. Specifically, the chapters on Regression Trees &amp; Bagging and Random Forests, which can be found <a href="http://uc-r.github.io/predictive">here</a>.</p></li>
 </ul>
 <section id="dependencies" class="level2" data-number="10.1">
@@ -421,11 +411,7 @@ div.csl-indent {
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">52000</span>, <span class="fl">0.00006</span>, <span class="fu">c</span>(<span class="st">"test set"</span>,<span class="st">"training set"</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>This is due to the fact that the dataset that we loaded at the beginning of this workbook is sorted so that some entries corresponding to MSOAs that are geographically close to each other are in consecutive rows. Therefore, to ensure that the distribution of outputs in training and test sets is the same, the data needs to be randomly shuffled. The code below achieves this goal, as it can be seen in the kernel density plot with the new data split.</p>
@@ -449,11 +435,7 @@ div.csl-indent {
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">52000</span>, <span class="fl">0.00006</span>, <span class="fu">c</span>(<span class="st">"test set"</span>,<span class="st">"training set"</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Before proceeding any further we should note here that one of the advantages of decision trees and random forests is that they are not sensitive to the magnitude of the input variables, so standardisation is not needed before fitting these models. However, there are other ML algorithms such as k-means, where standardisation is a crucial step to ensure the success of learning process and it should always take place before training the algorithm. Similarly, random forests are not sensitive to correlations between independent variables, so there is no need to check for correlations before training the models.</p>
@@ -466,11 +448,11 @@ div.csl-indent {
 <p>In essence, a decision tree is like a flowchart that helps us make a decision based on a number of questions or conditions, which are represented by internal nodes. It starts with a root node and branches out into different paths, with each branch representing a decision. The final nodes represent the outcome and are known as leaf nodes. For example, imagine you are trying to decide what to wear to an event. You could create a decision tree with the root node being “Formal event?”, like in the diagram below. If the answer is “yes” you would proceed to the left and if the answer if “no”, you would proceed to the right. On the right, you would have another node for “Black tie?”, and again two “yes” and “no” branches emerging from it. On the left, you would have a node for “Everyday wear?” with its two branches. Each branch would eventually lead to a decision or action represented by the so-called leaf nodes, such as “wear suit”.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figs/chp10/Decision tree.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="470"></p>
+<p><img src="figs/chp10/Decision tree.jpg" class="img-fluid figure-img" width="470"></p>
 </figure>
 </div>
 <p>The decision tree to predict the annual household income of an MSOA based on its demographic features will be a lot more complex than the one depicted above. The branches will lead to leaf nodes representing the predicted values of annual household income. The internal nodes will represent conditions for the demographic variables (e.g.&nbsp;is the percentage of people aged 65 or over in this MSOA greater than <em>X</em> %?). Not all the demographic variables will be equally relevant to predict the annual household income at the MSOA level. To optimise the prediction process, conditions on the most relevant variables should be near the root of the tree so the most determining questions can be asked at the beginning of the decision-making process. The internal nodes that are further from the tree will help fine-tune the final predictions. But, how can we choose which are the most relevant variables? And, what are the right questions to ask in each internal node (e.g.&nbsp;if we are asking ‘is the percentage of people aged 65 or over in this MSOA greater than <em>X</em> %?’, what should be the value of <em>X</em> ?).</p>
-<p>Luckily, nowadays there are many off-the-shelf software packages available that can help us build decision trees with just a line of code. Here, we use the R package <code>rpart</code>, which is based on the Classification And Regression Tree (CART) algorithm proposed by Breiman <span class="citation" data-cites="breiman1984">(<a href="references.html#ref-breiman1984" role="doc-biblioref">Breiman 1984</a>)</span>. In particular, we can use the function <code>rpart()</code> to find the decision tree that best fits the training set. This function requires to use the formula method for expressing the model. In this case, the formula is <code>INCOME ~.</code>, which means that we regard the variable <code>INCOME</code> as a function of all the other variables in the training data set. For more information on the formula method, you can check the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/formula">R documentation</a>. The function <code>rpart()</code> also requires to specify the method for fitting. Since we are performing a regression task (as opposed to classification), we need to set method to <code>'anova'</code>.</p>
+<p>Luckily, nowadays there are many off-the-shelf software packages available that can help us build decision trees with just a line of code. Here, we use the R package <code>rpart</code>, which is based on the Classification And Regression Tree (CART) algorithm proposed by Breiman <span class="citation" data-cites="breiman1984">(<a href="#ref-breiman1984" role="doc-biblioref">Breiman 1984</a>)</span>. In particular, we can use the function <code>rpart()</code> to find the decision tree that best fits the training set. This function requires to use the formula method for expressing the model. In this case, the formula is <code>INCOME ~.</code>, which means that we regard the variable <code>INCOME</code> as a function of all the other variables in the training data set. For more information on the formula method, you can check the <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/formula">R documentation</a>. The function <code>rpart()</code> also requires to specify the method for fitting. Since we are performing a regression task (as opposed to classification), we need to set method to <code>'anova'</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">rpart</span>(INCOME <span class="sc">~</span>., <span class="at">data =</span> df_train, <span class="at">method =</span> <span class="st">'anova'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -478,11 +460,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>As we can see, <code>rpart()</code> produces a decision tree with 11 leaf nodes and the conditions to reach each leaf are associated with only 8 demographic variables. However, in the original training set, there were many more demographic variables that have not been included in the model. The reason for this is that, behind the scenes, <code>rpart()</code> is trying to find a balance between the complexity of the tree (i.e.&nbsp;its depth) and the generalisability of the tree to predict new unseen data. If it is too deep, the tree runs the risk of overfitting the training data and failing to predict the annual household income for other MSOAs that are not included in the training set.</p>
@@ -497,11 +475,7 @@ div.csl-indent {
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># draw vertical line at 11 trees</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">11</span>, <span class="at">lty=</span><span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>As we can see from the plot above, with more than 11 leaves, little reduction in the prediction error is achieved as the model becomes more and more complex. In other words, we start seeing diminishing returns in error reduction as the tree grows deeper. Hence <code>rpart()</code> is doing some behind-the-scenes tuning by pruning the tree so it only has 11 leaf nodes.</p>
@@ -523,14 +497,14 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, df_test<span class="sc">$</span>INCOME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4855.626</code></pre>
+<pre><code>[1] 4731.838</code></pre>
 </div>
 </div>
 <p>This value does not have much meaning in isolation. A good or bad RMSE is always relative to the specific data set. For this reason, we need to establish a baseline RMSE that we can compare it with. Here we establish this baseline as the RMSE that would be obtained from a naive tree that merely predicts the mean annual household income value across all the data entries in the training set. If the fitted model achieves an RSME lower than the naive model, we say that the fitted model “has skill”. The following line of code confirms that our fitted model is better than the naive model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, <span class="fu">mean</span>(df_train<span class="sc">$</span>INCOME))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5196.256</code></pre>
+<pre><code>[1] 5283.385</code></pre>
 </div>
 </div>
 </section>
@@ -562,11 +536,11 @@ div.csl-indent {
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 4461, 4461, 4459, 4462, 4460, 4461, ... 
+Summary of sample sizes: 4460, 4459, 4462, 4462, 4460, 4461, ... 
 Resampling results:
 
-  RMSE     Rsquared   MAE    
-  4094.84  0.6672087  3075.07</code></pre>
+  RMSE      Rsquared   MAE     
+  4195.742  0.6564717  3137.384</code></pre>
 </div>
 </div>
 <p>We see that the cross-validated value of RMSE with bagging is lower than that associated with the single decision tree that we trained with <code>rcart</code>. This indicates that the predictive performance is estimated to be better. We can compare the cross-validated value of the RMSE with the RMSE from the test set. These two quantities should be close:</p>
@@ -574,18 +548,14 @@ Resampling results:
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>predict_bagged_unseen <span class="ot">&lt;-</span> <span class="fu">predict</span>(bagged, df_test)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_bagged_unseen, df_test<span class="sc">$</span>INCOME)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4371.322</code></pre>
+<pre><code>[1] 4185.516</code></pre>
 </div>
 </div>
 <p>The library <code>caret</code> has an additional function <code>varImp()</code> that helps us understand the variable importance across the bagged trees, i.e.&nbsp;the variables that are most relevant to determine the predictions of MSOA net annual household income. You are welcome to check the <code>caret</code> documentation to learn more about how the variable importance is determined. We can plot a rank of variable importance by running the code below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">varImp</span>(bagged), <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>As noted before, given the variables included in our original data set, the percentage of people born in Antarctica, Oceania and Other is, almost invariably, the best predictor of annual household income, although due to the randomness introduced in bagging, this could sometimes change.</p>
@@ -617,33 +587,29 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 16
 
-          Mean of squared residuals: 9777006
-                    % Var explained: 79.97</code></pre>
+          Mean of squared residuals: 10263947
+                    % Var explained: 79.46</code></pre>
 </div>
 </div>
 <p>As we can see from above, the mean of squared residuals, which is the same as the MSE, is 9903736 for 500 trees and therefore, RMSE = 3147. This metric is computed by averaging residuals from the OOB samples. To illustrate how the MSE varies as more bootstrap samples are added to the model, we can plot the fitted model:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit_rf, <span class="at">main =</span> <span class="st">"Errors vs no. of trees"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We see that the MSE becomes stable with approximately 100 trees, but it continues to decrease slowly. To find the number of trees that lead to the minimum error, we can run the following line:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 498</code></pre>
+<pre><code>[1] 482</code></pre>
 </div>
 </div>
 <p>By computing the RMSE, we can compare the performance of this model with performance of the models in the previous sections:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(fit_rf<span class="sc">$</span>mse[<span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3126.705</code></pre>
+<pre><code>[1] 3202.813</code></pre>
 </div>
 </div>
 <p>This is a much lower value than what we obtained with just a single tree and even after applying bagging! Remember, this RMSE is based on the OOB samples, but we could also obtain it from the test set. <code>randomForest()</code> allows us to easily compare the RMSE obtained from OOB data and from the test set.</p>
@@ -667,11 +633,7 @@ No. of variables tried at each split: 16
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, test_rmse, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">'red'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="dv">350</span>, <span class="dv">4500</span>, <span class="fu">c</span>(<span class="st">"OOB"</span>,<span class="st">"test"</span>), <span class="at">lwd=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="machine-learning_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="machine-learning_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -715,19 +677,13 @@ No. of variables tried at each split: 16
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add OOB error to grid</span></span>
 <span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  hyper_grid<span class="sc">$</span>OOB_RMSE[i] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(fit_rf_tuning<span class="sc">$</span>prediction.error)</span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Growing trees.. Progress: 6%. Estimated remaining time: 9 minutes, 28 seconds.
-Growing trees.. Progress: 41%. Estimated remaining time: 43 seconds.
-Growing trees.. Progress: 39%. Estimated remaining time: 49 seconds.
-Growing trees.. Progress: 53%. Estimated remaining time: 27 seconds.</code></pre>
-</div>
 </div>
 <p>From the fitted models, the one that produces the minimum OOB RMSE and hence, the best-performing one, is given by the combination of parameters printed below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>hyper_grid[<span class="fu">which.min</span>(hyper_grid<span class="sc">$</span>OOB_RMSE),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hyper_grid[<span class="fu">which.min</span>(hyper_grid<span class="sc">$</span>OOB_RMSE),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   mtry sample.fraction min.node.size OOB_RMSE
-21   14            0.75             3 3124.939</code></pre>
+28   16             0.8             3 3203.368</code></pre>
 </div>
 </div>
 <p><code>mtry</code>= 14, <code>sample.fraction</code> =0.8 and <code>min.node.size</code>=3. The OOB RMSE is 3141.089, slightly lower than the error we obtained with the default model for random forest with no tuning, yay!</p>
@@ -737,14 +693,14 @@ Growing trees.. Progress: 53%. Estimated remaining time: 27 seconds.</code></pre
 <h2 data-number="10.6" class="anchored" data-anchor-id="questions"><span class="header-section-number">10.6</span> Questions</h2>
 <p>For this set of questions, you will use a data set very similar to the one used in the examples above. However, instead of focusing on predicting the net annual household income, you will focus in the median house price paid in each MSOA in 2021. The raw data for median house price can be downloaded <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/hpssadataset2medianhousepricebymsoaquarterlyrollingyear">here</a>, but we have created a clean dataset for you. You can load the relevant data set by running the code below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-houseprice.csv"</span>)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning, remove the X field</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>df_housing<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning, the fields "date", "geography" and "geography.code" are not needed</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_housing, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(date, geography, geography.code))</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># More data cleaning, remove comma from income and turn it into a numeric value</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>df_housing<span class="sc">$</span>HOUSEPRICE <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, df_housing<span class="sc">$</span>HOUSEPRICE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-houseprice.csv"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning, remove the X field</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>df_housing<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning, the fields "date", "geography" and "geography.code" are not needed</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">subset</span>(df_housing, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(date, geography, geography.code))</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># More data cleaning, remove comma from income and turn it into a numeric value</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>df_housing<span class="sc">$</span>HOUSEPRICE <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, df_housing<span class="sc">$</span>HOUSEPRICE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For the following questions, you will use the whole dataset for training and evaluate the performance of the ML models via the OOB error.</p>
 <ol type="1">
@@ -755,7 +711,7 @@ Growing trees.. Progress: 53%. Estimated remaining time: 27 seconds.</code></pre
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-ChristopherBishop06" class="csl-entry" role="listitem">
 Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. Information Science and Statistics. New York: Springer.
 </div>
@@ -848,9 +804,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -860,17 +817,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -883,125 +831,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1045,7 +874,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1071,32 +899,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1158,12 +960,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./longitudinal-2.html" class="pagination-link  aria-label=" &lt;span="" interventions&lt;="" span&gt;"="">
+      <a href="./longitudinal-2.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Assessing Interventions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data-sets.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Data sets</span>">
+      <a href="./data-sets.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data sets</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1171,18 +973,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>Population Science was written by Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani.</p>
-</div>   
+    <div class="nav-footer-left">Population Science was written by Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani.</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/fcorowe/r4ps/edit/main/machine-learning.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
-    <div class="nav-footer-right">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
-</div>
+    </div>
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>
-
 
 
 

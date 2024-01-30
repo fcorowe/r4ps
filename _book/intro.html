@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -364,37 +364,57 @@ div.csl-indent {
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="list-of-libraries"><span class="header-section-number">1.4.1</span> List of libraries</h3>
 <p>The list of libraries used in this book is provided below:</p>
 <ul>
-<li><code>tidyverse</code></li>
-<li><code>viridis</code></li>
-<li><code>viridisLite</code></li>
-<li><code>ggthemes</code></li>
-<li><code>patchwork</code></li>
-<li><code>showtext</code></li>
-<li><code>RColorBrewer</code></li>
-<li><code>lubridate</code></li>
-<li><code>tmap</code></li>
-<li><code>sjPlot</code></li>
-<li><code>sf</code></li>
-<li><code>sp</code></li>
-<li><code>kableExtra</code></li>
-<li><code>ggcorrplot</code></li>
-<li><code>plotrix</code></li>
-<li><code>cluster</code></li>
-<li><code>factoextra</code></li>
-<li><code>igraph</code></li>
-<li><code>stringr</code></li>
-<li><code>rpart</code></li>
-<li><code>rpart.plot</code></li>
-<li><code>ggplot2</code></li>
-<li><code>Metrics</code></li>
-<li><code>caret</code></li>
-<li><code>randomForest</code></li>
-<li><code>ranger</code></li>
+<li>“tidyverse”,</li>
+<li>“viridis”</li>
+<li>“viridisLite”</li>
+<li>“ggthemes”</li>
+<li>“patchwork”</li>
+<li>“showtext”</li>
+<li>“RColorBrewer”</li>
+<li>“lubridate”</li>
+<li>“tmap”</li>
+<li>“sjPlot”</li>
+<li>“sf”</li>
+<li>“sp”</li>
+<li>“kableExtra”</li>
+<li>“ggcorrplot”</li>
+<li>“plotrix”</li>
+<li>“cluster”</li>
+<li>“factoextra”</li>
+<li>“igraph”</li>
+<li>“stringr”</li>
+<li>“rpart”</li>
+<li>“rpart.plot”</li>
+<li>“ggplot2”</li>
+<li>“Metrics”</li>
+<li>“caret”</li>
+<li>“randomForest”</li>
+<li>“ranger”</li>
+<li>“wpgpDownloadR”</li>
+<li>“devtools”</li>
+<li>“ggseqplot”</li>
+<li>“tidytext”</li>
+<li>“tm”</li>
+<li>“textdata”</li>
+<li>“topicmodels”</li>
+<li>“RedditExtractoR”</li>
+<li>“stm”</li>
+<li>“dygraphs”</li>
+<li>“plotly”</li>
+<li>“ggpmisc”</li>
+<li>“ggformula”</li>
+<li>“ggimage”</li>
+<li>“modelsummary”</li>
+<li>“gtools”</li>
+<li>“webshot”</li>
+<li>“gridExtra”</li>
+<li>“broom”</li>
+<li>“rtweet”</li>
 </ul>
 <p>You need to ensure you have installed the list of libraries used in this book, running the following code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># package names</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"tidyverse"</span>, <span class="st">"viridis"</span>, <span class="st">"viridisLite"</span>, <span class="st">"ggthemes"</span>, <span class="st">"patchwork"</span>, <span class="st">"showtext"</span>, <span class="st">"RColorBrewer"</span>, <span class="st">"lubridate"</span>, <span class="st">"tmap"</span>, <span class="st">"sjPlot"</span>, <span class="st">"sf"</span>, <span class="st">"sp"</span>, <span class="st">"kableExtra"</span>, <span class="st">"ggcorrplot"</span>, <span class="st">"plotrix"</span>, <span class="st">"cluster"</span>, <span class="st">"factoextra"</span>, <span class="st">"igraph"</span>, <span class="st">"stringr"</span>, <span class="st">"rpart"</span>, <span class="st">"rpart.plot"</span>, <span class="st">"ggplot2"</span>, <span class="st">"Metrics"</span>, <span class="st">"caret"</span>, <span class="st">"randomForest"</span>, <span class="st">"ranger"</span>, <span class="st">"wpgpDownloadR"</span>, <span class="st">"devtools"</span>, <span class="st">"ggseqplot"</span>, <span class="st">"tidytext"</span>, <span class="st">"tm"</span>, <span class="st">"textdata"</span>, <span class="st">"topicmodels"</span>, <span class="st">"RedditExtractoR"</span>, <span class="st">"stm"</span>, <span class="st">"dygraphs"</span>, <span class="st">"plotly"</span>, <span class="st">"ggpmisc"</span>, <span class="st">"ggformula"</span>, <span class="st">"ggimage"</span>, <span class="st">"modelsummary"</span>, <span class="st">"gtools"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"tidyverse"</span>, <span class="st">"viridis"</span>, <span class="st">"viridisLite"</span>, <span class="st">"ggthemes"</span>, <span class="st">"patchwork"</span>, <span class="st">"showtext"</span>, <span class="st">"RColorBrewer"</span>, <span class="st">"lubridate"</span>, <span class="st">"tmap"</span>, <span class="st">"sjPlot"</span>, <span class="st">"sf"</span>, <span class="st">"sp"</span>, <span class="st">"kableExtra"</span>, <span class="st">"ggcorrplot"</span>, <span class="st">"plotrix"</span>, <span class="st">"cluster"</span>, <span class="st">"factoextra"</span>, <span class="st">"igraph"</span>, <span class="st">"stringr"</span>, <span class="st">"rpart"</span>, <span class="st">"rpart.plot"</span>, <span class="st">"ggplot2"</span>, <span class="st">"Metrics"</span>, <span class="st">"caret"</span>, <span class="st">"randomForest"</span>, <span class="st">"ranger"</span>, <span class="st">"devtools"</span>, <span class="st">"vader"</span>, <span class="st">"wpgpDownloadR"</span>, <span class="st">"ggseqplot"</span>, <span class="st">"tidytext"</span>, <span class="st">"tm"</span>, <span class="st">"textdata"</span>, <span class="st">"topicmodels"</span>, <span class="st">"RedditExtractoR"</span>, <span class="st">"stm"</span>, <span class="st">"dygraphs"</span>, <span class="st">"plotly"</span>, <span class="st">"ggpmisc"</span>, <span class="st">"ggformula"</span>, <span class="st">"ggimage"</span>, <span class="st">"modelsummary"</span>, <span class="st">"gtools"</span>, <span class="st">"gridExtra"</span>, <span class="st">"broom"</span>, <span class="st">"rtweet"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages not yet installed</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> packages <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())</span>

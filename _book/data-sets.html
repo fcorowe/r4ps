@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -282,27 +282,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#source-pre-processing-2" id="toc-source-pre-processing-2" class="nav-link" data-scroll-target="#source-pre-processing-2">Source &amp; pre-processing</a></li>
   </ul></li>
   <li><a href="#twitter-data-on-public-opinion-originated-in-the-us-and-in-the-uk" id="toc-twitter-data-on-public-opinion-originated-in-the-us-and-in-the-uk" class="nav-link" data-scroll-target="#twitter-data-on-public-opinion-originated-in-the-us-and-in-the-uk"><span class="header-section-number">11.7</span> Twitter data on public opinion originated in the US and in the UK</a></li>
-  <li><a href="#reddit-data" id="toc-reddit-data" class="nav-link" data-scroll-target="#reddit-data"><span class="header-section-number">11.8</span> Reddit data</a>
-  <ul class="collapse">
-  <li><a href="#availability-3" id="toc-availability-3" class="nav-link" data-scroll-target="#availability-3"><span class="header-section-number">11.8.1</span> Availability</a></li>
-  <li><a href="#variables-3" id="toc-variables-3" class="nav-link" data-scroll-target="#variables-3"><span class="header-section-number">11.8.2</span> Variables</a></li>
-  <li><a href="#source-pre-processing-3" id="toc-source-pre-processing-3" class="nav-link" data-scroll-target="#source-pre-processing-3"><span class="header-section-number">11.8.3</span> Source &amp; Pre-processing</a></li>
-  </ul></li>
-  <li><a href="#google-mobility-data-for-italy-and-the-uk" id="toc-google-mobility-data-for-italy-and-the-uk" class="nav-link" data-scroll-target="#google-mobility-data-for-italy-and-the-uk"><span class="header-section-number">11.9</span> Google mobility data for Italy and the UK</a>
-  <ul class="collapse">
-  <li><a href="#availability-4" id="toc-availability-4" class="nav-link" data-scroll-target="#availability-4"><span class="header-section-number">11.9.1</span> Availability</a></li>
-  <li><a href="#variables-4" id="toc-variables-4" class="nav-link" data-scroll-target="#variables-4"><span class="header-section-number">11.9.2</span> Variables</a></li>
-  </ul></li>
-  <li><a href="#covid-19-cases-data-for-london-and-rome" id="toc-covid-19-cases-data-for-london-and-rome" class="nav-link" data-scroll-target="#covid-19-cases-data-for-london-and-rome"><span class="header-section-number">11.10</span> COVID-19 cases data for London and Rome</a>
-  <ul class="collapse">
-  <li><a href="#availability-5" id="toc-availability-5" class="nav-link" data-scroll-target="#availability-5"><span class="header-section-number">11.10.1</span> Availability</a></li>
-  <li><a href="#variables-5" id="toc-variables-5" class="nav-link" data-scroll-target="#variables-5"><span class="header-section-number">11.10.2</span> Variables</a></li>
-  </ul></li>
+  <li><a href="#reddit-data" id="toc-reddit-data" class="nav-link" data-scroll-target="#reddit-data"><span class="header-section-number">11.8</span> Reddit data</a></li>
+  <li><a href="#google-mobility-data-for-italy-and-the-uk" id="toc-google-mobility-data-for-italy-and-the-uk" class="nav-link" data-scroll-target="#google-mobility-data-for-italy-and-the-uk"><span class="header-section-number">11.9</span> Google mobility data for Italy and the UK</a></li>
+  <li><a href="#covid-19-cases-data-for-london-and-rome" id="toc-covid-19-cases-data-for-london-and-rome" class="nav-link" data-scroll-target="#covid-19-cases-data-for-london-and-rome"><span class="header-section-number">11.10</span> COVID-19 cases data for London and Rome</a></li>
   <li><a href="#census-msoa-data-for-england-and-wales" id="toc-census-msoa-data-for-england-and-wales" class="nav-link" data-scroll-target="#census-msoa-data-for-england-and-wales"><span class="header-section-number">11.11</span> Census MSOA data for England and Wales</a>
   <ul class="collapse">
-  <li><a href="#availability-6" id="toc-availability-6" class="nav-link" data-scroll-target="#availability-6">Availability</a></li>
-  <li><a href="#variables-6" id="toc-variables-6" class="nav-link" data-scroll-target="#variables-6">Variables</a></li>
-  <li><a href="#source-pre-processing-4" id="toc-source-pre-processing-4" class="nav-link" data-scroll-target="#source-pre-processing-4">Source &amp; pre-processing</a></li>
+  <li><a href="#availability-3" id="toc-availability-3" class="nav-link" data-scroll-target="#availability-3">Availability</a></li>
+  <li><a href="#variables-3" id="toc-variables-3" class="nav-link" data-scroll-target="#variables-3">Variables</a></li>
+  <li><a href="#source-pre-processing-3" id="toc-source-pre-processing-3" class="nav-link" data-scroll-target="#source-pre-processing-3">Source &amp; pre-processing</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fcorowe/r4ps/edit/main/data-sets.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -340,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/geodemographics/manchester_land_cover_2011.gpkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `manchester_land_cover_2011' from data source 
-  `/Users/PIETROST/Library/CloudStorage/Dropbox/GitHub/r4ps/data/geodemographics/manchester_land_cover_2011.gpkg' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202324/r4ps/data/geodemographics/manchester_land_cover_2011.gpkg' 
   using driver `GPKG'
 Simple feature collection with 1673 features and 44 fields
 Geometry type: MULTIPOLYGON
@@ -368,7 +355,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>st_LSOA <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LSOA_2011_London_gen_MHW' from data source 
-  `/Users/PIETROST/Library/CloudStorage/Dropbox/GitHub/r4ps/data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202324/r4ps/data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 4835 features and 14 fields
 Geometry type: MULTIPOLYGON
@@ -382,7 +369,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>LA_UK <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"./data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `LAD_DEC_2022_UK_BFC' from data source 
-  `/Users/PIETROST/Library/CloudStorage/Dropbox/GitHub/r4ps/data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp' 
+  `/Users/franciscorowe/Dropbox/Francisco/uol/teaching/envs418/202324/r4ps/data/networks/Local_Authority_Districts_(December_2022)_Boundaries_UK_BFC/LAD_DEC_2022_UK_BFC.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 374 features and 10 fields
 Geometry type: MULTIPOLYGON
@@ -621,267 +608,31 @@ PROJCRS["OSGB36 / British National Grid",
 </section>
 <section id="reddit-data" class="level2" data-number="11.8">
 <h2 data-number="11.8" class="anchored" data-anchor-id="reddit-data"><span class="header-section-number">11.8</span> Reddit data</h2>
-<section id="availability-3" class="level3" data-number="11.8.1">
-<h3 data-number="11.8.1" class="anchored" data-anchor-id="availability-3"><span class="header-section-number">11.8.1</span> Availability</h3>
-<p>Reddit is a social news website where you can find posts about almost anything. Reddit also has a plug-n-play R package which makes is very easy to get Reddit data via API. Everyone can source their own Reddit data. The data used on fertility rates during the pandemic can be accessed through the following code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/topic-modelling/comments.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="variables-3" class="level3" data-number="11.8.2">
-<h3 data-number="11.8.2" class="anchored" data-anchor-id="variables-3"><span class="header-section-number">11.8.2</span> Variables</h3>
-<p>For each of the 78,065 comments from Reddit, the following fields are available:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(comments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "url"        "author"     "date"       "timestamp"  "score"     
- [6] "upvotes"    "downvotes"  "golds"      "comment"    "comment_id"</code></pre>
-</div>
-</div>
-</section>
-<section id="source-pre-processing-3" class="level3" data-number="11.8.3">
-<h3 data-number="11.8.3" class="anchored" data-anchor-id="source-pre-processing-3"><span class="header-section-number">11.8.3</span> Source &amp; Pre-processing</h3>
-<p>More information on Reddit data and the Reedit API can be found <a href="https://rpubs.com/mswofford/redditAPI">here</a>. Some considerable pre-processing needs to happen to create a Corpus style object using <code>tidytext</code> as shown in <a href="https://www.population-science.net/topic-modelling">Chapter 7</a>. Sme insights on using Reddit data for research <a href="https://journals.sagepub.com/doi/10.1177/20563051211019004">here</a>.</p>
-</section>
 </section>
 <section id="google-mobility-data-for-italy-and-the-uk" class="level2" data-number="11.9">
 <h2 data-number="11.9" class="anchored" data-anchor-id="google-mobility-data-for-italy-and-the-uk"><span class="header-section-number">11.9</span> Google mobility data for Italy and the UK</h2>
-<section id="availability-4" class="level3" data-number="11.9.1">
-<h3 data-number="11.9.1" class="anchored" data-anchor-id="availability-4"><span class="header-section-number">11.9.1</span> Availability</h3>
-<p><a href="https://www.google.com/covid19/mobility/">COVID-19 community mobility reports</a> area all freely accessible online.</p>
-<p>To access mobility reports for Italy directly, you can the load the following:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mobility_it <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2022_IT_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>To access mobility reports for the UK directly, you can the load the following:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The datasets for the geographic boundaries can be load the following for Italy:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>italy_iso3166 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/longitudinal-1/italy_projected_simplified.geojson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `italy_projected_simplified' from data source 
-  `/Users/PIETROST/Library/CloudStorage/Dropbox/GitHub/r4ps/data/longitudinal-1/italy_projected_simplified.geojson' 
-  using driver `GeoJSON'
-Simple feature collection with 124 features and 4 fields
-Geometry type: MULTIPOLYGON
-Dimension:     XY
-Bounding box:  xmin: 1313364 ymin: 3933695 xmax: 2312062 ymax: 5220353
-Projected CRS: Monte Mario / Italy zone 1</code></pre>
-</div>
-</div>
-<p>With the following CRS:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(italy_iso3166)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Coordinate Reference System:
-  User input: Monte Mario / Italy zone 1 
-  wkt:
-PROJCRS["Monte Mario / Italy zone 1",
-    BASEGEOGCRS["Monte Mario",
-        DATUM["Monte Mario",
-            ELLIPSOID["International 1924",6378388,297,
-                LENGTHUNIT["metre",1]]],
-        PRIMEM["Greenwich",0,
-            ANGLEUNIT["degree",0.0174532925199433]],
-        ID["EPSG",4265]],
-    CONVERSION["Italy zone 1",
-        METHOD["Transverse Mercator",
-            ID["EPSG",9807]],
-        PARAMETER["Latitude of natural origin",0,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8801]],
-        PARAMETER["Longitude of natural origin",9,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8802]],
-        PARAMETER["Scale factor at natural origin",0.9996,
-            SCALEUNIT["unity",1],
-            ID["EPSG",8805]],
-        PARAMETER["False easting",1500000,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8806]],
-        PARAMETER["False northing",0,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8807]]],
-    CS[Cartesian,2],
-        AXIS["easting (X)",east,
-            ORDER[1],
-            LENGTHUNIT["metre",1]],
-        AXIS["northing (Y)",north,
-            ORDER[2],
-            LENGTHUNIT["metre",1]],
-    USAGE[
-        SCOPE["Engineering survey, topographic mapping."],
-        AREA["Italy - onshore and offshore - west of 12°E."],
-        BBOX[36.53,5.93,47.04,12]],
-    ID["EPSG",3003]]</code></pre>
-</div>
-</div>
-<p>and this for the UK</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>uk_iso3166 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/longitudinal-1/uk_projected_simplified.geojson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `uk_projected_simplified' from data source 
-  `/Users/PIETROST/Library/CloudStorage/Dropbox/GitHub/r4ps/data/longitudinal-1/uk_projected_simplified.geojson' 
-  using driver `GeoJSON'
-Simple feature collection with 245 features and 4 fields (with 16 geometries empty)
-Geometry type: MULTIPOLYGON
-Dimension:     XY
-Bounding box:  xmin: -50462.93 ymin: 5270.466 xmax: 655975.3 ymax: 1219809
-Projected CRS: OSGB36 / British National Grid</code></pre>
-</div>
-</div>
-<p>With the following CRS:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(uk_iso3166)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Coordinate Reference System:
-  User input: OSGB36 / British National Grid 
-  wkt:
-PROJCRS["OSGB36 / British National Grid",
-    BASEGEOGCRS["OSGB36",
-        DATUM["Ordnance Survey of Great Britain 1936",
-            ELLIPSOID["Airy 1830",6377563.396,299.3249646,
-                LENGTHUNIT["metre",1]]],
-        PRIMEM["Greenwich",0,
-            ANGLEUNIT["degree",0.0174532925199433]],
-        ID["EPSG",4277]],
-    CONVERSION["British National Grid",
-        METHOD["Transverse Mercator",
-            ID["EPSG",9807]],
-        PARAMETER["Latitude of natural origin",49,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8801]],
-        PARAMETER["Longitude of natural origin",-2,
-            ANGLEUNIT["degree",0.0174532925199433],
-            ID["EPSG",8802]],
-        PARAMETER["Scale factor at natural origin",0.9996012717,
-            SCALEUNIT["unity",1],
-            ID["EPSG",8805]],
-        PARAMETER["False easting",400000,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8806]],
-        PARAMETER["False northing",-100000,
-            LENGTHUNIT["metre",1],
-            ID["EPSG",8807]]],
-    CS[Cartesian,2],
-        AXIS["(E)",east,
-            ORDER[1],
-            LENGTHUNIT["metre",1]],
-        AXIS["(N)",north,
-            ORDER[2],
-            LENGTHUNIT["metre",1]],
-    USAGE[
-        SCOPE["Engineering survey, topographic mapping."],
-        AREA["United Kingdom (UK) - offshore to boundary of UKCS within 49°45'N to 61°N and 9°W to 2°E; onshore Great Britain (England, Wales and Scotland). Isle of Man onshore."],
-        BBOX[49.75,-9,61.01,2.01]],
-    ID["EPSG",27700]]</code></pre>
-</div>
-</div>
-</section>
-<section id="variables-4" class="level3" data-number="11.9.2">
-<h3 data-number="11.9.2" class="anchored" data-anchor-id="variables-4"><span class="header-section-number">11.9.2</span> Variables</h3>
-<p>The following variables are available.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mobility_it)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "country_region_code"                               
- [2] "country_region"                                    
- [3] "sub_region_1"                                      
- [4] "sub_region_2"                                      
- [5] "metro_area"                                        
- [6] "iso_3166_2_code"                                   
- [7] "census_fips_code"                                  
- [8] "place_id"                                          
- [9] "date"                                              
-[10] "retail_and_recreation_percent_change_from_baseline"
-[11] "grocery_and_pharmacy_percent_change_from_baseline" 
-[12] "parks_percent_change_from_baseline"                
-[13] "transit_stations_percent_change_from_baseline"     
-[14] "workplaces_percent_change_from_baseline"           
-[15] "residential_percent_change_from_baseline"          </code></pre>
-</div>
-</div>
-<ul>
-<li><strong>Grocery &amp; pharmacy</strong> - Mobility trends for places like grocery markets, food warehouses, farmers markets, specialty food shops, drug stores, and pharmacies.</li>
-<li><strong>Parks Mobility</strong> - trends for places like local parks, national parks, public beaches, marinas, dog parks, plazas, and public gardens.</li>
-<li><strong>Transit stations</strong> - Mobility trends for places like public transport hubs such as subway, bus, and train stations.</li>
-<li><strong>Retail &amp; recreation</strong> - Mobility trends for places like restaurants, cafes, shopping centers, theme parks, museums, libraries, and movie theaters.</li>
-<li><strong>Residential Mobility</strong> - trends for places of residence.</li>
-<li><strong>Workplaces Mobility</strong> - trends for places of work.</li>
-</ul>
-</section>
 </section>
 <section id="covid-19-cases-data-for-london-and-rome" class="level2" data-number="11.10">
 <h2 data-number="11.10" class="anchored" data-anchor-id="covid-19-cases-data-for-london-and-rome"><span class="header-section-number">11.10</span> COVID-19 cases data for London and Rome</h2>
-<section id="availability-5" class="level3" data-number="11.10.1">
-<h3 data-number="11.10.1" class="anchored" data-anchor-id="availability-5"><span class="header-section-number">11.10.1</span> Availability</h3>
-<p>COVID-19 case data can be downloaded for the UK through the <a href="https://coronavirus.data.gov.uk/details/download">corovirus data portal</a>.</p>
-<p>Data for London was pre-prepared for the book and can be accessed here:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>covid_cases_london <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-2/covid_cases_london.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>COVID-19 case data can be downloaded for the Italy through the Presidenza del Consiglio dei Ministri - Dipartimento della Protezione Civile <a href="https://github.com/pcm-dpc/COVID-19/tree/master/dati-province">github</a>.</p>
-<p>Data for the Lazio region was pre-prepared for the book and can be accessed here:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>covid_cases_lazio <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-2/covid_cases_lazio.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="variables-5" class="level3" data-number="11.10.2">
-<h3 data-number="11.10.2" class="anchored" data-anchor-id="variables-5"><span class="header-section-number">11.10.2</span> Variables</h3>
-<p>For each of the 34,229 observations in the London datasets, the following characteristics are available.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(covid_cases_london)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "areaType"                       "areaName"                      
- [3] "areaCode"                       "date"                          
- [5] "newCasesBySpecimenDate"         "cumCasesBySpecimenDate"        
- [7] "newFirstEpisodesBySpecimenDate" "cumFirstEpisodesBySpecimenDate"
- [9] "newReinfectionsBySpecimenDate"  "cumReinfectionsBySpecimenDate" </code></pre>
-</div>
-</div>
-<p>We consider <code>cumCasesBySpecimenDate</code> the cumulative cases equivalent to the total cases present in the Italian data.</p>
-<p>For each of the 15,793 observations in the Lazio datasets, the following characteristics are available.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(covid_cases_lazio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "data"                    "stato"                  
- [3] "codice_regione"          "denominazione_regione"  
- [5] "codice_provincia"        "denominazione_provincia"
- [7] "sigla_provincia"         "lat"                    
- [9] "long"                    "totale_casi"            </code></pre>
-</div>
-</div>
-<ul>
-<li><strong>data</strong> - Date and time</li>
-<li><strong>stato</strong> - Country</li>
-<li><strong>codice_regione</strong> - Regional Code</li>
-<li><strong>denominazione_regione</strong> - Region</li>
-<li><strong>codice_provincia</strong> - Provincial Code</li>
-<li><strong>denominazione_provincia</strong> - Province (sub-region)</li>
-<li><strong>totale_casi</strong> - Total number of cases</li>
-</ul>
-</section>
 </section>
 <section id="census-msoa-data-for-england-and-wales" class="level2" data-number="11.11">
 <h2 data-number="11.11" class="anchored" data-anchor-id="census-msoa-data-for-england-and-wales"><span class="header-section-number">11.11</span> Census MSOA data for England and Wales</h2>
-<section id="availability-6" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="availability-6">Availability</h3>
+<section id="availability-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="availability-3">Availability</h3>
 <p>The dataset for the demographic census data of each MSOA in England and Wales can be loaded as a csv file from:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df_MSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-income.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_MSOA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-income.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A very similar dataset for the demographic census data of each MSOA in England and Wales which also contains data on the median house price can be loaded as a csv file from:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-houseprice.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_housing <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/census2021-msoa-houseprice.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="variables-6" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="variables-6">Variables</h3>
+<section id="variables-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="variables-3">Variables</h3>
 <p>For each of the 7,080 MSOAs recorded in England and Wales, the following fields are available:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_MSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df_MSOA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "X"                "date"             "geography"        "geography.code"  
  [5] "inHH"             "inCE"             "SING"             "MARRIED"         
@@ -901,8 +652,8 @@ PROJCRS["OSGB36 / British National Grid",
 </div>
 <p>For a description of the variables in the columns of df_MSOA, we can load a dictionary for these variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/Dictionary.csv"</span>)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/machine-learning/Dictionary.csv"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                      Dictionary       X
 1                                                       
@@ -914,8 +665,8 @@ PROJCRS["OSGB36 / British National Grid",
 </div>
 </div>
 </section>
-<section id="source-pre-processing-4" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="source-pre-processing-4">Source &amp; pre-processing</h3>
+<section id="source-pre-processing-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="source-pre-processing-3">Source &amp; pre-processing</h3>
 <p>Data on the the census characteristics for different MSOAs can be downloaded from the <a href="https://www.nomisweb.co.uk/census/2021/bulk">Nomis website</a>. Data on the average net household income can be obtained from the <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/smallareaincomeestimatesformiddlelayersuperoutputareasenglandandwales">ONS website</a>.</p>
 <p>Data on the median houseprice for different MSOAs can be downloaded from the <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/housing/datasets/hpssadataset2medianhousepricebymsoaquarterlyrollingyear">ONS website</a>.</p>
 <p>All the data has been pre-processed on Microsoft Excel.</p>

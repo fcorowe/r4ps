@@ -312,7 +312,7 @@ div.csl-indent {
 </header>
 
 <p>Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. One of the ways to track the spread of the disease is through the collection and analysis of data on daily cases, which has become a crucial component of new digital footprint trends. Contact tracing apps and tools were developed and implemented in many countries to help track the spread of COVID-19.</p>
-<p>Data on daily cases can help us evaluate the effectiveness of policies implemented during the pandemic, such as lockdowns and other restrictions. By analyzing these data, policymakers and public health experts have gained insights into the impact of these policies on the spread of the disease <span class="citation" data-cites="goodman2020using">Brodeur et al. (<a href="#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="zhou2021varying">(<a href="#ref-zhou2021varying" role="doc-biblioref">Zhou and Kan 2021</a>)</span>. For instance, if daily cases decrease significantly during a lockdown, it could indicate that the policy was successful in controlling the spread of the disease.</p>
+<p>Data on daily cases can help us evaluate the effectiveness of policies implemented during the pandemic, such as lockdowns and other restrictions. By analyzing these data, policymakers and public health experts have gained insights into the impact of these policies on the spread of the disease <span class="citation" data-cites="goodman2020using">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="zhou2021varying">(<a href="references.html#ref-zhou2021varying" role="doc-biblioref">Zhou and Kan 2021</a>)</span>. For instance, if daily cases decrease significantly during a lockdown, it could indicate that the policy was successful in controlling the spread of the disease.</p>
 <p>Data on daily cases can also help policymakers to make informed decisions about when to implement or lift certain restrictions. For example, if daily cases start to rise again after a lifting of restrictions, it may indicate that it is too early to do so, and that more caution is necessary. In summary, data on daily cases was an essential tool for evaluating the effectiveness of policies implemented during the COVID-19 pandemic and making informed decisions about future policies. As we will see in this chapter, evaluating COVI9-19 policies based onn cases is, unfortunately not so simple.</p>
 <p>To assess government interventions during the pandemic, we will be using <strong>difference-in-differences</strong> (diff-n-diff), a widely-adopted quasi-experimental design, used to evaluate the effect of an intervention or exposure on an outcome of interest. This strategy involves comparing the change in the outcome before and after the intervention or exposure in the treated group, relative to the change in the outcome over the same time period in a control group. By doing so, diff-n-diff can help isolate the effect of the intervention or exposure from other factors that may be driving the outcome.</p>
 <p>This chapter is based on :</p>
@@ -705,7 +705,7 @@ div.csl-indent {
 </div>
 </div>
 <p>It is important for all diff-in-diff analyses to give careful attention to possible violations of the common trends assumption, especially considering the COVID-19 situation where many of these violations are likely to occur. Furthermore, due to the unique dynamics of COVID-19 such as lags between exposure and recorded infections, nonlinearities from person-to-person transmission, and the possibility of policies having differential effects over time, it further complicates the potential risks to the diff-in-diff research design.</p>
-<p><span class="citation" data-cites="goodman2020using">(<a href="#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span> comment on the following problems which can be consulted in their paper:</p>
+<p><span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span> comment on the following problems which can be consulted in their paper:</p>
 <ul>
 <li><p>Packaged Policies</p></li>
 <li><p>Reverse Causality</p></li>
@@ -714,7 +714,7 @@ div.csl-indent {
 <li><p>Anticipation Spillovers</p></li>
 <li><p>Variation in Policy Timing</p></li>
 </ul>
-<p><span class="citation" data-cites="goodman2020using">(<a href="#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span> also give great recommendations on how to address these problems, but this is far beyond the objective of this chapter.</p>
+<p><span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span> also give great recommendations on how to address these problems, but this is far beyond the objective of this chapter.</p>
 <p><strong>Difference-in-Difference with regression</strong></p>
 <p>Calculating all the pieces by hand like that is tedious, so we can use regression to do it instead! Remember that we need to include indicator variables for treatment/control and for before/after, as well as the interaction of the two.</p>
 <p>This is the equation:</p>
@@ -828,7 +828,7 @@ div.csl-indent {
 </section>
 <section id="questions" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="questions"><span class="header-section-number">9.5</span> Questions</h2>
-<p>For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>. You will need to do a bit of digging on when lockdowns or other COVID-19 related shock happened in 2021 to set up a diff-in-diff strategy. Have a look at <span class="citation" data-cites="brodeur2021covid">Brodeur et al. (<a href="#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.</p>
+<p>For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>. You will need to do a bit of digging on when lockdowns or other COVID-19 related shock happened in 2021 to set up a diff-in-diff strategy. Have a look at <span class="citation" data-cites="brodeur2021covid">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.</p>
 <p>Start by loading both the csv</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -842,7 +842,7 @@ div.csl-indent {
 <p>Analyse and discuss what insights you obtain into people’s changes in behaviors during the pandemic in responde to an intervention.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-brodeur2021covid" class="csl-entry" role="listitem">
 Brodeur, Abel, Andrew E Clark, Sarah Fleche, and Nattavudh Powdthavee. 2021. <span>“COVID-19, Lockdowns and Well-Being: Evidence from Google Trends.”</span> <em>Journal of Public Economics</em> 193: 104346.
 </div>

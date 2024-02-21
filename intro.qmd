@@ -105,6 +105,10 @@ The list of libraries used in this book is provided below:
 -   "gridExtra"
 -   "broom"
 -   "rtweet"
+-   "dplyr"
+-   "ggraph"
+-   "tidygraph"
+-   "ggspatial"
 
 You need to ensure you have installed the list of libraries used in this book, running the following code:
 
@@ -112,7 +116,7 @@ You need to ensure you have installed the list of libraries used in this book, r
 #| eval: false
 
 # package names
-packages <- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger", "devtools", "vader", "wpgpDownloadR", "ggseqplot", "tidytext", "tm", "textdata", "topicmodels", "RedditExtractoR", "stm", "dygraphs", "plotly", "ggpmisc", "ggformula", "ggimage", "modelsummary", "gtools", "gridExtra", "broom", "rtweet", "webshot")
+packages <- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger", "devtools", "vader", "wpgpDownloadR", "ggseqplot", "tidytext", "tm", "textdata", "topicmodels", "RedditExtractoR", "stm", "dygraphs", "plotly", "ggpmisc", "ggformula", "ggimage", "modelsummary", "gtools", "gridExtra", "broom", "rtweet", "webshot", "ggraph", "tidygraph", "ggspatial")
 
 # install packages not yet installed
 installed_packages <- packages %in% rownames(installed.packages())

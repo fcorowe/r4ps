@@ -110,6 +110,20 @@ The boundaries for the LADs for the UK can be found on the ONS Open Geography Po
 LND_boroughs <- LA_UK %>% filter(grepl('E09', LAD22CD)) 
 ```
 
+## Twitter migration data for the UK
+
+### Availability
+
+The dataset is stored on a gpkg file that can be found, within the structure of this project, under:
+
+```{r}
+st_LSOA <- st_read("./data/networks/internal_migration_uk.csv")
+```
+
+### Source and preprocessing
+
+The data was created for the paper [@Wang2022]. The paper includes details on the methodology.
+
 ## Worldpop population count data for Ukraine
 
 ## Census population count data for UK

@@ -72,7 +72,7 @@ TidyText: This is a novel approach developed by @silgerobison2022. The tidytext 
 ```{r}
 # converting to a tidytext data representation
 tidy_tweets_df <- tweets_df %>%
-    select(created_at, text) %>%
+    dplyr::select(created_at, text) %>%
     unnest_tokens("word", text)
 ```
 

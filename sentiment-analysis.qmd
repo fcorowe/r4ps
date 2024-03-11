@@ -65,9 +65,9 @@ String: Text can be stored as strings, i.e., character vectors, within R, and of
 
 Corpus: These types of objects typically contain raw strings annotated with additional metadata and details.
 
-Document-term matrix: This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count.
+Document-term matrix: This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically a word count.
 
-TidyText: This is a novel approach developed by @silgerobison2022. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. Tidy data has a specific structure. Each variable is a column. Each observation is a row and each type of observational unit is a table, The R `tidytext` package provides full functionality to implement the tidytext approach and manipulate text with the standard `tidyverse` ecosystem.
+TidyText: This is a novel approach developed by @silgerobison2022. The tidytext approach defines a representation in the form of a table with one-token-per-row. A token is a meaningful unit of text for analysis, such as a word, a sentence or a tweet. Tokenisation is the process of splitting text into tokens. Tidy data has a specific structure. Each variable is a column. Each observation is a row and each type of observational unit is a table. The R `tidytext` package provides full functionality to implement the tidytext approach and manipulate text with the standard `tidyverse` ecosystem.
 
 ```{r}
 # converting to a tidytext data representation

@@ -172,7 +172,7 @@ tidy_fertility_reddit_clean %>%
   geom_bar( position="stack", 
             stat = "identity"
             ) +
-  theme_tufte2() +
+  theme_tufte() +
   scale_fill_gradient(low = "white", 
                       high = "darkblue") +
   theme(axis.text.x = element_text(angle = 90, 
@@ -244,7 +244,7 @@ ap_top_terms %>%
   geom_col(show.legend = FALSE) +
   facet_wrap(~ topic, scales = "free") +
   scale_y_reordered() +
-  theme_tufte2()
+  theme_tufte()
 ```
 
 Have we defined too many topics? Do we need to increase the number of words per topic. We can see that the Topic 1 focuses on "pregancy" and "adoption", while Topic 3 is probably addressing "legal" questions around fertility. We would need to clean the data further to identify better patterns.
@@ -277,7 +277,7 @@ beta_wide %>%
   ggplot(aes(log_ratio, term)) +
   geom_col() +
   labs(x = "Log2 ratio of beta in topic 5 / topic 1", y = NULL) +
-  theme_tufte2()
+  theme_tufte()
 ```
 
 We can see that the words more common in topic 3 include words such as "sperm", "embryo" and "response" suggesting we may be picking up medical discussion around fertility. Whereas Topic 1 is more centred around "pregnancy", "parents" and "divorce" suggesting socio-economic .... More exploration would be warranted here...

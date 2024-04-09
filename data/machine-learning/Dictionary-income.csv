@@ -49,3 +49,5 @@ Other social rented (% housholds),RENTotherSOCIAL
 Rents from landlord or letting agency (% housholds),RENTprivate
 Other private rented (% housholds),RENTprivateOTHER
 Lives rent free (% housholds),RENTfree
+Net annual household income,INCOME
+Median price paid (year ending Jun 2021),HOUSEPRICE

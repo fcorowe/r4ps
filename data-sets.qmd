@@ -213,7 +213,7 @@ df_MSOA <- read.csv("./data/machine-learning/census2021-msoa.csv")
 A dataset for the data on the median rent price for each MSOA can be loaded as a csv as below. This data is from Zoopla and is made available [here](https://www.ubdc.ac.uk/data-services/data-catalogue/housing-data/zoopla-property-data/) for non-commercial use, through the Urban Big Data Centre:
 
 ```{r}
-df_housing <- read.csv("./data/machine-learning/census2021-msoa-houseprice.csv")
+df_rent <- read.csv("./data/machine-learning/zoopla_mean_rent_msoa.csv")
 ```
 
 ### Variables {.unnumbered}

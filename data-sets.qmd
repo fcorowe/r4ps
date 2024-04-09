@@ -24,7 +24,7 @@ The variables included in this dataset follow the land use classification of the
 
 The data was sourced from [What do 'left behind' areas look like over time?](https://github.com/GDSL-UL/APPG-LBA/blob/main/README.md) and cleaned on Python.
 
-## British administrative boundaries (LSOAs and LAs)
+## British administrative boundaries (LSOAs, MSOAs and LAs)
 
 ### Availability {.unnumbered}
 
@@ -33,6 +33,8 @@ The dataset for the boundaries of the lower-layer super-output areas (LSOAs) wit
 ```{r}
 st_LSOA <- st_read("data/geodemographics-old/LSOA_2011_London_gen_MHW/LSOA_2011_London_gen_MHW.shp")
 ```
+
+Data for the shapes of the MSOAs must be downloaded from UK's GeoPortal [here](https://geoportal.statistics.gov.uk/search?q=BDY_MSOA%20DEC_2021&sort=Title%7Ctitle%7Casc). Make sure you download the 2021 version and store it in the `.\data\machine-learning\` folder as a file with the .gpkg extension. We have not included the file in the GitHub repo due to its large size. You can load it with `st_read` and ensure it is in a projection system of choice.
 
 The dataset for the boundaries of the local authority distrits (LADs) for the UK is stored as a shapefile that can be found under:
 
@@ -130,54 +132,65 @@ The data was created for the paper [@Wang2022]. The paper includes details on th
 
 ## Ukraine's administrative boundaries
 
-## Internal migration flows between US metropolitan areas and between London boroughs
+<!-- ## Internal migration flows between US metropolitan areas and between London boroughs -->
 
-### Availability {.unnumbered}
+<!-- ### Availability {.unnumbered} -->
 
-The dataset for the migration flows between US metropolitan areas can be found as a csv file under:
+<!-- The dataset for the migration flows between US metropolitan areas can be found as a csv file under: -->
 
-```{r}
-df_metro <- read.csv("./data/networks/metro_to_metro_2015_2019_US_migration.csv")
-```
+<!-- ```{r} -->
 
-The dataset for the migration flows between London boroughs can be found as a csv file under:
+<!-- df_metro <- read.csv("./data/networks/metro_to_metro_2015_2019_US_migration.csv") -->
 
-```{r}
-df_borough <- read.csv("./data/networks/LA_to_LA_2019_London_clean.csv")
-```
+<!-- ``` -->
 
-### Variables {.unnumbered}
+<!-- The dataset for the migration flows between London boroughs can be found as a csv file under: -->
 
-For each of the 52,930 movements recorded on the dataset for the migration flows between US metropolitan areas, the following fields are available:
+<!-- ```{r} -->
 
-```{r}
-names(df_metro)
-```
+<!-- df_borough <- read.csv("./data/networks/LA_to_LA_2019_London_clean.csv") -->
 
-All the fields that start with `MSA_Current_` or `MSA_Previous_` refer to the characteristics of the origin and destination metropolican areas. The relevant fields for the analysis in this book are:
+<!-- ``` -->
 
--   `Movers_Metro_to_Metro_Flow_Estimate`: Estimate of number of people moving between origin and destination
--   `Movers_Metro_to_Metro_Flow_MOE`: Margin of error for the above estimate
+<!-- ### Variables {.unnumbered} -->
 
-More details on the methodology to obtain the estimates and the margin of error for each population movement can be found on the [US Census Bureau website](https://www.census.gov/programs-surveys/acs/methodology.html).
+<!-- For each of the 52,930 movements recorded on the dataset for the migration flows between US metropolitan areas, the following fields are available: -->
 
-For each of the 1,053 movements recorded on the dataset for the migration flows between London boroughs, the following fields are available:
+<!-- ```{r} -->
 
-```{r}
-names(df_borough)
-```
+<!-- names(df_metro) -->
 
-where:
+<!-- ``` -->
 
--   `OutLA` is the code corresponding to the origin borough
--   `InLA` is the code corresponding to the destination borough
--   `Moves` is the number of internal migration moves within each flow. Note that the numbers are not integers. This is because of the various scaling processes used to produce the dataset, which are described in more detail in the latest methodology document, which can be found [here](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset).
+<!-- All the fields that start with `MSA_Current_` or `MSA_Previous_` refer to the characteristics of the origin and destination metropolican areas. The relevant fields for the analysis in this book are: -->
 
-### Source & pre-processing {.unnumbered}
+<!-- -   `Movers_Metro_to_Metro_Flow_Estimate`: Estimate of number of people moving between origin and destination -->
 
-The dataset for the migration flows between US metropolitan areas can be downloaded from the [US Census Bureau website](https://www.census.gov/data/tables/2019/demo/geographic-mobility/metro-to-metro-migration.html). The data was cleaned on Microsoft Excel.
+<!-- -   `Movers_Metro_to_Metro_Flow_MOE`: Margin of error for the above estimate -->
 
-The dataset for the migration flows between London boroughs can be downloaded from the [ONS website](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset). The data was cleaned on Microsoft Excel.
+<!-- More details on the methodology to obtain the estimates and the margin of error for each population movement can be found on the [US Census Bureau website](https://www.census.gov/programs-surveys/acs/methodology.html). -->
+
+<!-- For each of the 1,053 movements recorded on the dataset for the migration flows between London boroughs, the following fields are available: -->
+
+<!-- ```{r} -->
+
+<!-- names(df_borough) -->
+
+<!-- ``` -->
+
+<!-- where: -->
+
+<!-- -   `OutLA` is the code corresponding to the origin borough -->
+
+<!-- -   `InLA` is the code corresponding to the destination borough -->
+
+<!-- -   `Moves` is the number of internal migration moves within each flow. Note that the numbers are not integers. This is because of the various scaling processes used to produce the dataset, which are described in more detail in the latest methodology document, which can be found [here](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset). -->
+
+<!-- ### Source & pre-processing {.unnumbered} -->
+
+<!-- The dataset for the migration flows between US metropolitan areas can be downloaded from the [US Census Bureau website](https://www.census.gov/data/tables/2019/demo/geographic-mobility/metro-to-metro-migration.html). The data was cleaned on Microsoft Excel. -->
+
+<!-- The dataset for the migration flows between London boroughs can be downloaded from the [ONS website](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/migrationwithintheuk/datasets/internalmigrationbyoriginanddestinationlocalauthoritiessexandsingleyearofagedetailedestimatesdataset). The data was cleaned on Microsoft Excel. -->
 
 ## Twitter data on public opinion originated in the US and in the UK
 
@@ -194,10 +207,10 @@ The dataset for the migration flows between London boroughs can be downloaded fr
 The dataset for the demographic census data of each MSOA in England and Wales can be loaded as a csv file from:
 
 ```{r}
-df_MSOA <- read.csv("./data/machine-learning/census2021-msoa-income.csv")
+df_MSOA <- read.csv("./data/machine-learning/census2021-msoa.csv")
 ```
 
-A very similar dataset for the demographic census data of each MSOA in England and Wales which also contains data on the median house price can be loaded as a csv file from:
+A dataset for the data on the median rent price for each MSOA can be loaded as a csv as below. This data is from Zoopla and is made available [here](https://www.ubdc.ac.uk/data-services/data-catalogue/housing-data/zoopla-property-data/) for non-commercial use, through the Urban Big Data Centre:
 
 ```{r}
 df_housing <- read.csv("./data/machine-learning/census2021-msoa-houseprice.csv")

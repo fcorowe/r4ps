@@ -173,9 +173,9 @@ We can visualise the fitted decision tree with the `rpart.plot()` function from 
 rpart.plot(fit)
 ```
 
-As we can see, `rpart()` produces a decision tree with 9 leaf nodes and the conditions to reach each leaf are associated with only 6 demographic variables. However, in the original training set, there were many more demographic variables that have not been included in the model. The reason for this is that, behind the scenes, `rpart()` is trying to find a balance between the complexity of the tree (i.e. its depth) and the generalisability of the tree to predict new unseen data. If it is too deep, the tree runs the risk of overfitting the training data and failing to predict the median monthly rent price for other MSOAs that are not included in the training set.
+As we can see, `rpart()` produces a decision tree with a number of leaf nodes and the conditions to reach each leaf are associated with only a few demographic variables. However, in the original training set, there were many more demographic variables that have not been included in the model. The reason for this is that, behind the scenes, `rpart()` is trying to find a balance between the complexity of the tree (i.e. its depth) and the generalisability of the tree to predict new unseen data. If it is too deep, the tree runs the risk of overfitting the training data and failing to predict the median monthly rent price for other MSOAs that are not included in the training set.
 
-To illustrate the point of selecting a tree with 9 leaves, we can manually control the level of complexity allowed when fitting of a decision tree model. The lower we set the value of the parameter `cp`, the more complex the resulting tree will be, so `cp` can be regarded as penalty for the level of complexity or a cost complexity parameter. Below, we fit a decision tree with no penalty for generating a complex tree model, i.e. `cp=0`, and then we use the function `plotcp()` to plot the prediction error ([PRESS statistic](https://en.wikipedia.org/wiki/PRESS_statistic)) that would be achieved with decision trees of different levels of complexity.
+To illustrate the point of selecting a tree with the obtained number of leaves leaves, we can manually control the level of complexity allowed when fitting of a decision tree model. The lower we set the value of the parameter `cp`, the more complex the resulting tree will be, so `cp` can be regarded as penalty for the level of complexity or a cost complexity parameter. Below, we fit a decision tree with no penalty for generating a complex tree model, i.e. `cp=0`, and then we use the function `plotcp()` to plot the prediction error ([PRESS statistic](https://en.wikipedia.org/wiki/PRESS_statistic)) that would be achieved with decision trees of different levels of complexity.
 
 ```{r}
 # set seed for reproducibility
@@ -184,11 +184,10 @@ set.seed(123)
 fit2 <- rpart(as.numeric(median_rent_per_month) ~., data = df_train, method = 'anova', control = list(cp = 0))
 # plot error vs tree complexity 
 plotcp(fit2)
-# draw vertical line at 11 trees
-abline(v=9, lty='dashed')
+
 ```
 
-As we can see from the plot above, with more than 9 leaves, little reduction in the prediction error is achieved as the model becomes more and more complex. In other words, we start seeing diminishing returns in error reduction as the tree grows deeper. Hence `rpart()` is doing some behind-the-scenes tuning by pruning the tree so it only has 9 leaf nodes.
+As we can see from the plot above, with more than a certain number of leaves, little reduction in the prediction error is achieved as the model becomes more and more complex. In other words, we start seeing diminishing returns in error reduction as the tree grows deeper. Hence `rpart()` is doing some behind-the-scenes tuning by pruning the tree so it only has the obtained number of leaf nodes.
 
 There are other model parameters that can be tuned in order to improve the model performance via the control argument of the `rpart()` function, just like we did above for `cp`. While we do not experiment with these additional parameters in the workbook, we provide brief descriptions below so you can explore them on your own time:
 

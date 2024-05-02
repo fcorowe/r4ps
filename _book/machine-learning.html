@@ -524,17 +524,15 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>As we can see, <code>rpart()</code> produces a decision tree with 9 leaf nodes and the conditions to reach each leaf are associated with only 6 demographic variables. However, in the original training set, there were many more demographic variables that have not been included in the model. The reason for this is that, behind the scenes, <code>rpart()</code> is trying to find a balance between the complexity of the tree (i.e.&nbsp;its depth) and the generalisability of the tree to predict new unseen data. If it is too deep, the tree runs the risk of overfitting the training data and failing to predict the median monthly rent price for other MSOAs that are not included in the training set.</p>
-<p>To illustrate the point of selecting a tree with 9 leaves, we can manually control the level of complexity allowed when fitting of a decision tree model. The lower we set the value of the parameter <code>cp</code>, the more complex the resulting tree will be, so <code>cp</code> can be regarded as penalty for the level of complexity or a cost complexity parameter. Below, we fit a decision tree with no penalty for generating a complex tree model, i.e.&nbsp;<code>cp=0</code>, and then we use the function <code>plotcp()</code> to plot the prediction error (<a href="https://en.wikipedia.org/wiki/PRESS_statistic">PRESS statistic</a>) that would be achieved with decision trees of different levels of complexity.</p>
+<p>As we can see, <code>rpart()</code> produces a decision tree with a number of leaf nodes and the conditions to reach each leaf are associated with only a few demographic variables. However, in the original training set, there were many more demographic variables that have not been included in the model. The reason for this is that, behind the scenes, <code>rpart()</code> is trying to find a balance between the complexity of the tree (i.e.&nbsp;its depth) and the generalisability of the tree to predict new unseen data. If it is too deep, the tree runs the risk of overfitting the training data and failing to predict the median monthly rent price for other MSOAs that are not included in the training set.</p>
+<p>To illustrate the point of selecting a tree with the obtained number of leaves leaves, we can manually control the level of complexity allowed when fitting of a decision tree model. The lower we set the value of the parameter <code>cp</code>, the more complex the resulting tree will be, so <code>cp</code> can be regarded as penalty for the level of complexity or a cost complexity parameter. Below, we fit a decision tree with no penalty for generating a complex tree model, i.e.&nbsp;<code>cp=0</code>, and then we use the function <code>plotcp()</code> to plot the prediction error (<a href="https://en.wikipedia.org/wiki/PRESS_statistic">PRESS statistic</a>) that would be achieved with decision trees of different levels of complexity.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># train model</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(<span class="fu">as.numeric</span>(median_rent_per_month) <span class="sc">~</span>., <span class="at">data =</span> df_train, <span class="at">method =</span> <span class="st">'anova'</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">cp =</span> <span class="dv">0</span>))</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot error vs tree complexity </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plotcp</span>(fit2)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># draw vertical line at 11 trees</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">9</span>, <span class="at">lty=</span><span class="st">'dashed'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plotcp</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -543,7 +541,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>As we can see from the plot above, with more than 9 leaves, little reduction in the prediction error is achieved as the model becomes more and more complex. In other words, we start seeing diminishing returns in error reduction as the tree grows deeper. Hence <code>rpart()</code> is doing some behind-the-scenes tuning by pruning the tree so it only has 9 leaf nodes.</p>
+<p>As we can see from the plot above, with more than a certain number of leaves, little reduction in the prediction error is achieved as the model becomes more and more complex. In other words, we start seeing diminishing returns in error reduction as the tree grows deeper. Hence <code>rpart()</code> is doing some behind-the-scenes tuning by pruning the tree so it only has the obtained number of leaf nodes.</p>
 <p>There are other model parameters that can be tuned in order to improve the model performance via the control argument of the <code>rpart()</code> function, just like we did above for <code>cp</code>. While we do not experiment with these additional parameters in the workbook, we provide brief descriptions below so you can explore them on your own time:</p>
 <ul>
 <li><p><code>minsplit</code> controls the minimum number of data points required in each leaf node. The default is 20. Setting this lower will result in more leaves with very few data points belonging to the corresponding branch.</p></li>
@@ -562,14 +560,14 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, df_test<span class="sc">$</span>median_rent_per_month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 286.1798</code></pre>
+<pre><code>[1] 291.0097</code></pre>
 </div>
 </div>
 <p>This value does not have much meaning in isolation. A good or bad RMSE is always relative to the specific data set. For this reason, we need to establish a baseline RMSE that we can compare it with. Here we establish this baseline as the RMSE that would be obtained from a naive tree that merely predicts the median monthly rent across all the data entries in the training set. If the fitted model achieves an RSME lower than the naive model, we say that the fitted model “has skill”. The following line of code confirms that our fitted model is better than the naive model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_unseen, <span class="fu">mean</span>(df_train<span class="sc">$</span>median_rent_per_month))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 414.4566</code></pre>
+<pre><code>[1] 432.5357</code></pre>
 </div>
 </div>
 </section>
@@ -601,11 +599,11 @@ window.Quarto = {
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 1579, 1578, 1579, 1580, 1579, 1580, ... 
+Summary of sample sizes: 1578, 1578, 1577, 1581, 1579, 1581, ... 
 Resampling results:
 
-  RMSE      Rsquared   MAE     
-  259.6851  0.7194196  177.2139</code></pre>
+  RMSE      Rsquared   MAE    
+  257.3835  0.7170825  175.319</code></pre>
 </div>
 </div>
 <p>We see that the cross-validated value of RMSE with bagging is lower than that associated with the single decision tree that we trained with <code>rcart</code>. This indicates that the predictive performance is estimated to be better. We can compare the cross-validated value of the RMSE with the RMSE from the test set. These two quantities should be close:</p>
@@ -613,7 +611,7 @@ Resampling results:
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>predict_bagged_unseen <span class="ot">&lt;-</span> <span class="fu">predict</span>(bagged, df_test)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(predict_bagged_unseen, df_test<span class="sc">$</span>median_rent_per_month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 230.1622</code></pre>
+<pre><code>[1] 255.4262</code></pre>
 </div>
 </div>
 <p>The library <code>caret</code> has an additional function <code>varImp()</code> that helps us understand the variable importance across the bagged trees, i.e.&nbsp;the variables that are most relevant to determine the predictions of MSOA median rent per month. You are encouraged to check the <code>caret</code> documentation to learn more about how the variable importance is determined. We can plot a rank of variable importance by running the code below.</p>
@@ -656,8 +654,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 16
 
-          Mean of squared residuals: 50278.4
-                    % Var explained: 78.72</code></pre>
+          Mean of squared residuals: 50342.21
+                    % Var explained: 78.36</code></pre>
 </div>
 </div>
 <p>As we can see from above, the mean of squared residuals, which is the same as the MSE, is around 48,561 (you might get a slightly different number due to randomness in the algorithm) for 500 trees and therefore, RMSE = 220. This metric is computed by averaging residuals from the OOB samples. To illustrate how the MSE varies as more bootstrap samples are added to the model, we can plot the fitted model:</p>
@@ -675,14 +673,14 @@ No. of variables tried at each split: 16
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 294</code></pre>
+<pre><code>[1] 354</code></pre>
 </div>
 </div>
 <p>By computing the RMSE, we can compare the performance of this model with performance of the models in the previous sections:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(fit_rf<span class="sc">$</span>mse[<span class="fu">which.min</span>(fit_rf<span class="sc">$</span>mse)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 223.2337</code></pre>
+<pre><code>[1] 223.8975</code></pre>
 </div>
 </div>
 <p>This is a lower value than what we obtained with just a single tree and even after applying bagging! Remember, this RMSE is based on the OOB samples, but we could also obtain it from the test set. <code>randomForest()</code> allows us to easily compare the RMSE obtained from OOB data and from the test set.</p>
@@ -760,7 +758,7 @@ No. of variables tried at each split: 16
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>hyper_grid[<span class="fu">which.min</span>(hyper_grid<span class="sc">$</span>OOB_RMSE),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   mtry sample.fraction min.node.size OOB_RMSE
-52   16            0.75             5 224.2104</code></pre>
+30   20             0.8             3 222.3484</code></pre>
 </div>
 </div>
 <p>The OOB RMSE is even lower than the error we obtained with the default model for random forest with no tuning.</p>
@@ -804,7 +802,7 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
- 96.071  11.207 109.348 </code></pre>
+ 90.667  11.259 103.811 </code></pre>
 </div>
 </div>
 <div class="cell">

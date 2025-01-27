@@ -1,6 +1,6 @@
 # Welcome {.unnumbered}
 
-This is the website for "Population Science". This is a course designed and delivered by Dr. Carmen Cabrera-Arnau, Prof. Francisco Rowe and Dr. Elisabetta Pietrostefani from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. You will learn applied tools and cutting-edge analytical approaches to use digital footprint data to explore and understand human population trends and patterns, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods.
+This is the website for "Population Science". This is a course designed by Dr. Carmen Cabrera-Arnau, Prof. Francisco Rowe and Dr. Elisabetta Pietrostefani, and delivered by Dr. Carmen Cabrera-Arnau, Dr. Olga Gkountouna and Mr. Matthew Howard, from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. Through a series of hands-on computational notebooks, you will learn data science methods to address social science questions relating to population trends, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods. 
 
 The website is *free to use* and is licensed under the [Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). A compilation of this web course is hosted as a GitHub repository that you can access:
 
@@ -9,12 +9,12 @@ The website is *free to use* and is licensed under the [Attribution-NonCommercia
 -   As a [pdf document](https://www.population-science.net/Population-Science.pdf)
 -   As a [GitHub repository](https://github.com/fcorowe/r4ps).
 
-## Contact {.unnumbered}
+## Contacts for 2024-25 {.unnumbered}
 
 -   **Module lead:** ***Dr Carmen Cabrera-Arnau*** - c.cabrera-arnau \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science
 
--   *Prof Francisco Rowe* - f.rowe-gonzalez \[at\] liverpool.ac.uk - Professor in Population Data Science
+-   *Dr Olga Gkountouna* - olga.gkountouna \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science
 
--   *Dr Elisabetta Pietrostefani* - e.pietrostefani \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science
+-   *Mr Matthew Howard* - m.howard \[at\] liverpool.ac.uk - Lecturer in Geographic Data Science
 
     Find us in Roxby Building, University of Liverpool, UK

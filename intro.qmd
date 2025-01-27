@@ -140,7 +140,7 @@ Both assignments will have the same requirements:
 
 Assignments need to be prepared in "*Quarto Document*" format (i.e. qmd extension) and then converted into a **self-contained HTML file** that will then be submitted via Turnitin. **It is very important that the quarto document is self-contained so that it renders well once submitted.** The document should only display content that will be assessed. Intermediate steps do not need to be displayed. Messages resulting from loading packages, attaching data frames, or similar messages do not need to be included as output code. Useful resources to customise your R notebook can be found on [Quarto's website](https://quarto.org/docs/guide/).
 
-Two Quarto Document templates will be available via [the module Canvas site](https://canvas.liverpool.ac.uk/courses/70394/modules).
+Two Quarto Document templates will be available via [the module Canvas site](https://canvas.liverpool.ac.uk/courses/70394/modules). You can download these templates as use them for your assignments. Highly recommnded!
 
 Submission is electronic only via Turnitin on Canvas.
 

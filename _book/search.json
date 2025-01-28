@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Population Science",
+    "title": "Population Data Science",
     "section": "",
-    "text": "Welcome\nThis is the website for “Population Science”. This is a course designed by Dr. Carmen Cabrera-Arnau, Prof. Francisco Rowe and Dr. Elisabetta Pietrostefani, and delivered by Dr. Carmen Cabrera-Arnau, Dr. Olga Gkountouna and Mr. Matthew Howard, from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. Through a series of hands-on computational notebooks, you will learn data science methods to address social science questions relating to population trends, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods.\nThe website is free to use and is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International. A compilation of this web course is hosted as a GitHub repository that you can access:",
+    "text": "Welcome\nThis is the website for “Population Data Science”. This is a course designed by Dr. Carmen Cabrera-Arnau, Prof. Francisco Rowe and Dr. Elisabetta Pietrostefani, and delivered by Dr. Carmen Cabrera-Arnau, Dr. Olga Gkountouna and Mr. Matthew Howard, from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. Through a series of hands-on computational notebooks, you will learn data science methods to address social science questions relating to population trends, including supervised and unsupervised machine learning approaches, network analysis and causal inference methods.\nThe website is free to use and is licensed under the Attribution-NonCommercial-NoDerivatives 4.0 International. A compilation of this web course is hosted as a GitHub repository that you can access:",
     "crumbs": [
       "Welcome"
     ]
@@ -644,7 +644,7 @@
   {
     "objectID": "index.html#contacts-for-2024-25",
     "href": "index.html#contacts-for-2024-25",
-    "title": "Population Science",
+    "title": "Population Data Science",
     "section": "Contacts for 2024-25",
     "text": "Contacts for 2024-25\n\nModule lead: Dr Carmen Cabrera-Arnau - c.cabrera-arnau [at] liverpool.ac.uk - Lecturer in Geographic Data Science\nDr Olga Gkountouna - olga.gkountouna [at] liverpool.ac.uk - Lecturer in Geographic Data Science\nMr Matthew Howard - m.howard [at] liverpool.ac.uk - Lecturer in Geographic Data Science\nFind us in Roxby Building, University of Liverpool, UK",
     "crumbs": [

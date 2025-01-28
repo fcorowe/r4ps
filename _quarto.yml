@@ -2,13 +2,13 @@ project:
   type: book
 
 book:
-  title: "Population Science"
-  author: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
+  title: "Population Data Science"
+  author: "Carmen Cabrera-Arnau, Francisco Rowe, Elisabetta Pietrostefani"
   date: today
 
   page-footer:
     left: |
-      Population Science was written by Francisco Rowe,
+      Population Data Science was written by Francisco Rowe,
       Carmen Cabrera-Arnau, Elisabetta Pietrostefani.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.

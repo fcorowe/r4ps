@@ -1,0 +1,1 @@
+load("/Users/carmen/Documents/github/r4ps/data/sentiment-analysis/usa_tweets_01122019_01052020.rds")

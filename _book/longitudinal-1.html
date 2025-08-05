@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.543">
+<head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.6.39" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
 
-<title>Population Science - 8&nbsp; Modelling Time</title>
+<title>8  Modelling Time – Population Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -76,25 +78,7 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./longitudinal-2.html" rel="next">
-<link href="./topic-modelling.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<!-- htmldependencies:E3FAD763 -->
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,32 +106,38 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-<script src="site_libs/plotly-binding-4.10.3/plotly.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.11.0/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
 <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
-<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="nav-sidebar docked">
+<body>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn"
+      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
+      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./longitudinal-1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modelling Time</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -159,38 +149,40 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Population Science</a> 
+      <a href="/">
+      Population Data Science
+      </a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/fcorowe/r4ps" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/fcorowe/r4ps"  title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./Population-Science.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+            <a class="dropdown-item sidebar-tools-main-item" href="/Population-Data-Science.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./Population-Science.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+            <a class="dropdown-item sidebar-tools-main-item" href="/Population-Data-Science.epub">
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
       </ul>
     </div>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
@@ -208,106 +200,96 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  <a href="/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-population-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Population Science</span></span></a>
+  <a href="/intro-population-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>Introducing Population Data Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geodemographics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Geodemographics</span></span></a>
+  <a href="/geodemographics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Geodemographics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sequence-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sequence Analysis</span></span></a>
+  <a href="/sequence-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Sequence Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./network.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Network Analysis</span></span></a>
+  <a href="/network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Network Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sentiment-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Sentiment Analysis</span></span></a>
+  <a href="/sentiment-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>Sentiment Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic-modelling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span></a>
+  <a href="/topic-modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Topic Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./longitudinal-1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modelling Time</span></span></a>
+  <a href="/longitudinal-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>Modelling Time</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./longitudinal-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Assessing Interventions</span></span></a>
+  <a href="/longitudinal-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Assessing Interventions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./machine-learning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+  <a href="/machine-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Machine Learning</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data-sets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Data sets</span></span></a>
+  <a href="/data-sets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>Data sets</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#dependencies" id="toc-dependencies" class="nav-link active" data-scroll-target="#dependencies"><span class="header-section-number">8.1</span> Dependencies</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">8.2</span> Data</a></li>
-  <li><a href="#modelling-time" id="toc-modelling-time" class="nav-link" data-scroll-target="#modelling-time"><span class="header-section-number">8.3</span> Modelling Time</a></li>
-  <li><a href="#modelling-time-and-space" id="toc-modelling-time-and-space" class="nav-link" data-scroll-target="#modelling-time-and-space"><span class="header-section-number">8.4</span> Modelling Time and Space</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">8.5</span> Questions</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/fcorowe/r4ps/edit/main/longitudinal-1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+        <div id="quarto-toc-target"></div>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-chp8" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modelling Time</span></span></h1>
+<h1 class="title"><span id="sec-chp8" class="quarto-section-identifier"><span class="chapter-number">8</span>  <span class="chapter-title">Modelling Time</span></span></h1>
 </div>
 
 
@@ -323,13 +305,23 @@ div.csl-indent {
 
 </header>
 
-
-<p>Time is a critical variable in many areas of research, and its modeling can help us gain insights into underlying phenomena. Timeseries data has proven to be a valuable tool in understanding the COVID-19 pandemic. By analyzing data over time, researchers have been able to track changes in the spread of the virus, the effectiveness of interventions such as social distancing and vaccination campaigns, and the impact of the pandemic on various social and economic indicators. With the increasing availability of digital footprint data, which includes information both of offline behaviour such as visits to grocery shops and parks, as well as online behavior such as internet searches and social media activity, researchers have had new opportunities to understand the pandemic’s impact on individuals and communities <span class="citation" data-cites="ugolini2020effects schleicher2020impact">(<a href="references.html#ref-ugolini2020effects" role="doc-biblioref">Ugolini et al. 2020</a>; <a href="references.html#ref-schleicher2020impact" role="doc-biblioref">Schleicher 2020</a>)</span> and <span class="citation" data-cites="cinelli2020covid">(<a href="references.html#ref-cinelli2020covid" role="doc-biblioref">Cinelli et al. 2020</a>)</span>. These data sources provide insight into people’s attitudes, concerns, and behaviors during the pandemic, as well as their response to interventions and policies. Together, timeseries and digital footprint data offer powerful tools for understanding the complex dynamics of the COVID-19 pandemic and developing effective responses.</p>
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#dependencies" id="toc-dependencies"><span class="header-section-number">8.1</span> Dependencies</a></li>
+  <li><a href="#data" id="toc-data"><span class="header-section-number">8.2</span> Data</a></li>
+  <li><a href="#modelling-time" id="toc-modelling-time"><span class="header-section-number">8.3</span> Modelling Time</a></li>
+  <li><a href="#modelling-time-and-space" id="toc-modelling-time-and-space"><span class="header-section-number">8.4</span> Modelling Time and Space</a></li>
+  <li><a href="#questions" id="toc-questions"><span class="header-section-number">8.5</span> Questions</a></li>
+  </ul>
+</nav>
+<p>Time is a critical variable in many areas of research, and its modeling can help us gain insights into underlying phenomena. Timeseries data has proven to be a valuable tool in understanding the COVID-19 pandemic. By analyzing data over time, researchers have been able to track changes in the spread of the virus, the effectiveness of interventions such as social distancing and vaccination campaigns, and the impact of the pandemic on various social and economic indicators. With the increasing availability of digital footprint data, which includes information both of offline behaviour such as visits to grocery shops and parks, as well as online behavior such as internet searches and social media activity, researchers have had new opportunities to understand the pandemic’s impact on individuals and communities <span class="citation" data-cites="ugolini2020effects schleicher2020impact">(<a href="#ref-ugolini2020effects" role="doc-biblioref">Ugolini et al. 2020</a>; <a href="#ref-schleicher2020impact" role="doc-biblioref">Schleicher 2020</a>)</span> and <span class="citation" data-cites="cinelli2020covid">(<a href="#ref-cinelli2020covid" role="doc-biblioref">Cinelli et al. 2020</a>)</span>. These data sources provide insight into people’s attitudes, concerns, and behaviors during the pandemic, as well as their response to interventions and policies. Together, timeseries and digital footprint data offer powerful tools for understanding the complex dynamics of the COVID-19 pandemic and developing effective responses.</p>
 <p>This chapter will introduce modelling time descriptively using linear trends, quadratic trends, and splines. It will also provide and introduction to modelling data over time and space.</p>
 <section id="dependencies" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="dependencies"><span class="header-section-number">8.1</span> Dependencies</h2>
+<h2 data-number="8.1"><span class="header-section-number">8.1</span> Dependencies</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -350,13 +342,13 @@ div.csl-indent {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggformula)</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code></pre></div>
 </div>
 </section>
 <section id="data" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="data"><span class="header-section-number">8.2</span> Data</h2>
+<h2 data-number="8.2"><span class="header-section-number">8.2</span> Data</h2>
 <p>We will use a sample of <a href="https://www.google.com/covid19/mobility/index.html?hl=en">Google Mobility data</a>. Google has made available Community Mobility data to provide insights into what changed in response to policies aimed at combating COVID-19. The data also has accompanying reports which analyse movement trends over time by geography, across different categories of places such as retail and recreation, groceries and pharmacies, parks, transit stations, workplaces, and residential. Data is available from 2020 and 2022. Community Mobility data is no longer being updated as of 2022-10-15. All historical data will remain publicly available.</p>
-<p>Location accuracy and the understanding of categorised places varies from region to region, so it is not recommend the data is used to compare changes between countries, or between regions with different characteristics (e.g.&nbsp;rural versus urban areas). Region that do not have statistically significant levels of data have been left out of the report.</p>
+<p>Location accuracy and the understanding of categorised places varies from region to region, so it is not recommend the data is used to compare changes between countries, or between regions with different characteristics (e.g. rural versus urban areas). Region that do not have statistically significant levels of data have been left out of the report.</p>
 <p>Some important facts about the data:</p>
 <ul>
 <li><p>Changes for each day are compared to a baseline value for that day of the week. The baseline is the median value.</p></li>
@@ -366,34 +358,34 @@ div.csl-indent {
 <p>For more about this data please see <a href="https://www.gstatic.com/covid19/mobility/2022-10-15_GB_Mobility_Report_en-GB.pdf">here</a>.</p>
 </section>
 <section id="modelling-time" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="modelling-time"><span class="header-section-number">8.3</span> Modelling Time</h2>
+<h2 data-number="8.3"><span class="header-section-number">8.3</span> Modelling Time</h2>
 <p>First we import the data we will be working with. We will be looking at Google Mobility data for Italy.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mobility_it <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2022_IT_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mobility_it <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/longitudinal-1/2022_IT_Region_Mobility_Report.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <p>Check out variables in the dataframe</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out variables in the dataframe </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mobility_it)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out variables in the dataframe </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mobility_it)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "country_region_code"                               
- [2] "country_region"                                    
- [3] "sub_region_1"                                      
- [4] "sub_region_2"                                      
- [5] "metro_area"                                        
- [6] "iso_3166_2_code"                                   
- [7] "census_fips_code"                                  
- [8] "place_id"                                          
- [9] "date"                                              
-[10] "retail_and_recreation_percent_change_from_baseline"
-[11] "grocery_and_pharmacy_percent_change_from_baseline" 
-[12] "parks_percent_change_from_baseline"                
-[13] "transit_stations_percent_change_from_baseline"     
-[14] "workplaces_percent_change_from_baseline"           
-[15] "residential_percent_change_from_baseline"          </code></pre>
+<pre><code> [1] &quot;country_region_code&quot;                               
+ [2] &quot;country_region&quot;                                    
+ [3] &quot;sub_region_1&quot;                                      
+ [4] &quot;sub_region_2&quot;                                      
+ [5] &quot;metro_area&quot;                                        
+ [6] &quot;iso_3166_2_code&quot;                                   
+ [7] &quot;census_fips_code&quot;                                  
+ [8] &quot;place_id&quot;                                          
+ [9] &quot;date&quot;                                              
+[10] &quot;retail_and_recreation_percent_change_from_baseline&quot;
+[11] &quot;grocery_and_pharmacy_percent_change_from_baseline&quot; 
+[12] &quot;parks_percent_change_from_baseline&quot;                
+[13] &quot;transit_stations_percent_change_from_baseline&quot;     
+[14] &quot;workplaces_percent_change_from_baseline&quot;           
+[15] &quot;residential_percent_change_from_baseline&quot;          </code></pre>
 </div>
 </div>
-<p><strong>Long data vs.&nbsp;Wide data</strong></p>
+<p><strong>Long data vs. Wide data</strong></p>
 <p>Long data and wide data are two different formats used to store and organize data in a tabular form. Wide data is a format where each variable is stored in a separate column, and each observation or time point is stored in a separate row. This format is often useful when the number of variables is small compared to the number of observations, and is often used for descriptive statistics and exploratory data analysis.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -439,21 +431,21 @@ div.csl-indent {
 <p>Both wide and long data formats have their own advantages and disadvantages, and the choice between them often depends on the specific data and the analysis that is planned. Transforming data from one format to another is a common task in data processing and analysis, and can be accomplished using various data manipulation tools in R, such as <code>tidyr</code> and <code>reshape2</code> packages. Look back at the Italian google mobility data to check which format it is in.</p>
 <p><strong>Date format</strong></p>
 <p>Time series aim to study the evolution of one or several variables through time. Several packages that are part of the <code>tidyverse</code> family will help you analyse time series data in <code>R</code>. The <code>lubridate</code>package is your best friend to deal with the date format. <code>ggplot2</code> will allow you to plot it efficiently. <code>dygraphs</code> will also help build attractive interactive charts.</p>
-<p>Building time series requires the time variable to be at the date format. The first step of your analysis must be to double check that R read your data correctly, i.e.&nbsp;at the date format. This is possible thanks to the str() function:</p>
+<p>Building time series requires the time variable to be at the date format. The first step of your analysis must be to double check that R read your data correctly, i.e. at the date format. This is possible thanks to the str() function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking date format</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mobility_it)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking date format</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mobility_it)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   36576 obs. of  15 variables:
- $ country_region_code                               : chr  "IT" "IT" "IT" "IT" ...
- $ country_region                                    : chr  "Italy" "Italy" "Italy" "Italy" ...
- $ sub_region_1                                      : chr  "ALL" "ALL" "ALL" "ALL" ...
- $ sub_region_2                                      : chr  "" "" "" "" ...
+<pre><code>&#39;data.frame&#39;:   36576 obs. of  15 variables:
+ $ country_region_code                               : chr  &quot;IT&quot; &quot;IT&quot; &quot;IT&quot; &quot;IT&quot; ...
+ $ country_region                                    : chr  &quot;Italy&quot; &quot;Italy&quot; &quot;Italy&quot; &quot;Italy&quot; ...
+ $ sub_region_1                                      : chr  &quot;ALL&quot; &quot;ALL&quot; &quot;ALL&quot; &quot;ALL&quot; ...
+ $ sub_region_2                                      : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
  $ metro_area                                        : logi  NA NA NA NA NA NA ...
- $ iso_3166_2_code                                   : chr  "" "" "" "" ...
+ $ iso_3166_2_code                                   : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
  $ census_fips_code                                  : logi  NA NA NA NA NA NA ...
- $ place_id                                          : chr  "ChIJA9KNRIL-1BIRb15jJFz1LOI" "ChIJA9KNRIL-1BIRb15jJFz1LOI" "ChIJA9KNRIL-1BIRb15jJFz1LOI" "ChIJA9KNRIL-1BIRb15jJFz1LOI" ...
- $ date                                              : chr  "01/01/2022" "02/01/2022" "03/01/2022" "04/01/2022" ...
+ $ place_id                                          : chr  &quot;ChIJA9KNRIL-1BIRb15jJFz1LOI&quot; &quot;ChIJA9KNRIL-1BIRb15jJFz1LOI&quot; &quot;ChIJA9KNRIL-1BIRb15jJFz1LOI&quot; &quot;ChIJA9KNRIL-1BIRb15jJFz1LOI&quot; ...
+ $ date                                              : chr  &quot;01/01/2022&quot; &quot;02/01/2022&quot; &quot;03/01/2022&quot; &quot;04/01/2022&quot; ...
  $ retail_and_recreation_percent_change_from_baseline: int  -65 -27 -13 -13 -10 -30 -20 -27 -39 -22 ...
  $ grocery_and_pharmacy_percent_change_from_baseline : int  -80 7 28 30 42 -24 25 6 -7 19 ...
  $ parks_percent_change_from_baseline                : int  21 12 19 17 10 42 13 3 -36 -18 ...
@@ -464,166 +456,166 @@ div.csl-indent {
 </div>
 <p>This is already looking fine in the google mobility data, but in many other cases the <code>lubridate</code> package is such a life saver. It offers several function which name are composed by 3 letters: year (<code>y</code>), month (<code>m</code>) and day (<code>d</code>). Have a look at <code>lubridate</code> <a href="https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf">cheat sheet</a> to see more about converting time variables to useful formats. There is also the anytime() function in the anytime package whose sole goal is to automatically parse strings as dates regardless of the format.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert the date column to a date format using the dmy() function </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mobility_it<span class="sc">$</span>date_fix <span class="ot">&lt;-</span> <span class="fu">dmy</span>(mobility_it<span class="sc">$</span>date)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert the date column to a date format using the dmy() function </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mobility_it<span class="sc">$</span>date_fix <span class="ot">&lt;-</span> <span class="fu">dmy</span>(mobility_it<span class="sc">$</span>date)  </span></code></pre></div>
 </div>
 <p>Tidy up some variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename variables</span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename variables</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mobility_it <span class="ot">&lt;-</span> mobility_it <span class="sc">%&gt;%</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">grocery_pharmacy =</span> grocery_and_pharmacy_percent_change_from_baseline,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">parks_percent_change_from_baseline =</span> parks_percent_change_from_baseline,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">transit =</span> transit_stations_percent_change_from_baseline)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">transit =</span> transit_stations_percent_change_from_baseline)</span></code></pre></div>
 </div>
 <p><strong>Initial time-series plotting with ggplot2</strong></p>
 <p>Let’s start easy by keeping only data for the whole of Italy.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the dataframe to keep only the rows for all of Italy</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mobility_it_nogeo <span class="ot">&lt;-</span><span class="fu">filter</span>(mobility_it, sub_region_1 <span class="sc">==</span> <span class="st">"ALL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the dataframe to keep only the rows for all of Italy</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mobility_it_nogeo <span class="ot">&lt;-</span><span class="fu">filter</span>(mobility_it, sub_region_1 <span class="sc">==</span> <span class="st">&quot;ALL&quot;</span>)</span></code></pre></div>
 </div>
 <p><code>ggplot2</code> offers great features when it comes to visualize time series. The date format will be recognized automatically, resulting in a neat x axis labels.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most basic bubble plot - uncomment to visualise</span></span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Most basic bubble plot - uncomment to visualise</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#timeseries1 &lt;- ggplot(data = mobility_it_nogeo, aes(x=date_fix, y=grocery_pharmacy)) + geom_point()</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#timeseries1 </span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding lines and starting to clean up graph</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>timeseries2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>grocery_pharmacy)) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">"#2c7bb6"</span>) <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;#2c7bb6&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grocery and Pharmacy % change"</span>) </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Grocery and Pharmacy % change&quot;</span>) </span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>timeseries2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>timeseries2</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The <code>ggplot2</code> package recognizes the date format and automatically uses a specific type of X axis. If the time variable isn’t at the date format, this won’t work. Always check with <code>str(data)</code> how variables are understood by R. The <code>scale_x_data()</code> makes it a breeze to customize those labels.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the limit option of the scale_x_date() function to select a time frame in the data:</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the limit option of the scale_x_date() function to select a time frame in the data:</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>timeseries3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>grocery_pharmacy)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="at">color=</span><span class="st">"#2c7bb6"</span>) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grocery and Pharmacy % change visits"</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="at">color=</span><span class="st">&quot;#2c7bb6&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Grocery and Pharmacy % change visits&quot;</span>) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">limit=</span><span class="fu">c</span>(<span class="fu">as.Date</span>(<span class="st">"2022-01-01"</span>),<span class="fu">as.Date</span>(<span class="st">"2022-04-01"</span>))) <span class="co"># Limiting between two dates </span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">limit=</span><span class="fu">c</span>(<span class="fu">as.Date</span>(<span class="st">&quot;2022-01-01&quot;</span>),<span class="fu">as.Date</span>(<span class="st">&quot;2022-04-01&quot;</span>))) <span class="co"># Limiting between two dates </span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>timeseries3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>timeseries3</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
 </div>
 <p><code>plotly</code> is also great to turn the resulting chart interactive in one more line of code. With the <code>ggplotly()</code> function you can hover circles to get a tooltip, or select an area of interest for zooming. You can zoom by selecting an area of interest. Hover over the line to get exact time and value. Export to a widget with <code>htmlwidgets</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usual chart</span></span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usual chart</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>timeseries3bis <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>grocery_pharmacy)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">"#2c7bb6"</span>) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;#2c7bb6&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grocery and Pharmacy % change"</span>) </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Grocery and Pharmacy % change&quot;</span>) </span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn it interactive with ggplotly</span></span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>timeseries_interactive <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(timeseries3bis)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>timeseries_interactive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>timeseries_interactive</span></code></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8e1fe96c0688a849169a" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-8e1fe96c0688a849169a">{"x":{"data":[{"x":[18993,18994,18995,18996,18997,18998,18999,19000,19001,19002,19003,19004,19005,19006,19007,19008,19009,19010,19011,19012,19013,19014,19015,19016,19017,19018,19019,19020,19021,19022,19023,19024,19025,19026,19027,19028,19029,19030,19031,19032,19033,19034,19035,19036,19037,19038,19039,19040,19041,19042,19043,19044,19045,19046,19047,19048,19049,19050,19051,19052,19053,19054,19055,19056,19057,19058,19059,19060,19061,19062,19063,19064,19065,19066,19067,19068,19069,19070,19071,19072,19073,19074,19075,19076,19077,19078,19079,19080,19081,19082,19083,19084,19085,19086,19087,19088,19089,19090,19091,19092,19093,19094,19095,19096,19097,19098,19099,19100,19101,19102,19103,19104,19105,19106,19107,19108,19109,19110,19111,19112,19113,19114,19115,19116,19117,19118,19119,19120,19121,19122,19123,19124,19125,19126,19127,19128,19129,19130,19131,19132,19133,19134,19135,19136,19137,19138,19139,19140,19141,19142,19143,19144,19145,19146,19147,19148,19149,19150,19151,19152,19153,19154,19155,19156,19157,19158,19159,19160,19161,19162,19163,19164,19165,19166,19167,19168,19169,19170,19171,19172,19173,19174,19175,19176,19177,19178,19179,19180,19181,19182,19183,19184,19185,19186,19187,19188,19189,19190,19191,19192,19193,19194,19195,19196,19197,19198,19199,19200,19201,19202,19203,19204,19205,19206,19207,19208,19209,19210,19211,19212,19213,19214,19215,19216,19217,19218,19219,19220,19221,19222,19223,19224,19225,19226,19227,19228,19229,19230,19231,19232,19233,19234,19235,19236,19237,19238,19239,19240,19241,19242,19243,19244,19245,19246,19247,19248,19249,19250,19251,19252,19253,19254,19255,19256,19257,19258,19259,19260,19261,19262,19263,19264,19265,19266,19267,19268,19269,19270,19271,19272,19273,19274,19275,19276,19277,19278,19279,19280],"y":[-80,7,28,30,42,-24,25,6,-7,19,20,18,18,17,9,-1,17,17,17,15,15,9,-2,14,15,15,16,16,10,0,15,18,19,18,17,9,0,13,17,16,17,17,9,3,19,10,16,16,15,8,0,11,14,16,16,16,7,1,14,15,15,17,15,8,2,14,16,14,16,19,12,3,13,15,14,14,15,6,0,12,14,15,15,15,8,1,14,16,11,13,17,9,5,15,16,16,17,19,11,8,21,24,26,27,35,27,-58,-30,19,19,18,19,12,8,-19,24,22,20,20,12,-14,23,21,20,18,17,12,6,13,18,18,17,17,8,4,18,20,19,19,18,8,4,18,19,19,18,18,8,9,18,20,31,-12,28,4,5,21,22,20,19,20,7,10,19,20,20,20,18,7,8,20,20,19,19,16,5,7,20,21,19,18,21,8,11,22,22,21,20,20,8,11,23,23,21,20,15,7,11,21,22,21,20,18,7,8,22,22,23,23,19,9,14,28,27,24,23,20,6,14,27,26,24,24,26,11,28,-33,26,24,23,22,0,10,24,25,22,19,17,3,12,22,20,20,23,20,8,13,21,21,21,20,19,8,14,25,25,24,24,21,13,15,23,25,25,24,22,12,24,18,26,25,22,20,16,15,25,26,25,23,21,11,11,20,22,21,19,23,13],"text":["date_fix: 2022-01-01<br />grocery_pharmacy: -80","date_fix: 2022-01-02<br />grocery_pharmacy:   7","date_fix: 2022-01-03<br />grocery_pharmacy:  28","date_fix: 2022-01-04<br />grocery_pharmacy:  30","date_fix: 2022-01-05<br />grocery_pharmacy:  42","date_fix: 2022-01-06<br />grocery_pharmacy: -24","date_fix: 2022-01-07<br />grocery_pharmacy:  25","date_fix: 2022-01-08<br />grocery_pharmacy:   6","date_fix: 2022-01-09<br />grocery_pharmacy:  -7","date_fix: 2022-01-10<br />grocery_pharmacy:  19","date_fix: 2022-01-11<br />grocery_pharmacy:  20","date_fix: 2022-01-12<br />grocery_pharmacy:  18","date_fix: 2022-01-13<br />grocery_pharmacy:  18","date_fix: 2022-01-14<br />grocery_pharmacy:  17","date_fix: 2022-01-15<br />grocery_pharmacy:   9","date_fix: 2022-01-16<br />grocery_pharmacy:  -1","date_fix: 2022-01-17<br />grocery_pharmacy:  17","date_fix: 2022-01-18<br />grocery_pharmacy:  17","date_fix: 2022-01-19<br />grocery_pharmacy:  17","date_fix: 2022-01-20<br />grocery_pharmacy:  15","date_fix: 2022-01-21<br />grocery_pharmacy:  15","date_fix: 2022-01-22<br />grocery_pharmacy:   9","date_fix: 2022-01-23<br />grocery_pharmacy:  -2","date_fix: 2022-01-24<br />grocery_pharmacy:  14","date_fix: 2022-01-25<br />grocery_pharmacy:  15","date_fix: 2022-01-26<br />grocery_pharmacy:  15","date_fix: 2022-01-27<br />grocery_pharmacy:  16","date_fix: 2022-01-28<br />grocery_pharmacy:  16","date_fix: 2022-01-29<br />grocery_pharmacy:  10","date_fix: 2022-01-30<br />grocery_pharmacy:   0","date_fix: 2022-01-31<br />grocery_pharmacy:  15","date_fix: 2022-02-01<br />grocery_pharmacy:  18","date_fix: 2022-02-02<br />grocery_pharmacy:  19","date_fix: 2022-02-03<br />grocery_pharmacy:  18","date_fix: 2022-02-04<br />grocery_pharmacy:  17","date_fix: 2022-02-05<br />grocery_pharmacy:   9","date_fix: 2022-02-06<br />grocery_pharmacy:   0","date_fix: 2022-02-07<br />grocery_pharmacy:  13","date_fix: 2022-02-08<br />grocery_pharmacy:  17","date_fix: 2022-02-09<br />grocery_pharmacy:  16","date_fix: 2022-02-10<br />grocery_pharmacy:  17","date_fix: 2022-02-11<br />grocery_pharmacy:  17","date_fix: 2022-02-12<br />grocery_pharmacy:   9","date_fix: 2022-02-13<br />grocery_pharmacy:   3","date_fix: 2022-02-14<br />grocery_pharmacy:  19","date_fix: 2022-02-15<br />grocery_pharmacy:  10","date_fix: 2022-02-16<br />grocery_pharmacy:  16","date_fix: 2022-02-17<br />grocery_pharmacy:  16","date_fix: 2022-02-18<br />grocery_pharmacy:  15","date_fix: 2022-02-19<br />grocery_pharmacy:   8","date_fix: 2022-02-20<br />grocery_pharmacy:   0","date_fix: 2022-02-21<br />grocery_pharmacy:  11","date_fix: 2022-02-22<br />grocery_pharmacy:  14","date_fix: 2022-02-23<br />grocery_pharmacy:  16","date_fix: 2022-02-24<br />grocery_pharmacy:  16","date_fix: 2022-02-25<br />grocery_pharmacy:  16","date_fix: 2022-02-26<br />grocery_pharmacy:   7","date_fix: 2022-02-27<br />grocery_pharmacy:   1","date_fix: 2022-02-28<br />grocery_pharmacy:  14","date_fix: 2022-03-01<br />grocery_pharmacy:  15","date_fix: 2022-03-02<br />grocery_pharmacy:  15","date_fix: 2022-03-03<br />grocery_pharmacy:  17","date_fix: 2022-03-04<br />grocery_pharmacy:  15","date_fix: 2022-03-05<br />grocery_pharmacy:   8","date_fix: 2022-03-06<br />grocery_pharmacy:   2","date_fix: 2022-03-07<br />grocery_pharmacy:  14","date_fix: 2022-03-08<br />grocery_pharmacy:  16","date_fix: 2022-03-09<br />grocery_pharmacy:  14","date_fix: 2022-03-10<br />grocery_pharmacy:  16","date_fix: 2022-03-11<br />grocery_pharmacy:  19","date_fix: 2022-03-12<br />grocery_pharmacy:  12","date_fix: 2022-03-13<br />grocery_pharmacy:   3","date_fix: 2022-03-14<br />grocery_pharmacy:  13","date_fix: 2022-03-15<br />grocery_pharmacy:  15","date_fix: 2022-03-16<br />grocery_pharmacy:  14","date_fix: 2022-03-17<br />grocery_pharmacy:  14","date_fix: 2022-03-18<br />grocery_pharmacy:  15","date_fix: 2022-03-19<br />grocery_pharmacy:   6","date_fix: 2022-03-20<br />grocery_pharmacy:   0","date_fix: 2022-03-21<br />grocery_pharmacy:  12","date_fix: 2022-03-22<br />grocery_pharmacy:  14","date_fix: 2022-03-23<br />grocery_pharmacy:  15","date_fix: 2022-03-24<br />grocery_pharmacy:  15","date_fix: 2022-03-25<br />grocery_pharmacy:  15","date_fix: 2022-03-26<br />grocery_pharmacy:   8","date_fix: 2022-03-27<br />grocery_pharmacy:   1","date_fix: 2022-03-28<br />grocery_pharmacy:  14","date_fix: 2022-03-29<br />grocery_pharmacy:  16","date_fix: 2022-03-30<br />grocery_pharmacy:  11","date_fix: 2022-03-31<br />grocery_pharmacy:  13","date_fix: 2022-04-01<br />grocery_pharmacy:  17","date_fix: 2022-04-02<br />grocery_pharmacy:   9","date_fix: 2022-04-03<br />grocery_pharmacy:   5","date_fix: 2022-04-04<br />grocery_pharmacy:  15","date_fix: 2022-04-05<br />grocery_pharmacy:  16","date_fix: 2022-04-06<br />grocery_pharmacy:  16","date_fix: 2022-04-07<br />grocery_pharmacy:  17","date_fix: 2022-04-08<br />grocery_pharmacy:  19","date_fix: 2022-04-09<br />grocery_pharmacy:  11","date_fix: 2022-04-10<br />grocery_pharmacy:   8","date_fix: 2022-04-11<br />grocery_pharmacy:  21","date_fix: 2022-04-12<br />grocery_pharmacy:  24","date_fix: 2022-04-13<br />grocery_pharmacy:  26","date_fix: 2022-04-14<br />grocery_pharmacy:  27","date_fix: 2022-04-15<br />grocery_pharmacy:  35","date_fix: 2022-04-16<br />grocery_pharmacy:  27","date_fix: 2022-04-17<br />grocery_pharmacy: -58","date_fix: 2022-04-18<br />grocery_pharmacy: -30","date_fix: 2022-04-19<br />grocery_pharmacy:  19","date_fix: 2022-04-20<br />grocery_pharmacy:  19","date_fix: 2022-04-21<br />grocery_pharmacy:  18","date_fix: 2022-04-22<br />grocery_pharmacy:  19","date_fix: 2022-04-23<br />grocery_pharmacy:  12","date_fix: 2022-04-24<br />grocery_pharmacy:   8","date_fix: 2022-04-25<br />grocery_pharmacy: -19","date_fix: 2022-04-26<br />grocery_pharmacy:  24","date_fix: 2022-04-27<br />grocery_pharmacy:  22","date_fix: 2022-04-28<br />grocery_pharmacy:  20","date_fix: 2022-04-29<br />grocery_pharmacy:  20","date_fix: 2022-04-30<br />grocery_pharmacy:  12","date_fix: 2022-05-01<br />grocery_pharmacy: -14","date_fix: 2022-05-02<br />grocery_pharmacy:  23","date_fix: 2022-05-03<br />grocery_pharmacy:  21","date_fix: 2022-05-04<br />grocery_pharmacy:  20","date_fix: 2022-05-05<br />grocery_pharmacy:  18","date_fix: 2022-05-06<br />grocery_pharmacy:  17","date_fix: 2022-05-07<br />grocery_pharmacy:  12","date_fix: 2022-05-08<br />grocery_pharmacy:   6","date_fix: 2022-05-09<br />grocery_pharmacy:  13","date_fix: 2022-05-10<br />grocery_pharmacy:  18","date_fix: 2022-05-11<br />grocery_pharmacy:  18","date_fix: 2022-05-12<br />grocery_pharmacy:  17","date_fix: 2022-05-13<br />grocery_pharmacy:  17","date_fix: 2022-05-14<br />grocery_pharmacy:   8","date_fix: 2022-05-15<br />grocery_pharmacy:   4","date_fix: 2022-05-16<br />grocery_pharmacy:  18","date_fix: 2022-05-17<br />grocery_pharmacy:  20","date_fix: 2022-05-18<br />grocery_pharmacy:  19","date_fix: 2022-05-19<br />grocery_pharmacy:  19","date_fix: 2022-05-20<br />grocery_pharmacy:  18","date_fix: 2022-05-21<br />grocery_pharmacy:   8","date_fix: 2022-05-22<br />grocery_pharmacy:   4","date_fix: 2022-05-23<br />grocery_pharmacy:  18","date_fix: 2022-05-24<br />grocery_pharmacy:  19","date_fix: 2022-05-25<br />grocery_pharmacy:  19","date_fix: 2022-05-26<br />grocery_pharmacy:  18","date_fix: 2022-05-27<br />grocery_pharmacy:  18","date_fix: 2022-05-28<br />grocery_pharmacy:   8","date_fix: 2022-05-29<br />grocery_pharmacy:   9","date_fix: 2022-05-30<br />grocery_pharmacy:  18","date_fix: 2022-05-31<br />grocery_pharmacy:  20","date_fix: 2022-06-01<br />grocery_pharmacy:  31","date_fix: 2022-06-02<br />grocery_pharmacy: -12","date_fix: 2022-06-03<br />grocery_pharmacy:  28","date_fix: 2022-06-04<br />grocery_pharmacy:   4","date_fix: 2022-06-05<br />grocery_pharmacy:   5","date_fix: 2022-06-06<br />grocery_pharmacy:  21","date_fix: 2022-06-07<br />grocery_pharmacy:  22","date_fix: 2022-06-08<br />grocery_pharmacy:  20","date_fix: 2022-06-09<br />grocery_pharmacy:  19","date_fix: 2022-06-10<br />grocery_pharmacy:  20","date_fix: 2022-06-11<br />grocery_pharmacy:   7","date_fix: 2022-06-12<br />grocery_pharmacy:  10","date_fix: 2022-06-13<br />grocery_pharmacy:  19","date_fix: 2022-06-14<br />grocery_pharmacy:  20","date_fix: 2022-06-15<br />grocery_pharmacy:  20","date_fix: 2022-06-16<br />grocery_pharmacy:  20","date_fix: 2022-06-17<br />grocery_pharmacy:  18","date_fix: 2022-06-18<br />grocery_pharmacy:   7","date_fix: 2022-06-19<br />grocery_pharmacy:   8","date_fix: 2022-06-20<br />grocery_pharmacy:  20","date_fix: 2022-06-21<br />grocery_pharmacy:  20","date_fix: 2022-06-22<br />grocery_pharmacy:  19","date_fix: 2022-06-23<br />grocery_pharmacy:  19","date_fix: 2022-06-24<br />grocery_pharmacy:  16","date_fix: 2022-06-25<br />grocery_pharmacy:   5","date_fix: 2022-06-26<br />grocery_pharmacy:   7","date_fix: 2022-06-27<br />grocery_pharmacy:  20","date_fix: 2022-06-28<br />grocery_pharmacy:  21","date_fix: 2022-06-29<br />grocery_pharmacy:  19","date_fix: 2022-06-30<br />grocery_pharmacy:  18","date_fix: 2022-07-01<br />grocery_pharmacy:  21","date_fix: 2022-07-02<br />grocery_pharmacy:   8","date_fix: 2022-07-03<br />grocery_pharmacy:  11","date_fix: 2022-07-04<br />grocery_pharmacy:  22","date_fix: 2022-07-05<br />grocery_pharmacy:  22","date_fix: 2022-07-06<br />grocery_pharmacy:  21","date_fix: 2022-07-07<br />grocery_pharmacy:  20","date_fix: 2022-07-08<br />grocery_pharmacy:  20","date_fix: 2022-07-09<br />grocery_pharmacy:   8","date_fix: 2022-07-10<br />grocery_pharmacy:  11","date_fix: 2022-07-11<br />grocery_pharmacy:  23","date_fix: 2022-07-12<br />grocery_pharmacy:  23","date_fix: 2022-07-13<br />grocery_pharmacy:  21","date_fix: 2022-07-14<br />grocery_pharmacy:  20","date_fix: 2022-07-15<br />grocery_pharmacy:  15","date_fix: 2022-07-16<br />grocery_pharmacy:   7","date_fix: 2022-07-17<br />grocery_pharmacy:  11","date_fix: 2022-07-18<br />grocery_pharmacy:  21","date_fix: 2022-07-19<br />grocery_pharmacy:  22","date_fix: 2022-07-20<br />grocery_pharmacy:  21","date_fix: 2022-07-21<br />grocery_pharmacy:  20","date_fix: 2022-07-22<br />grocery_pharmacy:  18","date_fix: 2022-07-23<br />grocery_pharmacy:   7","date_fix: 2022-07-24<br />grocery_pharmacy:   8","date_fix: 2022-07-25<br />grocery_pharmacy:  22","date_fix: 2022-07-26<br />grocery_pharmacy:  22","date_fix: 2022-07-27<br />grocery_pharmacy:  23","date_fix: 2022-07-28<br />grocery_pharmacy:  23","date_fix: 2022-07-29<br />grocery_pharmacy:  19","date_fix: 2022-07-30<br />grocery_pharmacy:   9","date_fix: 2022-07-31<br />grocery_pharmacy:  14","date_fix: 2022-08-01<br />grocery_pharmacy:  28","date_fix: 2022-08-02<br />grocery_pharmacy:  27","date_fix: 2022-08-03<br />grocery_pharmacy:  24","date_fix: 2022-08-04<br />grocery_pharmacy:  23","date_fix: 2022-08-05<br />grocery_pharmacy:  20","date_fix: 2022-08-06<br />grocery_pharmacy:   6","date_fix: 2022-08-07<br />grocery_pharmacy:  14","date_fix: 2022-08-08<br />grocery_pharmacy:  27","date_fix: 2022-08-09<br />grocery_pharmacy:  26","date_fix: 2022-08-10<br />grocery_pharmacy:  24","date_fix: 2022-08-11<br />grocery_pharmacy:  24","date_fix: 2022-08-12<br />grocery_pharmacy:  26","date_fix: 2022-08-13<br />grocery_pharmacy:  11","date_fix: 2022-08-14<br />grocery_pharmacy:  28","date_fix: 2022-08-15<br />grocery_pharmacy: -33","date_fix: 2022-08-16<br />grocery_pharmacy:  26","date_fix: 2022-08-17<br />grocery_pharmacy:  24","date_fix: 2022-08-18<br />grocery_pharmacy:  23","date_fix: 2022-08-19<br />grocery_pharmacy:  22","date_fix: 2022-08-20<br />grocery_pharmacy:   0","date_fix: 2022-08-21<br />grocery_pharmacy:  10","date_fix: 2022-08-22<br />grocery_pharmacy:  24","date_fix: 2022-08-23<br />grocery_pharmacy:  25","date_fix: 2022-08-24<br />grocery_pharmacy:  22","date_fix: 2022-08-25<br />grocery_pharmacy:  19","date_fix: 2022-08-26<br />grocery_pharmacy:  17","date_fix: 2022-08-27<br />grocery_pharmacy:   3","date_fix: 2022-08-28<br />grocery_pharmacy:  12","date_fix: 2022-08-29<br />grocery_pharmacy:  22","date_fix: 2022-08-30<br />grocery_pharmacy:  20","date_fix: 2022-08-31<br />grocery_pharmacy:  20","date_fix: 2022-09-01<br />grocery_pharmacy:  23","date_fix: 2022-09-02<br />grocery_pharmacy:  20","date_fix: 2022-09-03<br />grocery_pharmacy:   8","date_fix: 2022-09-04<br />grocery_pharmacy:  13","date_fix: 2022-09-05<br />grocery_pharmacy:  21","date_fix: 2022-09-06<br />grocery_pharmacy:  21","date_fix: 2022-09-07<br />grocery_pharmacy:  21","date_fix: 2022-09-08<br />grocery_pharmacy:  20","date_fix: 2022-09-09<br />grocery_pharmacy:  19","date_fix: 2022-09-10<br />grocery_pharmacy:   8","date_fix: 2022-09-11<br />grocery_pharmacy:  14","date_fix: 2022-09-12<br />grocery_pharmacy:  25","date_fix: 2022-09-13<br />grocery_pharmacy:  25","date_fix: 2022-09-14<br />grocery_pharmacy:  24","date_fix: 2022-09-15<br />grocery_pharmacy:  24","date_fix: 2022-09-16<br />grocery_pharmacy:  21","date_fix: 2022-09-17<br />grocery_pharmacy:  13","date_fix: 2022-09-18<br />grocery_pharmacy:  15","date_fix: 2022-09-19<br />grocery_pharmacy:  23","date_fix: 2022-09-20<br />grocery_pharmacy:  25","date_fix: 2022-09-21<br />grocery_pharmacy:  25","date_fix: 2022-09-22<br />grocery_pharmacy:  24","date_fix: 2022-09-23<br />grocery_pharmacy:  22","date_fix: 2022-09-24<br />grocery_pharmacy:  12","date_fix: 2022-09-25<br />grocery_pharmacy:  24","date_fix: 2022-09-26<br />grocery_pharmacy:  18","date_fix: 2022-09-27<br />grocery_pharmacy:  26","date_fix: 2022-09-28<br />grocery_pharmacy:  25","date_fix: 2022-09-29<br />grocery_pharmacy:  22","date_fix: 2022-09-30<br />grocery_pharmacy:  20","date_fix: 2022-10-01<br />grocery_pharmacy:  16","date_fix: 2022-10-02<br />grocery_pharmacy:  15","date_fix: 2022-10-03<br />grocery_pharmacy:  25","date_fix: 2022-10-04<br />grocery_pharmacy:  26","date_fix: 2022-10-05<br />grocery_pharmacy:  25","date_fix: 2022-10-06<br />grocery_pharmacy:  23","date_fix: 2022-10-07<br />grocery_pharmacy:  21","date_fix: 2022-10-08<br />grocery_pharmacy:  11","date_fix: 2022-10-09<br />grocery_pharmacy:  11","date_fix: 2022-10-10<br />grocery_pharmacy:  20","date_fix: 2022-10-11<br />grocery_pharmacy:  22","date_fix: 2022-10-12<br />grocery_pharmacy:  21","date_fix: 2022-10-13<br />grocery_pharmacy:  19","date_fix: 2022-10-14<br />grocery_pharmacy:  23","date_fix: 2022-10-15<br />grocery_pharmacy:  13"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(6,22,133,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle-open","line":{"width":1.8897637795275593,"color":"rgba(6,22,133,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.8897637795275593,"color":"rgba(44,123,182,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":25.57077625570777,"l":43.105022831050235},"font":{"color":"rgba(0,0,0,1)","family":"serif","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18978.650000000001,19294.349999999999],"tickmode":"array","ticktext":["Jan","Apr","Jul","Oct"],"tickvals":[18993,19083,19174,19266],"categoryorder":"array","categoryarray":["Jan","Apr","Jul","Oct"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"serif","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"serif","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-86.099999999999994,48.100000000000001],"tickmode":"array","ticktext":["-50","0"],"tickvals":[-50,0],"categoryorder":"array","categoryarray":["-50","0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"serif","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Grocery and Pharmacy % change","font":{"color":"rgba(0,0,0,1)","family":"serif","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"serif","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"20793830bb33":{"x":{},"y":{},"type":"scatter"},"20797522e17":{"x":{},"y":{}}},"cur_data":"20793830bb33","visdat":{"20793830bb33":["function (y) ","x"],"20797522e17":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-8e1fe96c0688a849169a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8e1fe96c0688a849169a">{"x":{"data":[{"x":[18993,18994,18995,18996,18997,18998,18999,19000,19001,19002,19003,19004,19005,19006,19007,19008,19009,19010,19011,19012,19013,19014,19015,19016,19017,19018,19019,19020,19021,19022,19023,19024,19025,19026,19027,19028,19029,19030,19031,19032,19033,19034,19035,19036,19037,19038,19039,19040,19041,19042,19043,19044,19045,19046,19047,19048,19049,19050,19051,19052,19053,19054,19055,19056,19057,19058,19059,19060,19061,19062,19063,19064,19065,19066,19067,19068,19069,19070,19071,19072,19073,19074,19075,19076,19077,19078,19079,19080,19081,19082,19083,19084,19085,19086,19087,19088,19089,19090,19091,19092,19093,19094,19095,19096,19097,19098,19099,19100,19101,19102,19103,19104,19105,19106,19107,19108,19109,19110,19111,19112,19113,19114,19115,19116,19117,19118,19119,19120,19121,19122,19123,19124,19125,19126,19127,19128,19129,19130,19131,19132,19133,19134,19135,19136,19137,19138,19139,19140,19141,19142,19143,19144,19145,19146,19147,19148,19149,19150,19151,19152,19153,19154,19155,19156,19157,19158,19159,19160,19161,19162,19163,19164,19165,19166,19167,19168,19169,19170,19171,19172,19173,19174,19175,19176,19177,19178,19179,19180,19181,19182,19183,19184,19185,19186,19187,19188,19189,19190,19191,19192,19193,19194,19195,19196,19197,19198,19199,19200,19201,19202,19203,19204,19205,19206,19207,19208,19209,19210,19211,19212,19213,19214,19215,19216,19217,19218,19219,19220,19221,19222,19223,19224,19225,19226,19227,19228,19229,19230,19231,19232,19233,19234,19235,19236,19237,19238,19239,19240,19241,19242,19243,19244,19245,19246,19247,19248,19249,19250,19251,19252,19253,19254,19255,19256,19257,19258,19259,19260,19261,19262,19263,19264,19265,19266,19267,19268,19269,19270,19271,19272,19273,19274,19275,19276,19277,19278,19279,19280],"y":[-80,7,28,30,42,-24,25,6,-7,19,20,18,18,17,9,-1,17,17,17,15,15,9,-2,14,15,15,16,16,10,0,15,18,19,18,17,9,0,13,17,16,17,17,9,3,19,10,16,16,15,8,0,11,14,16,16,16,7,1,14,15,15,17,15,8,2,14,16,14,16,19,12,3,13,15,14,14,15,6,0,12,14,15,15,15,8,1,14,16,11,13,17,9,5,15,16,16,17,19,11,8,21,24,26,27,35,27,-58,-30,19,19,18,19,12,8,-19,24,22,20,20,12,-14,23,21,20,18,17,12,6,13,18,18,17,17,8,4,18,20,19,19,18,8,4,18,19,19,18,18,8,9,18,20,31,-12,28,4,5,21,22,20,19,20,7,10,19,20,20,20,18,7,8,20,20,19,19,16,5,7,20,21,19,18,21,8,11,22,22,21,20,20,8,11,23,23,21,20,15,7,11,21,22,21,20,18,7,8,22,22,23,23,19,9,14,28,27,24,23,20,6,14,27,26,24,24,26,11,28,-33,26,24,23,22,0,10,24,25,22,19,17,3,12,22,20,20,23,20,8,13,21,21,21,20,19,8,14,25,25,24,24,21,13,15,23,25,25,24,22,12,24,18,26,25,22,20,16,15,25,26,25,23,21,11,11,20,22,21,19,23,13],"text":["date_fix: 2022-01-01<br />grocery_pharmacy: -80","date_fix: 2022-01-02<br />grocery_pharmacy:   7","date_fix: 2022-01-03<br />grocery_pharmacy:  28","date_fix: 2022-01-04<br />grocery_pharmacy:  30","date_fix: 2022-01-05<br />grocery_pharmacy:  42","date_fix: 2022-01-06<br />grocery_pharmacy: -24","date_fix: 2022-01-07<br />grocery_pharmacy:  25","date_fix: 2022-01-08<br />grocery_pharmacy:   6","date_fix: 2022-01-09<br />grocery_pharmacy:  -7","date_fix: 2022-01-10<br />grocery_pharmacy:  19","date_fix: 2022-01-11<br />grocery_pharmacy:  20","date_fix: 2022-01-12<br />grocery_pharmacy:  18","date_fix: 2022-01-13<br />grocery_pharmacy:  18","date_fix: 2022-01-14<br />grocery_pharmacy:  17","date_fix: 2022-01-15<br />grocery_pharmacy:   9","date_fix: 2022-01-16<br />grocery_pharmacy:  -1","date_fix: 2022-01-17<br />grocery_pharmacy:  17","date_fix: 2022-01-18<br />grocery_pharmacy:  17","date_fix: 2022-01-19<br />grocery_pharmacy:  17","date_fix: 2022-01-20<br />grocery_pharmacy:  15","date_fix: 2022-01-21<br />grocery_pharmacy:  15","date_fix: 2022-01-22<br />grocery_pharmacy:   9","date_fix: 2022-01-23<br />grocery_pharmacy:  -2","date_fix: 2022-01-24<br />grocery_pharmacy:  14","date_fix: 2022-01-25<br />grocery_pharmacy:  15","date_fix: 2022-01-26<br />grocery_pharmacy:  15","date_fix: 2022-01-27<br />grocery_pharmacy:  16","date_fix: 2022-01-28<br />grocery_pharmacy:  16","date_fix: 2022-01-29<br />grocery_pharmacy:  10","date_fix: 2022-01-30<br />grocery_pharmacy:   0","date_fix: 2022-01-31<br />grocery_pharmacy:  15","date_fix: 2022-02-01<br />grocery_pharmacy:  18","date_fix: 2022-02-02<br />grocery_pharmacy:  19","date_fix: 2022-02-03<br />grocery_pharmacy:  18","date_fix: 2022-02-04<br />grocery_pharmacy:  17","date_fix: 2022-02-05<br />grocery_pharmacy:   9","date_fix: 2022-02-06<br />grocery_pharmacy:   0","date_fix: 2022-02-07<br />grocery_pharmacy:  13","date_fix: 2022-02-08<br />grocery_pharmacy:  17","date_fix: 2022-02-09<br />grocery_pharmacy:  16","date_fix: 2022-02-10<br />grocery_pharmacy:  17","date_fix: 2022-02-11<br />grocery_pharmacy:  17","date_fix: 2022-02-12<br />grocery_pharmacy:   9","date_fix: 2022-02-13<br />grocery_pharmacy:   3","date_fix: 2022-02-14<br />grocery_pharmacy:  19","date_fix: 2022-02-15<br />grocery_pharmacy:  10","date_fix: 2022-02-16<br />grocery_pharmacy:  16","date_fix: 2022-02-17<br />grocery_pharmacy:  16","date_fix: 2022-02-18<br />grocery_pharmacy:  15","date_fix: 2022-02-19<br />grocery_pharmacy:   8","date_fix: 2022-02-20<br />grocery_pharmacy:   0","date_fix: 2022-02-21<br />grocery_pharmacy:  11","date_fix: 2022-02-22<br />grocery_pharmacy:  14","date_fix: 2022-02-23<br />grocery_pharmacy:  16","date_fix: 2022-02-24<br />grocery_pharmacy:  16","date_fix: 2022-02-25<br />grocery_pharmacy:  16","date_fix: 2022-02-26<br />grocery_pharmacy:   7","date_fix: 2022-02-27<br />grocery_pharmacy:   1","date_fix: 2022-02-28<br />grocery_pharmacy:  14","date_fix: 2022-03-01<br />grocery_pharmacy:  15","date_fix: 2022-03-02<br />grocery_pharmacy:  15","date_fix: 2022-03-03<br />grocery_pharmacy:  17","date_fix: 2022-03-04<br />grocery_pharmacy:  15","date_fix: 2022-03-05<br />grocery_pharmacy:   8","date_fix: 2022-03-06<br />grocery_pharmacy:   2","date_fix: 2022-03-07<br />grocery_pharmacy:  14","date_fix: 2022-03-08<br />grocery_pharmacy:  16","date_fix: 2022-03-09<br />grocery_pharmacy:  14","date_fix: 2022-03-10<br />grocery_pharmacy:  16","date_fix: 2022-03-11<br />grocery_pharmacy:  19","date_fix: 2022-03-12<br />grocery_pharmacy:  12","date_fix: 2022-03-13<br />grocery_pharmacy:   3","date_fix: 2022-03-14<br />grocery_pharmacy:  13","date_fix: 2022-03-15<br />grocery_pharmacy:  15","date_fix: 2022-03-16<br />grocery_pharmacy:  14","date_fix: 2022-03-17<br />grocery_pharmacy:  14","date_fix: 2022-03-18<br />grocery_pharmacy:  15","date_fix: 2022-03-19<br />grocery_pharmacy:   6","date_fix: 2022-03-20<br />grocery_pharmacy:   0","date_fix: 2022-03-21<br />grocery_pharmacy:  12","date_fix: 2022-03-22<br />grocery_pharmacy:  14","date_fix: 2022-03-23<br />grocery_pharmacy:  15","date_fix: 2022-03-24<br />grocery_pharmacy:  15","date_fix: 2022-03-25<br />grocery_pharmacy:  15","date_fix: 2022-03-26<br />grocery_pharmacy:   8","date_fix: 2022-03-27<br />grocery_pharmacy:   1","date_fix: 2022-03-28<br />grocery_pharmacy:  14","date_fix: 2022-03-29<br />grocery_pharmacy:  16","date_fix: 2022-03-30<br />grocery_pharmacy:  11","date_fix: 2022-03-31<br />grocery_pharmacy:  13","date_fix: 2022-04-01<br />grocery_pharmacy:  17","date_fix: 2022-04-02<br />grocery_pharmacy:   9","date_fix: 2022-04-03<br />grocery_pharmacy:   5","date_fix: 2022-04-04<br />grocery_pharmacy:  15","date_fix: 2022-04-05<br />grocery_pharmacy:  16","date_fix: 2022-04-06<br />grocery_pharmacy:  16","date_fix: 2022-04-07<br />grocery_pharmacy:  17","date_fix: 2022-04-08<br />grocery_pharmacy:  19","date_fix: 2022-04-09<br />grocery_pharmacy:  11","date_fix: 2022-04-10<br />grocery_pharmacy:   8","date_fix: 2022-04-11<br />grocery_pharmacy:  21","date_fix: 2022-04-12<br />grocery_pharmacy:  24","date_fix: 2022-04-13<br />grocery_pharmacy:  26","date_fix: 2022-04-14<br />grocery_pharmacy:  27","date_fix: 2022-04-15<br />grocery_pharmacy:  35","date_fix: 2022-04-16<br />grocery_pharmacy:  27","date_fix: 2022-04-17<br />grocery_pharmacy: -58","date_fix: 2022-04-18<br />grocery_pharmacy: -30","date_fix: 2022-04-19<br />grocery_pharmacy:  19","date_fix: 2022-04-20<br />grocery_pharmacy:  19","date_fix: 2022-04-21<br />grocery_pharmacy:  18","date_fix: 2022-04-22<br />grocery_pharmacy:  19","date_fix: 2022-04-23<br />grocery_pharmacy:  12","date_fix: 2022-04-24<br />grocery_pharmacy:   8","date_fix: 2022-04-25<br />grocery_pharmacy: -19","date_fix: 2022-04-26<br />grocery_pharmacy:  24","date_fix: 2022-04-27<br />grocery_pharmacy:  22","date_fix: 2022-04-28<br />grocery_pharmacy:  20","date_fix: 2022-04-29<br />grocery_pharmacy:  20","date_fix: 2022-04-30<br />grocery_pharmacy:  12","date_fix: 2022-05-01<br />grocery_pharmacy: -14","date_fix: 2022-05-02<br />grocery_pharmacy:  23","date_fix: 2022-05-03<br />grocery_pharmacy:  21","date_fix: 2022-05-04<br />grocery_pharmacy:  20","date_fix: 2022-05-05<br />grocery_pharmacy:  18","date_fix: 2022-05-06<br />grocery_pharmacy:  17","date_fix: 2022-05-07<br />grocery_pharmacy:  12","date_fix: 2022-05-08<br />grocery_pharmacy:   6","date_fix: 2022-05-09<br />grocery_pharmacy:  13","date_fix: 2022-05-10<br />grocery_pharmacy:  18","date_fix: 2022-05-11<br />grocery_pharmacy:  18","date_fix: 2022-05-12<br />grocery_pharmacy:  17","date_fix: 2022-05-13<br />grocery_pharmacy:  17","date_fix: 2022-05-14<br />grocery_pharmacy:   8","date_fix: 2022-05-15<br />grocery_pharmacy:   4","date_fix: 2022-05-16<br />grocery_pharmacy:  18","date_fix: 2022-05-17<br />grocery_pharmacy:  20","date_fix: 2022-05-18<br />grocery_pharmacy:  19","date_fix: 2022-05-19<br />grocery_pharmacy:  19","date_fix: 2022-05-20<br />grocery_pharmacy:  18","date_fix: 2022-05-21<br />grocery_pharmacy:   8","date_fix: 2022-05-22<br />grocery_pharmacy:   4","date_fix: 2022-05-23<br />grocery_pharmacy:  18","date_fix: 2022-05-24<br />grocery_pharmacy:  19","date_fix: 2022-05-25<br />grocery_pharmacy:  19","date_fix: 2022-05-26<br />grocery_pharmacy:  18","date_fix: 2022-05-27<br />grocery_pharmacy:  18","date_fix: 2022-05-28<br />grocery_pharmacy:   8","date_fix: 2022-05-29<br />grocery_pharmacy:   9","date_fix: 2022-05-30<br />grocery_pharmacy:  18","date_fix: 2022-05-31<br />grocery_pharmacy:  20","date_fix: 2022-06-01<br />grocery_pharmacy:  31","date_fix: 2022-06-02<br />grocery_pharmacy: -12","date_fix: 2022-06-03<br />grocery_pharmacy:  28","date_fix: 2022-06-04<br />grocery_pharmacy:   4","date_fix: 2022-06-05<br />grocery_pharmacy:   5","date_fix: 2022-06-06<br />grocery_pharmacy:  21","date_fix: 2022-06-07<br />grocery_pharmacy:  22","date_fix: 2022-06-08<br />grocery_pharmacy:  20","date_fix: 2022-06-09<br />grocery_pharmacy:  19","date_fix: 2022-06-10<br />grocery_pharmacy:  20","date_fix: 2022-06-11<br />grocery_pharmacy:   7","date_fix: 2022-06-12<br />grocery_pharmacy:  10","date_fix: 2022-06-13<br />grocery_pharmacy:  19","date_fix: 2022-06-14<br />grocery_pharmacy:  20","date_fix: 2022-06-15<br />grocery_pharmacy:  20","date_fix: 2022-06-16<br />grocery_pharmacy:  20","date_fix: 2022-06-17<br />grocery_pharmacy:  18","date_fix: 2022-06-18<br />grocery_pharmacy:   7","date_fix: 2022-06-19<br />grocery_pharmacy:   8","date_fix: 2022-06-20<br />grocery_pharmacy:  20","date_fix: 2022-06-21<br />grocery_pharmacy:  20","date_fix: 2022-06-22<br />grocery_pharmacy:  19","date_fix: 2022-06-23<br />grocery_pharmacy:  19","date_fix: 2022-06-24<br />grocery_pharmacy:  16","date_fix: 2022-06-25<br />grocery_pharmacy:   5","date_fix: 2022-06-26<br />grocery_pharmacy:   7","date_fix: 2022-06-27<br />grocery_pharmacy:  20","date_fix: 2022-06-28<br />grocery_pharmacy:  21","date_fix: 2022-06-29<br />grocery_pharmacy:  19","date_fix: 2022-06-30<br />grocery_pharmacy:  18","date_fix: 2022-07-01<br />grocery_pharmacy:  21","date_fix: 2022-07-02<br />grocery_pharmacy:   8","date_fix: 2022-07-03<br />grocery_pharmacy:  11","date_fix: 2022-07-04<br />grocery_pharmacy:  22","date_fix: 2022-07-05<br />grocery_pharmacy:  22","date_fix: 2022-07-06<br />grocery_pharmacy:  21","date_fix: 2022-07-07<br />grocery_pharmacy:  20","date_fix: 2022-07-08<br />grocery_pharmacy:  20","date_fix: 2022-07-09<br />grocery_pharmacy:   8","date_fix: 2022-07-10<br />grocery_pharmacy:  11","date_fix: 2022-07-11<br />grocery_pharmacy:  23","date_fix: 2022-07-12<br />grocery_pharmacy:  23","date_fix: 2022-07-13<br />grocery_pharmacy:  21","date_fix: 2022-07-14<br />grocery_pharmacy:  20","date_fix: 2022-07-15<br />grocery_pharmacy:  15","date_fix: 2022-07-16<br />grocery_pharmacy:   7","date_fix: 2022-07-17<br />grocery_pharmacy:  11","date_fix: 2022-07-18<br />grocery_pharmacy:  21","date_fix: 2022-07-19<br />grocery_pharmacy:  22","date_fix: 2022-07-20<br />grocery_pharmacy:  21","date_fix: 2022-07-21<br />grocery_pharmacy:  20","date_fix: 2022-07-22<br />grocery_pharmacy:  18","date_fix: 2022-07-23<br />grocery_pharmacy:   7","date_fix: 2022-07-24<br />grocery_pharmacy:   8","date_fix: 2022-07-25<br />grocery_pharmacy:  22","date_fix: 2022-07-26<br />grocery_pharmacy:  22","date_fix: 2022-07-27<br />grocery_pharmacy:  23","date_fix: 2022-07-28<br />grocery_pharmacy:  23","date_fix: 2022-07-29<br />grocery_pharmacy:  19","date_fix: 2022-07-30<br />grocery_pharmacy:   9","date_fix: 2022-07-31<br />grocery_pharmacy:  14","date_fix: 2022-08-01<br />grocery_pharmacy:  28","date_fix: 2022-08-02<br />grocery_pharmacy:  27","date_fix: 2022-08-03<br />grocery_pharmacy:  24","date_fix: 2022-08-04<br />grocery_pharmacy:  23","date_fix: 2022-08-05<br />grocery_pharmacy:  20","date_fix: 2022-08-06<br />grocery_pharmacy:   6","date_fix: 2022-08-07<br />grocery_pharmacy:  14","date_fix: 2022-08-08<br />grocery_pharmacy:  27","date_fix: 2022-08-09<br />grocery_pharmacy:  26","date_fix: 2022-08-10<br />grocery_pharmacy:  24","date_fix: 2022-08-11<br />grocery_pharmacy:  24","date_fix: 2022-08-12<br />grocery_pharmacy:  26","date_fix: 2022-08-13<br />grocery_pharmacy:  11","date_fix: 2022-08-14<br />grocery_pharmacy:  28","date_fix: 2022-08-15<br />grocery_pharmacy: -33","date_fix: 2022-08-16<br />grocery_pharmacy:  26","date_fix: 2022-08-17<br />grocery_pharmacy:  24","date_fix: 2022-08-18<br />grocery_pharmacy:  23","date_fix: 2022-08-19<br />grocery_pharmacy:  22","date_fix: 2022-08-20<br />grocery_pharmacy:   0","date_fix: 2022-08-21<br />grocery_pharmacy:  10","date_fix: 2022-08-22<br />grocery_pharmacy:  24","date_fix: 2022-08-23<br />grocery_pharmacy:  25","date_fix: 2022-08-24<br />grocery_pharmacy:  22","date_fix: 2022-08-25<br />grocery_pharmacy:  19","date_fix: 2022-08-26<br />grocery_pharmacy:  17","date_fix: 2022-08-27<br />grocery_pharmacy:   3","date_fix: 2022-08-28<br />grocery_pharmacy:  12","date_fix: 2022-08-29<br />grocery_pharmacy:  22","date_fix: 2022-08-30<br />grocery_pharmacy:  20","date_fix: 2022-08-31<br />grocery_pharmacy:  20","date_fix: 2022-09-01<br />grocery_pharmacy:  23","date_fix: 2022-09-02<br />grocery_pharmacy:  20","date_fix: 2022-09-03<br />grocery_pharmacy:   8","date_fix: 2022-09-04<br />grocery_pharmacy:  13","date_fix: 2022-09-05<br />grocery_pharmacy:  21","date_fix: 2022-09-06<br />grocery_pharmacy:  21","date_fix: 2022-09-07<br />grocery_pharmacy:  21","date_fix: 2022-09-08<br />grocery_pharmacy:  20","date_fix: 2022-09-09<br />grocery_pharmacy:  19","date_fix: 2022-09-10<br />grocery_pharmacy:   8","date_fix: 2022-09-11<br />grocery_pharmacy:  14","date_fix: 2022-09-12<br />grocery_pharmacy:  25","date_fix: 2022-09-13<br />grocery_pharmacy:  25","date_fix: 2022-09-14<br />grocery_pharmacy:  24","date_fix: 2022-09-15<br />grocery_pharmacy:  24","date_fix: 2022-09-16<br />grocery_pharmacy:  21","date_fix: 2022-09-17<br />grocery_pharmacy:  13","date_fix: 2022-09-18<br />grocery_pharmacy:  15","date_fix: 2022-09-19<br />grocery_pharmacy:  23","date_fix: 2022-09-20<br />grocery_pharmacy:  25","date_fix: 2022-09-21<br />grocery_pharmacy:  25","date_fix: 2022-09-22<br />grocery_pharmacy:  24","date_fix: 2022-09-23<br />grocery_pharmacy:  22","date_fix: 2022-09-24<br />grocery_pharmacy:  12","date_fix: 2022-09-25<br />grocery_pharmacy:  24","date_fix: 2022-09-26<br />grocery_pharmacy:  18","date_fix: 2022-09-27<br />grocery_pharmacy:  26","date_fix: 2022-09-28<br />grocery_pharmacy:  25","date_fix: 2022-09-29<br />grocery_pharmacy:  22","date_fix: 2022-09-30<br />grocery_pharmacy:  20","date_fix: 2022-10-01<br />grocery_pharmacy:  16","date_fix: 2022-10-02<br />grocery_pharmacy:  15","date_fix: 2022-10-03<br />grocery_pharmacy:  25","date_fix: 2022-10-04<br />grocery_pharmacy:  26","date_fix: 2022-10-05<br />grocery_pharmacy:  25","date_fix: 2022-10-06<br />grocery_pharmacy:  23","date_fix: 2022-10-07<br />grocery_pharmacy:  21","date_fix: 2022-10-08<br />grocery_pharmacy:  11","date_fix: 2022-10-09<br />grocery_pharmacy:  11","date_fix: 2022-10-10<br />grocery_pharmacy:  20","date_fix: 2022-10-11<br />grocery_pharmacy:  22","date_fix: 2022-10-12<br />grocery_pharmacy:  21","date_fix: 2022-10-13<br />grocery_pharmacy:  19","date_fix: 2022-10-14<br />grocery_pharmacy:  23","date_fix: 2022-10-15<br />grocery_pharmacy:  13"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(6,22,133,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle-open","line":{"width":1.8897637795275593,"color":"rgba(6,22,133,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.8897637795275593,"color":"rgba(44,123,182,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":26.228310502283108,"r":7.3059360730593621,"b":25.57077625570777,"l":43.105022831050235},"font":{"color":"rgba(0,0,0,1)","family":"serif","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18978.650000000001,19294.349999999999],"tickmode":"array","ticktext":["Jan","Apr","Jul","Oct"],"tickvals":[18993,19083,19174,19266],"categoryorder":"array","categoryarray":["Jan","Apr","Jul","Oct"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"serif","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"serif","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-86.099999999999994,48.100000000000001],"tickmode":"array","ticktext":["-50","0"],"tickvals":[-50,0],"categoryorder":"array","categoryarray":["-50","0"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"serif","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"Grocery and Pharmacy % change","font":{"color":"rgba(0,0,0,1)","family":"serif","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"serif","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"54753b438416":{"x":{},"y":{},"type":"scatter"},"54754d94debf":{"x":{},"y":{}}},"cur_data":"54753b438416","visdat":{"54753b438416":["function (y) ","x"],"54754d94debf":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Of course this needs more cleaning to be a final output</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Of course this needs more cleaning to be a final output</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># To save the widget use the library(htmlwidgets)</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># saveWidget(p, file=paste0( getwd(), "/HtmlWidget/ggplotlyAreachart.html"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># saveWidget(p, file=paste0( getwd(), &quot;/HtmlWidget/ggplotlyAreachart.html&quot;))</span></span></code></pre></div>
 </div>
 <p><strong>Linear trends</strong></p>
 <p>Now let’s try to model trends in the data. Let’s first consider linear trends. Linear trends are the simplest way to model time as a quantitative variable. We can represent time as a series of evenly spaced points on a graph, and then fit a straight line to those points. The slope of the line tells us the rate at which the variable is changing over time. For example, if we are measuring population counts over time, a positive slope would indicate that a population increase, and a negative slope would indicate a population decrease.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate linear regression model</span></span>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate linear regression model</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(grocery_pharmacy <span class="sc">~</span> date_fix, mobility_it_nogeo)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A simple plot line</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mobility_it_nogeo<span class="sc">$</span>date_fix,                       </span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>     mobility_it_nogeo<span class="sc">$</span>grocery_pharmacy,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(mobility_it_nogeo<span class="sc">$</span>date_fix,</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">predict</span>(linear_model),</span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="dv">2</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">lwd =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficients of model and print</span></span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficients of model and print</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>my_coef <span class="ot">&lt;-</span> <span class="fu">coef</span>(linear_model)            </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>my_coef                            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>my_coef                            </span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  (Intercept)      date_fix 
 -694.27809786    0.03706687 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract equation of model and print</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_equation <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"y ="</span>,        </span>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract equation of model and print</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_equation <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;y =&quot;</span>,        </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">coef</span>(linear_model)[[<span class="dv">1</span>]],</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"+"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;+&quot;</span>,</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">coef</span>(linear_model)[[<span class="dv">2</span>]],</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"* x"</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>my_equation                        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;* x&quot;</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>my_equation                        </span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "y = -694.278097860568 + 0.037066871224827 * x"</code></pre>
+<pre><code>[1] &quot;y = -694.278097860568 + 0.037066871224827 * x&quot;</code></pre>
 </div>
 </div>
 <p>Let’s plot this with ggplot to fit our line through our points. We can use the package <code>ggpmisc</code> to add the equation and R2 with <code>stat_poly_line()</code> and <code>stat_poly_eq</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using geom_smooth() for the linear fit</span></span>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using geom_smooth() for the linear fit</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>timeseries4a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>grocery_pharmacy)) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># linear regression </span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grocery &amp; Pharmacy %"</span>) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> <span class="co"># linear regression </span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Grocery &amp; Pharmacy %&quot;</span>) <span class="sc">+</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_line</span>() <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">"eq"</span>, <span class="st">"R2"</span>))) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">&quot;eq&quot;</span>, <span class="st">&quot;R2&quot;</span>))) <span class="sc">+</span></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">"% Grocery &amp; Pharmacy"</span>)))</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">&quot;% Grocery &amp; Pharmacy&quot;</span>)))</span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>timeseries4b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>transit)) <span class="sc">+</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span> <span class="co">#This is where your linear regression is</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Transit stations %"</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> <span class="co">#This is where your linear regression is</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Transit stations %&quot;</span>) <span class="sc">+</span></span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_line</span>() <span class="sc">+</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">"eq"</span>, <span class="st">"R2"</span>))) <span class="sc">+</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">&quot;eq&quot;</span>, <span class="st">&quot;R2&quot;</span>))) <span class="sc">+</span></span>
 <span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">"% Transit stations"</span>)))</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">&quot;% Transit stations&quot;</span>)))</span>
 <span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>timeseries4c <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>parks_percent_change_from_baseline)) <span class="sc">+</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method=</span><span class="st">"lm"</span>) <span class="sc">+</span> <span class="co">#This is where your linear regression is</span></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Parks %"</span>) <span class="sc">+</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">method=</span><span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> <span class="co">#This is where your linear regression is</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Parks %&quot;</span>) <span class="sc">+</span></span>
 <span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_line</span>() <span class="sc">+</span></span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">"eq"</span>, <span class="st">"R2"</span>))) <span class="sc">+</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_poly_eq</span>(<span class="fu">use_label</span>(<span class="fu">c</span>(<span class="st">&quot;eq&quot;</span>, <span class="st">&quot;R2&quot;</span>))) <span class="sc">+</span></span>
 <span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">"% Visit Parks"</span>)))</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">&quot;% Visit Parks&quot;</span>)))</span>
 <span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(timeseries4a, timeseries4b, timeseries4c, <span class="at">ncol=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(timeseries4a, timeseries4b, timeseries4c, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
@@ -634,33 +626,33 @@ div.csl-indent {
 <p>Quadratic trends model time as a second-degree polynomial, which allows for a curved relationship between time and the variable we are measuring. Quadratic trends can capture more complex patterns in the data than linear trends, such as a gradual increase followed by a gradual decrease. For example, if we are measuring the number of COVID-19 cases over time, a quadratic trend may capture the initial exponential growth, followed by a flattening out of the curve.</p>
 <p>However, quadratic trends also have some limitations. They assume that the relationship between time and the variable we are measuring is symmetrical, which may not always be the case. In addition, they can be difficult to interpret, as the coefficient for the quadratic term does not have a straightforward interpretation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>timeseries5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>transit)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x,<span class="dv">2</span>), <span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> T, <span class="at">level =</span> <span class="fl">0.99</span>) <span class="sc">+</span> <span class="co"># 2nd order polynomial &amp; adjusting level of the confidence interval</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Transit stations % change"</span>) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>timeseries5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>transit)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x,<span class="dv">2</span>), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> T, <span class="at">level =</span> <span class="fl">0.99</span>) <span class="sc">+</span> <span class="co"># 2nd order polynomial &amp; adjusting level of the confidence interval</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Transit stations % change&quot;</span>) <span class="sc">+</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_tufte</span>() </span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>timeseries5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>timeseries5</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>timeseries6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>transit)) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x,<span class="dv">3</span>), <span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se =</span> T, <span class="at">level =</span> <span class="fl">0.99</span>) <span class="sc">+</span> <span class="co"># 3rd order polynomial &amp; adjusting level of the confidence interval</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Transit stations % change"</span>) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>timeseries6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>transit)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x,<span class="dv">3</span>), <span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> T, <span class="at">level =</span> <span class="fl">0.99</span>) <span class="sc">+</span> <span class="co"># 3rd order polynomial &amp; adjusting level of the confidence interval</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Transit stations % change&quot;</span>) <span class="sc">+</span></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_tufte</span>() </span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>timeseries6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>timeseries6</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
@@ -670,19 +662,19 @@ div.csl-indent {
 <p>However, splines also have some limitations. They can be computationally intensive, and the choice of the number and location of the knots (i.e., the points where the polynomial segments connect) can have a big impact on the results. Splines are useful when the underlying function is complex or unknown, and can be used for a variety of applications, including curve fitting, data smoothing, and prediction.</p>
 <p>In R, you can plot x vs y using the plot() function. To plot a spline, you can use the spline() function to generate the points for the curve, and then plot the curve using the lines() function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>timeseries7 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>grocery_pharmacy)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"#061685"</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>timeseries7 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_nogeo, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>grocery_pharmacy)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&quot;#061685&quot;</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  ggformula<span class="sc">::</span><span class="fu">stat_spline</span>() <span class="sc">+</span> <span class="co"># spline</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Grocery &amp; Pharmacy %"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Grocery &amp; Pharmacy %&quot;</span>) <span class="sc">+</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">theme_tufte</span>() <span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">"% Visit Parks"</span>)))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(Delta, <span class="st">&quot;% Visit Parks&quot;</span>)))</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>timeseries7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>timeseries7</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
@@ -690,148 +682,148 @@ div.csl-indent {
 <p>Linear trends, quadratic trends, and splines are all ways to model time as a quantitative variable, each with their own strengths and weaknesses. The choice of method will depend on the specific research question and the shape of the relationship between time and the variable we are measuring. You can find more on descriptive timeseries analysis <a href="http://r-statistics.co/Time-Series-Analysis-With-R.html?utm_content=cmp-true">here</a>.</p>
 </section>
 <section id="modelling-time-and-space" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="modelling-time-and-space"><span class="header-section-number">8.4</span> Modelling Time and Space</h2>
+<h2 data-number="8.4"><span class="header-section-number">8.4</span> Modelling Time and Space</h2>
 <p>We can also examine the heterogeneity in the data by region. Some regions in Italy were had many more COVID-19 cases than others.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mobility data by region over time</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mobility data by region over time</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>timeseries_all_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it, <span class="fu">aes</span>(<span class="at">x=</span>date_fix, <span class="at">y=</span>transit, <span class="at">color =</span> sub_region_1)) <span class="sc">+</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(alpha = 0.8) + </span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>,<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x,<span class="dv">2</span>), <span class="at">se=</span>F) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x,<span class="dv">2</span>), <span class="at">se=</span>F) <span class="sc">+</span></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="cn">NA</span>)) <span class="sc">+</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Change in use of transit stations"</span>) </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Change in use of transit stations&quot;</span>) </span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial Graph</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>timeseries_all_1  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>timeseries_all_1  </span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mobility_it_filtered <span class="ot">&lt;-</span> mobility_it <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sub_region_1 <span class="sc">!=</span> <span class="st">"ALL"</span>)</span>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mobility_it_filtered <span class="ot">&lt;-</span> mobility_it <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sub_region_1 <span class="sc">!=</span> <span class="st">&quot;ALL&quot;</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mobility data by region over time with some edits</span></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>timeseries_all_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mobility_it_filtered, <span class="fu">aes</span>(<span class="at">x =</span> date_fix, <span class="at">y =</span> transit, <span class="at">color =</span> sub_region_1)) <span class="sc">+</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>), <span class="at">se =</span> F, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>, <span class="at">option=</span><span class="st">"mako"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>), <span class="at">se =</span> F, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>, <span class="at">option=</span><span class="st">&quot;mako&quot;</span>) <span class="sc">+</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)</span>
 <span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Change in use of transit stations"</span>,</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Region"</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Change in use of transit stations&quot;</span>,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;Region&quot;</span></span>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>timeseries_all_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>timeseries_all_2</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
 </div>
 <p>These graphs would need further work. We could for example divide the data between North, Centre and Southern Italy. Let’s load the geojson of italian regions and plot the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the polygons of Italy to the environment</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>italy_iso3166 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/longitudinal-1/italy_projected_simplified.geojson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the polygons of Italy to the environment</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>italy_iso3166 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/longitudinal-1/italy_projected_simplified.geojson&quot;</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `italy_projected_simplified' from data source 
-  `/Users/carmen/Documents/GitHub/r4ps/data/longitudinal-1/italy_projected_simplified.geojson' 
-  using driver `GeoJSON'
+<pre><code>Reading layer `italy_projected_simplified&#39; from data source 
+  `/Users/franciscorowe/Library/CloudStorage/Dropbox/Francisco/uol/teaching/envs418/202526/r4ps/data/longitudinal-1/italy_projected_simplified.geojson&#39; 
+  using driver `GeoJSON&#39;
 Simple feature collection with 124 features and 4 fields
 Geometry type: MULTIPOLYGON
 Dimension:     XY
 Bounding box:  xmin: 1313364 ymin: 3933695 xmax: 2312062 ymax: 5220353
 Projected CRS: Monte Mario / Italy zone 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a simple plot</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(italy_iso3166<span class="sc">$</span>geometry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a simple plot</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(italy_iso3166<span class="sc">$</span>geometry)</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Now let’s join the data by regional code.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join by regional code</span></span>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r fold-show cell-code"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join by regional code</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>italy_iso3166_tidy <span class="ot">&lt;-</span> italy_iso3166 <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(mobility_it, <span class="at">by=</span><span class="fu">c</span>(<span class="st">"ISO3166.2"</span><span class="ot">=</span><span class="st">"iso_3166_2_code"</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(mobility_it, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;ISO3166.2&quot;</span><span class="ot">=</span><span class="st">&quot;iso_3166_2_code&quot;</span>))</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check the first rows of the merged data table</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># head(italy_iso3166_tidy)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># head(italy_iso3166_tidy)</span></span></code></pre></div>
 </div>
 <p>To start with, we can plot the data statically using ggplot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One point in time</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_1 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">"2022-01-01"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_2 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">"2022-02-01"</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_3 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">"2022-03-01"</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_4 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">"2022-04-01"</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_5 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">"2022-05-01"</span>)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_6 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">"2022-06-01"</span>)</span>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One point in time</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_1 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">&quot;2022-01-01&quot;</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_2 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">&quot;2022-02-01&quot;</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_3 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">&quot;2022-03-01&quot;</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_4 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">&quot;2022-04-01&quot;</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_5 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">&quot;2022-05-01&quot;</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>italy_sf_subset_6 <span class="ot">&lt;-</span> italy_iso3166_tidy <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date_fix <span class="sc">==</span> <span class="st">&quot;2022-06-01&quot;</span>)</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#This may take some time to load</span></span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> italy_sf_subset_1, <span class="fu">aes</span>(<span class="at">fill =</span> transit, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#d7191c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#d7191c&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>) <span class="sc">+</span></span>
 <span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> italy_sf_subset_2, <span class="fu">aes</span>(<span class="at">fill =</span> transit, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#d7191c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#d7191c&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>) <span class="sc">+</span></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> italy_sf_subset_3, <span class="fu">aes</span>(<span class="at">fill =</span> transit, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#d7191c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#d7191c&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>) <span class="sc">+</span></span>
 <span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> italy_sf_subset_4, <span class="fu">aes</span>(<span class="at">fill =</span> transit, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#d7191c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#d7191c&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>) <span class="sc">+</span></span>
 <span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>g5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> italy_sf_subset_5, <span class="fu">aes</span>(<span class="at">fill =</span> transit, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#d7191c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#d7191c&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>) <span class="sc">+</span></span>
 <span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>g6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> italy_sf_subset_6, <span class="fu">aes</span>(<span class="at">fill =</span> transit, <span class="at">geometry =</span> geometry)) <span class="sc">+</span></span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#d7191c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkblue"</span>, </span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">"colourbar"</span>) <span class="sc">+</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">&quot;#d7191c&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>                      <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">guide =</span> <span class="st">&quot;colourbar&quot;</span>) <span class="sc">+</span></span>
 <span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(g1, g2, g3, g4, g5, g6, <span class="at">ncol =</span> <span class="dv">3</span>, </span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>             <span class="at">top =</span> <span class="fu">textGrob</span>(<span class="st">"Change in use of transit by Italian Region"</span>, <span class="at">gp=</span><span class="fu">gpar</span>(<span class="at">fontsize=</span><span class="dv">18</span>,<span class="at">font=</span><span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>             <span class="at">top =</span> <span class="fu">textGrob</span>(<span class="st">&quot;Change in use of transit by Italian Region&quot;</span>, <span class="at">gp=</span><span class="fu">gpar</span>(<span class="at">fontsize=</span><span class="dv">18</span>,<span class="at">font=</span><span class="dv">2</span>)))</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="longitudinal-1_files/figure-html/join plots-1.png" class="img-fluid figure-img" width="672"></p>
+<figure>
+<p><img src="longitudinal-1_files/figure-html/join%20plots-1.png" class="img-fluid" width="672" /></p>
 </figure>
 </div>
 </div>
@@ -839,17 +831,17 @@ Projected CRS: Monte Mario / Italy zone 1</code></pre>
 <p>Plotting time and space interactively is more complex. There are quite a few examples of how to visualise data over space and time <a href="https://rstudio-pubs-static.s3.amazonaws.com/595502_57d6130e00384d99a6b0cea0e5212d44.html">here</a>.</p>
 </section>
 <section id="questions" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="questions"><span class="header-section-number">8.5</span> Questions</h2>
+<h2 data-number="8.5"><span class="header-section-number">8.5</span> Questions</h2>
 <p>For the assignment, we will continue to focus on the United Kingdom as our geographical area of analysis. For this section, we will use Google Mobility data for the UK for 2021. It has the same format as the Google Mobility data for Italy used in this chapter. During this year the UK underwent a third national lockdown, limitations of gatherings and more. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>.</p>
 <p>Start by loading both the csv and geojsons.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/longitudinal-1/2021_GB_Region_Mobility_Report.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>uk_iso3166 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"data/longitudinal-1/uk_projected_simplified.geojson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>uk_iso3166 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/longitudinal-1/uk_projected_simplified.geojson&quot;</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `uk_projected_simplified' from data source 
-  `/Users/carmen/Documents/GitHub/r4ps/data/longitudinal-1/uk_projected_simplified.geojson' 
-  using driver `GeoJSON'
+<pre><code>Reading layer `uk_projected_simplified&#39; from data source 
+  `/Users/franciscorowe/Library/CloudStorage/Dropbox/Francisco/uol/teaching/envs418/202526/r4ps/data/longitudinal-1/uk_projected_simplified.geojson&#39; 
+  using driver `GeoJSON&#39;
 Simple feature collection with 245 features and 4 fields (with 16 geometries empty)
 Geometry type: MULTIPOLYGON
 Dimension:     XY
@@ -864,9 +856,19 @@ Projected CRS: OSGB36 / British National Grid</code></pre>
 <li><p>Create a static or interactive map (bonus points) of your choice from the data.</p></li>
 </ol>
 <p>Analyse and discuss what insights you obtain into people’s attitudes, concerns, and behaviors during the pandemic, as well as their response to interventions and policies.</p>
-
-
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">Population Data Science</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">Population Data Science</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uZXh0"><span class="chapter-number">9</span>  <span class="chapter-title">Assessing Interventions</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1wcmV2"><span class="chapter-number">7</span>  <span class="chapter-title">Topic Modelling</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sV2VsY29tZQ==">Welcome</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnRyby5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPk92ZXJ2aWV3PC9zcGFuPg=="><span class="chapter-number">1</span>  <span class="chapter-title">Overview</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbnRyby1wb3B1bGF0aW9uLXNjaWVuY2UuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Mjwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5JbnRyb2R1Y2luZy1Qb3B1bGF0aW9uLURhdGEtU2NpZW5jZTwvc3Bhbj4="><span class="chapter-number">2</span>  <span class="chapter-title">Introducing Population Data Science</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9nZW9kZW1vZ3JhcGhpY3MuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Mzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5HZW9kZW1vZ3JhcGhpY3M8L3NwYW4+"><span class="chapter-number">3</span>  <span class="chapter-title">Geodemographics</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zZXF1ZW5jZS1hbmFseXNpcy5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz40PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlNlcXVlbmNlLUFuYWx5c2lzPC9zcGFuPg=="><span class="chapter-number">4</span>  <span class="chapter-title">Sequence Analysis</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9uZXR3b3JrLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjU8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TmV0d29yay1BbmFseXNpczwvc3Bhbj4="><span class="chapter-number">5</span>  <span class="chapter-title">Network Analysis</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zZW50aW1lbnQtYW5hbHlzaXMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Njwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TZW50aW1lbnQtQW5hbHlzaXM8L3NwYW4+"><span class="chapter-number">6</span>  <span class="chapter-title">Sentiment Analysis</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi90b3BpYy1tb2RlbGxpbmcuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+Nzwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Ub3BpYy1Nb2RlbGxpbmc8L3NwYW4+"><span class="chapter-number">7</span>  <span class="chapter-title">Topic Modelling</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9sb25naXR1ZGluYWwtMS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz44PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPk1vZGVsbGluZy1UaW1lPC9zcGFuPg=="><span class="chapter-number">8</span>  <span class="chapter-title">Modelling Time</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9sb25naXR1ZGluYWwtMi5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz45PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkFzc2Vzc2luZy1JbnRlcnZlbnRpb25zPC9zcGFuPg=="><span class="chapter-number">9</span>  <span class="chapter-title">Assessing Interventions</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9tYWNoaW5lLWxlYXJuaW5nLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjEwPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPk1hY2hpbmUtTGVhcm5pbmc8L3NwYW4+"><span class="chapter-number">10</span>  <span class="chapter-title">Machine Learning</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXRhLXNldHMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTE8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+RGF0YS1zZXRzPC9zcGFuPg=="><span class="chapter-number">11</span>  <span class="chapter-title">Data sets</span></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWZlcmVuY2VzLmh0bWxSZWZlcmVuY2Vz">References</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+ODwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5Nb2RlbGxpbmctVGltZTwvc3Bhbj4="><span class="chapter-number">8</span>  <span class="chapter-title">Modelling Time</span></span></p>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="Zm9vdGVyLWxlZnQ=">
+<p>Population Data Science was written by Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani.</p>
+</div>
+<div class="hidden quarto-markdown-envelope-contents" data-render-id="Zm9vdGVyLXJpZ2h0">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ=="><span id="sec-chp8" class="quarto-section-identifier"><span class="chapter-number">8</span>  <span class="chapter-title">Modelling Time</span></span> – Population Data Science</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="><span id="sec-chp8" class="quarto-section-identifier"><span class="chapter-number">8</span>  <span class="chapter-title">Modelling Time</span></span> – Population Data Science</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl"><span id="sec-chp8" class="quarto-section-identifier"><span class="chapter-number">8</span>  <span class="chapter-title">Modelling Time</span></span> – Population Data Science</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">Population Data Science</span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="></span> <span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj"></span></p>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-cinelli2020covid" class="csl-entry" role="listitem">
 Cinelli, Matteo, Walter Quattrociocchi, Alessandro Galeazzi, Carlo Michele Valensise, Emanuele Brugnoli, Ana Lucia Schmidt, Paola Zola, Fabiana Zollo, and Antonio Scala. 2020. <span>“The COVID-19 Social Media Infodemic.”</span> <em>Scientific Reports</em> 10 (1): 1–10.
 </div>
@@ -880,7 +882,7 @@ Ugolini, Francesca, Luciano Massetti, Pedro Calaza-Martı́nez, Paloma Cariñano
 </section>
 
 </main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<script id = "quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -915,18 +917,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -958,7 +949,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/www\.population-science\.net");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -993,7 +1022,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1041,7 +1074,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1269,13 +1301,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./topic-modelling.html" class="pagination-link  aria-label=" &lt;span="" modelling&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span>
+      <a  href="/topic-modelling.html" class="pagination-link" aria-label="Topic Modelling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Topic Modelling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./longitudinal-2.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Assessing Interventions</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Assessing Interventions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a  href="/longitudinal-2.html" class="pagination-link" aria-label="Assessing Interventions">
+        <span class="nav-page-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Assessing Interventions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1283,18 +1315,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Population Science was written by Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani.</p>
-</div>   
+      <div class='footer-contents'>Population Data Science was written by Francisco Rowe,
+Carmen Cabrera-Arnau, Elisabetta Pietrostefani.
+</div>  
+    </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/fcorowe/r4ps/edit/main/longitudinal-1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
-<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
-</div>
+      <div class='footer-contents'>This book was built with <a href="https://quarto.org/">Quarto</a>.
+</div>  
+    </div>
   </div>
 </footer>
 
+</body>
 
-
-
-</body></html>
+</html>

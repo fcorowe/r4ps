@@ -1,7 +1,3 @@
----
-prefer-html: true
----
-
 # Assessing Interventions {#sec-chp9}
 
 ```{r}

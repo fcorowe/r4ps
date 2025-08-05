@@ -481,7 +481,7 @@ To understand the representative patterns captured in our data partition, we use
 
 ```{r}
 # create individual sequence plots
-par(ma=c(1,1,1,1))
+par(mar = c(4, 4, 2, 2))  # set margins
 seqplot(seq.cl, 
         group = pam_optimal$clustering,
         type = "I",

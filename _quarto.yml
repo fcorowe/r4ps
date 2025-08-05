@@ -3,7 +3,7 @@ project:
 
 book:
   title: "Population Data Science"
-  author: "Carmen Cabrera-Arnau, Francisco Rowe, Elisabetta Pietrostefani"
+  author: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
   date: today
 
   page-footer:

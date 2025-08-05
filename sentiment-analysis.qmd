@@ -36,13 +36,8 @@ library(tidyverse) # manipulate data
 # sentiment analysis
 library(vader)
 
-# download twitter data (no used)
-library(rtweet)
-
 # design plots
 library(patchwork)
-
-
 ```
 
 ## Data

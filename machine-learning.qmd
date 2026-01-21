@@ -403,86 +403,86 @@ raster2020 <- read_stars("./data/machine-learning/gbr_ppp_2020_1km_Aggregated.ti
 
 We then load the shapes of the MSOAs. These must be downloaded from UK's GeoPortal [here](https://geoportal.statistics.gov.uk/search?q=BDY_MSOA%20DEC_2021&sort=Title%7Ctitle%7Casc). Make sure you download the 2021 version and store it in the `.\data\machine-learning\` folder as a file with the .gpkg extension. We have not included the file in the GitHub repo due to its large size. You can load it with `st_read` and ensure it is in a projection system of choice:
 
-```{r}
-# read_files
-msoa <- st_read("./data/machine-learning/MSOA_2021_EW_BFC_V6_4482478884757418417.gpkg") %>% 
-  st_transform(., "EPSG:4326") # set projection system
-```
+<!-- ```{r} -->
+<!-- # read_files -->
+<!-- # msoa <- st_read("./data/machine-learning/MSOA_2021_EW_BFC_V6_4482478884757418417.gpkg") %>%  -->
+<!-- #   st_transform(., "EPSG:4326") # set projection system -->
+<!-- ``` -->
 
-We ensure that the `raster2000` and `raster2020` objects are in the same projection system as `msoa`, so we can make both objects to work together.
+<!-- We ensure that the `raster2000` and `raster2020` objects are in the same projection system as `msoa`, so we can make both objects to work together. -->
 
-```{r}
-raster2000 <- st_transform(raster2000, st_crs(msoa))   
-raster2020 <- st_transform(raster2020, st_crs(msoa))   
-```
+<!-- ```{r} -->
+<!-- raster2000 <- st_transform(raster2000, st_crs(msoa))    -->
+<!-- raster2020 <- st_transform(raster2020, st_crs(msoa))    -->
+<!-- ``` -->
 
-We aggregate the 1km gridded population data to MSOAs in England and Wales. Like in Chapter 4, we use `system.time` to time the duration of the process of aggregation which could take some time depending on your local computational environment.
+<!-- We aggregate the 1km gridded population data to MSOAs in England and Wales. Like in Chapter 4, we use `system.time` to time the duration of the process of aggregation which could take some time depending on your local computational environment. -->
 
-```{r}
+<!-- ```{r} -->
 
-system.time({
-pop_2000 = aggregate(x = raster2000, by = msoa, FUN = sum, na.rm = TRUE) 
-pop_2020 = aggregate(x = raster2020, by = msoa, FUN = sum, na.rm = TRUE) 
-})
+<!-- system.time({ -->
+<!-- pop_2000 = aggregate(x = raster2000, by = msoa, FUN = sum, na.rm = TRUE)  -->
+<!-- pop_2020 = aggregate(x = raster2020, by = msoa, FUN = sum, na.rm = TRUE)  -->
+<!-- }) -->
 
-```
+<!-- ``` -->
 
-```{r}
-# create a function to bind the population data frame to the shapefile
-add_population <- function(x) mutate(msoa, 
-                      population = x)
+<!-- ```{r} -->
+<!-- # create a function to bind the population data frame to the shapefile -->
+<!-- add_population <- function(x) mutate(msoa,  -->
+<!--                       population = x) -->
 
-# obtain sub-national population counts
-uk_eshp_2000 <- lapply(pop_2000, add_population)
-uk_eshp_2020 <- lapply(pop_2020, add_population)
-```
+<!-- # obtain sub-national population counts -->
+<!-- uk_eshp_2000 <- lapply(pop_2000, add_population) -->
+<!-- uk_eshp_2020 <- lapply(pop_2020, add_population) -->
+<!-- ``` -->
 
-```{r}
+<!-- ```{r} -->
 
-# create a dataframe with sub-national populations
-select_pop_2000 <- function(x) dplyr::select(x, MSOA21CD, population)
-select_pop_2020 <- function(x) dplyr::select(x, MSOA21CD, population)
+<!-- # create a dataframe with sub-national populations -->
+<!-- select_pop_2000 <- function(x) dplyr::select(x, MSOA21CD, population) -->
+<!-- select_pop_2020 <- function(x) dplyr::select(x, MSOA21CD, population) -->
 
-population_df_2000 <- lapply(uk_eshp_2000, select_pop_2000) %>% 
-  do.call(rbind, .)
-population_df_2020 <- lapply(uk_eshp_2020, select_pop_2020) %>% 
-  do.call(rbind, .)
-```
+<!-- population_df_2000 <- lapply(uk_eshp_2000, select_pop_2000) %>%  -->
+<!--   do.call(rbind, .) -->
+<!-- population_df_2020 <- lapply(uk_eshp_2020, select_pop_2020) %>%  -->
+<!--   do.call(rbind, .) -->
+<!-- ``` -->
 
-Now, we can load, once again the original dataframe containing all the sociodemographic variables from the Census for each MSOA.
+<!-- Now, we can load, once again the original dataframe containing all the sociodemographic variables from the Census for each MSOA. -->
 
-```{r}
-# Load the MSOA census data
-df_MSOA <- read.csv("./data/machine-learning/census2021-msoa.csv")
-# Data cleaning, remove the X field
-df_MSOA$X <- NULL
-```
+<!-- ```{r} -->
+<!-- # Load the MSOA census data -->
+<!-- df_MSOA <- read.csv("./data/machine-learning/census2021-msoa.csv") -->
+<!-- # Data cleaning, remove the X field -->
+<!-- df_MSOA$X <- NULL -->
+<!-- ``` -->
 
-To this dataset, we will add a column of the percentage change between the population in 2000 and 2020 for each MSOA (i.e. $(P_{2020}-P_{2000})/P_{2000} \times 100$, which we will call `perchange`. Before this, we need to merge the sociodemographic data with the population data derived from raster files.
+<!-- To this dataset, we will add a column of the percentage change between the population in 2000 and 2020 for each MSOA (i.e. $(P_{2020}-P_{2000})/P_{2000} \times 100$, which we will call `perchange`. Before this, we need to merge the sociodemographic data with the population data derived from raster files. -->
 
-```{r}
-df_MSOA <- merge(df_MSOA, st_drop_geometry(population_df_2000)[, c("MSOA21CD", "population")], by.x = "geography.code", by.y = "MSOA21CD") %>% rename(population2000 = population)
+<!-- ```{r} -->
+<!-- df_MSOA <- merge(df_MSOA, st_drop_geometry(population_df_2000)[, c("MSOA21CD", "population")], by.x = "geography.code", by.y = "MSOA21CD") %>% rename(population2000 = population) -->
 
-df_MSOA <- merge(df_MSOA, st_drop_geometry(population_df_2020)[, c("MSOA21CD", "population")], by.x = "geography.code", by.y = "MSOA21CD") %>% rename(population2020 = population) %>% na.omit()
-```
+<!-- df_MSOA <- merge(df_MSOA, st_drop_geometry(population_df_2020)[, c("MSOA21CD", "population")], by.x = "geography.code", by.y = "MSOA21CD") %>% rename(population2020 = population) %>% na.omit() -->
+<!-- ``` -->
 
-```{r}
-df_MSOA$perchange <- (df_MSOA$population2020 - df_MSOA$population2000)/df_MSOA$population2000*100
-```
+<!-- ```{r} -->
+<!-- df_MSOA$perchange <- (df_MSOA$population2020 - df_MSOA$population2000)/df_MSOA$population2000*100 -->
+<!-- ``` -->
 
-And, like before, we delete the unwanted columns:
+<!-- And, like before, we delete the unwanted columns: -->
 
-```{r}
-# Data cleaning
-df_MSOA <- subset(df_MSOA, select = -c(date, geography, geography.code, population2000, population2020))
-```
+<!-- ```{r} -->
+<!-- # Data cleaning -->
+<!-- df_MSOA <- subset(df_MSOA, select = -c(date, geography, geography.code, population2000, population2020)) -->
+<!-- ``` -->
 
-For the following questions, you will use the whole dataset for training and evaluate the performance of the ML models via the OOB error.
+<!-- For the following questions, you will use the whole dataset for training and evaluate the performance of the ML models via the OOB error. -->
 
-1.  Train a model of decision trees with bagging using `caret`. Use 10-fold cross-validation and the default number of trees in the training process. Set the seed to 123 so that your results are reproducible. Report the OOB RMSE and the top ten most important variables for the decision process in the fitted model using the function `varImp()`. Comment on why you think these ten demographic variables are relatively important to determine population change for MSOAs in England & Wales. Do not include any plots.
+<!-- 1.  Train a model of decision trees with bagging using `caret`. Use 10-fold cross-validation and the default number of trees in the training process. Set the seed to 123 so that your results are reproducible. Report the OOB RMSE and the top ten most important variables for the decision process in the fitted model using the function `varImp()`. Comment on why you think these ten demographic variables are relatively important to determine population change for MSOAs in England & Wales. Do not include any plots. -->
 
-2.  Train a random forest model to predict the percentage change of population between the years 2000 and 2020 at the MSOA level using `randomForest` with the default settings. Without including any plots, report the number of trees that produces the minimum OOB MSE. What would be the associated minimum RMSE? Like before, set the seed to 123 to ensure your results are reproducible. Do you observe any improvements in model performance with respect to the model you fitted in question 1?
+<!-- 2.  Train a random forest model to predict the percentage change of population between the years 2000 and 2020 at the MSOA level using `randomForest` with the default settings. Without including any plots, report the number of trees that produces the minimum OOB MSE. What would be the associated minimum RMSE? Like before, set the seed to 123 to ensure your results are reproducible. Do you observe any improvements in model performance with respect to the model you fitted in question 1? -->
 
-3.  Use `ranger` to tune the random forest model. Perform the hyperparameter search through a grid that considers only the number of trees and the number of variables to be sampled at each split. For the number of trees, try values from 495 to 505, separated by 1 unit. For the number of variables to be sampled at each split, try values from 15 to 25, also separated by 1 unit. Set the seed to 123. Without including any plots, report the combination of parameter values that leads to the model with the lowest OOB RMSE. Report the value of the OOB RMSE. Do you observe any further improvements? In the context of predicting population change, do you think this RMSE is acceptable? Justify your answer.
+<!-- 3.  Use `ranger` to tune the random forest model. Perform the hyperparameter search through a grid that considers only the number of trees and the number of variables to be sampled at each split. For the number of trees, try values from 495 to 505, separated by 1 unit. For the number of variables to be sampled at each split, try values from 15 to 25, also separated by 1 unit. Set the seed to 123. Without including any plots, report the combination of parameter values that leads to the model with the lowest OOB RMSE. Report the value of the OOB RMSE. Do you observe any further improvements? In the context of predicting population change, do you think this RMSE is acceptable? Justify your answer. -->
 
-4.  Using your own words, explain what are the advantages of using random forests to predict population change instead of multilinear regression. You should include references to the ML literature to support your arguments.
+<!-- 4.  Using your own words, explain what are the advantages of using random forests to predict population change instead of multilinear regression. You should include references to the ML literature to support your arguments. -->

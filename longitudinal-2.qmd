@@ -205,7 +205,7 @@ covid_cases_2
 
 ```
 
-To identify whether there is a timeperiod where a lockdown was implemented in one location but not the other, and how cases evolved, we can plot aggregates of both locations in one plot.
+To identify whether there is a time period where a lockdown was implemented in one location but not the other, and how cases evolved, we can plot aggregates of both locations in one plot.
 
 ```{r}
 # Aggregate the data by region for each day

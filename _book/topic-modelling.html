@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Topic Modelling – Population Data Science</title>
+<title>7&nbsp; Topic Modelling – Computational Social Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ecddca49e8a95842710ab9a43bee7330.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -180,20 +180,20 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Population Data Science</a> 
+      <a href="./">Computational Social Science</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/fcorowe/r4ps" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./Population-Data-Science.pdf">
+            <a class="dropdown-item sidebar-tools-main-item" href="./Computational-Social-Science.pdf">
               <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./Population-Data-Science.epub">
+            <a class="dropdown-item sidebar-tools-main-item" href="./Computational-Social-Science.epub">
               <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
@@ -235,14 +235,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro-population-science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Population Data Science</span></span></a>
+  <a href="./intro-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducing Computational Social Science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -357,8 +357,8 @@ window.Quarto = {
 <p><strong>Topic modelling</strong> is part of the larger topic of text data mining. Text mining is the process of transforming unstructured text into a structured format to identify meaningful patterns. In text mining, we often have collections of documents, such as news articles, blog posts, academic papers and much more. We often want to divide these documents into natural groups so that we can understand them separately. <strong>Topic modeling</strong> is a method for unsupervised classification of such documents, similar to clustering on numeric data, which finds natural groups of items - instead of counting them individually - even when we are not sure what we are looking for. Topic modeling is not the only method that does this– cluster analysis, latent semantic analysis, and other techniques have also been used to identify clustering within texts (<a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Bail, 2020</a>).</p>
 <p>Topic models offer two significant advantages over simple forms of cluster analysis such as k-means clustering. Unlike k-means clustering, which assigns each document to only one cluster, topic models are mixture models that assign a probability to each document indicating its likelihood of belonging to a latent theme or topic.</p>
 <p>Additionally, topic models use more advanced iterative Bayesian techniques to determine the probability of each document being associated with a particular theme or topic. Initially, documents are assigned a random probability of topic assignment, but the accuracy of these probabilities improves as more data is processed.</p>
-<p>Topic Modelling has been used in population studies on various occasions to analyse demographic processes such as fertility and migration. <span class="citation" data-cites="marshall2013defining">Marshall (<a href="#ref-marshall2013defining" role="doc-biblioref">2013</a>)</span> for example, uses topic modelling to show the set of concepts relevant to the study of fertility was defined differently in France and Great Britain. Findings indicate that bith cultural and institutional differences were present in the research agendas around the understandings of fertility decline. This chapter will illustrate Topic Modelling with <a href="https://www.reddit.com/r/unitedkingdom/">Reddit data</a>.</p>
-<p>Specifically it will investigate what reddit data can tell us about discussions around fertility and the pandemic’s influence on fertility rates. Does the data shed any light on theories on the increase in fertility associated with rising wage inequality <span class="citation" data-cites="bar2018did">Bar et al. (<a href="#ref-bar2018did" role="doc-biblioref">2018</a>)</span>? Or on the <a href="https://www.stlouisfed.org/on-the-economy/2021/november/pandemic-influence-us-fertility-rates">negative impact of the pandemic</a> on the fertility of women of prime childbearing age—30- to 34-year-olds?</p>
+<p>Topic Modelling has been used in population studies on various occasions to analyse demographic processes such as fertility and migration. <span class="citation" data-cites="marshall2013defining">Marshall (<a href="references.html#ref-marshall2013defining" role="doc-biblioref">2013</a>)</span> for example, uses topic modelling to show the set of concepts relevant to the study of fertility was defined differently in France and Great Britain. Findings indicate that bith cultural and institutional differences were present in the research agendas around the understandings of fertility decline. This chapter will illustrate Topic Modelling with <a href="https://www.reddit.com/r/unitedkingdom/">Reddit data</a>.</p>
+<p>Specifically it will investigate what reddit data can tell us about discussions around fertility and the pandemic’s influence on fertility rates. Does the data shed any light on theories on the increase in fertility associated with rising wage inequality <span class="citation" data-cites="bar2018did">Bar et al. (<a href="references.html#ref-bar2018did" role="doc-biblioref">2018</a>)</span>? Or on the <a href="https://www.stlouisfed.org/on-the-economy/2021/november/pandemic-influence-us-fertility-rates">negative impact of the pandemic</a> on the fertility of women of prime childbearing age—30- to 34-year-olds?</p>
 <p>This chapter is based on:</p>
 <ul>
 <li><p>The <a href="https://www.tidytextmining.com/topicmodeling.html">Topic modelling</a> chapter in Silge, J. and Robinson, D, 2022. <a href="https://www.tidytextmining.com/">Text Mining with R: A Tidy Approach</a></p></li>
@@ -370,7 +370,7 @@ window.Quarto = {
 <li><p>Each document as a combination of topics. We imagine that each document may contain words from several topics in particular proportions. For instance, in a two-topic model we could say Document 1 is 80% about <em>migration</em> and 20% about <em>refugees</em>, while Document 2 is 40% about <em>migration</em> and 60% about <em>increased work-force</em>.</p></li>
 <li><p>Each topic as a blend of words. For example, we could imagine a two-topic model of a Twitter-feed, with one topic for “migration” and one for “refugees.” The most common words in the migration topic might be “migrant”, “origin”, and “destination”, while the refugee topic may be made up of words such as “armed conflict”, “persecution”, and “camp”. Importantly, words can be shared between topics; a word like “destination” might appear in both equally.</p></li>
 </ul>
-<p>This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. <span class="citation" data-cites="blei2003latent">Blei, Ng, and Jordan (<a href="#ref-blei2003latent" role="doc-biblioref">2003</a>)</span> describe LDA’s in detail.</p>
+<p>This approach allows for documents to share content and overlap with one another, as opposed to being isolated into distinct groups. This mimics how natural language is typically used. <span class="citation" data-cites="blei2003latent">Blei, Ng, and Jordan (<a href="references.html#ref-blei2003latent" role="doc-biblioref">2003</a>)</span> describe LDA’s in detail.</p>
 <p>For more on LDA’s see Bail’s chapter on <a href="https://sicss.io/2020/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Topic Modelling</a>.</p>
 <section id="dependencies" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="dependencies"><span class="header-section-number">7.1</span> Dependencies</h2>
@@ -836,7 +836,7 @@ Your corpus now has 218 documents, 5347 terms and 64554 tokens.</code></pre>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-bar2018did" class="csl-entry" role="listitem">
 Bar, Michael, Moshe Hazan, Oksana Leukhina, David Weiss, and Hosny Zoabi. 2018. <span>“Why Did Rich Families Increase Their Fertility? Inequality and Marketization of Child Care.”</span> <em>Journal of Economic Growth</em> 23: 427–63.
 </div>
@@ -932,6 +932,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1042,6 +1044,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1283,7 +1286,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Population Data Science was written by Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani.</p>
+<p>Computational Social Science was written by Carmen Cabrera, Francisco Rowe, Elisabetta Pietrostefani.</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

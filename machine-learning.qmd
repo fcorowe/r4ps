@@ -404,16 +404,23 @@ raster2020 <- read_stars("./data/machine-learning/gbr_ppp_2020_1km_Aggregated.ti
 We then load the shapes of the MSOAs. These must be downloaded from UK's GeoPortal [here](https://geoportal.statistics.gov.uk/search?q=BDY_MSOA%20DEC_2021&sort=Title%7Ctitle%7Casc). Make sure you download the 2021 version and store it in the `.\data\machine-learning\` folder as a file with the .gpkg extension. We have not included the file in the GitHub repo due to its large size. You can load it with `st_read` and ensure it is in a projection system of choice:
 
 <!-- ```{r} -->
+
 <!-- # read_files -->
+
 <!-- # msoa <- st_read("./data/machine-learning/MSOA_2021_EW_BFC_V6_4482478884757418417.gpkg") %>%  -->
+
 <!-- #   st_transform(., "EPSG:4326") # set projection system -->
+
 <!-- ``` -->
 
 <!-- We ensure that the `raster2000` and `raster2020` objects are in the same projection system as `msoa`, so we can make both objects to work together. -->
 
 <!-- ```{r} -->
+
 <!-- raster2000 <- st_transform(raster2000, st_crs(msoa))    -->
+
 <!-- raster2020 <- st_transform(raster2020, st_crs(msoa))    -->
+
 <!-- ``` -->
 
 <!-- We aggregate the 1km gridded population data to MSOAs in England and Wales. Like in Chapter 4, we use `system.time` to time the duration of the process of aggregation which could take some time depending on your local computational environment. -->
@@ -421,60 +428,87 @@ We then load the shapes of the MSOAs. These must be downloaded from UK's GeoPort
 <!-- ```{r} -->
 
 <!-- system.time({ -->
+
 <!-- pop_2000 = aggregate(x = raster2000, by = msoa, FUN = sum, na.rm = TRUE)  -->
+
 <!-- pop_2020 = aggregate(x = raster2020, by = msoa, FUN = sum, na.rm = TRUE)  -->
+
 <!-- }) -->
 
 <!-- ``` -->
 
 <!-- ```{r} -->
+
 <!-- # create a function to bind the population data frame to the shapefile -->
+
 <!-- add_population <- function(x) mutate(msoa,  -->
+
 <!--                       population = x) -->
 
 <!-- # obtain sub-national population counts -->
+
 <!-- uk_eshp_2000 <- lapply(pop_2000, add_population) -->
+
 <!-- uk_eshp_2020 <- lapply(pop_2020, add_population) -->
+
 <!-- ``` -->
 
 <!-- ```{r} -->
 
 <!-- # create a dataframe with sub-national populations -->
+
 <!-- select_pop_2000 <- function(x) dplyr::select(x, MSOA21CD, population) -->
+
 <!-- select_pop_2020 <- function(x) dplyr::select(x, MSOA21CD, population) -->
 
 <!-- population_df_2000 <- lapply(uk_eshp_2000, select_pop_2000) %>%  -->
+
 <!--   do.call(rbind, .) -->
+
 <!-- population_df_2020 <- lapply(uk_eshp_2020, select_pop_2020) %>%  -->
+
 <!--   do.call(rbind, .) -->
+
 <!-- ``` -->
 
 <!-- Now, we can load, once again the original dataframe containing all the sociodemographic variables from the Census for each MSOA. -->
 
 <!-- ```{r} -->
+
 <!-- # Load the MSOA census data -->
+
 <!-- df_MSOA <- read.csv("./data/machine-learning/census2021-msoa.csv") -->
+
 <!-- # Data cleaning, remove the X field -->
+
 <!-- df_MSOA$X <- NULL -->
+
 <!-- ``` -->
 
 <!-- To this dataset, we will add a column of the percentage change between the population in 2000 and 2020 for each MSOA (i.e. $(P_{2020}-P_{2000})/P_{2000} \times 100$, which we will call `perchange`. Before this, we need to merge the sociodemographic data with the population data derived from raster files. -->
 
 <!-- ```{r} -->
+
 <!-- df_MSOA <- merge(df_MSOA, st_drop_geometry(population_df_2000)[, c("MSOA21CD", "population")], by.x = "geography.code", by.y = "MSOA21CD") %>% rename(population2000 = population) -->
 
 <!-- df_MSOA <- merge(df_MSOA, st_drop_geometry(population_df_2020)[, c("MSOA21CD", "population")], by.x = "geography.code", by.y = "MSOA21CD") %>% rename(population2020 = population) %>% na.omit() -->
+
 <!-- ``` -->
 
 <!-- ```{r} -->
+
 <!-- df_MSOA$perchange <- (df_MSOA$population2020 - df_MSOA$population2000)/df_MSOA$population2000*100 -->
+
 <!-- ``` -->
 
 <!-- And, like before, we delete the unwanted columns: -->
 
 <!-- ```{r} -->
+
 <!-- # Data cleaning -->
+
 <!-- df_MSOA <- subset(df_MSOA, select = -c(date, geography, geography.code, population2000, population2020)) -->
+
 <!-- ``` -->
 
 <!-- For the following questions, you will use the whole dataset for training and evaluate the performance of the ML models via the OOB error. -->

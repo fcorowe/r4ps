@@ -2,14 +2,13 @@ project:
   type: book
 
 book:
-  title: "Population Data Science"
-  author: "Francisco Rowe, Carmen Cabrera-Arnau, Elisabetta Pietrostefani"
+  title: "Computational Social Science"
+  author: "Carmen Cabrera, Francisco Rowe, Elisabetta Pietrostefani"
   date: today
 
   page-footer:
     left: |
-      Population Data Science was written by Francisco Rowe,
-      Carmen Cabrera-Arnau, Elisabetta Pietrostefani.
+      Computational Social Science was written by Carmen Cabrera, Francisco Rowe, Elisabetta Pietrostefani.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
 
@@ -22,13 +21,13 @@ book:
     style: docked
     background: light
   downloads: [pdf, epub]
-  cover-image: source-dall-e.png
+  cover-image: css.png
   cover-image-alt: |
     Alternative text describing the book cover
   chapters:
     - index.qmd
-    - intro.qmd
-    - intro-population-science.qmd
+    - overview.qmd
+    - intro-css.qmd
     - geodemographics.qmd
     - sequence-analysis.qmd
     - network.qmd

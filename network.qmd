@@ -524,4 +524,4 @@ provide answers to the following essay questions:
 
     Furthermore, briefly comment on your findings. Do the patterns you observe agree with your intuition? You may suggest reasons for the observed patterns to arise.
 
-2.  Consider the movements between Camden and the rest of local authorities in the country. Using the strength of a node, compute the **net flow** of people moving between Camden and the rest of the country, both in April-May 2019 and 2020. Comment on the difference in net flow between these two years. 
+2.  Consider the movements between Camden and the rest of local authorities in the country. Using the strength of a node, compute the **net flow** of people moving between Camden and the rest of the country, both in April-May 2019 and 2020. Comment on the difference in net flow between these two years.

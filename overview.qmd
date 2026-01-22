@@ -14,7 +14,11 @@ This module aims to:
 
 ## Learning Outcomes
 
-By the end of the module, students should be able to: - understand key social science concepts and questions to interpret patterns of population dynamics and societal change; - apply data science and social science methods to analyse novel and large-scale social data; - critically evaluate how data-driven analyses of societal change inform policy-relevant debates, demonstrating awareness of ethical, legal and societal issues associated with big and novel forms of data.
+By the end of the module, students should be able to:
+
+-    understand key social science concepts and questions to interpret patterns of population dynamics and societal change;
+-   apply data science and social science methods to analyse novel and large-scale social data;
+-   critically evaluate how data-driven analyses of societal change inform policy-relevant debates, demonstrating awareness of ethical, legal and societal issues associated with big and novel forms of data.
 
 ## Feedback
 

@@ -1,6 +1,6 @@
 # Welcome {.unnumbered}
 
-This is the website for "Computational Social Science". This is a course designed by Dr Carmen Cabrera, Prof Francisco Rowe and Dr Elisabetta Pietrostefani, and currently delivered by Dr Carmen Cabrera, Prof Francisco Rowe and Dr Olga Gkountouna, from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. Through a series of hands-on computational notebooks, you will learn data science methods to address social science questions, including supervised and unsupervised machine learning approaches, network analysis and time series analysis methods.
+This is the website for "Computational Social Science". This is a course designed by Prof Francisco Rowe, Dr Carmen Cabrera and Dr Elisabetta Pietrostefani, and currently delivered by Dr Carmen Cabrera, Prof Francisco Rowe and Dr Olga Gkountouna, from the Geographic Data Science Lab at the University of Liverpool, United Kingdom. Through a series of hands-on computational notebooks, you will learn data science methods to address social science questions, including supervised and unsupervised machine learning approaches, network analysis and time series analysis methods.
 
 The course material is **built upon on the previously taught course on Population Data Science**, designed by Prof Francisco Rowe, Dr Carmen Cabrera and Dr Elisabetta Pietrostefani. The previous version of this course is available [here](https://github.com/fcorowe/r4ps).
 

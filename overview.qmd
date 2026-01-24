@@ -16,7 +16,7 @@ This module aims to:
 
 By the end of the module, students should be able to:
 
--    understand key social science concepts and questions to interpret patterns of population dynamics and societal change;
+-   understand key social science concepts and questions to interpret patterns of population dynamics and societal change;
 -   apply data science and social science methods to analyse novel and large-scale social data;
 -   critically evaluate how data-driven analyses of societal change inform policy-relevant debates, demonstrating awareness of ethical, legal and societal issues associated with big and novel forms of data.
 
@@ -103,6 +103,8 @@ The list of libraries used in this book is provided below:
 -   "ggraph"
 -   "tidygraph"
 -   "ggspatial"
+-   "webshot"
+-   "webshot2"
 
 You need to ensure you have installed the list of libraries used in this book, running the following code:
 
@@ -110,7 +112,7 @@ You need to ensure you have installed the list of libraries used in this book, r
 #| eval: false
 
 # package names
-packages <- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger", "devtools", "vader", "wpgpDownloadR", "ggseqplot", "tidytext", "tm", "textdata", "topicmodels", "RedditExtractoR", "stm", "dygraphs", "plotly", "ggpmisc", "ggformula", "ggimage", "modelsummary", "gtools", "gridExtra", "broom", "rtweet", "webshot", "ggraph", "tidygraph", "ggspatial")
+packages <- c( "tidyverse", "viridis", "viridisLite", "ggthemes", "patchwork", "showtext", "RColorBrewer", "lubridate", "tmap", "sjPlot", "sf", "sp", "kableExtra", "ggcorrplot", "plotrix", "cluster", "factoextra", "igraph", "stringr", "rpart", "rpart.plot", "ggplot2", "Metrics", "caret", "randomForest", "ranger", "devtools", "vader", "wpgpDownloadR", "ggseqplot", "tidytext", "tm", "textdata", "topicmodels", "RedditExtractoR", "stm", "dygraphs", "plotly", "ggpmisc", "ggformula", "ggimage", "modelsummary", "gtools", "gridExtra", "broom", "rtweet", "webshot", "ggraph", "tidygraph", "ggspatial", "webshot", "webshot2")
 
 # install packages not yet installed
 installed_packages <- packages %in% rownames(installed.packages())

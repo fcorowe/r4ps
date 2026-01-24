@@ -3,12 +3,12 @@ project:
 
 book:
   title: "Computational Social Science"
-  author: "Carmen Cabrera, Francisco Rowe, Elisabetta Pietrostefani"
+  author: "Francisco Rowe, Carmen Cabrera, Elisabetta Pietrostefani"
   date: today
 
   page-footer:
     left: |
-      Computational Social Science was written by Carmen Cabrera, Francisco Rowe, Elisabetta Pietrostefani.
+      Computational Social Science was written by Francisco Rowe, Carmen Cabrera, Elisabetta Pietrostefani.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
 
@@ -46,8 +46,8 @@ format:
     theme: ember.scss
     css: styles.css
 #    prefer-html: true
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
 
 editor: visual
 

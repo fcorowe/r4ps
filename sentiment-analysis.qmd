@@ -535,7 +535,7 @@ Natural language processing is a rapidly evolving field and various new sentimen
 
 ## Questions
 
-For the second assignment, we will focus on the United Kingdom as our geographical area of analysis. We will use a dataset of tweets about migration posted by users in the United Kingdom during February 24th 2021 to July 1st 2022. This period coincides with the start of the war in Ukraine and is expected to capture changes in migration sentiment. The dataset contains the following information:
+For the second assignment, we will focus on Greater London as our geographical area of analysis. We will use a dataset of tweets about migration posted by users within the Greater London during February 24th 2021 to July 1st 2022. This period coincides with the start of the war in Ukraine and is expected to capture changes in migration sentiment. The dataset contains the following information:
 
 -   tweet_id: unique tweet identifier
 
@@ -562,4 +562,4 @@ Using VADER:
 
 3.  Visualise the geographical patterns of sentiment scores - see the spatial autocorrelation section on @rowe2022f to map sentiment scores using `ggplot`.
 
-Analyse and discuss: a) the extent of anti-immigration sentiment in the United Kingdom; b) how it has changes over time in intensity and composition; and, c) the degree of spatial concentration in anti-immigration sentiment in the country.
+Analyse and discuss: a) the extent of anti-immigration sentiment in the Greater London; b) how it has changes over time in intensity and composition; and, c) the degree of spatial concentration in anti-immigration sentiment in the country.

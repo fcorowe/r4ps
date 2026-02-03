@@ -35,6 +35,7 @@ library(cluster)
 library(tmap)
 #Provides some easy-to-use functions to extract and visualize the output of multivariate data analyses
 library(factoextra)
+library(ggspatial)
 ```
 
 ```{r}
@@ -113,16 +114,50 @@ The histogram reveals that many LSOAs have a high proportion of discontinuous ur
 Now the question is whether the LSOAs with similar proportions of discontinuous urban fabric are also spatially close. To find out, we need to map the data. We can do this by using the `tmap` library functions. We observe that, LSOAs in the South of Greater Manchester tend to have high proportions of discontinuous urban fabric, while LSOAs in the peripheries have a low proportion of this type of land use.
 
 ```{r}
+legend_title <- expression("% Discontinuous urban fabric (2012)")
 
-legend_title = expression("% Discontinuous urban fabric (2012)")
-map_discountinuous = tm_shape(sf_LSOA) +
-  tm_fill(col = "Discontinuous.urban.fabric..112...2012.", title = legend_title, text.size = 28, palette = viridis(256), style = "cont") + # add fill
-  tm_layout(legend.position = c(0.69, 0.02), legend.title.size=0.9, inner.margins=c(0.05, 0.05, 0.05, 0.26)) +
-  tm_borders(col = "white", lwd = .01)  + # add borders
-  tm_compass(type = "arrow", position = c("right", "top") , size = 2) + # add compass
-  tm_scale_bar(breaks = c(0,2,4,6,8,10), text.size = 0.8, position =  c("left", "bottom")) # add scale bar
+map_discontinuous <- ggplot(sf_LSOA) +
+  geom_sf(
+    aes(fill = Discontinuous.urban.fabric..112...2012.),
+    color = "white",
+    linewidth = 0.01
+  ) +
+  
+  scale_fill_viridis_c(
+    option = "viridis",
+    name = legend_title
+  ) +
+  
+  annotation_scale(
+    location = "bl",
+    width_hint = 0.3,
+    text_cex = 0.8
+  ) +
+  
+  annotation_north_arrow(
+    location = "tr",
+    which_north = "true",
+    style = north_arrow_fancy_orienteering,
+    height = unit(2, "cm"),
+    width = unit(2, "cm")
+  ) +
+  
+  theme_minimal() +
+  
+  theme(
+    panel.grid = element_blank(),    # no grid lines
+    axis.text  = element_blank(),    # no tick labels
+    axis.ticks = element_blank(),    # optional: no tick marks
+    legend.position.inside = c(0.69, 0.1),
+    legend.title = element_text(size = 9),
+    legend.text  = element_text(size = 8),
+    plot.margin  = margin(5, 5, 30, 5)
+  )
 
-map_discountinuous
+```
+
+```{r}
+map_discontinuous
 ```
 
 ## Standardisation {#sec-sec3}
@@ -260,16 +295,48 @@ sf_std <- st_set_geometry(df_std, geometry_column)
 
 Finally, we can plot the results of the clustering process on a map using functions from the `tmap` library:
 
-```{r}
-map_cluster = tm_shape(sf_std) +
-  tm_fill(col = "cluster", title = "Cluster", palette = viridis(256), style = "cont") + # add fill
-  tm_borders(col = "white", lwd = .01)  + # add borders
-  tm_layout(legend.position = c(0.9, 0.02), legend.title.size=0.9, inner.margins=c(0.05, 0.05, 0.05, 0.05)) +
-  tm_compass(type = "arrow", position = c("right", "top") , size = 2) + # add compass
-  tm_scale_bar(breaks = c(0,2,4,6,8,10), text.size = 0.8, position =  c("left", "bottom")) # add scale bar
 
+```{r}
+map_cluster <- ggplot(sf_std) +
+  geom_sf(aes(fill = cluster), color = "white", linewidth = 0.01) +
+  
+  scale_fill_viridis_c(
+    option = "viridis",
+    name = "Cluster"
+  ) +
+  
+  annotation_scale(
+    location = "bl",
+    width_hint = 0.3,
+    text_cex = 0.8
+  ) +
+  
+  annotation_north_arrow(
+    location = "tr",
+    which_north = "true",
+    style = north_arrow_fancy_orienteering,
+    height = unit(2, "cm"),
+    width = unit(2, "cm")
+  ) +
+  
+  theme_minimal() +
+  
+  theme(
+    panel.grid = element_blank(), 
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
+    legend.position.inside = c(0.9, 0.1),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 8),
+    plot.margin = margin(5, 5, 5, 5)
+  )
+
+```
+
+```{r}
 map_cluster
 ```
+
 
 **Note:** sometimes, the number of items in a cluster may be very small. In that case, you may want to merge two clusterx to make the number of items in each group more homogeneous or perhaps change k in the k-means algorithm.
 

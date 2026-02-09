@@ -412,7 +412,7 @@ diff_diff
 
 ```
 
-The diff-in-diff estimate is 131.99, which means that the lockdown here caused an increase in cases in the time-window we are analysing. Not it's intended effect!
+The diff-in-diff estimate is 131.99, which means that the lockdown here caused an increase in cases in the time-window we are analysing. Not its intended effect!
 
 We can visualise this really well with a bit of extra code:
 

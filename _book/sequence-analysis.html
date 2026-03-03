@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ecddca49e8a95842710ab9a43bee7330.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -400,7 +400,7 @@ window.Quarto = {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//Rtmp4DZYXa/wpgpDatasets.md5'</code></pre>
+'/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T//RtmpAglDCo/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ISO ISO3            Country
@@ -418,7 +418,7 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = 1): incomplete final line found on
-'/var/folders/9z/ql42lpgn22x_c5353k3ycqfr0000gn/T//Rtmp4DZYXa/wpgpDatasets.md5'</code></pre>
+'/var/folders/79/65l52xsj7vq_4_t_l6k5bl2c0000gn/T//RtmpAglDCo/wpgpDatasets.md5'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     ISO ISO3 Country Covariate
@@ -494,7 +494,7 @@ window.Quarto = {
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(., <span class="st">"EPSG:4326"</span>) <span class="co"># set projection system</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `gadm41_UKR_2' from data source 
-  `/Users/franciscorowe/Library/CloudStorage/Dropbox/Francisco/uol/teaching/envs418/202526/r4ps/data/sequence-analysis/ukr_shp/gadm41_UKR_2.shp' 
+  `/Users/carmen/Documents/github/r4ps/data/sequence-analysis/ukr_shp/gadm41_UKR_2.shp' 
   using driver `ESRI Shapefile'
 Simple feature collection with 629 features and 13 fields
 Geometry type: MULTIPOLYGON
@@ -574,7 +574,7 @@ First 10 features:
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
- 72.691  10.037  82.756 </code></pre>
+ 85.283  12.582  98.215 </code></pre>
 </div>
 </div>
 <p><strong>Sub-national population</strong></p>
@@ -1381,6 +1381,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1491,6 +1493,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

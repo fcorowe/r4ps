@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ecddca49e8a95842710ab9a43bee7330.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -817,9 +817,9 @@ window.Quarto = {
 
     <script>
 
-      function styleCell_pj8rhpp9uow7ighx8geg(i, j, css_id) {
-          var table = document.getElementById("tinytable_pj8rhpp9uow7ighx8geg");
-          var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+      function styleCell_3zu2ynhdk4kfpadzo3qu(i, j, css_id) {
+          var table = document.getElementById("tinytable_3zu2ynhdk4kfpadzo3qu");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
               cell.classList.add(css_id);
@@ -827,52 +827,60 @@ window.Quarto = {
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function spanCell_pj8rhpp9uow7ighx8geg(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_pj8rhpp9uow7ighx8geg");
-        const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
-        if (!targetCell) {
-          console.warn(`Cell at (${i}, ${j}) not found.`);
-        }
-
-        // Get all cells that need to be removed
-        const cellsToRemove = [];
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_3zu2ynhdk4kfpadzo3qu');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_3zu2ynhdk4kfpadzo3qu(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_3zu2ynhdk4kfpadzo3qu");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
-          for (let c = 0; c < colspan; c++) {
-            if (r === 0 && c === 0) continue; // Skip the target cell
-            const cell = table.querySelector(`[data-row="${i + r}"][data-col="${j + c}"]`);
-            if (cell) {
-              cellsToRemove.push(cell);
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
             }
           }
         }
-
-        // Remove all cells
-        cellsToRemove.forEach(cell => cell.remove());
-
-        // Set rowspan and colspan of the target cell if it exists
-        if (targetCell) {
-          targetCell.rowSpan = rowspan;
-          targetCell.colSpan = colspan;
-        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
       }
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '16', j: 1 },  ], css_id: 'tinytable_css_mrclzkekt6g9b892bw9c',}, 
-          { positions: [ { i: '8', j: 1 },  ], css_id: 'tinytable_css_t3dvbfmj7ovmxdya8xib',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '12', j: 1 }, { i: '9', j: 1 }, { i: '10', j: 1 }, { i: '11', j: 1 }, { i: '13', j: 1 }, { i: '14', j: 1 }, { i: '15', j: 1 },  ], css_id: 'tinytable_css_shmnekw3l6txcrms0do2',}, 
-          { positions: [ { i: '0', j: 1 },  ], css_id: 'tinytable_css_8y5wtclz1llus0lomajt',}, 
-          { positions: [ { i: '16', j: 0 },  ], css_id: 'tinytable_css_53axpuuk4v6vb5cii2uq',}, 
-          { positions: [ { i: '8', j: 0 },  ], css_id: 'tinytable_css_icdqv97xeylckmnullrk',}, 
-          { positions: [ { i: '1', j: 0 }, { i: '2', j: 0 }, { i: '3', j: 0 }, { i: '4', j: 0 }, { i: '5', j: 0 }, { i: '6', j: 0 }, { i: '7', j: 0 }, { i: '12', j: 0 }, { i: '9', j: 0 }, { i: '10', j: 0 }, { i: '11', j: 0 }, { i: '13', j: 0 }, { i: '14', j: 0 }, { i: '15', j: 0 },  ], css_id: 'tinytable_css_wlz4noqoauvvzrg8x1bs',}, 
-          { positions: [ { i: '0', j: 0 },  ], css_id: 'tinytable_css_n3x29atli5nrl0ednhiz',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_vn9yvxv3bf5i130dibag',}, 
+          { positions: [ { i: 16, j: 1 },  ], css_id: 'tinytable_css_vmzouby0nssfsicy0hjy',}, 
+          { positions: [ { i: 16, j: 0 },  ], css_id: 'tinytable_css_qnm5ylfbwt88m1k9hel6',}, 
+          { positions: [ { i: 8, j: 1 },  ], css_id: 'tinytable_css_kfbf2450subz6rks4g6z',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 12, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 15, j: 1 },  ], css_id: 'tinytable_css_6kowax14jxh2rvv439o9',}, 
+          { positions: [ { i: 8, j: 0 },  ], css_id: 'tinytable_css_5s4xwzotctsla2nhsypm',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_5gxvo17d238d2inn039g',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 12, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 },  ], css_id: 'tinytable_css_0569vxqpwsmomw0vq6ix',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_pj8rhpp9uow7ighx8geg(cell.i, cell.j, group.css_id);
+                  styleCell_3zu2ynhdk4kfpadzo3qu(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -880,89 +888,89 @@ window.Quarto = {
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_mrclzkekt6g9b892bw9c, .table th.tinytable_css_mrclzkekt6g9b892bw9c { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_t3dvbfmj7ovmxdya8xib, .table th.tinytable_css_t3dvbfmj7ovmxdya8xib { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_shmnekw3l6txcrms0do2, .table th.tinytable_css_shmnekw3l6txcrms0do2 { text-align: center; }
-      .table td.tinytable_css_8y5wtclz1llus0lomajt, .table th.tinytable_css_8y5wtclz1llus0lomajt { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_53axpuuk4v6vb5cii2uq, .table th.tinytable_css_53axpuuk4v6vb5cii2uq { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_icdqv97xeylckmnullrk, .table th.tinytable_css_icdqv97xeylckmnullrk { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_wlz4noqoauvvzrg8x1bs, .table th.tinytable_css_wlz4noqoauvvzrg8x1bs { text-align: left; }
-      .table td.tinytable_css_n3x29atli5nrl0ednhiz, .table th.tinytable_css_n3x29atli5nrl0ednhiz { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_vn9yvxv3bf5i130dibag, .table th.tinytable_css_vn9yvxv3bf5i130dibag { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_vmzouby0nssfsicy0hjy, .table th.tinytable_css_vmzouby0nssfsicy0hjy { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_qnm5ylfbwt88m1k9hel6, .table th.tinytable_css_qnm5ylfbwt88m1k9hel6 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_kfbf2450subz6rks4g6z, .table th.tinytable_css_kfbf2450subz6rks4g6z { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_6kowax14jxh2rvv439o9, .table th.tinytable_css_6kowax14jxh2rvv439o9 { text-align: center; }
+      .table td.tinytable_css_5s4xwzotctsla2nhsypm, .table th.tinytable_css_5s4xwzotctsla2nhsypm { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_5gxvo17d238d2inn039g, .table th.tinytable_css_5gxvo17d238d2inn039g { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_0569vxqpwsmomw0vq6ix, .table th.tinytable_css_0569vxqpwsmomw0vq6ix { text-align: left; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_pj8rhpp9uow7ighx8geg" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_3zu2ynhdk4kfpadzo3qu" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
-                <th scope="col" data-row="0" data-col="0"> </th>
-                <th scope="col" data-row="0" data-col="1">Simple</th>
+                <th scope="col"> </th>
+                <th scope="col">Simple</th>
               </tr>
         </thead>
         
         <tbody>
                 <tr>
-                  <td data-row="1" data-col="0">(Intercept)</td>
-                  <td data-row="1" data-col="1">55.694***</td>
+                  <td>(Intercept)</td>
+                  <td>55.694***</td>
                 </tr>
                 <tr>
-                  <td data-row="2" data-col="0"></td>
-                  <td data-row="2" data-col="1">(4.469)</td>
+                  <td></td>
+                  <td>(4.469)</td>
                 </tr>
                 <tr>
-                  <td data-row="3" data-col="0">areaRome (Lazio)</td>
-                  <td data-row="3" data-col="1">125.910***</td>
+                  <td>areaRome (Lazio)</td>
+                  <td>125.910***</td>
                 </tr>
                 <tr>
-                  <td data-row="4" data-col="0"></td>
-                  <td data-row="4" data-col="1">(7.986)</td>
+                  <td></td>
+                  <td>(7.986)</td>
                 </tr>
                 <tr>
-                  <td data-row="5" data-col="0">after_5nov</td>
-                  <td data-row="5" data-col="1">300.656***</td>
+                  <td>after_5nov</td>
+                  <td>300.656***</td>
                 </tr>
                 <tr>
-                  <td data-row="6" data-col="0"></td>
-                  <td data-row="6" data-col="1">(11.681)</td>
+                  <td></td>
+                  <td>(11.681)</td>
                 </tr>
                 <tr>
-                  <td data-row="7" data-col="0">areaRome (Lazio) × after_5nov</td>
-                  <td data-row="7" data-col="1">-269.302***</td>
+                  <td>areaRome (Lazio) × after_5nov</td>
+                  <td>-269.302***</td>
                 </tr>
                 <tr>
-                  <td data-row="8" data-col="0"></td>
-                  <td data-row="8" data-col="1">(21.032)</td>
+                  <td></td>
+                  <td>(21.032)</td>
                 </tr>
                 <tr>
-                  <td data-row="9" data-col="0">Num.Obs.</td>
-                  <td data-row="9" data-col="1">5366</td>
+                  <td>Num.Obs.</td>
+                  <td>5366</td>
                 </tr>
                 <tr>
-                  <td data-row="10" data-col="0">R2</td>
-                  <td data-row="10" data-col="1">0.130</td>
+                  <td>R2</td>
+                  <td>0.130</td>
                 </tr>
                 <tr>
-                  <td data-row="11" data-col="0">R2 Adj.</td>
-                  <td data-row="11" data-col="1">0.130</td>
+                  <td>R2 Adj.</td>
+                  <td>0.130</td>
                 </tr>
                 <tr>
-                  <td data-row="12" data-col="0">AIC</td>
-                  <td data-row="12" data-col="1">74524.8</td>
+                  <td>AIC</td>
+                  <td>74524.8</td>
                 </tr>
                 <tr>
-                  <td data-row="13" data-col="0">BIC</td>
-                  <td data-row="13" data-col="1">74557.7</td>
+                  <td>BIC</td>
+                  <td>74557.7</td>
                 </tr>
                 <tr>
-                  <td data-row="14" data-col="0">Log.Lik.</td>
-                  <td data-row="14" data-col="1">-37257.375</td>
+                  <td>Log.Lik.</td>
+                  <td>-37257.375</td>
                 </tr>
                 <tr>
-                  <td data-row="15" data-col="0">F</td>
-                  <td data-row="15" data-col="1">267.482</td>
+                  <td>F</td>
+                  <td>267.482</td>
                 </tr>
                 <tr>
-                  <td data-row="16" data-col="0">RMSE</td>
-                  <td data-row="16" data-col="1">250.71</td>
+                  <td>RMSE</td>
+                  <td>250.71</td>
                 </tr>
         </tbody>
       </table>
@@ -1083,6 +1091,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1193,6 +1203,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

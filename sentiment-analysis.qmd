@@ -535,7 +535,7 @@ Natural language processing is a rapidly evolving field and various new sentimen
 
 ## Questions
 
-For the second assignment, we will focus on Greater London as our geographical area of analysis. We will use a dataset of tweets about migration posted by users within the Greater London during February 24th 2021 to July 1st 2022. This period coincides with the start of the war in Ukraine and is expected to capture changes in migration sentiment. The dataset contains the following information:
+We will focus on Greater London as our geographical area of analysis. We will use a dataset of tweets about migration posted by users within the Greater London during February 24th 2021 to July 1st 2022. This period coincides with the start of the war in Ukraine and is expected to capture changes in migration sentiment. The dataset contains the following information:
 
 -   tweet_id: unique tweet identifier
 

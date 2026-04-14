@@ -114,7 +114,7 @@ Building time series requires the time variable to be formatted as date. The fir
 str(mobility_it)
 ```
 
-This is already looking fine in the Google mobility data, but in many other cases the `lubridate` package is such a life saver. It offers several functions whose names are composed by 3 letters: year (`y`), month (`m`) and day (`d`). Have a look at `lubridate` [cheat sheet](https://rawgit.com/rstudio/cheatsheets/main/lubridate.pdf) to learn more about converting time variables to useful formats. There is also the anytime() function in the anytime package whose sole goal is to automatically parse strings as dates regardless of the format.
+This is already looking fine in the Google mobility data, but in many other cases the `lubridate` package is such a life saver. It offers several functions whose names are composed by 3 letters: year (`y`), month (`m`) and day (`d`). Have a look at `lubridate` [cheat sheet](https://lubridate.tidyverse.org/) to learn more about converting time variables to useful formats. There is also the anytime() function in the anytime package whose sole goal is to automatically parse strings as dates regardless of the format.
 
 ```{r}
 #Convert the date column to a date format using the dmy() function 

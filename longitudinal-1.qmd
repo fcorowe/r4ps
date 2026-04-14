@@ -460,6 +460,6 @@ uk_iso3166 <- st_read("data/longitudinal-1/uk_projected_simplified.geojson")
 
 3.  Model both time and space: use `ggplot` to create a graph of the data by region or other geographical area. You can chose what to focus on here and do not necessarily need to use all the geographical classifications available to you. Analyse the trends that appear in your plot.
 
-<!-- 4.  Create a static or interactive map (bonus points) of your choice from the data. !--!>
+<!-- 4.  Create a static or interactive map (bonus points) of your choice from the data.  -->
 
 Analyse and discuss what insights you obtain into people's attitudes, concerns, and behaviors during the pandemic, as well as their response to interventions and policies.

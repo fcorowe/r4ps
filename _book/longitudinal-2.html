@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ecddca49e8a95842710ab9a43bee7330.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -318,8 +318,13 @@ window.Quarto = {
   <li><a href="#dependencies" id="toc-dependencies" class="nav-link active" data-scroll-target="#dependencies"><span class="header-section-number">9.1</span> Dependencies</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">9.2</span> Data</a></li>
   <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">9.3</span> Data Exploration</a></li>
-  <li><a href="#difference-in-difference" id="toc-difference-in-difference" class="nav-link" data-scroll-target="#difference-in-difference"><span class="header-section-number">9.4</span> Difference in Difference</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">9.5</span> Questions</a></li>
+  <li><a href="#difference-in-differences" id="toc-difference-in-differences" class="nav-link" data-scroll-target="#difference-in-differences"><span class="header-section-number">9.4</span> Difference-in-Differences</a>
+  <ul class="collapse">
+  <li><a href="#checking-parallel-trends" id="toc-checking-parallel-trends" class="nav-link" data-scroll-target="#checking-parallel-trends"><span class="header-section-number">9.4.1</span> Checking parallel trends</a></li>
+  <li><a href="#what-if-parallel-trends-fail" id="toc-what-if-parallel-trends-fail" class="nav-link" data-scroll-target="#what-if-parallel-trends-fail"><span class="header-section-number">9.4.2</span> What if parallel trends fail?</a></li>
+  </ul></li>
+  <li><a href="#concluding-remarks" id="toc-concluding-remarks" class="nav-link" data-scroll-target="#concluding-remarks"><span class="header-section-number">9.5</span> Concluding Remarks</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">9.6</span> Questions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/fcorowe/r4ps/edit/main/longitudinal-2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -345,11 +350,9 @@ window.Quarto = {
 </header>
 
 
-<p>Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. One of the ways to track the spread of the disease is through the collection and analysis of data on daily cases, which has become a crucial component of new digital footprint trends. Contact tracing apps and tools were developed and implemented in many countries to help track the spread of COVID-19.</p>
-<p>Data on daily cases can help us evaluate the effectiveness of policies implemented during the pandemic, such as lockdowns and other restrictions. By analyzing these data, policymakers and public health experts have gained insights into the impact of these policies on the spread of the disease <span class="citation" data-cites="goodman2020using">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="zhou2021varying">(<a href="references.html#ref-zhou2021varying" role="doc-biblioref">Zhou and Kan 2021</a>)</span>. For instance, if daily cases decrease significantly during a lockdown, it could indicate that the policy was successful in controlling the spread of the disease.</p>
-<p>Data on daily cases can also help policymakers to make informed decisions about when to implement or lift certain restrictions. For example, if daily cases start to rise again after a lifting of restrictions, it may indicate that it is too early to do so, and that more caution is necessary. In summary, data on daily cases was an essential tool for evaluating the effectiveness of policies implemented during the COVID-19 pandemic and making informed decisions about future policies. As we will see in this chapter, evaluating COVI9-19 policies based onn cases is, unfortunately not so simple.</p>
-<p>To assess government interventions during the pandemic, we will be using <strong>difference-in-differences</strong> (diff-n-diff), a widely-adopted quasi-experimental design, used to evaluate the effect of an intervention or exposure on an outcome of interest. This strategy involves comparing the change in the outcome before and after the intervention or exposure in the treated group, relative to the change in the outcome over the same time period in a control group. By doing so, diff-n-diff can help isolate the effect of the intervention or exposure from other factors that may be driving the outcome.</p>
-<p>This chapter is based on :</p>
+<p>Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. Daily case counts quickly became one of the main ways to track the pandemic and to debate the effects of lockdowns and other restrictions. These data helped policymakers monitor the evolution of the disease and make decisions about when to tighten or relax restrictions <span class="citation" data-cites="goodman2020using brodeur2021covid zhou2021varying">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>; <a href="references.html#ref-brodeur2021covid" role="doc-biblioref">Brodeur et al. 2021</a>; <a href="references.html#ref-zhou2021varying" role="doc-biblioref">Zhou and Kan 2021</a>)</span>.</p>
+<p>At the same time, case data do not automatically provide a clean causal evaluation of policy. In this chapter we use <strong>difference-in-differences</strong> (diff-in-diff), a widely used quasi-experimental design, to show both the promise and the limits of this approach. The aim is not only to estimate an effect, but also to learn how to judge whether a diff-in-diff design is credible. We begin with COVID case data because they are tempting to use, then see why they are problematic for a simple policy evaluation. We then switch to a small theoretical example to explain the mechanics of the method more clearly. This also prepares us for the assignment, where mobility data may offer a more plausible short-run outcome than recorded cases.</p>
+<p>This chapter is based on:</p>
 <ul>
 <li><p>Goodman-Bacon, Andrew, and Jan Marcus. <a href="https://d-nb.info/1212037294/34">“Using difference-in-differences to identify causal effects of COVID-19 policies.”</a> (2020)</p></li>
 <li><p>Andrew Heiss’ chapter on <a href="https://evalf20.classes.andrewheiss.com/example/diff-in-diff/">Difference-in-differences</a></p></li>
@@ -571,88 +574,124 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>We could make some assumptions and set this up as a quasi experiment. In social science, researchers are often using natural or quasi experimental setting as randomized experiments can rarely be conducted. This involves splitting the population at hand into a treatment and control group.</p>
+<p>At first sight, this looks like a quasi-experiment. In social science, researchers often work with natural or quasi-experimental settings because randomized experiments are rarely possible. The key question, however, is not whether we can label one group as treated and the other as control, but whether that comparison is credible.</p>
 </section>
-<section id="difference-in-difference" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="difference-in-difference"><span class="header-section-number">9.4</span> Difference in Difference</h2>
-<p><strong>Plotting Means</strong></p>
-<p>For a <code>diff-in-diff</code> analysis using COVID data, possible shocks that would make this type of quasi-experiment possible could be the following:</p>
-<ul>
-<li><p><strong>National lockdown</strong>: The first national lockdown in the UK was announced on March 23, 2020. This sudden shock to the economy and society could be used as a treatment group for the diff-in-diff analysis, with the pre-lockdown period as the control group.</p></li>
-<li><p><strong>Regional lockdowns</strong>: The UK also implemented regional lockdowns throughout the pandemic, with different regions experiencing restrictions at different times. These regional lockdowns could be used as treatment groups, with regions that did not experience lockdowns as the control group.</p></li>
-<li><p><strong>School closures</strong>: In response to the pandemic, schools in the UK were closed from March 20, 2020, until June 1, 2020, and then again from January 5, 2021, until March 8, 2021. The impact of school closures on education outcomes could be studied using a diff-in-diff approach, with the period before school closures as the control group.</p></li>
-<li><p><strong>Travel restrictions</strong>: The UK implemented various travel restrictions throughout the pandemic, including quarantine requirements for travelers from certain countries. The impact of these travel restrictions on the tourism industry or the spread of the virus could be studied using a diff-in-diff approach.</p></li>
-<li><p><strong>Vaccine rollout</strong>: The UK began its COVID-19 vaccination program in December 2020. The impact of the vaccine rollout on various health and economic outcomes could be studied using a diff-in-diff approach, with the period before the rollout as the control group.</p></li>
-</ul>
-<p>These are just a few examples of shocks that could be used for a diff-in-diff analysis using COVID data. The choice of shock will depend on the research question and the data available.</p>
+<section id="difference-in-differences" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="difference-in-differences"><span class="header-section-number">9.4</span> Difference-in-Differences</h2>
+<p><strong>Design choices</strong></p>
 <p>The DiD approach includes a before-after comparison for a treatment and control group. In our example:</p>
 <ul>
-<li><p>A <code>cross-sectional comparison</code> (= compare a sample that was treated (London) to an non-treated control group (Rome))</p></li>
+<li><p>A <code>cross-sectional comparison</code> (= compare a sample that was treated (London) to an untreated control group (Rome))</p></li>
 <li><p>A <code>before-after comparison</code> (= compare treatment group with itself, before and after the treatment (5th of November))</p></li>
 </ul>
-<p>The <strong>main assumption</strong> is that without the change in the natural environment the outcome variable would have remained constant!</p>
-<p>First, we create a dummy variable to indicate the time when the treatment started. In our case this will be the 5th of November 2020. We will also limit the time-span of our data.</p>
+<p>The <strong>main assumption</strong> is not that the outcome would have remained constant. It is the <strong>parallel trends assumption</strong>: in the absence of the intervention, the treated and control groups would have followed similar trends over the period we analyse. The two groups do not need to have the same level, but they should evolve in a comparable way before treatment.</p>
+<p>In practice, a good DiD design requires four choices: the treated group, the comparison group, the pre-treatment window, and the post-treatment window. These are part of the research design, not just data cleaning. This comparison is already imperfect because Lazio was not a pure untreated case: it also faced pandemic restrictions, even if they were milder than those in England.</p>
+<p>A useful first lesson from this chapter is that the time window matters. If we define the post period too broadly, we risk attributing later shocks to the policy of interest. Here that is especially important because London cases rose sharply again in December 2020 and January 2021.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep data from 2020-09-01 to 2021-01-01</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>covid_combined_filtered <span class="ot">&lt;-</span> covid_combined <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-09-01"</span> <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> <span class="st">"2021-01-01"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a dummy variable to indicate the time when the treatment started (5 Nov 2020)</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>covid_combined_filtered <span class="ot">&lt;-</span> covid_combined_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">after_5nov =</span> <span class="fu">ifelse</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-11-05"</span>, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="co">#changed to 05 Nov</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A wide window that mixes the November lockdown with the later winter surge</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>covid_combined_wide <span class="ot">&lt;-</span> covid_combined <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-09-01"</span> <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> <span class="st">"2021-01-01"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">after_5nov =</span> <span class="fu">ifelse</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-11-05"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">window =</span> <span class="st">"Wide window: 1 Sep to 1 Jan"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># A tighter window focused on the weeks around the intervention</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>covid_combined_tight <span class="ot">&lt;-</span> covid_combined <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-10-15"</span> <span class="sc">&amp;</span> date <span class="sc">&lt;=</span> <span class="st">"2020-11-30"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">after_5nov =</span> <span class="fu">ifelse</span>(date <span class="sc">&gt;=</span> <span class="st">"2020-11-05"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">window =</span> <span class="st">"Tighter window: 15 Oct to 30 Nov"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>covid_designs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(covid_combined_wide, covid_combined_tight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a frequency table of area and treatment</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>freq_table <span class="ot">&lt;-</span> <span class="fu">table</span>(covid_combined_filtered<span class="sc">$</span>area, covid_combined_filtered<span class="sc">$</span>after_5nov)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the frequency table</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freq_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              
-                  0    1
-  London       3150  540
-  Rome (Lazio) 1436  240</code></pre>
-</div>
-</div>
-<p>We then want to plot averages to see differences between treatment/control groups and before/after. But we can also calculate the mean and 95% confidence interval. We can also use group_by() and summarize() to figure out group means before sending the data to ggplot.</p>
+<p>We can now compare these two designs directly by plotting group means before and after 5 November.</p>
 <div class="cell" data-messages="false">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> covid_combined_filtered <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make these categories instead of 0/1 numbers so they look nicer in the plot</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">after_5nov =</span> <span class="fu">factor</span>(after_5nov, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Before 5 November 2020"</span>, <span class="st">"After 5 November 2020"</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(area, after_5nov) <span class="sc">%&gt;%</span> </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_cases =</span> <span class="fu">mean</span>(cases),</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_cases =</span> <span class="fu">sd</span>(cases) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">upper =</span> mean_cases <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> se_cases),</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">lower =</span> mean_cases <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.96</span> <span class="sc">*</span> se_cases)) </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> area, <span class="at">y =</span> mean_cases)) <span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(after_5nov))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>design_plot_data <span class="ot">&lt;-</span> covid_designs <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make these categories instead of 0/1 numbers so they look nicer in the plot</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">after_5nov =</span> <span class="fu">factor</span>(after_5nov, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Pre 5 Nov 2020"</span>, <span class="st">"Post 5 Nov 2020"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(window, area, after_5nov) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_cases =</span> <span class="fu">mean</span>(cases),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se_cases =</span> <span class="fu">sd</span>(cases) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">upper =</span> mean_cases <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> se_cases),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">lower =</span> mean_cases <span class="sc">+</span> (<span class="sc">-</span><span class="fl">1.96</span> <span class="sc">*</span> se_cases),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(design_plot_data, <span class="fu">aes</span>(<span class="at">x =</span> after_5nov, <span class="at">y =</span> mean_cases, <span class="at">color =</span> area)) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> area)) <span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>)) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(window))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Here, we can start to see a diff-in-diff plot, where there is little to no difference in means with our control city (Rome-Lazio) and a substancial jump in means in our treatment city (London). It looks there were many more cases of COVID-19 after the 5th of march in London, indicating the lockdown did not have an effect, at least in this time-frame. Why could that be?</p>
-<p>We can also plot a more standard diff-in-diff format:</p>
+<p>In our example, a shorter time window represents a better research design. It is a better reflection that the implementation of the lockdown in London contained the pre-treatment surge in Covid-19 cases. A wider window can be misleading as they suggest that the implementation of the lockdown did not have any impact. On the contrary, it is linked to a considerable increase in Covid-19. But from the time series plot above, we know that this actually reflects a surge in Covid-19 cases during December 2020 and January 2021.</p>
+<section id="checking-parallel-trends" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="checking-parallel-trends"><span class="header-section-number">9.4.1</span> Checking parallel trends</h3>
+<p>As highlighted above, a key issue to assess in the implementation of diff-in-diff is the complaince of the parallel trends assumption. In our example, this is responding to the question: were London and Lazio were moving in similar ways <strong>before</strong> the intervention? The parallel trends assumption is about slopes, not levels. One group can start higher than the other, but the pre-treatment trajectories should be broadly similar.</p>
+<p>A practical way to assess this is:</p>
+<ol type="1">
+<li>Plot only the pre-treatment period.</li>
+<li>Look for similar direction and pace of change.</li>
+<li>Use domain knowledge to ask whether other shocks or policies were affecting the groups differently.</li>
+<li>If useful, run a simple pre-trend regression and check whether the treated and control groups have different pre-treatment slopes.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> after_5nov, <span class="at">y =</span> mean_cases, <span class="at">color =</span> area)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> area)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pre_period <span class="ot">&lt;-</span> covid_combined_tight <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2020-11-05"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">as.numeric</span>(date <span class="sc">-</span> <span class="fu">min</span>(date)),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">treat_london =</span> <span class="fu">ifelse</span>(area <span class="sc">==</span> <span class="st">"London"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pre_period, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> cases, <span class="at">color =</span> area)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"darkred"</span>)) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Pre-treatment trends only"</span>,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Region"</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This second plot shows us it is probable that our diff-n-diff set up will not work. A clean classic diff-n-diff would look more like the following. Please note the following plot is theoretical.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pretrend_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(cases <span class="sc">~</span> treat_london <span class="sc">+</span> day <span class="sc">+</span> treat_london<span class="sc">:</span>day,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> pre_period)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(pretrend_model) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"treat_london:day"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  term             estimate std.error statistic    p.value
+  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 treat_london:day    -13.3      2.77     -4.79 0.00000196</code></pre>
+</div>
+</div>
+<p>In this case, the pre-treatment slopes are still quite different, so the London-Lazio comparison remains weak. The narrower window fixes one design problem, but it does not fully rescue the design. A pre-trend test like this is only a diagnostic, not proof, but it is a useful warning sign when the interaction term is large and clearly different from zero.</p>
+</section>
+<section id="what-if-parallel-trends-fail" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="what-if-parallel-trends-fail"><span class="header-section-number">9.4.2</span> What if parallel trends fail?</h3>
+<p>If the parallel trends assumption does not look plausible, do not force the method. A sensible sequence is:</p>
+<ul>
+<li>Redefine the time window so the pre and post periods match the timing of the policy more closely.</li>
+<li>Allow for a plausible lag if the outcome reacts with delay, as COVID case data often do.</li>
+<li>Choose a better comparison group with a more similar pre-treatment trend and policy context.</li>
+<li>Change the outcome to something that responds more immediately to the intervention, such as mobility or another behavioural measure.</li>
+<li>If none of these improve the design, present the comparison as descriptive evidence and use another research design for causal claims.</li>
+</ul>
+<p>This is the point at which the London-Lazio example becomes most useful: it shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of diff-in-diff more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.</p>
 <div class="cell" data-messages="false">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import csv </span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>covid_perfect_example <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/longitudinal-2/example_covid.csv"</span>)</span>
@@ -669,7 +708,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -706,7 +745,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>A combination of group_by() and summarize() makes this really easy. We can pull each of these numbers out of the table with some filter()s and pull():</p>
+<p>We can pull each of these numbers out of the table:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>before_treatment <span class="ot">&lt;-</span> covid_perfect_example <span class="sc">%&gt;%</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(after_5nov <span class="sc">==</span> <span class="st">"Before 5 November 2020"</span>, area <span class="sc">==</span> <span class="st">"London"</span>) <span class="sc">%&gt;%</span> </span>
@@ -740,7 +779,7 @@ window.Quarto = {
 <pre><code>[1] 131.9961</code></pre>
 </div>
 </div>
-<p>The diff-in-diff estimate is 131.99, which means that the lockdown here caused an increase in cases in the time-window we are analysing. Not its intended effect!</p>
+<p>In this theoretical example, the diff-in-diff estimate is 131.99. This is the gap between the treated group’s observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.</p>
 <p>We can visualise this really well with a bit of extra code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covid_perfect_example, <span class="fu">aes</span>(<span class="at">x =</span> after_5nov, <span class="at">y =</span> mean_cases, <span class="at">color =</span> area)) <span class="sc">+</span></span>
@@ -765,61 +804,60 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="longitudinal-2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>It is important for all diff-in-diff analyses to give careful attention to possible violations of the common trends assumption, especially considering the COVID-19 situation where many of these violations are likely to occur. Furthermore, due to the unique dynamics of COVID-19 such as lags between exposure and recorded infections, nonlinearities from person-to-person transmission, and the possibility of policies having differential effects over time, it further complicates the potential risks to the diff-in-diff research design.</p>
-<p><span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span> comment on the following problems which can be consulted in their paper:</p>
-<ul>
-<li><p>Packaged Policies</p></li>
-<li><p>Reverse Causality</p></li>
-<li><p>Voluntary Precautions</p></li>
-<li><p>Difference Data collection</p></li>
-<li><p>Anticipation Spillovers</p></li>
-<li><p>Variation in Policy Timing</p></li>
-</ul>
-<p><span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span> also give great recommendations on how to address these problems, but this is far beyond the objective of this chapter.</p>
+<p>This distinction matters. Diff-in-diff is valuable not because every policy comparison works, but because it makes the design questions explicit. With COVID data, common threats include policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing <span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span>. These problems are especially serious when the outcome is recorded cases.</p>
 <p><strong>Difference-in-Difference with regression</strong></p>
-<p>Calculating all the pieces by hand like that is tedious, so we can use regression to do it instead! Remember that we need to include indicator variables for treatment/control and for before/after, as well as the interaction of the two.</p>
-<p>This is the equation:</p>
-<p><span class="math inline">\(\Delta Y_{gt} = \beta_0 + \beta_1 London_{g} + \beta_2 Post5Nov_{t} + \beta_3 London_{g} \times Post5Nov_{t} + \beta_4 Rome_{g} + \epsilon_{gt}\)</span></p>
-<p>The output will show the diff-in-diff coefficient estimate, standard error, t-value, and p-value, which can be used to determine whether there was a significant effect of the second lockdown 4 on Covid cases in November 2020.</p>
+<p>Calculating all the pieces by hand is useful for intuition, but regression lets us recover the same logic more systematically. The easiest way to see this is to build the model step by step using the theoretical example. That keeps the mechanics clear before we return to the messier real-world design.</p>
+<p>First, we code London as the treated group and the post-5 November period as the post-treatment period:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model_small <span class="ot">&lt;-</span> <span class="fu">lm</span>(cases <span class="sc">~</span> area <span class="sc">+</span> after_5nov <span class="sc">+</span> area <span class="sc">*</span> after_5nov,</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> covid_combined_filtered)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the model output</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>diffndiff1 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_small) </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add significance stars using stars.pval from gtools</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>diffndiff1<span class="sc">$</span>stars <span class="ot">&lt;-</span> <span class="fu">stars.pval</span>(diffndiff1<span class="sc">$</span>p.value)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View the results</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>diffndiff1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 6
-  term                        estimate std.error statistic   p.value stars
-  &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;
-1 (Intercept)                     55.7      4.47      12.5 3.62e- 35 ***  
-2 areaRome (Lazio)               126.       7.99      15.8 8.81e- 55 ***  
-3 after_5nov                     301.      11.7       25.7 7.63e-138 ***  
-4 areaRome (Lazio):after_5nov   -269.      21.0      -12.8 5.37e- 37 ***  </code></pre>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>covid_perfect_reg <span class="ot">&lt;-</span> covid_perfect_example <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> <span class="fu">ifelse</span>(area <span class="sc">==</span> <span class="st">"London"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">post =</span> <span class="fu">ifelse</span>(after_5nov <span class="sc">==</span> <span class="st">"After 5 November 2020"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a model summary table for the model</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">modelsummary</span>(<span class="fu">list</span>(<span class="st">"Simple"</span> <span class="ot">=</span> model_small), <span class="at">estimate =</span><span class="fu">c</span>(<span class="st">"{estimate}{stars}"</span>))</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the results</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>summary_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can now build the regression in four steps:</p>
+<ol type="1">
+<li><code>mean_cases ~ treat</code> This is only a cross-sectional comparison. It tells us whether London and Lazio differ on average, but it ignores time completely.</li>
+<li><code>mean_cases ~ post</code> This is only a before-after comparison. It tells us whether average cases are different after 5 November, but it ignores whether the change happened in the treated or control group.</li>
+<li><code>mean_cases ~ treat + post</code> This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.</li>
+<li><code>mean_cases ~ treat * post</code> This adds the interaction term. That interaction is the diff-in-diff estimate.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_treat <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_cases <span class="sc">~</span> treat, <span class="at">data =</span> covid_perfect_reg)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>model_post <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_cases <span class="sc">~</span> post, <span class="at">data =</span> covid_perfect_reg)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>model_additive <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_cases <span class="sc">~</span> treat <span class="sc">+</span> post, <span class="at">data =</span> covid_perfect_reg)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>model_did <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_cases <span class="sc">~</span> treat <span class="sc">*</span> post, <span class="at">data =</span> covid_perfect_reg)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Treat only"</span> <span class="ot">=</span> model_treat,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Post only"</span> <span class="ot">=</span> model_post,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Treat + post"</span> <span class="ot">=</span> model_additive,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Treat * post"</span> <span class="ot">=</span> model_did</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"(Intercept)"</span> <span class="ot">=</span> <span class="st">"Control group, before"</span>,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"treat"</span> <span class="ot">=</span> <span class="st">"Treat: London"</span>,</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"post"</span> <span class="ot">=</span> <span class="st">"Post period"</span>,</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"treat:post"</span> <span class="ot">=</span> <span class="st">"DiD estimate"</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">estimate =</span> <span class="st">"{estimate}"</span>,</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">statistic =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">gof_omit =</span> <span class="st">".*"</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_3zu2ynhdk4kfpadzo3qu(i, j, css_id) {
-          var table = document.getElementById("tinytable_3zu2ynhdk4kfpadzo3qu");
-          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+      function styleCell_4cuefpwgy3qh2s5tmexh(i, j, css_id) {
+          var table = document.getElementById("tinytable_4cuefpwgy3qh2s5tmexh");
+          var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
               cell.classList.add(css_id);
@@ -827,60 +865,50 @@ window.Quarto = {
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_3zu2ynhdk4kfpadzo3qu');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_3zu2ynhdk4kfpadzo3qu(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_3zu2ynhdk4kfpadzo3qu");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
+      function spanCell_4cuefpwgy3qh2s5tmexh(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_4cuefpwgy3qh2s5tmexh");
+        const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+        if (!targetCell) {
+          console.warn(`Cell at (${i}, ${j}) not found.`);
+        }
+
+        // Get all cells that need to be removed
+        const cellsToRemove = [];
         for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
+          for (let c = 0; c < colspan; c++) {
+            if (r === 0 && c === 0) continue; // Skip the target cell
+            const cell = table.querySelector(`[data-row="${i + r}"][data-col="${j + c}"]`);
+            if (cell) {
+              cellsToRemove.push(cell);
             }
           }
         }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
+
+        // Remove all cells
+        cellsToRemove.forEach(cell => cell.remove());
+
+        // Set rowspan and colspan of the target cell if it exists
+        if (targetCell) {
+          targetCell.rowSpan = rowspan;
+          targetCell.colSpan = colspan;
+        }
       }
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_vn9yvxv3bf5i130dibag',}, 
-          { positions: [ { i: 16, j: 1 },  ], css_id: 'tinytable_css_vmzouby0nssfsicy0hjy',}, 
-          { positions: [ { i: 16, j: 0 },  ], css_id: 'tinytable_css_qnm5ylfbwt88m1k9hel6',}, 
-          { positions: [ { i: 8, j: 1 },  ], css_id: 'tinytable_css_kfbf2450subz6rks4g6z',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 12, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 15, j: 1 },  ], css_id: 'tinytable_css_6kowax14jxh2rvv439o9',}, 
-          { positions: [ { i: 8, j: 0 },  ], css_id: 'tinytable_css_5s4xwzotctsla2nhsypm',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_5gxvo17d238d2inn039g',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 12, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 },  ], css_id: 'tinytable_css_0569vxqpwsmomw0vq6ix',}, 
+          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 }, { i: '4', j: 4 },  ], css_id: 'tinytable_css_agehukik4pretb2zeisb',}, 
+          { positions: [ { i: '3', j: 2 }, { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '1', j: 3 },  ], css_id: 'tinytable_css_hxvz0vf2ijur8j9xdw03',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_16xzcyraz7yghf32jkal',}, 
+          { positions: [ { i: '4', j: 0 },  ], css_id: 'tinytable_css_02wa9ravilshcgl7pgrp',}, 
+          { positions: [ { i: '1', j: 0 }, { i: '2', j: 0 }, { i: '3', j: 0 },  ], css_id: 'tinytable_css_1pn0vffjtlqpo57e7q3b',}, 
+          { positions: [ { i: '0', j: 0 },  ], css_id: 'tinytable_css_adip909myj4tcszo8sgc',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_3zu2ynhdk4kfpadzo3qu(cell.i, cell.j, group.css_id);
+                  styleCell_4cuefpwgy3qh2s5tmexh(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -888,89 +916,54 @@ window.Quarto = {
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_vn9yvxv3bf5i130dibag, .table th.tinytable_css_vn9yvxv3bf5i130dibag { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_vmzouby0nssfsicy0hjy, .table th.tinytable_css_vmzouby0nssfsicy0hjy { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_qnm5ylfbwt88m1k9hel6, .table th.tinytable_css_qnm5ylfbwt88m1k9hel6 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_kfbf2450subz6rks4g6z, .table th.tinytable_css_kfbf2450subz6rks4g6z { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_6kowax14jxh2rvv439o9, .table th.tinytable_css_6kowax14jxh2rvv439o9 { text-align: center; }
-      .table td.tinytable_css_5s4xwzotctsla2nhsypm, .table th.tinytable_css_5s4xwzotctsla2nhsypm { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_5gxvo17d238d2inn039g, .table th.tinytable_css_5gxvo17d238d2inn039g { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_0569vxqpwsmomw0vq6ix, .table th.tinytable_css_0569vxqpwsmomw0vq6ix { text-align: left; }
+      .table td.tinytable_css_agehukik4pretb2zeisb, .table th.tinytable_css_agehukik4pretb2zeisb { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_hxvz0vf2ijur8j9xdw03, .table th.tinytable_css_hxvz0vf2ijur8j9xdw03 { text-align: center; }
+      .table td.tinytable_css_16xzcyraz7yghf32jkal, .table th.tinytable_css_16xzcyraz7yghf32jkal { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_02wa9ravilshcgl7pgrp, .table th.tinytable_css_02wa9ravilshcgl7pgrp { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_1pn0vffjtlqpo57e7q3b, .table th.tinytable_css_1pn0vffjtlqpo57e7q3b { text-align: left; }
+      .table td.tinytable_css_adip909myj4tcszo8sgc, .table th.tinytable_css_adip909myj4tcszo8sgc { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_3zu2ynhdk4kfpadzo3qu" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_4cuefpwgy3qh2s5tmexh" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
-                <th scope="col"> </th>
-                <th scope="col">Simple</th>
+                <th scope="col" data-row="0" data-col="0"> </th>
+                <th scope="col" data-row="0" data-col="1">Treat only</th>
+                <th scope="col" data-row="0" data-col="2">Post only</th>
+                <th scope="col" data-row="0" data-col="3">Treat + post</th>
+                <th scope="col" data-row="0" data-col="4">Treat * post</th>
               </tr>
         </thead>
         
         <tbody>
                 <tr>
-                  <td>(Intercept)</td>
-                  <td>55.694***</td>
+                  <td data-row="1" data-col="0">Control group, before</td>
+                  <td data-row="1" data-col="1">200.781</td>
+                  <td data-row="1" data-col="2">194.302</td>
+                  <td data-row="1" data-col="3">155.605</td>
+                  <td data-row="1" data-col="4">188.604</td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td>(4.469)</td>
+                  <td data-row="2" data-col="0">Treat: London</td>
+                  <td data-row="2" data-col="1">77.394</td>
+                  <td data-row="2" data-col="2"></td>
+                  <td data-row="2" data-col="3">77.394</td>
+                  <td data-row="2" data-col="4">11.396</td>
                 </tr>
                 <tr>
-                  <td>areaRome (Lazio)</td>
-                  <td>125.910***</td>
+                  <td data-row="3" data-col="0">Post period</td>
+                  <td data-row="3" data-col="1"></td>
+                  <td data-row="3" data-col="2">90.352</td>
+                  <td data-row="3" data-col="3">90.352</td>
+                  <td data-row="3" data-col="4">24.354</td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td>(7.986)</td>
-                </tr>
-                <tr>
-                  <td>after_5nov</td>
-                  <td>300.656***</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>(11.681)</td>
-                </tr>
-                <tr>
-                  <td>areaRome (Lazio) × after_5nov</td>
-                  <td>-269.302***</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>(21.032)</td>
-                </tr>
-                <tr>
-                  <td>Num.Obs.</td>
-                  <td>5366</td>
-                </tr>
-                <tr>
-                  <td>R2</td>
-                  <td>0.130</td>
-                </tr>
-                <tr>
-                  <td>R2 Adj.</td>
-                  <td>0.130</td>
-                </tr>
-                <tr>
-                  <td>AIC</td>
-                  <td>74524.8</td>
-                </tr>
-                <tr>
-                  <td>BIC</td>
-                  <td>74557.7</td>
-                </tr>
-                <tr>
-                  <td>Log.Lik.</td>
-                  <td>-37257.375</td>
-                </tr>
-                <tr>
-                  <td>F</td>
-                  <td>267.482</td>
-                </tr>
-                <tr>
-                  <td>RMSE</td>
-                  <td>250.71</td>
+                  <td data-row="4" data-col="0">DiD estimate</td>
+                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="2"></td>
+                  <td data-row="4" data-col="3"></td>
+                  <td data-row="4" data-col="4">131.996</td>
                 </tr>
         </tbody>
       </table>
@@ -978,21 +971,42 @@ window.Quarto = {
 <!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
+<p>Because this theoretical dataset contains only the four DiD cells, we focus on the coefficients rather than on standard errors or significance tests. The point here is interpretation:</p>
+<ul>
+<li>In model 1, the <code>treat</code> coefficient captures the average London-Lazio difference, but that mixes pre-treatment and post-treatment differences together.</li>
+<li>In model 2, the <code>post</code> coefficient captures the average change after 5 November, but that mixes treated and control areas together.</li>
+<li>In model 3, the <code>treat</code> and <code>post</code> coefficients separate group differences from time differences, but they still assume the treatment effect is zero for both groups.</li>
+<li>In model 4, the interaction term <code>treat:post</code> is the extra post-treatment change in London relative to Lazio. This is the DiD estimate, and it matches the quantity we calculated by hand above.</li>
+</ul>
+<p>The final regression is therefore:</p>
+<p><span class="math inline">\(Y_{gt} = \beta_0 + \beta_1 Treat_g + \beta_2 Post_t + \beta_3 (Treat_g \times Post_t) + \epsilon_{gt}\)</span></p>
+<p>This sequence is useful because it shows what each piece of the DiD design does inside the regression framework. The same logic can be applied to real data, but the interpretation remains only as good as the design. If the control group is weak or parallel trends do not look plausible, the interaction term should not be treated as a convincing causal effect.</p>
 </section>
-<section id="questions" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="questions"><span class="header-section-number">9.5</span> Questions</h2>
-<p>For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>. You will need to do a bit of digging on when lockdowns or other COVID-19 related shock happened in 2021 to set up a diff-in-diff strategy. Have a look at <span class="citation" data-cites="brodeur2021covid">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.</p>
+</section>
+<section id="concluding-remarks" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="concluding-remarks"><span class="header-section-number">9.5</span> Concluding Remarks</h2>
+<p>Diff-in-diff works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:</p>
+<ul>
+<li>labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change</li>
+<li>public health: comparing places that expanded Medicaid or adopted smoking bans with similar places that did not</li>
+<li>urban and environmental policy: comparing cities that introduced congestion charging or low-emission zones with cities that did not</li>
+</ul>
+<p>These examples are persuasive because the design question comes first. The method is strongest when the comparison group, outcome, and time window make the counterfactual believable.</p>
+</section>
+<section id="questions" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="questions"><span class="header-section-number">9.6</span> Questions</h2>
+<p>For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>. You will need to do a bit of digging on when lockdowns or other COVID-19 related shocks happened in 2021 to set up a diff-in-diff strategy. Have a look at <span class="citation" data-cites="brodeur2021covid">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.</p>
 <p>Start by loading both the csv</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
-<li><p>Visualize the data with <code>ggplot</code> and identify what section of the data could be used to evaluate a COVID-19 intervention. Examples of these interventions could be a regional lockdown, school closures, travel restrictions or vaccine rollouts. Generate a clean <code>ggplot</code> which indicates which intervention you are going to examine.</p></li>
-<li><p>Explore differences in means through a <code>frequency table</code> and a graph of these averages. Chose whichever suits your purposes best.</p></li>
-<li><p>Define and estimage a diff-in-diff regression. What do the results suggest? Was the intervention you chose effective? Discuss the reasons why it was or was not.</p></li>
-<li><p>Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results.</p></li>
+<li><p>Visualize the data with <code>ggplot</code> and identify a COVID-19 intervention, a treated group, a comparison group, and a before/after window. Examples of these interventions could be a regional lockdown, school closures, travel restrictions, or vaccine rollouts. Generate a clean <code>ggplot</code> which indicates which intervention you are going to examine and explain briefly why this could be a useful diff-in-diff design.</p></li>
+<li><p>Plot the pre-treatment period only and assess whether the parallel trends assumption looks plausible. If it does not, redesign your setup once by changing the control group, the time window, or the outcome.</p></li>
+<li><p>Define and estimate a diff-in-diff regression for your final design. What does the interaction term suggest? Would you treat it as a credible causal effect? Discuss the reasons why or why not.</p></li>
+<li><p>Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results. If your design remains weak, explain what alternative outcome or design you would choose next.</p></li>
 </ol>
-<p>Analyse and discuss what insights you obtain into people’s changes in behaviors during the pandemic in responde to an intervention.</p>
+<p>Analyse and discuss what insights you obtain into people’s changes in behaviour during the pandemic in response to an intervention.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -1091,8 +1105,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1203,7 +1215,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

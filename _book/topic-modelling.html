@@ -600,20 +600,20 @@ Docs         act aren awkward dis normal wish
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ap_topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(Reddit_topic_model, <span class="at">matrix =</span> <span class="st">"beta"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ap_topics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 162,320 × 3
-   topic term       beta
-   &lt;int&gt; &lt;chr&gt;     &lt;dbl&gt;
- 1     1 carri 0.000567 
- 2     2 carri 0.00115  
- 3     3 carri 0.0000683
- 4     4 carri 0.000402 
- 5     5 carri 0.00117  
- 6     1 deal  0.000830 
- 7     2 deal  0.00164  
- 8     3 deal  0.00203  
- 9     4 deal  0.000326 
-10     5 deal  0.000681 
-# ℹ 162,310 more rows</code></pre>
+<pre><code># A tibble: 159,610 × 3
+   topic term      beta
+   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;
+ 1     1 carri 0.000804
+ 2     2 carri 0.00188 
+ 3     3 carri 0.000114
+ 4     4 carri 0.000227
+ 5     5 carri 0.000333
+ 6     1 deal  0.00175 
+ 7     2 deal  0.00312 
+ 8     3 deal  0.000353
+ 9     4 deal  0.000116
+10     5 deal  0.000141
+# ℹ 159,600 more rows</code></pre>
 </div>
 </div>
 <p>This has turned the model into a one-topic-per-term-per-row format. For each combination, the model computes the probability of that term being generated from that topic. CHANGE: For example, the term “aaron” has a 1.686917 × 10−12 probability of being generated from topic 1, but a 3.8959408 × 10−5 probability of being generated from topic 2.</p>
@@ -657,20 +657,20 @@ Docs         act aren awkward dis normal wish
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>beta_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 275 × 4
-   term     topic1    topic5 log_ratio
-   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
- 1 carri  0.000567 0.00117       1.05 
- 2 lot    0.00574  0.000850     -2.76 
- 3 run    0.00134  0.0000847    -3.98 
- 4 child  0.0206   0.00159      -3.70 
- 5 enjoy  0.000929 0.00102       0.131
- 6 fertil 0.00430  0.00362      -0.249
- 7 grow   0.00193  0.00236       0.289
- 8 hous   0.00166  0.000110     -3.92 
- 9 life   0.00923  0.00209      -2.14 
-10 mean   0.000899 0.00118       0.396
-# ℹ 265 more rows</code></pre>
+<pre><code># A tibble: 255 × 4
+   term     topic1   topic5 log_ratio
+   &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+ 1 deal   0.00175  0.000141    -3.63 
+ 2 aren   0.00121  0.000475    -1.35 
+ 3 lot    0.0123   0.000737    -4.06 
+ 4 run    0.000939 0.00164      0.809
+ 5 child  0.0563   0.000172    -8.36 
+ 6 enjoy  0.00166  0.000681    -1.29 
+ 7 fertil 0.00343  0.00914      1.42 
+ 8 grow   0.000970 0.00239      1.30 
+ 9 hous   0.00143  0.000400    -1.84 
+10 huge   0.000317 0.00204      2.68 
+# ℹ 245 more rows</code></pre>
 </div>
 </div>
 <p>The words with the greatest differences between the Topic 1 and Topic 3:</p>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ecddca49e8a95842710ab9a43bee7330.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -385,20 +385,20 @@ $ text       &lt;chr&gt; "Another example @anonymous are the TRUE protectors of 
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 129,554 × 2
+<pre><code># A tibble: 127,852 × 2
    word             n
    &lt;chr&gt;        &lt;int&gt;
  1 anonymous   449611
- 2 the         215293
- 3 to          163434
- 4 http        143377
+ 2 the         215398
+ 3 to          163443
+ 4 http        143517
  5 url_removed 136774
- 6 and         112320
- 7 of          106244
- 8 in           93216
- 9 a            92763
-10 is           75237
-# ℹ 129,544 more rows</code></pre>
+ 6 and         112345
+ 7 of          106254
+ 8 in           93222
+ 9 a            93037
+10 is           75239
+# ℹ 127,842 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -466,7 +466,7 @@ Note
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(created_at, text) <span class="sc">%&gt;%</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest_tokens</span>(ngram, text, <span class="at">token =</span> <span class="st">"ngrams"</span>, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,296 × 2
+<pre><code># A tibble: 1,297 × 2
    created_at          ngram                
    &lt;dttm&gt;              &lt;chr&gt;                
  1 2019-12-01 00:00:18 another example      
@@ -479,7 +479,7 @@ Note
  8 2019-12-01 00:00:18 of sanctuary         
  9 2019-12-01 00:00:18 sanctuary communities
 10 2019-12-01 00:00:18 communities when     
-# ℹ 1,286 more rows</code></pre>
+# ℹ 1,287 more rows</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -630,20 +630,20 @@ Tip
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 123,886 × 2
+<pre><code># A tibble: 122,191 × 2
    word             n
    &lt;chr&gt;        &lt;int&gt;
  1 anonymous   449611
- 2 http        143377
+ 2 http        143517
  3 url_removed 136774
- 4 immigration  51480
- 5 people       19523
- 6 ice          19397
- 7 immigrant    18898
- 8 trump        17861
- 9 virus        16162
-10 illegals     14392
-# ℹ 123,876 more rows</code></pre>
+ 4 immigration  51497
+ 5 people       19539
+ 6 ice          19418
+ 7 immigrant    18900
+ 8 trump        17886
+ 9 virus        16190
+10 illegals     14415
+# ℹ 122,181 more rows</code></pre>
 </div>
 </div>
 <p>We could also use <code>str_detect</code> from the <code>stringr</code> package.</p>
@@ -657,20 +657,20 @@ Tip
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span> </span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 123,191 × 2
+<pre><code># A tibble: 121,599 × 2
    word            n
    &lt;chr&gt;       &lt;int&gt;
- 1 immigration 51480
- 2 people      19523
- 3 ice         19397
- 4 immigrant   18898
- 5 trump       17861
- 6 virus       16162
- 7 illegals    14392
- 8 china       12750
- 9 coronavirus 12318
-10 chinese     11258
-# ℹ 123,181 more rows</code></pre>
+ 1 immigration 51497
+ 2 people      19539
+ 3 ice         19418
+ 4 immigrant   18900
+ 5 trump       17886
+ 6 virus       16190
+ 7 illegals    14415
+ 8 china       12765
+ 9 coronavirus 12320
+10 chinese     11261
+# ℹ 121,589 more rows</code></pre>
 </div>
 </div>
 <p>Analysing word frequencies is often the first stop in text analysis. We can easily do this using <code>ggplot</code>. Let’s visualise the 20 most common words used on Twitter to express public opinions about migration-related topics.</p>
@@ -841,7 +841,7 @@ Note
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in inner_join(., get_sentiments("bing")): Detected an unexpected many-to-many relationship between `x` and `y`.
-ℹ Row 106476 of `x` matches multiple rows in `y`.
+ℹ Row 106214 of `x` matches multiple rows in `y`.
 ℹ Row 6177 of `y` matches multiple rows in `x`.
 ℹ If a many-to-many relationship is expected, set `relationship =
   "many-to-many"` to silence this warning.</code></pre>
@@ -918,7 +918,7 @@ Note
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in inner_join(., get_sentiments("bing")): Detected an unexpected many-to-many relationship between `x` and `y`.
-ℹ Row 106476 of `x` matches multiple rows in `y`.
+ℹ Row 106214 of `x` matches multiple rows in `y`.
 ℹ Row 6177 of `y` matches multiple rows in `x`.
 ℹ If a many-to-many relationship is expected, set `relationship =
   "many-to-many"` to silence this warning.</code></pre>
@@ -1296,8 +1296,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1408,7 +1406,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

@@ -51,15 +51,11 @@
 #write.csv(combined_data, "data/longitudinal-2/covid_cases_lazio.csv", #row.names=FALSE)
 ```
 
-Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. One of the ways to track the spread of the disease is through the collection and analysis of data on daily cases, which has become a crucial component of new digital footprint trends. Contact tracing apps and tools were developed and implemented in many countries to help track the spread of COVID-19.
+Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. Daily case counts quickly became one of the main ways to track the pandemic and to debate the effects of lockdowns and other restrictions. These data helped policymakers monitor the evolution of the disease and make decisions about when to tighten or relax restrictions [@goodman2020using; @brodeur2021covid; @zhou2021varying].
 
-Data on daily cases can help us evaluate the effectiveness of policies implemented during the pandemic, such as lockdowns and other restrictions. By analyzing these data, policymakers and public health experts have gained insights into the impact of these policies on the spread of the disease [@goodman2020using, @brodeur2021covid] and [@zhou2021varying]. For instance, if daily cases decrease significantly during a lockdown, it could indicate that the policy was successful in controlling the spread of the disease.
+At the same time, case data do not automatically provide a clean causal evaluation of policy. In this chapter we use **difference-in-differences** (diff-in-diff), a widely used quasi-experimental design, to show both the promise and the limits of this approach. The aim is not only to estimate an effect, but also to learn how to judge whether a diff-in-diff design is credible. We begin with COVID case data because they are tempting to use, then see why they are problematic for a simple policy evaluation. We then switch to a small theoretical example to explain the mechanics of the method more clearly. This also prepares us for the assignment, where mobility data may offer a more plausible short-run outcome than recorded cases.
 
-Data on daily cases can also help policymakers to make informed decisions about when to implement or lift certain restrictions. For example, if daily cases start to rise again after a lifting of restrictions, it may indicate that it is too early to do so, and that more caution is necessary. In summary, data on daily cases was an essential tool for evaluating the effectiveness of policies implemented during the COVID-19 pandemic and making informed decisions about future policies. As we will see in this chapter, evaluating COVI9-19 policies based onn cases is, unfortunately not so simple.
-
-To assess government interventions during the pandemic, we will be using **difference-in-differences** (diff-n-diff), a widely-adopted quasi-experimental design, used to evaluate the effect of an intervention or exposure on an outcome of interest. This strategy involves comparing the change in the outcome before and after the intervention or exposure in the treated group, relative to the change in the outcome over the same time period in a control group. By doing so, diff-n-diff can help isolate the effect of the intervention or exposure from other factors that may be driving the outcome.
-
-This chapter is based on :
+This chapter is based on:
 
 -   Goodman-Bacon, Andrew, and Jan Marcus. ["Using difference-in-differences to identify causal effects of COVID-19 policies."](https://d-nb.info/1212037294/34) (2020)
 
@@ -263,95 +259,122 @@ covid_cases_4
 
 ```
 
-We could make some assumptions and set this up as a quasi experiment. In social science, researchers are often using natural or quasi experimental setting as randomized experiments can rarely be conducted. This involves splitting the population at hand into a treatment and control group.
+At first sight, this looks like a quasi-experiment. In social science, researchers often work with natural or quasi-experimental settings because randomized experiments are rarely possible. The key question, however, is not whether we can label one group as treated and the other as control, but whether that comparison is credible.
 
-## Difference in Difference
+## Difference-in-Differences
 
-**Plotting Means**
-
-For a `diff-in-diff` analysis using COVID data, possible shocks that would make this type of quasi-experiment possible could be the following:
-
--   **National lockdown**: The first national lockdown in the UK was announced on March 23, 2020. This sudden shock to the economy and society could be used as a treatment group for the diff-in-diff analysis, with the pre-lockdown period as the control group.
-
--   **Regional lockdowns**: The UK also implemented regional lockdowns throughout the pandemic, with different regions experiencing restrictions at different times. These regional lockdowns could be used as treatment groups, with regions that did not experience lockdowns as the control group.
-
--   **School closures**: In response to the pandemic, schools in the UK were closed from March 20, 2020, until June 1, 2020, and then again from January 5, 2021, until March 8, 2021. The impact of school closures on education outcomes could be studied using a diff-in-diff approach, with the period before school closures as the control group.
-
--   **Travel restrictions**: The UK implemented various travel restrictions throughout the pandemic, including quarantine requirements for travelers from certain countries. The impact of these travel restrictions on the tourism industry or the spread of the virus could be studied using a diff-in-diff approach.
-
--   **Vaccine rollout**: The UK began its COVID-19 vaccination program in December 2020. The impact of the vaccine rollout on various health and economic outcomes could be studied using a diff-in-diff approach, with the period before the rollout as the control group.
-
-These are just a few examples of shocks that could be used for a diff-in-diff analysis using COVID data. The choice of shock will depend on the research question and the data available.
+**Design choices**
 
 The DiD approach includes a before-after comparison for a treatment and control group. In our example:
 
--   A `cross-sectional comparison` (= compare a sample that was treated (London) to an non-treated control group (Rome))
+-   A `cross-sectional comparison` (= compare a sample that was treated (London) to an untreated control group (Rome))
 
 -   A `before-after comparison` (= compare treatment group with itself, before and after the treatment (5th of November))
 
-The **main assumption** is that without the change in the natural environment the outcome variable would have remained constant!
+The **main assumption** is not that the outcome would have remained constant. It is the **parallel trends assumption**: in the absence of the intervention, the treated and control groups would have followed similar trends over the period we analyse. The two groups do not need to have the same level, but they should evolve in a comparable way before treatment.
 
-First, we create a dummy variable to indicate the time when the treatment started. In our case this will be the 5th of November 2020. We will also limit the time-span of our data.
+In practice, a good DiD design requires four choices: the treated group, the comparison group, the pre-treatment window, and the post-treatment window. These are part of the research design, not just data cleaning. This comparison is already imperfect because Lazio was not a pure untreated case: it also faced pandemic restrictions, even if they were milder than those in England.
 
-```{r}
-# keep data from 2020-09-01 to 2021-01-01
-covid_combined_filtered <- covid_combined %>%
-  filter(date >= "2020-09-01" & date <= "2021-01-01")
-
-# create a dummy variable to indicate the time when the treatment started (5 Nov 2020)
-covid_combined_filtered <- covid_combined_filtered %>%
-  mutate(after_5nov = ifelse(date >= "2020-11-05", 1, 0)) #changed to 05 Nov
-```
+A useful first lesson from this chapter is that the time window matters. If we define the post period too broadly, we risk attributing later shocks to the policy of interest. Here that is especially important because London cases rose sharply again in December 2020 and January 2021.
 
 ```{r}
-#| echo: FALSE
+# A wide window that mixes the November lockdown with the later winter surge
+covid_combined_wide <- covid_combined %>%
+  filter(date >= "2020-09-01" & date <= "2021-01-01") %>%
+  mutate(after_5nov = ifelse(date >= "2020-11-05", 1, 0),
+         window = "Wide window: 1 Sep to 1 Jan")
 
-covid_combined_filtered <- covid_combined_filtered %>%
-  mutate(after_5nov = ifelse(date >= "2020-12-15", 1, 0))
+# A tighter window focused on the weeks around the intervention
+covid_combined_tight <- covid_combined %>%
+  filter(date >= "2020-10-15" & date <= "2020-11-30") %>%
+  mutate(after_5nov = ifelse(date >= "2020-11-05", 1, 0),
+         window = "Tighter window: 15 Oct to 30 Nov")
+
+covid_designs <- bind_rows(covid_combined_wide, covid_combined_tight)
 ```
 
-```{r}
-# Create a frequency table of area and treatment
-freq_table <- table(covid_combined_filtered$area, covid_combined_filtered$after_5nov)
-
-# Print the frequency table
-print(freq_table)
-
-```
-
-We then want to plot averages to see differences between treatment/control groups and before/after. But we can also calculate the mean and 95% confidence interval. We can also use group_by() and summarize() to figure out group means before sending the data to ggplot.
+We can now compare these two designs directly by plotting group means before and after 5 November.
 
 ```{r}
 #| messages: FALSE
 #| warning: FALSE
 
-plot_data <- covid_combined_filtered %>% 
+design_plot_data <- covid_designs %>% 
   # Make these categories instead of 0/1 numbers so they look nicer in the plot
-  mutate(after_5nov = factor(after_5nov, labels = c("Before 5 November 2020", "After 5 November 2020"))) %>% 
-  group_by(area, after_5nov) %>% 
+  mutate(after_5nov = factor(after_5nov, labels = c("Pre 5 Nov 2020", "Post 5 Nov 2020"))) %>% 
+  group_by(window, area, after_5nov) %>% 
   summarize(mean_cases = mean(cases),
             se_cases = sd(cases) / sqrt(n()),
             upper = mean_cases + (1.96 * se_cases),
-            lower = mean_cases + (-1.96 * se_cases)) 
+            lower = mean_cases + (-1.96 * se_cases),
+            .groups = "drop")
 
-ggplot(plot_data, aes(x = area, y = mean_cases)) +
-  geom_pointrange(aes(ymin = lower, ymax = upper), 
-                  color = "darkred", size = 1) +
-  facet_wrap(vars(after_5nov))
-```
-
-Here, we can start to see a diff-in-diff plot, where there is little to no difference in means with our control city (Rome-Lazio) and a substancial jump in means in our treatment city (London). It looks there were many more cases of COVID-19 after the 5th of march in London, indicating the lockdown did not have an effect, at least in this time-frame. Why could that be?
-
-We can also plot a more standard diff-in-diff format:
-
-```{r}
-ggplot(plot_data, aes(x = after_5nov, y = mean_cases, color = area)) +
+ggplot(design_plot_data, aes(x = after_5nov, y = mean_cases, color = area)) +
   geom_pointrange(aes(ymin = lower, ymax = upper), size = 1) + 
   geom_line(aes(group = area)) +
-  scale_color_manual(values = c("darkblue", "darkred"))
+  scale_color_manual(values = c("darkblue", "darkred")) +
+  facet_wrap(vars(window))
 ```
 
-This second plot shows us it is probable that our diff-n-diff set up will not work. A clean classic diff-n-diff would look more like the following. Please note the following plot is theoretical.
+In our example, a shorter time window represents a better research design. It is a better reflection that the implementation of the lockdown in London contained the pre-treatment surge in Covid-19 cases. A wider window can be misleading as they suggest that the implementation of the lockdown did not have any impact. On the contrary, it is linked to a considerable increase in Covid-19. But from the time series plot above, we know that this actually reflects a surge in Covid-19 cases during December 2020 and January 2021.
+
+### Checking parallel trends
+
+As highlighted above, a key issue to assess in the implementation of diff-in-diff is the complaince of the parallel trends assumption. In our example, this is responding to the question: were London and Lazio were moving in similar ways **before** the intervention? The parallel trends assumption is about slopes, not levels. One group can start higher than the other, but the pre-treatment trajectories should be broadly similar.
+
+A practical way to assess this is:
+
+1.  Plot only the pre-treatment period.
+2.  Look for similar direction and pace of change.
+3.  Use domain knowledge to ask whether other shocks or policies were affecting the groups differently.
+4.  If useful, run a simple pre-trend regression and check whether the treated and control groups have different pre-treatment slopes.
+
+```{r}
+#| warning: false
+#| message: FALSE
+
+pre_period <- covid_combined_tight %>%
+  filter(date < as.Date("2020-11-05")) %>%
+  mutate(day = as.numeric(date - min(date)),
+         treat_london = ifelse(area == "London", 1, 0))
+
+ggplot(pre_period, aes(x = date, y = cases, color = area)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("darkblue", "darkred")) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
+  ) +
+  labs(
+    x = "",
+    y = "",
+    title = "Pre-treatment trends only",
+    color = "Region"
+  )
+```
+
+```{r}
+pretrend_model <- lm(cases ~ treat_london + day + treat_london:day,
+                     data = pre_period)
+
+tidy(pretrend_model) %>%
+  filter(term == "treat_london:day")
+```
+
+In this case, the pre-treatment slopes are still quite different, so the London-Lazio comparison remains weak. The narrower window fixes one design problem, but it does not fully rescue the design. A pre-trend test like this is only a diagnostic, not proof, but it is a useful warning sign when the interaction term is large and clearly different from zero.
+
+### What if parallel trends fail?
+
+If the parallel trends assumption does not look plausible, do not force the method. A sensible sequence is:
+
+-   Redefine the time window so the pre and post periods match the timing of the policy more closely.
+-   Allow for a plausible lag if the outcome reacts with delay, as COVID case data often do.
+-   Choose a better comparison group with a more similar pre-treatment trend and policy context.
+-   Change the outcome to something that responds more immediately to the intervention, such as mobility or another behavioural measure.
+-   If none of these improve the design, present the comparison as descriptive evidence and use another research design for causal claims.
+
+This is the point at which the London-Lazio example becomes most useful: it shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of diff-in-diff more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.
 
 ```{r}
 #| messages: FALSE
@@ -382,7 +405,7 @@ We can find the exact difference by filling out the 2x2 before/after treatment/c
 | Control    | C      | D     | D - C             |
 | Difference | C - A  | D - B | (D − C) − (B − A) |
 
-A combination of group_by() and summarize() makes this really easy. We can pull each of these numbers out of the table with some filter()s and pull():
+We can pull each of these numbers out of the table:
 
 ```{r}
 before_treatment <- covid_perfect_example %>% 
@@ -412,7 +435,7 @@ diff_diff
 
 ```
 
-The diff-in-diff estimate is 131.99, which means that the lockdown here caused an increase in cases in the time-window we are analysing. Not its intended effect!
+In this theoretical example, the diff-in-diff estimate is 131.99. This is the gap between the treated group's observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.
 
 We can visualise this really well with a bit of extra code:
 
@@ -439,57 +462,90 @@ ggplot(covid_perfect_example, aes(x = after_5nov, y = mean_cases, color = area))
            label = "Program effect", size = 3)
 ```
 
-It is important for all diff-in-diff analyses to give careful attention to possible violations of the common trends assumption, especially considering the COVID-19 situation where many of these violations are likely to occur. Furthermore, due to the unique dynamics of COVID-19 such as lags between exposure and recorded infections, nonlinearities from person-to-person transmission, and the possibility of policies having differential effects over time, it further complicates the potential risks to the diff-in-diff research design.
-
-[@goodman2020using] comment on the following problems which can be consulted in their paper:
-
--   Packaged Policies
-
--   Reverse Causality
-
--   Voluntary Precautions
-
--   Difference Data collection
-
--   Anticipation Spillovers
-
--   Variation in Policy Timing
-
-[@goodman2020using] also give great recommendations on how to address these problems, but this is far beyond the objective of this chapter.
+This distinction matters. Diff-in-diff is valuable not because every policy comparison works, but because it makes the design questions explicit. With COVID data, common threats include policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing [@goodman2020using]. These problems are especially serious when the outcome is recorded cases.
 
 **Difference-in-Difference with regression**
 
-Calculating all the pieces by hand like that is tedious, so we can use regression to do it instead! Remember that we need to include indicator variables for treatment/control and for before/after, as well as the interaction of the two.
+Calculating all the pieces by hand is useful for intuition, but regression lets us recover the same logic more systematically. The easiest way to see this is to build the model step by step using the theoretical example. That keeps the mechanics clear before we return to the messier real-world design.
 
-This is the equation:
-
-$\Delta Y_{gt} = \beta_0 + \beta_1 London_{g} + \beta_2 Post5Nov_{t} + \beta_3 London_{g} \times Post5Nov_{t} + \beta_4 Rome_{g} + \epsilon_{gt}$
-
-The output will show the diff-in-diff coefficient estimate, standard error, t-value, and p-value, which can be used to determine whether there was a significant effect of the second lockdown 4 on Covid cases in November 2020.
+First, we code London as the treated group and the post-5 November period as the post-treatment period:
 
 ```{r}
-model_small <- lm(cases ~ area + after_5nov + area * after_5nov,
-                  data = covid_combined_filtered)
+#| warning: false
+#| message: FALSE
 
-# Tidy the model output
-diffndiff1 <- tidy(model_small) 
-
-# Add significance stars using stars.pval from gtools
-diffndiff1$stars <- stars.pval(diffndiff1$p.value)
-
-# View the results
-diffndiff1
-
-# Create a model summary table for the model
-summary_table <- modelsummary(list("Simple" = model_small), estimate =c("{estimate}{stars}"))
-
-# View the results
-summary_table
+covid_perfect_reg <- covid_perfect_example %>%
+  mutate(
+    treat = ifelse(area == "London", 1, 0),
+    post = ifelse(after_5nov == "After 5 November 2020", 1, 0)
+  )
 ```
+
+We can now build the regression in four steps:
+
+1.  `mean_cases ~ treat`
+This is only a cross-sectional comparison. It tells us whether London and Lazio differ on average, but it ignores time completely.
+2.  `mean_cases ~ post`
+This is only a before-after comparison. It tells us whether average cases are different after 5 November, but it ignores whether the change happened in the treated or control group.
+3.  `mean_cases ~ treat + post`
+This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.
+4.  `mean_cases ~ treat * post`
+This adds the interaction term. That interaction is the diff-in-diff estimate.
+
+```{r}
+#| warning: false
+#| message: FALSE
+
+model_treat <- lm(mean_cases ~ treat, data = covid_perfect_reg)
+model_post <- lm(mean_cases ~ post, data = covid_perfect_reg)
+model_additive <- lm(mean_cases ~ treat + post, data = covid_perfect_reg)
+model_did <- lm(mean_cases ~ treat * post, data = covid_perfect_reg)
+
+modelsummary(
+  list(
+    "Treat only" = model_treat,
+    "Post only" = model_post,
+    "Treat + post" = model_additive,
+    "Treat * post" = model_did
+  ),
+  coef_map = c(
+    "(Intercept)" = "Control group, before",
+    "treat" = "Treat: London",
+    "post" = "Post period",
+    "treat:post" = "DiD estimate"
+  ),
+  estimate = "{estimate}",
+  statistic = NULL,
+  gof_omit = ".*"
+)
+```
+
+Because this theoretical dataset contains only the four DiD cells, we focus on the coefficients rather than on standard errors or significance tests. The point here is interpretation:
+
+-   In model 1, the `treat` coefficient captures the average London-Lazio difference, but that mixes pre-treatment and post-treatment differences together.
+-   In model 2, the `post` coefficient captures the average change after 5 November, but that mixes treated and control areas together.
+-   In model 3, the `treat` and `post` coefficients separate group differences from time differences, but they still assume the treatment effect is zero for both groups.
+-   In model 4, the interaction term `treat:post` is the extra post-treatment change in London relative to Lazio. This is the DiD estimate, and it matches the quantity we calculated by hand above.
+
+The final regression is therefore:
+
+$Y_{gt} = \beta_0 + \beta_1 Treat_g + \beta_2 Post_t + \beta_3 (Treat_g \times Post_t) + \epsilon_{gt}$
+
+This sequence is useful because it shows what each piece of the DiD design does inside the regression framework. The same logic can be applied to real data, but the interpretation remains only as good as the design. If the control group is weak or parallel trends do not look plausible, the interaction term should not be treated as a convincing causal effect.
+
+## Concluding Remarks
+
+Diff-in-diff works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:
+
+-   labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change
+-   public health: comparing places that expanded Medicaid or adopted smoking bans with similar places that did not
+-   urban and environmental policy: comparing cities that introduced congestion charging or low-emission zones with cities that did not
+
+These examples are persuasive because the design question comes first. The method is strongest when the comparison group, outcome, and time window make the counterfactual believable.
 
 ## Questions
 
-For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look [here](https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf). You will need to do a bit of digging on when lockdowns or other COVID-19 related shock happened in 2021 to set up a diff-in-diff strategy. Have a look at @brodeur2021covid to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.
+For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look [here](https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf). You will need to do a bit of digging on when lockdowns or other COVID-19 related shocks happened in 2021 to set up a diff-in-diff strategy. Have a look at @brodeur2021covid to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.
 
 Start by loading both the csv
 
@@ -498,12 +554,12 @@ mobility_gb <- read.csv("data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"
 
 ```
 
-1.  Visualize the data with `ggplot` and identify what section of the data could be used to evaluate a COVID-19 intervention. Examples of these interventions could be a regional lockdown, school closures, travel restrictions or vaccine rollouts. Generate a clean `ggplot` which indicates which intervention you are going to examine.
+1.  Visualize the data with `ggplot` and identify a COVID-19 intervention, a treated group, a comparison group, and a before/after window. Examples of these interventions could be a regional lockdown, school closures, travel restrictions, or vaccine rollouts. Generate a clean `ggplot` which indicates which intervention you are going to examine and explain briefly why this could be a useful diff-in-diff design.
 
-2.  Explore differences in means through a `frequency table` and a graph of these averages. Chose whichever suits your purposes best.
+2.  Plot the pre-treatment period only and assess whether the parallel trends assumption looks plausible. If it does not, redesign your setup once by changing the control group, the time window, or the outcome.
 
-3.  Define and estimage a diff-in-diff regression. What do the results suggest? Was the intervention you chose effective? Discuss the reasons why it was or was not.
+3.  Define and estimate a diff-in-diff regression for your final design. What does the interaction term suggest? Would you treat it as a credible causal effect? Discuss the reasons why or why not.
 
-4.  Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results.
+4.  Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results. If your design remains weak, explain what alternative outcome or design you would choose next.
 
-Analyse and discuss what insights you obtain into people's changes in behaviors during the pandemic in responde to an intervention.
+Analyse and discuss what insights you obtain into people's changes in behaviour during the pandemic in response to an intervention.

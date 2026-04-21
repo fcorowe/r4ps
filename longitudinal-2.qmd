@@ -338,13 +338,15 @@ A practical way to assess this is:
 #| message: FALSE
 
 pre_period <- covid_combined_tight %>%
+  group_by(area, date) %>%
+  summarize(cases = sum(cases), .groups = "drop") %>%
   filter(date < as.Date("2020-11-05")) %>%
   mutate(day = as.numeric(date - min(date)),
          treat_london = ifelse(area == "London", 1, 0))
 
 ggplot(pre_period, aes(x = date, y = cases, color = area)) +
-  geom_line() +
-  geom_smooth(method = "lm", se = FALSE) +
+  geom_line(aes(group = area), linewidth = 0.9) +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linewidth = 1) +
   scale_color_manual(values = c("darkblue", "darkred")) +
   theme_minimal() +
   theme(
@@ -529,17 +531,12 @@ The final regression is therefore:
 
 $Y_{gt} = \beta_0 + \beta_1 Treat_g + \beta_2 Post_t + \beta_3 (Treat_g \times Post_t) + \epsilon_{gt}$
 
-This sequence is useful because it shows what each piece of the DiD design does inside the regression framework. The same logic can be applied to real data, but the interpretation remains only as good as the design. If the control group is weak or parallel trends do not look plausible, the interaction term should not be treated as a convincing causal effect.
+We could then expand this regression by including relevant covariates of interest. Feel free to expand this basic structure adding covariates or identifying a more credible, truly untreated benchmark group. DiD works best when: (1) a policy changes for one group but not the group used for comparison; (2) the timing of the intervention is clear, and (3) pre-treatment trends are reasonably similar. Well-known applications include:
 
-## Concluding Remarks
-
-DiD works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:
-
--   labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change
--   public health: comparing places that expanded Medicaid or adopted smoking bans with similar places that did not
--   urban and environmental policy: comparing cities that introduced congestion charging or low-emission zones with cities that did not
-
-These examples are persuasive because the design question comes first. The method is strongest when the comparison group, outcome, and time window make the counterfactual believable.
+-   labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change [@card1993].
+-   public health: comparing places that expanded Medicaid [@wiggins2020] or adopted smoking bans with similar places that did not [@fu2024].
+-   urban and environmental policy: comparing cities that introduced congestion charging [@li2012] or low-emission zones with cities that did not [@sarmiento2023]
+-   migration: assessing the effects of visa policy changes [@faggian2015]
 
 ## Questions
 

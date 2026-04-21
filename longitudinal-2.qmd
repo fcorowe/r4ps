@@ -53,7 +53,7 @@
 
 Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. Daily case counts quickly became one of the main ways to track the pandemic and to debate the effects of lockdowns and other restrictions. These data helped policymakers monitor the evolution of the disease and make decisions about when to tighten or relax restrictions [@goodman2020using; @brodeur2021covid; @zhou2021varying].
 
-At the same time, case data do not automatically provide a clean causal evaluation of policy. In this chapter we use **difference-in-differences** (diff-in-diff), a widely used quasi-experimental design, to show both the promise and the limits of this approach. The aim is not only to estimate an effect, but also to learn how to judge whether a diff-in-diff design is credible. We begin with COVID case data because they are tempting to use, then see why they are problematic for a simple policy evaluation. We then switch to a small theoretical example to explain the mechanics of the method more clearly. This also prepares us for the assignment, where mobility data may offer a more plausible short-run outcome than recorded cases.
+In this chapter, we use **difference-in-differences** (diff-in-diff or DiD), a widely used quasi-experimental design, to assess treatement, interventions or policy evaluation. We show both the promise and the limits of this approach. The aim is to estimate an effect and to learn how to judge whether a DiD design is credible. We begin with COVID case data and learn some practical lessons about the challenges on policy evaluation and identify different decision areas. We then switch to a small theoretical example to explain the mechanics of the method more clearly. This also prepares us for the assignment, where mobility data may offer a more plausible short-run outcome than recorded cases.
 
 This chapter is based on:
 
@@ -112,7 +112,7 @@ covid_cases_lazio <- read.csv("data/longitudinal-2/covid_cases_lazio.csv", heade
 colnames(covid_cases_lazio)
 ```
 
-First we need to clean up the data somewhat and rename some variables in both dataframes to have 4 variables:
+First we need to clean up the data and rename some variables in both dataframes to have 4 variables:
 
 -   `date`: year-month-day
 
@@ -201,7 +201,7 @@ covid_cases_2
 
 ```
 
-To identify whether there is a time period where a lockdown was implemented in one location but not the other, and how cases evolved, we can plot aggregates of both locations in one plot.
+To identify the timing of lockdowns in these different areas and evolution of COVID-19 cases, we can overlap aggregage cases of both regions in a single plot.
 
 ```{r}
 # Aggregate the data by region for each day
@@ -230,7 +230,7 @@ covid_cases_3
 From an initial look at the data, the 2020/2021 winter period seems interesting as there is a high increase in London cases but not as much as a peak in Lazio cases. In fact, after a quick review of COVID-19 lockdowns, we found that:
 
 -   On the 5th of November 2020, the UK Prime Minister announced a second national lockdown, coming into force in England
--   On 4 November 2020, Italian Prime Minister Conte announced a new lockdown as well, however this lockdown divided the country into three zones depending on the severity of the pandemic, corresponding to red, orange and yellow zones. The Lazio region, was a yellow zone for the duration of this second lockdown. In yellow zones, the only restrictions included compulsory closing for restaurant and bar activities at 6 PM, and online education for high schools only.
+-   On 4 November 2020, Italian Prime Minister Conte also announced a new lockdown. Regions of the country were divided into three zones depending on the severity of the pandemic (not shown on the plot): red, orange and yellow zones. The Lazio region was a yellow zone for the duration of this second lockdown. In yellow zones, the only restrictions included compulsory closing for restaurant and bar activities at 6 PM, and online education for high schools only.
 
 ```{r}
 #| warning: false
@@ -259,21 +259,25 @@ covid_cases_4
 
 ```
 
-At first sight, this looks like a quasi-experiment. In social science, researchers often work with natural or quasi-experimental settings because randomized experiments are rarely possible. The key question, however, is not whether we can label one group as treated and the other as control, but whether that comparison is credible.
+DiD is often conceptualised as a quasi-experiment. In social science, researchers often work with natural or quasi-experimental settings because randomized experiments are rarely possible. The key question to formulate such a quasi-experimental setting is to establish a credible comparison. As we will see below, a key component to this is establishing a reliable control or benchmark group of comparison.
 
 ## Difference-in-Differences
 
+**What is difference in differences?**
+
+Difference-in-differences (DiD) is a way of estimating the effect of a policy or intervention when we cannot run a randomized experiment. Intuitively, we seek to compare how an outcome changes over time in a treated group with how the same outcome changes over time in a similar but untreated comparison group. A before-after comparison for the treated group alone is not enough, because many other things may be changing at the same time. A treated-versus-control comparison at one point in time is also not enough, because the two groups may already differ for other reasons. Difference-in-differences combines both comparisons and asks whether the treated group changed more, or less, than we would have expected given the change observed in the comparison group. Its key assumption is that, in the absence of treatment, the two groups would have followed *parallel trends*, so the untreated group provides a reasonable counterfactual for what would have happened to the treated group without the intervention.
+
 **Design choices**
 
-The DiD approach includes a before-after comparison for a treatment and control group. In our example:
+The DiD approach entails a number of critical choices. It includes a before-after comparison for a ***treatment*** and ***control group***. In our example:
 
 -   A `cross-sectional comparison` (= compare a sample that was treated (London) to an untreated control group (Rome))
 
 -   A `before-after comparison` (= compare treatment group with itself, before and after the treatment (5th of November))
 
-The **main assumption** is not that the outcome would have remained constant. It is the **parallel trends assumption**: in the absence of the intervention, the treated and control groups would have followed similar trends over the period we analyse. The two groups do not need to have the same level, but they should evolve in a comparable way before treatment.
+The **main and critical assumption** of DiD is the **parallel trends assumption**. That means that, in the absence of the intervention, the treated and control groups would have followed similar trends over the period we analyse. The two groups do not need to have the same level, but they should evolve in a comparable way *before treatment*.
 
-In practice, a good DiD design requires four choices: the treated group, the comparison group, the pre-treatment window, and the post-treatment window. These are part of the research design, not just data cleaning. This comparison is already imperfect because Lazio was not a pure untreated case: it also faced pandemic restrictions, even if they were milder than those in England.
+In practice, a good DiD design requires *four choices*: the treated group, the comparison group, the pre-treatment window, and the post-treatment window. For our example, we will see that making the right choices here may misguide our results and conclusions that we can draw from the data. Our comparison is imperfect because Lazio is not a pure untreated case. It also faced pandemic restrictions, even if they were milder than those in England. But, it is useful to illustrate the challenges of formulating a good quasi-experimental design for a credible DiD.
 
 A useful first lesson from this chapter is that the time window matters. If we define the post period too broadly, we risk attributing later shocks to the policy of interest. Here that is especially important because London cases rose sharply again in December 2020 and January 2021.
 
@@ -320,7 +324,7 @@ In our example, a shorter time window represents a better research design. It is
 
 ### Checking parallel trends
 
-As highlighted above, a key issue to assess in the implementation of diff-in-diff is the complaince of the parallel trends assumption. In our example, this is responding to the question: were London and Lazio were moving in similar ways **before** the intervention? The parallel trends assumption is about slopes, not levels. One group can start higher than the other, but the pre-treatment trajectories should be broadly similar.
+As highlighted above, a key issue to assess in the implementation of DiD is the compliance of the parallel trends assumption. In our example, this is responding to the question: whether London and Lazio were moving in similar ways **before** the intervention? The parallel trends assumption is about slopes, not levels. One group can start higher than the other, but the pre-treatment trajectories should be broadly similar.
 
 A practical way to assess this is:
 
@@ -362,7 +366,7 @@ tidy(pretrend_model) %>%
   filter(term == "treat_london:day")
 ```
 
-In this case, the pre-treatment slopes are still quite different, so the London-Lazio comparison remains weak. The narrower window fixes one design problem, but it does not fully rescue the design. A pre-trend test like this is only a diagnostic, not proof, but it is a useful warning sign when the interaction term is large and clearly different from zero.
+In this case, the pre-treatment slopes are different, so the London-Lazio comparison is a weak comparison. The narrower window fixes one design problem, but it does not fully offer a credible quasi-experimental design. A pre-trend test like this is only a diagnostic, not proof. It is a useful warning sign when the interaction term is large and clearly different from zero.
 
 ### What if parallel trends fail?
 
@@ -374,7 +378,7 @@ If the parallel trends assumption does not look plausible, do not force the meth
 -   Change the outcome to something that responds more immediately to the intervention, such as mobility or another behavioural measure.
 -   If none of these improve the design, present the comparison as descriptive evidence and use another research design for causal claims.
 
-This is the point at which the London-Lazio example becomes most useful: it shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of diff-in-diff more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.
+This is the point at which the London-Lazio example becomes most useful. It shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of DiD more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.
 
 ```{r}
 #| messages: FALSE
@@ -435,9 +439,9 @@ diff_diff
 
 ```
 
-In this theoretical example, the diff-in-diff estimate is 131.99. This is the gap between the treated group's observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.
+In this theoretical example, the DiD estimate is 131.99. This is the gap between the treated group's observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.
 
-We can visualise this really well with a bit of extra code:
+We can visualise this with a bit of extra code:
 
 ```{r}
 
@@ -462,13 +466,11 @@ ggplot(covid_perfect_example, aes(x = after_5nov, y = mean_cases, color = area))
            label = "Program effect", size = 3)
 ```
 
-This distinction matters. Diff-in-diff is valuable not because every policy comparison works, but because it makes the design questions explicit. With COVID data, common threats include policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing [@goodman2020using]. These problems are especially serious when the outcome is recorded cases.
+In this scenario, we have a credible quasi-experimental design. DiD shows the importance of establishing credible comparison groups and time frame to assess the influence of interventions. As with COVID data, a bad experimental design may produce misleading results because of it may capture the compounding effects of policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing [@goodman2020using]. These problems are especially serious when the outcome is recorded cases.
 
 **Difference-in-Difference with regression**
 
-Calculating all the pieces by hand is useful for intuition, but regression lets us recover the same logic more systematically. The easiest way to see this is to build the model step by step using the theoretical example. That keeps the mechanics clear before we return to the messier real-world design.
-
-First, we code London as the treated group and the post-5 November period as the post-treatment period:
+In practice, our control and treated groups tend to differ in systematic ways. Often, then, we want to account for these systematic differences by running DiD analysis in a regression framework. To this end, we first code London as the treated group and the post-5 November period as the post-treatment period:
 
 ```{r}
 #| warning: false
@@ -483,14 +485,10 @@ covid_perfect_reg <- covid_perfect_example %>%
 
 We can now build the regression in four steps:
 
-1.  `mean_cases ~ treat`
-This is only a cross-sectional comparison. It tells us whether London and Lazio differ on average, but it ignores time completely.
-2.  `mean_cases ~ post`
-This is only a before-after comparison. It tells us whether average cases are different after 5 November, but it ignores whether the change happened in the treated or control group.
-3.  `mean_cases ~ treat + post`
-This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.
-4.  `mean_cases ~ treat * post`
-This adds the interaction term. That interaction is the diff-in-diff estimate.
+1.  `mean_cases ~ treat` This is only a cross-sectional comparison. It tells us whether London and Lazio differ on average, but it ignores time completely.
+2.  `mean_cases ~ post` This is only a before-after comparison. It tells us whether average cases are different after 5 November, but it ignores whether the change happened in the treated or control group.
+3.  `mean_cases ~ treat + post` This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.
+4.  `mean_cases ~ treat * post` This adds the interaction term. That interaction is the DiD estimate.
 
 ```{r}
 #| warning: false
@@ -535,7 +533,7 @@ This sequence is useful because it shows what each piece of the DiD design does 
 
 ## Concluding Remarks
 
-Diff-in-diff works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:
+DiD works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:
 
 -   labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change
 -   public health: comparing places that expanded Medicaid or adopted smoking bans with similar places that did not
@@ -545,7 +543,7 @@ These examples are persuasive because the design question comes first. The metho
 
 ## Questions
 
-For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look [here](https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf). You will need to do a bit of digging on when lockdowns or other COVID-19 related shocks happened in 2021 to set up a diff-in-diff strategy. Have a look at @brodeur2021covid to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.
+For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look [here](https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf). You will need to do a bit of digging on when lockdowns or other COVID-19 related shocks happened in 2021 to set up a DiD strategy. Have a look at @brodeur2021covid to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.
 
 Start by loading both the csv
 
@@ -554,11 +552,11 @@ mobility_gb <- read.csv("data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"
 
 ```
 
-1.  Visualize the data with `ggplot` and identify a COVID-19 intervention, a treated group, a comparison group, and a before/after window. Examples of these interventions could be a regional lockdown, school closures, travel restrictions, or vaccine rollouts. Generate a clean `ggplot` which indicates which intervention you are going to examine and explain briefly why this could be a useful diff-in-diff design.
+1.  Visualize the data with `ggplot` and identify a COVID-19 intervention, a treated group, a comparison group, and a before/after window. Examples of these interventions could be a regional lockdown, school closures, travel restrictions, or vaccine rollouts. Generate a clean `ggplot` which indicates which intervention you are going to examine and explain briefly why this could be a useful DiD design.
 
 2.  Plot the pre-treatment period only and assess whether the parallel trends assumption looks plausible. If it does not, redesign your setup once by changing the control group, the time window, or the outcome.
 
-3.  Define and estimate a diff-in-diff regression for your final design. What does the interaction term suggest? Would you treat it as a credible causal effect? Discuss the reasons why or why not.
+3.  Define and estimate a DiD regression for your final design. What does the interaction term suggest? Would you treat it as a credible causal effect? Discuss the reasons why or why not.
 
 4.  Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results. If your design remains weak, explain what alternative outcome or design you would choose next.
 

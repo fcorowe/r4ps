@@ -354,7 +354,7 @@ window.Quarto = {
 
 
 <p>Since its outbreak in late 2019, COVID-19 affected millions of people worldwide. Daily case counts quickly became one of the main ways to track the pandemic and to debate the effects of lockdowns and other restrictions. These data helped policymakers monitor the evolution of the disease and make decisions about when to tighten or relax restrictions <span class="citation" data-cites="goodman2020using brodeur2021covid zhou2021varying">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>; <a href="references.html#ref-brodeur2021covid" role="doc-biblioref">Brodeur et al. 2021</a>; <a href="references.html#ref-zhou2021varying" role="doc-biblioref">Zhou and Kan 2021</a>)</span>.</p>
-<p>At the same time, case data do not automatically provide a clean causal evaluation of policy. In this chapter we use <strong>difference-in-differences</strong> (diff-in-diff), a widely used quasi-experimental design, to show both the promise and the limits of this approach. The aim is not only to estimate an effect, but also to learn how to judge whether a diff-in-diff design is credible. We begin with COVID case data because they are tempting to use, then see why they are problematic for a simple policy evaluation. We then switch to a small theoretical example to explain the mechanics of the method more clearly. This also prepares us for the assignment, where mobility data may offer a more plausible short-run outcome than recorded cases.</p>
+<p>In this chapter, we use <strong>difference-in-differences</strong> (diff-in-diff or DiD), a widely used quasi-experimental design, to assess treatement, interventions or policy evaluation. We show both the promise and the limits of this approach. The aim is to estimate an effect and to learn how to judge whether a DiD design is credible. We begin with COVID case data and learn some practical lessons about the challenges on policy evaluation and identify different decision areas. We then switch to a small theoretical example to explain the mechanics of the method more clearly. This also prepares us for the assignment, where mobility data may offer a more plausible short-run outcome than recorded cases.</p>
 <p>This chapter is based on:</p>
 <ul>
 <li><p>Goodman-Bacon, Andrew, and Jan Marcus. <a href="https://d-nb.info/1212037294/34">“Using difference-in-differences to identify causal effects of COVID-19 policies.”</a> (2020)</p></li>
@@ -417,7 +417,7 @@ window.Quarto = {
  [9] "long"                    "totale_casi"            </code></pre>
 </div>
 </div>
-<p>First we need to clean up the data somewhat and rename some variables in both dataframes to have 4 variables:</p>
+<p>First we need to clean up the data and rename some variables in both dataframes to have 4 variables:</p>
 <ul>
 <li><p><code>date</code>: year-month-day</p></li>
 <li><p><code>geo</code>: geographical region</p></li>
@@ -513,7 +513,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>To identify whether there is a time period where a lockdown was implemented in one location but not the other, and how cases evolved, we can plot aggregates of both locations in one plot.</p>
+<p>To identify the timing of lockdowns in these different areas and evolution of COVID-19 cases, we can overlap aggregage cases of both regions in a single plot.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate the data by region for each day</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>covid_combined_agg <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(cases <span class="sc">~</span> area <span class="sc">+</span> date, <span class="at">data =</span> covid_combined, <span class="at">FUN =</span> sum)</span>
@@ -546,7 +546,7 @@ window.Quarto = {
 <p>From an initial look at the data, the 2020/2021 winter period seems interesting as there is a high increase in London cases but not as much as a peak in Lazio cases. In fact, after a quick review of COVID-19 lockdowns, we found that:</p>
 <ul>
 <li>On the 5th of November 2020, the UK Prime Minister announced a second national lockdown, coming into force in England</li>
-<li>On 4 November 2020, Italian Prime Minister Conte announced a new lockdown as well, however this lockdown divided the country into three zones depending on the severity of the pandemic, corresponding to red, orange and yellow zones. The Lazio region, was a yellow zone for the duration of this second lockdown. In yellow zones, the only restrictions included compulsory closing for restaurant and bar activities at 6 PM, and online education for high schools only.</li>
+<li>On 4 November 2020, Italian Prime Minister Conte also announced a new lockdown. Regions of the country were divided into three zones depending on the severity of the pandemic (not shown on the plot): red, orange and yellow zones. The Lazio region was a yellow zone for the duration of this second lockdown. In yellow zones, the only restrictions included compulsory closing for restaurant and bar activities at 6 PM, and online education for high schools only.</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usual chart</span></span>
@@ -577,18 +577,20 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>At first sight, this looks like a quasi-experiment. In social science, researchers often work with natural or quasi-experimental settings because randomized experiments are rarely possible. The key question, however, is not whether we can label one group as treated and the other as control, but whether that comparison is credible.</p>
+<p>DiD is often conceptualised as a quasi-experiment. In social science, researchers often work with natural or quasi-experimental settings because randomized experiments are rarely possible. The key question to formulate such a quasi-experimental setting is to establish a credible comparison. As we will see below, a key component to this is establishing a reliable control or benchmark group of comparison.</p>
 </section>
 <section id="difference-in-differences" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="difference-in-differences"><span class="header-section-number">9.4</span> Difference-in-Differences</h2>
+<p><strong>What is difference in differences?</strong></p>
+<p>Difference-in-differences (DiD) is a way of estimating the effect of a policy or intervention when we cannot run a randomized experiment. Intuitively, we seek to compare how an outcome changes over time in a treated group with how the same outcome changes over time in a similar but untreated comparison group. A before-after comparison for the treated group alone is not enough, because many other things may be changing at the same time. A treated-versus-control comparison at one point in time is also not enough, because the two groups may already differ for other reasons. Difference-in-differences combines both comparisons and asks whether the treated group changed more, or less, than we would have expected given the change observed in the comparison group. Its key assumption is that, in the absence of treatment, the two groups would have followed <em>parallel trends</em>, so the untreated group provides a reasonable counterfactual for what would have happened to the treated group without the intervention.</p>
 <p><strong>Design choices</strong></p>
-<p>The DiD approach includes a before-after comparison for a treatment and control group. In our example:</p>
+<p>The DiD approach entails a number of critical choices. It includes a before-after comparison for a <strong><em>treatment</em></strong> and <strong><em>control group</em></strong>. In our example:</p>
 <ul>
 <li><p>A <code>cross-sectional comparison</code> (= compare a sample that was treated (London) to an untreated control group (Rome))</p></li>
 <li><p>A <code>before-after comparison</code> (= compare treatment group with itself, before and after the treatment (5th of November))</p></li>
 </ul>
-<p>The <strong>main assumption</strong> is not that the outcome would have remained constant. It is the <strong>parallel trends assumption</strong>: in the absence of the intervention, the treated and control groups would have followed similar trends over the period we analyse. The two groups do not need to have the same level, but they should evolve in a comparable way before treatment.</p>
-<p>In practice, a good DiD design requires four choices: the treated group, the comparison group, the pre-treatment window, and the post-treatment window. These are part of the research design, not just data cleaning. This comparison is already imperfect because Lazio was not a pure untreated case: it also faced pandemic restrictions, even if they were milder than those in England.</p>
+<p>The <strong>main and critical assumption</strong> of DiD is the <strong>parallel trends assumption</strong>. That means that, in the absence of the intervention, the treated and control groups would have followed similar trends over the period we analyse. The two groups do not need to have the same level, but they should evolve in a comparable way <em>before treatment</em>.</p>
+<p>In practice, a good DiD design requires <em>four choices</em>: the treated group, the comparison group, the pre-treatment window, and the post-treatment window. For our example, we will see that making the right choices here may misguide our results and conclusions that we can draw from the data. Our comparison is imperfect because Lazio is not a pure untreated case. It also faced pandemic restrictions, even if they were milder than those in England. But, it is useful to illustrate the challenges of formulating a good quasi-experimental design for a credible DiD.</p>
 <p>A useful first lesson from this chapter is that the time window matters. If we define the post period too broadly, we risk attributing later shocks to the policy of interest. Here that is especially important because London cases rose sharply again in December 2020 and January 2021.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A wide window that mixes the November lockdown with the later winter surge</span></span>
@@ -633,7 +635,7 @@ window.Quarto = {
 <p>In our example, a shorter time window represents a better research design. It is a better reflection that the implementation of the lockdown in London contained the pre-treatment surge in Covid-19 cases. A wider window can be misleading as they suggest that the implementation of the lockdown did not have any impact. On the contrary, it is linked to a considerable increase in Covid-19. But from the time series plot above, we know that this actually reflects a surge in Covid-19 cases during December 2020 and January 2021.</p>
 <section id="checking-parallel-trends" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="checking-parallel-trends"><span class="header-section-number">9.4.1</span> Checking parallel trends</h3>
-<p>As highlighted above, a key issue to assess in the implementation of diff-in-diff is the complaince of the parallel trends assumption. In our example, this is responding to the question: were London and Lazio were moving in similar ways <strong>before</strong> the intervention? The parallel trends assumption is about slopes, not levels. One group can start higher than the other, but the pre-treatment trajectories should be broadly similar.</p>
+<p>As highlighted above, a key issue to assess in the implementation of DiD is the compliance of the parallel trends assumption. In our example, this is responding to the question: whether London and Lazio were moving in similar ways <strong>before</strong> the intervention? The parallel trends assumption is about slopes, not levels. One group can start higher than the other, but the pre-treatment trajectories should be broadly similar.</p>
 <p>A practical way to assess this is:</p>
 <ol type="1">
 <li>Plot only the pre-treatment period.</li>
@@ -682,7 +684,7 @@ window.Quarto = {
 1 treat_london:day    -13.3      2.77     -4.79 0.00000196</code></pre>
 </div>
 </div>
-<p>In this case, the pre-treatment slopes are still quite different, so the London-Lazio comparison remains weak. The narrower window fixes one design problem, but it does not fully rescue the design. A pre-trend test like this is only a diagnostic, not proof, but it is a useful warning sign when the interaction term is large and clearly different from zero.</p>
+<p>In this case, the pre-treatment slopes are different, so the London-Lazio comparison is a weak comparison. The narrower window fixes one design problem, but it does not fully offer a credible quasi-experimental design. A pre-trend test like this is only a diagnostic, not proof. It is a useful warning sign when the interaction term is large and clearly different from zero.</p>
 </section>
 <section id="what-if-parallel-trends-fail" class="level3" data-number="9.4.2">
 <h3 data-number="9.4.2" class="anchored" data-anchor-id="what-if-parallel-trends-fail"><span class="header-section-number">9.4.2</span> What if parallel trends fail?</h3>
@@ -694,7 +696,7 @@ window.Quarto = {
 <li>Change the outcome to something that responds more immediately to the intervention, such as mobility or another behavioural measure.</li>
 <li>If none of these improve the design, present the comparison as descriptive evidence and use another research design for causal claims.</li>
 </ul>
-<p>This is the point at which the London-Lazio example becomes most useful: it shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of diff-in-diff more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.</p>
+<p>This is the point at which the London-Lazio example becomes most useful. It shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of DiD more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.</p>
 <div class="cell" data-messages="false">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import csv </span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>covid_perfect_example <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/longitudinal-2/example_covid.csv"</span>)</span>
@@ -782,8 +784,8 @@ window.Quarto = {
 <pre><code>[1] 131.9961</code></pre>
 </div>
 </div>
-<p>In this theoretical example, the diff-in-diff estimate is 131.99. This is the gap between the treated group’s observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.</p>
-<p>We can visualise this really well with a bit of extra code:</p>
+<p>In this theoretical example, the DiD estimate is 131.99. This is the gap between the treated group’s observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.</p>
+<p>We can visualise this with a bit of extra code:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covid_perfect_example, <span class="fu">aes</span>(<span class="at">x =</span> after_5nov, <span class="at">y =</span> mean_cases, <span class="at">color =</span> area)) <span class="sc">+</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -812,10 +814,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>This distinction matters. Diff-in-diff is valuable not because every policy comparison works, but because it makes the design questions explicit. With COVID data, common threats include policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing <span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span>. These problems are especially serious when the outcome is recorded cases.</p>
+<p>In this scenario, we have a credible quasi-experimental design. DiD shows the importance of establishing credible comparison groups and time frame to assess the influence of interventions. As with COVID data, a bad experimental design may produce misleading results because of it may capture the compounding effects of policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing <span class="citation" data-cites="goodman2020using">(<a href="references.html#ref-goodman2020using" role="doc-biblioref">Goodman-Bacon and Marcus 2020</a>)</span>. These problems are especially serious when the outcome is recorded cases.</p>
 <p><strong>Difference-in-Difference with regression</strong></p>
-<p>Calculating all the pieces by hand is useful for intuition, but regression lets us recover the same logic more systematically. The easiest way to see this is to build the model step by step using the theoretical example. That keeps the mechanics clear before we return to the messier real-world design.</p>
-<p>First, we code London as the treated group and the post-5 November period as the post-treatment period:</p>
+<p>In practice, our control and treated groups tend to differ in systematic ways. Often, then, we want to account for these systematic differences by running DiD analysis in a regression framework. To this end, we first code London as the treated group and the post-5 November period as the post-treatment period:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>covid_perfect_reg <span class="ot">&lt;-</span> covid_perfect_example <span class="sc">%&gt;%</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -828,7 +829,7 @@ window.Quarto = {
 <li><code>mean_cases ~ treat</code> This is only a cross-sectional comparison. It tells us whether London and Lazio differ on average, but it ignores time completely.</li>
 <li><code>mean_cases ~ post</code> This is only a before-after comparison. It tells us whether average cases are different after 5 November, but it ignores whether the change happened in the treated or control group.</li>
 <li><code>mean_cases ~ treat + post</code> This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.</li>
-<li><code>mean_cases ~ treat * post</code> This adds the interaction term. That interaction is the diff-in-diff estimate.</li>
+<li><code>mean_cases ~ treat * post</code> This adds the interaction term. That interaction is the DiD estimate.</li>
 </ol>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_treat <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_cases <span class="sc">~</span> treat, <span class="at">data =</span> covid_perfect_reg)</span>
@@ -856,117 +857,83 @@ window.Quarto = {
 <div class="cell-output-display">
 <!-- preamble start -->
 
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script>
+
     <script>
-
-      function styleCell_4cuefpwgy3qh2s5tmexh(i, j, css_id) {
-          var table = document.getElementById("tinytable_4cuefpwgy3qh2s5tmexh");
-          var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
-          if (cell) {
-              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
-              cell.classList.add(css_id);
-          } else {
-              console.warn(`Cell at (${i}, ${j}) not found.`);
-          }
-      }
-      function spanCell_4cuefpwgy3qh2s5tmexh(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_4cuefpwgy3qh2s5tmexh");
-        const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
-        if (!targetCell) {
-          console.warn(`Cell at (${i}, ${j}) not found.`);
-        }
-
-        // Get all cells that need to be removed
-        const cellsToRemove = [];
-        for (let r = 0; r < rowspan; r++) {
-          for (let c = 0; c < colspan; c++) {
-            if (r === 0 && c === 0) continue; // Skip the target cell
-            const cell = table.querySelector(`[data-row="${i + r}"][data-col="${j + c}"]`);
-            if (cell) {
-              cellsToRemove.push(cell);
-            }
-          }
-        }
-
-        // Remove all cells
-        cellsToRemove.forEach(cell => cell.remove());
-
-        // Set rowspan and colspan of the target cell if it exists
-        if (targetCell) {
-          targetCell.rowSpan = rowspan;
-          targetCell.colSpan = colspan;
-        }
-      }
+      // Create table-specific functions using external factory
+      const tableFns_yuk13mpelr54csqlvpr2 = TinyTable.createTableFunctions("tinytable_yuk13mpelr54csqlvpr2");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 }, { i: '4', j: 4 },  ], css_id: 'tinytable_css_agehukik4pretb2zeisb',}, 
-          { positions: [ { i: '3', j: 2 }, { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '1', j: 3 },  ], css_id: 'tinytable_css_hxvz0vf2ijur8j9xdw03',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_16xzcyraz7yghf32jkal',}, 
-          { positions: [ { i: '4', j: 0 },  ], css_id: 'tinytable_css_02wa9ravilshcgl7pgrp',}, 
-          { positions: [ { i: '1', j: 0 }, { i: '2', j: 0 }, { i: '3', j: 0 },  ], css_id: 'tinytable_css_1pn0vffjtlqpo57e7q3b',}, 
-          { positions: [ { i: '0', j: 0 },  ], css_id: 'tinytable_css_adip909myj4tcszo8sgc',}, 
+          { positions: [ { i: '4', j: 2 }, { i: '4', j: 3 }, { i: '4', j: 4 }, { i: '4', j: 5 } ], css_id: 'tinytable_css_hea6w4yazku7gffoealw',}, 
+          { positions: [ { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '1', j: 4 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '1', j: 5 }, { i: '2', j: 5 }, { i: '3', j: 5 } ], css_id: 'tinytable_css_5b824v66yqdbeej8n3db',}, 
+          { positions: [ { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 }, { i: '0', j: 5 } ], css_id: 'tinytable_css_qixxx0cqku7ifnri406x',}, 
+          { positions: [ { i: '4', j: 1 } ], css_id: 'tinytable_css_pumo8wltf70d99afcbos',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 } ], css_id: 'tinytable_css_92yijsqp8roeh43b2aki',}, 
+          { positions: [ { i: '0', j: 1 } ], css_id: 'tinytable_css_nfmuw303frt40b4at9y1',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_4cuefpwgy3qh2s5tmexh(cell.i, cell.j, group.css_id);
+                  tableFns_yuk13mpelr54csqlvpr2.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
     </script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
-      /* tinytable css entries after */
-      .table td.tinytable_css_agehukik4pretb2zeisb, .table th.tinytable_css_agehukik4pretb2zeisb { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_hxvz0vf2ijur8j9xdw03, .table th.tinytable_css_hxvz0vf2ijur8j9xdw03 { text-align: center; }
-      .table td.tinytable_css_16xzcyraz7yghf32jkal, .table th.tinytable_css_16xzcyraz7yghf32jkal { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_02wa9ravilshcgl7pgrp, .table th.tinytable_css_02wa9ravilshcgl7pgrp { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_1pn0vffjtlqpo57e7q3b, .table th.tinytable_css_1pn0vffjtlqpo57e7q3b { text-align: left; }
-      .table td.tinytable_css_adip909myj4tcszo8sgc, .table th.tinytable_css_adip909myj4tcszo8sgc { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    /* tinytable css entries after */
+    #tinytable_yuk13mpelr54csqlvpr2 td.tinytable_css_hea6w4yazku7gffoealw, #tinytable_yuk13mpelr54csqlvpr2 th.tinytable_css_hea6w4yazku7gffoealw {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_yuk13mpelr54csqlvpr2 td.tinytable_css_5b824v66yqdbeej8n3db, #tinytable_yuk13mpelr54csqlvpr2 th.tinytable_css_5b824v66yqdbeej8n3db { text-align: center }
+    #tinytable_yuk13mpelr54csqlvpr2 td.tinytable_css_qixxx0cqku7ifnri406x, #tinytable_yuk13mpelr54csqlvpr2 th.tinytable_css_qixxx0cqku7ifnri406x {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: center }
+    #tinytable_yuk13mpelr54csqlvpr2 td.tinytable_css_pumo8wltf70d99afcbos, #tinytable_yuk13mpelr54csqlvpr2 th.tinytable_css_pumo8wltf70d99afcbos {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_yuk13mpelr54csqlvpr2 td.tinytable_css_92yijsqp8roeh43b2aki, #tinytable_yuk13mpelr54csqlvpr2 th.tinytable_css_92yijsqp8roeh43b2aki { text-align: left }
+    #tinytable_yuk13mpelr54csqlvpr2 td.tinytable_css_nfmuw303frt40b4at9y1, #tinytable_yuk13mpelr54csqlvpr2 th.tinytable_css_nfmuw303frt40b4at9y1 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_4cuefpwgy3qh2s5tmexh" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-        <thead>
+      <table class="tinytable" id="tinytable_yuk13mpelr54csqlvpr2" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
+        <thead>
               <tr>
-                <th scope="col" data-row="0" data-col="0"> </th>
-                <th scope="col" data-row="0" data-col="1">Treat only</th>
-                <th scope="col" data-row="0" data-col="2">Post only</th>
-                <th scope="col" data-row="0" data-col="3">Treat + post</th>
-                <th scope="col" data-row="0" data-col="4">Treat * post</th>
+                <th scope="col" data-row="0" data-col="1"> </th>
+                <th scope="col" data-row="0" data-col="2">Treat only</th>
+                <th scope="col" data-row="0" data-col="3">Post only</th>
+                <th scope="col" data-row="0" data-col="4">Treat + post</th>
+                <th scope="col" data-row="0" data-col="5">Treat * post</th>
               </tr>
         </thead>
         
         <tbody>
                 <tr>
-                  <td data-row="1" data-col="0">Control group, before</td>
-                  <td data-row="1" data-col="1">200.781</td>
-                  <td data-row="1" data-col="2">194.302</td>
-                  <td data-row="1" data-col="3">155.605</td>
-                  <td data-row="1" data-col="4">188.604</td>
+                  <td data-row="1" data-col="1">Control group, before</td>
+                  <td data-row="1" data-col="2">200.781</td>
+                  <td data-row="1" data-col="3">194.302</td>
+                  <td data-row="1" data-col="4">155.605</td>
+                  <td data-row="1" data-col="5">188.604</td>
                 </tr>
                 <tr>
-                  <td data-row="2" data-col="0">Treat: London</td>
-                  <td data-row="2" data-col="1">77.394</td>
-                  <td data-row="2" data-col="2"></td>
-                  <td data-row="2" data-col="3">77.394</td>
-                  <td data-row="2" data-col="4">11.396</td>
+                  <td data-row="2" data-col="1">Treat: London</td>
+                  <td data-row="2" data-col="2">77.394</td>
+                  <td data-row="2" data-col="3"></td>
+                  <td data-row="2" data-col="4">77.394</td>
+                  <td data-row="2" data-col="5">11.396</td>
                 </tr>
                 <tr>
-                  <td data-row="3" data-col="0">Post period</td>
-                  <td data-row="3" data-col="1"></td>
-                  <td data-row="3" data-col="2">90.352</td>
+                  <td data-row="3" data-col="1">Post period</td>
+                  <td data-row="3" data-col="2"></td>
                   <td data-row="3" data-col="3">90.352</td>
-                  <td data-row="3" data-col="4">24.354</td>
+                  <td data-row="3" data-col="4">90.352</td>
+                  <td data-row="3" data-col="5">24.354</td>
                 </tr>
                 <tr>
-                  <td data-row="4" data-col="0">DiD estimate</td>
-                  <td data-row="4" data-col="1"></td>
+                  <td data-row="4" data-col="1">DiD estimate</td>
                   <td data-row="4" data-col="2"></td>
                   <td data-row="4" data-col="3"></td>
-                  <td data-row="4" data-col="4">131.996</td>
+                  <td data-row="4" data-col="4"></td>
+                  <td data-row="4" data-col="5">131.996</td>
                 </tr>
         </tbody>
       </table>
@@ -988,7 +955,7 @@ window.Quarto = {
 </section>
 <section id="concluding-remarks" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="concluding-remarks"><span class="header-section-number">9.5</span> Concluding Remarks</h2>
-<p>Diff-in-diff works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:</p>
+<p>DiD works best when a policy changes for one group but not another comparable group, the timing of the intervention is clear, and pre-treatment trends are reasonably similar. Well-known applications include:</p>
 <ul>
 <li>labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change</li>
 <li>public health: comparing places that expanded Medicaid or adopted smoking bans with similar places that did not</li>
@@ -998,15 +965,15 @@ window.Quarto = {
 </section>
 <section id="questions" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="questions"><span class="header-section-number">9.6</span> Questions</h2>
-<p>For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>. You will need to do a bit of digging on when lockdowns or other COVID-19 related shocks happened in 2021 to set up a diff-in-diff strategy. Have a look at <span class="citation" data-cites="brodeur2021covid">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.</p>
+<p>For the assignment, you will continue to use Google Mobility data for the UK for 2021. For details on the timeline you can have a look <a href="https://www.instituteforgovernment.org.uk/sites/default/files/2022-12/timeline-coronavirus-lockdown-december-2021.pdf">here</a>. You will need to do a bit of digging on when lockdowns or other COVID-19 related shocks happened in 2021 to set up a DiD strategy. Have a look at <span class="citation" data-cites="brodeur2021covid">Brodeur et al. (<a href="references.html#ref-brodeur2021covid" role="doc-biblioref">2021</a>)</span> to get some inspiration. They used Google Trends data to test whether COVID-19 and the associated lockdowns implemented in Europe and America led to changes in well-being.</p>
 <p>Start by loading both the csv</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mobility_gb <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/longitudinal-1/2021_GB_Region_Mobility_Report.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
-<li><p>Visualize the data with <code>ggplot</code> and identify a COVID-19 intervention, a treated group, a comparison group, and a before/after window. Examples of these interventions could be a regional lockdown, school closures, travel restrictions, or vaccine rollouts. Generate a clean <code>ggplot</code> which indicates which intervention you are going to examine and explain briefly why this could be a useful diff-in-diff design.</p></li>
+<li><p>Visualize the data with <code>ggplot</code> and identify a COVID-19 intervention, a treated group, a comparison group, and a before/after window. Examples of these interventions could be a regional lockdown, school closures, travel restrictions, or vaccine rollouts. Generate a clean <code>ggplot</code> which indicates which intervention you are going to examine and explain briefly why this could be a useful DiD design.</p></li>
 <li><p>Plot the pre-treatment period only and assess whether the parallel trends assumption looks plausible. If it does not, redesign your setup once by changing the control group, the time window, or the outcome.</p></li>
-<li><p>Define and estimate a diff-in-diff regression for your final design. What does the interaction term suggest? Would you treat it as a credible causal effect? Discuss the reasons why or why not.</p></li>
+<li><p>Define and estimate a DiD regression for your final design. What does the interaction term suggest? Would you treat it as a credible causal effect? Discuss the reasons why or why not.</p></li>
 <li><p>Discuss how the unique dynamics of COVID-19 and the possibility of policies having differential effects over time complicate the interpretation of your results. If your design remains weak, explain what alternative outcome or design you would choose next.</p></li>
 </ol>
 <p>Analyse and discuss what insights you obtain into people’s changes in behaviour during the pandemic in response to an intervention.</p>

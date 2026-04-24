@@ -267,6 +267,76 @@ DiD is often conceptualised as a quasi-experiment. In social science, researcher
 
 Difference-in-differences (DiD) is a way of estimating the effect of a policy or intervention when we cannot run a randomized experiment. Intuitively, we seek to compare how an outcome changes over time in a treated group with how the same outcome changes over time in a similar but untreated comparison group. A before-after comparison for the treated group alone is not enough, because many other things may be changing at the same time. A treated-versus-control comparison at one point in time is also not enough, because the two groups may already differ for other reasons. Difference-in-differences combines both comparisons and asks whether the treated group changed more, or less, than we would have expected given the change observed in the comparison group. Its key assumption is that, in the absence of treatment, the two groups would have followed *parallel trends*, so the untreated group provides a reasonable counterfactual for what would have happened to the treated group without the intervention.
 
+The figure below shows the logic visually. The solid blue line is the observed treated group. The solid red line is the observed comparison group. The dashed grey line shows the treated group's counterfactual outcome. What we would have expected for the treated group after the intervention if it had followed the same trend as the comparison group. The gap between the treated group's observed outcome and this counterfactual is the DiD estimate, or the intervention effect.
+
+```{r}
+#| messages: FALSE
+#| warning: FALSE
+#| echo: false
+
+did_theory_data <- tibble(
+  group = rep(c("Treated group", "Comparison group"), each = 2),
+  period = rep(c("Before", "After"), times = 2),
+  outcome = c(50, 80, 35, 45)
+) %>%
+  mutate(
+    period = factor(period, levels = c("Before", "After")),
+    group = factor(group, levels = c("Treated group", "Comparison group"))
+  )
+
+treated_before <- did_theory_data %>%
+  filter(group == "Treated group", period == "Before") %>%
+  pull(outcome)
+
+treated_after <- did_theory_data %>%
+  filter(group == "Treated group", period == "After") %>%
+  pull(outcome)
+
+control_before <- did_theory_data %>%
+  filter(group == "Comparison group", period == "Before") %>%
+  pull(outcome)
+
+control_after <- did_theory_data %>%
+  filter(group == "Comparison group", period == "After") %>%
+  pull(outcome)
+
+counterfactual_after <- treated_before + (control_after - control_before)
+
+ggplot(did_theory_data, aes(x = period, y = outcome, color = group)) +
+  geom_line(aes(group = group), linewidth = 1) +
+  geom_point(size = 2.5) +
+  annotate(
+    geom = "segment",
+    x = "Before", xend = "After",
+    y = treated_before, yend = counterfactual_after,
+    linetype = "dashed", color = "grey50", linewidth = 1
+  ) +
+  annotate(
+    geom = "segment",
+    x = "After", xend = "After",
+    y = counterfactual_after, yend = treated_after,
+    linetype = "dotted", color = "darkblue", linewidth = 1
+  ) +
+  annotate(
+    geom = "label",
+    x = "After",
+    y = (treated_after + counterfactual_after) / 2,
+    label = "Programme effect",
+    size = 3
+  ) +
+  scale_color_manual(values = c("Treated group" = "darkblue", "Comparison group" = "darkred")) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
+  ) +
+  labs(
+    x = "",
+    y = "Outcome",
+    color = "",
+    title = "Difference-in-differences as a counterfactual comparison"
+  )
+```
+
 **Design choices**
 
 The DiD approach entails a number of critical choices. It includes a before-after comparison for a ***treatment*** and ***control group***. In our example:
@@ -316,7 +386,7 @@ design_plot_data <- covid_designs %>%
 ggplot(design_plot_data, aes(x = after_5nov, y = mean_cases, color = area)) +
   geom_pointrange(aes(ymin = lower, ymax = upper), size = 1) + 
   geom_line(aes(group = area)) +
-  scale_color_manual(values = c("darkblue", "darkred")) +
+  scale_color_manual(values = c("London" = "darkblue", "Rome (Lazio)" = "darkred")) +
   facet_wrap(vars(window))
 ```
 
@@ -347,14 +417,14 @@ pre_period <- covid_combined_tight %>%
 ggplot(pre_period, aes(x = date, y = cases, color = area)) +
   geom_line(aes(group = area), linewidth = 0.9) +
   geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linewidth = 1) +
-  scale_color_manual(values = c("darkblue", "darkred")) +
+  scale_color_manual(values = c("London" = "darkblue", "Rome (Lazio)" = "darkred")) +
   theme_minimal() +
   theme(
     legend.position = "bottom"
   ) +
   labs(
     x = "",
-    y = "",
+    y = "Daily COVID-19 cases",
     title = "Pre-treatment trends only",
     color = "Region"
   )
@@ -380,24 +450,135 @@ If the parallel trends assumption does not look plausible, do not force the meth
 -   Change the outcome to something that responds more immediately to the intervention, such as mobility or another behavioural measure.
 -   If none of these improve the design, present the comparison as descriptive evidence and use another research design for causal claims.
 
-This is the point at which the London-Lazio example becomes most useful. It shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient. To explain the mechanics of DiD more clearly, we now switch to a small theoretical example where the identifying logic is closer to what we want.
+This is the point at which the London-Lazio example becomes most useful. It shows how DiD helps us diagnose a weak comparison instead of blindly producing a coefficient.
+
+### Empirical DiD With Google Mobility Data
+
+We now move on to demonstrate the mechanics of DiD with more suitable data rather. We switch to a different empirical example based on Google Mobility data. Before setting up the DiD design, it is useful to understand the structure of the mobility data. Each row is a place-day observation: one geographical area observed on one date. As we have seen in the previous chapter, different mobility forms are stored in separate columns, such as retail and recreation, grocery and pharmacy, parks, transit stations, workplaces and residential. These variables report percentage changes from Google's pre-pandemic baseline. For example, a value of `-20` for transit stations means that visits to transit stations were 20 percent below the baseline for that area and day.
 
 ```{r}
 #| messages: FALSE
 #| warning: FALSE
 
-# import csv 
-covid_perfect_example <- read_csv("data/longitudinal-2/example_covid.csv")
+mobility_did_raw <- read.csv("data/longitudinal-1/2021_GB_Region_Mobility_Report.csv")
 
-# label pre/post labels
-covid_perfect_example <- covid_perfect_example %>%
-  mutate(after_5nov = factor(after_5nov, labels = c("Before 5 November 2020", "After 5 November 2020")))
+mobility_did_raw %>%
+  filter(
+    sub_region_1 %in% c("Greater London", "Edinburgh"),
+    sub_region_2 == ""
+  ) %>%
+  select(
+    sub_region_1,
+    sub_region_2,
+    date,
+    transit_stations_percent_change_from_baseline,
+    workplaces_percent_change_from_baseline,
+    residential_percent_change_from_baseline
+  ) %>%
+  str()
+```
 
-# plot    
-ggplot(covid_perfect_example, aes(x = after_5nov, y = mean_cases, color = area)) +
-  geom_pointrange(aes(ymin = lower, ymax = upper), size = 1) + 
+For this example, we compare **Greater London** with **Edinburgh** around the expansion of London's Ultra Low Emission Zone (ULEZ) on **25 October 2021**. London is the treated area because the policy change happened there. Edinburgh is the comparison area. The outcome is **transit station mobility**, because a transport policy should affect mobility behaviour more directly than a slower-moving outcome such as recorded COVID-19 cases. We begin preparing our data for the analysis.
+
+```{r}
+#| messages: FALSE
+#| warning: FALSE
+
+mobility_did <- mobility_did_raw %>%
+  mutate(
+    date = as.Date(date)
+  ) %>%
+  filter(
+    sub_region_1 %in% c("Greater London", "Edinburgh"),
+    sub_region_2 == "",
+    date >= as.Date("2021-09-15"),
+    date <= as.Date("2021-11-30")
+  ) %>%
+  transmute(
+    area = recode(sub_region_1, "Greater London" = "London", "Edinburgh" = "Edinburgh"),
+    date,
+    mobility = transit_stations_percent_change_from_baseline
+  ) %>%
+  filter(!is.na(mobility)) %>%
+  mutate(
+    area = factor(area, levels = c("London", "Edinburgh")),
+    post = ifelse(date >= as.Date("2021-10-25"), 1, 0),
+    period = factor(post, labels = c("Before 25 October 2021", "After 25 October 2021")),
+    treat_london = ifelse(area == "London", 1, 0),
+    day = as.numeric(date - min(date))
+  )
+
+mobility_plot_data <- mobility_did %>%
+  group_by(area, period) %>%
+  summarize(
+    mean_mobility = mean(mobility),
+    se_mobility = sd(mobility) / sqrt(n()),
+    upper = mean_mobility + (1.96 * se_mobility),
+    lower = mean_mobility - (1.96 * se_mobility),
+    .groups = "drop"
+  )
+```
+
+Before calculating the DiD estimate, we first check whether the parallel trends assumption looks plausible in the pre-treatment period. For this example, that means asking whether London and Edinburgh had similar trends in transit station mobility before the ULEZ expansion.
+
+```{r}
+#| messages: FALSE
+#| warning: FALSE
+
+mobility_pre_period <- mobility_did %>%
+  filter(post == 0) %>%
+  mutate(pre_day = as.numeric(date - min(date)))
+
+ggplot(mobility_pre_period, aes(x = date, y = mobility, color = area)) +
+  geom_line(linewidth = 0.9) +
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linewidth = 1) +
+  geom_vline(xintercept = as.Date("2021-10-25"), linetype = "dashed") +
+  scale_color_manual(values = c("London" = "darkblue", "Edinburgh" = "darkred")) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
+  ) +
+  labs(
+    x = "",
+    y = "Transit station mobility",
+    color = "Region",
+    title = "Pre-treatment mobility trends"
+  )
+```
+
+```{r}
+mobility_pretrend_model <- lm(
+  mobility ~ treat_london + pre_day + treat_london:pre_day,
+  data = mobility_pre_period
+)
+
+tidy(mobility_pretrend_model) %>%
+  filter(term == "treat_london:pre_day")
+```
+
+Based on the description above, this example gives us reasonable evidence that the parallel trends assumption is met. The key point is that London and Edinburgh do **not** need to have exactly the same level of transit station mobility before the intervention. What matters is whether they are moving in a similar direction at a similar pace before the policy change.
+
+In the pre-treatment plot, the two lines follow broadly similar paths before **25 October 2021**. London and Edinburgh both show day-to-day movement, but neither area is clearly moving away from the other before the intervention. The regression diagnostic supports this visual interpretation. The interaction between London and the pre-treatment time trend is small and not statistically distinguishable from zero, which means there is no strong evidence that London's pre-treatment slope is different from Edinburgh's.
+
+We can say: before the policy change, London and Edinburgh appear to be changing in similar ways. This makes Edinburgh a plausible comparison group for estimating what might have happened to London's transit station mobility if the ULEZ expansion had not occurred. This does not *prove* the parallel trends assumption, because we can never directly observe the counterfactual, but it makes the assumption plausible enough to continue with the DiD example.
+
+We can now compare the average outcome before and after the policy change for both areas. This plot is the visual version of the DiD table. It shows the before-after change in London and compares it with the before-after change in Edinburgh.
+
+```{r}
+ggplot(mobility_plot_data, aes(x = period, y = mean_mobility, color = area)) +
+  geom_pointrange(aes(ymin = lower, ymax = upper), size = 1) +
   geom_line(aes(group = area)) +
-  scale_color_manual(values = c("darkblue", "darkred"))
+  scale_color_manual(values = c("London" = "darkblue", "Edinburgh" = "darkred")) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom"
+  ) +
+  labs(
+    x = "",
+    y = "Transit station mobility",
+    color = "Region",
+    title = "Empirical DiD example with Google Mobility data"
+  )
 
 ```
 
@@ -411,24 +592,24 @@ We can find the exact difference by filling out the 2x2 before/after treatment/c
 | Control    | C      | D     | D - C             |
 | Difference | C - A  | D - B | (D − C) − (B − A) |
 
-We can pull each of these numbers out of the table:
+We can pull each of these numbers out of the empirical table:
 
 ```{r}
-before_treatment <- covid_perfect_example %>% 
-  filter(after_5nov == "Before 5 November 2020", area == "London") %>% 
-  pull(mean_cases)
+before_treatment <- mobility_plot_data %>% 
+  filter(period == "Before 25 October 2021", area == "London") %>% 
+  pull(mean_mobility)
 
-before_control <- covid_perfect_example %>% 
-  filter(after_5nov == "Before 5 November 2020", area == "Lazio") %>% 
-  pull(mean_cases)
+before_control <- mobility_plot_data %>% 
+  filter(period == "Before 25 October 2021", area == "Edinburgh") %>% 
+  pull(mean_mobility)
 
-after_treatment <- covid_perfect_example %>% 
-  filter(after_5nov == "After 5 November 2020", area == "London") %>% 
-  pull(mean_cases)
+after_treatment <- mobility_plot_data %>% 
+  filter(period == "After 25 October 2021", area == "London") %>% 
+  pull(mean_mobility)
 
-after_control <- covid_perfect_example %>% 
-  filter(after_5nov == "After 5 November 2020", area == "Lazio") %>% 
-  pull(mean_cases)
+after_control <- mobility_plot_data %>% 
+  filter(period == "After 25 October 2021", area == "Edinburgh") %>% 
+  pull(mean_mobility)
 
 diff_treatment_before_after <- after_treatment - before_treatment
 diff_treatment_before_after
@@ -441,65 +622,27 @@ diff_diff
 
 ```
 
-In this theoretical example, the DiD estimate is 131.99. This is the gap between the treated group's observed post-treatment outcome and the counterfactual post-treatment outcome implied by the control trend.
+In this empirical example, the DiD estimate is the extra post-treatment change in London relative to the post-treatment change in Edinburgh. With these data, the estimate is about `-5.08`, meaning that transit station mobility in London fell by around 5 percentage points more than we would have expected from the change observed in Edinburgh.
 
-We can visualise this with a bit of extra code:
-
-```{r}
-
-ggplot(covid_perfect_example, aes(x = after_5nov, y = mean_cases, color = area)) +
-  geom_point() +
-  #geom_pointrange(aes(ymin = lower, ymax = upper), size = 1) + 
-  #geom_line(aes(group = area)) +
-  geom_line(aes(group = as.factor(area))) +
-  scale_color_manual(values = c("darkblue", "darkred")) +
-  # If you use these lines you'll get some extra annotation lines and
-  # labels. The annotate() function lets you put stuff on a ggplot that's not
-  # part of a dataset. Normally with geom_line, geom_point, etc., you have to
-  # plot data that is in columns. With annotate() you can specify your own x and
-  # y values.
-  annotate(geom = "segment", x = "Before 5 November 2020", xend = "After 5 November 2020",
-           y = before_treatment, yend = after_treatment - diff_diff,
-           linetype = "dashed", color = "grey50") +
-  annotate(geom = "segment", x = "After 5 November 2020", xend = "After 5 November 2020",
-           y = after_treatment, yend = after_treatment - diff_diff,
-           linetype = "dotted", color = "blue") +
-  annotate(geom = "label", x = "After 5 November 2020", y = after_treatment - (diff_diff / 2), 
-           label = "Program effect", size = 3)
-```
-
-In this scenario, we have a credible quasi-experimental design. DiD shows the importance of establishing credible comparison groups and time frame to assess the influence of interventions. As with COVID data, a bad experimental design may produce misleading results because of it may capture the compounding effects of policy bundles, reverse causality, anticipation effects, changes in testing and data collection, and variation in policy timing [@goodman2020using]. These problems are especially serious when the outcome is recorded cases.
+This example is still not perfect, but it is better suited to teaching the mechanics of DiD because the data structure, the parallel trends check, the plot, and the models all come from the same real empirical data frame. The comparison is also easier to explain than a toy dataset, and it keeps the practical session grounded in observed data.
 
 **Difference-in-Difference with regression**
 
-In practice, our control and treated groups tend to differ in systematic ways. Often, then, we want to account for these systematic differences by running DiD analysis in a regression framework. To this end, we first code London as the treated group and the post-5 November period as the post-treatment period:
-
-```{r}
-#| warning: false
-#| message: FALSE
-
-covid_perfect_reg <- covid_perfect_example %>%
-  mutate(
-    treat = ifelse(area == "London", 1, 0),
-    post = ifelse(after_5nov == "After 5 November 2020", 1, 0)
-  )
-```
-
 We can now build the regression in four steps:
 
-1.  `mean_cases ~ treat` This is only a cross-sectional comparison. It tells us whether London and Lazio differ on average, but it ignores time completely.
-2.  `mean_cases ~ post` This is only a before-after comparison. It tells us whether average cases are different after 5 November, but it ignores whether the change happened in the treated or control group.
-3.  `mean_cases ~ treat + post` This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.
-4.  `mean_cases ~ treat * post` This adds the interaction term. That interaction is the DiD estimate.
+1.  `mobility ~ treat_london` This is only a cross-sectional comparison. It tells us whether London and Edinburgh differ on average, but it ignores time completely.
+2.  `mobility ~ post` This is only a before-after comparison. It tells us whether mobility changes after 25 October 2021, but it ignores whether the change happened in the treated or control group.
+3.  `mobility ~ treat_london + post` This controls for baseline group differences and for a common time shift, but it still does not isolate the treatment effect.
+4.  `mobility ~ treat_london * post` This adds the interaction term. That interaction is the DiD estimate.
 
 ```{r}
 #| warning: false
 #| message: FALSE
 
-model_treat <- lm(mean_cases ~ treat, data = covid_perfect_reg)
-model_post <- lm(mean_cases ~ post, data = covid_perfect_reg)
-model_additive <- lm(mean_cases ~ treat + post, data = covid_perfect_reg)
-model_did <- lm(mean_cases ~ treat * post, data = covid_perfect_reg)
+model_treat <- lm(mobility ~ treat_london, data = mobility_did)
+model_post <- lm(mobility ~ post, data = mobility_did)
+model_additive <- lm(mobility ~ treat_london + post, data = mobility_did)
+model_did <- lm(mobility ~ treat_london * post, data = mobility_did)
 
 modelsummary(
   list(
@@ -510,28 +653,28 @@ modelsummary(
   ),
   coef_map = c(
     "(Intercept)" = "Control group, before",
-    "treat" = "Treat: London",
+    "treat_london" = "Treat: London",
     "post" = "Post period",
-    "treat:post" = "DiD estimate"
+    "treat_london:post" = "DiD estimate"
   ),
-  estimate = "{estimate}",
-  statistic = NULL,
+  estimate = "{estimate}{stars}",
+  statistic = "({std.error})",
   gof_omit = ".*"
 )
 ```
 
-Because this theoretical dataset contains only the four DiD cells, we focus on the coefficients rather than on standard errors or significance tests. The point here is interpretation:
+These are now empirical regressions based on daily observations rather than on a toy four-cell table. The point remains interpretation:
 
--   In model 1, the `treat` coefficient captures the average London-Lazio difference, but that mixes pre-treatment and post-treatment differences together.
--   In model 2, the `post` coefficient captures the average change after 5 November, but that mixes treated and control areas together.
--   In model 3, the `treat` and `post` coefficients separate group differences from time differences, but they still assume the treatment effect is zero for both groups.
--   In model 4, the interaction term `treat:post` is the extra post-treatment change in London relative to Lazio. This is the DiD estimate, and it matches the quantity we calculated by hand above.
+-   In model 1, the `treat_london` coefficient captures the average London-Edinburgh difference, but that mixes pre-treatment and post-treatment differences together.
+-   In model 2, the `post` coefficient captures the average change after 25 October 2021, but that mixes treated and control areas together.
+-   In model 3, the `treat_london` and `post` coefficients separate group differences from time differences, but they still assume the treatment effect is zero for both groups.
+-   In model 4, the interaction term `treat_london:post` is the extra post-treatment change in London relative to Edinburgh. This is the DiD estimate, and it matches the quantity we calculated by hand above.
 
 The final regression is therefore:
 
 $Y_{gt} = \beta_0 + \beta_1 Treat_g + \beta_2 Post_t + \beta_3 (Treat_g \times Post_t) + \epsilon_{gt}$
 
-We could then expand this regression by including relevant covariates of interest. Feel free to expand this basic structure adding covariates or identifying a more credible, truly untreated benchmark group. DiD works best when: (1) a policy changes for one group but not the group used for comparison; (2) the timing of the intervention is clear, and (3) pre-treatment trends are reasonably similar. Well-known applications include:
+We could then expand this regression by including relevant covariates of interest. Feel free to expand this basic structure by adding covariates or identifying a more credible benchmark group. DiD works best when: (1) a policy changes for one group but not the group used for comparison; (2) the timing of the intervention is clear, and (3) pre-treatment trends are reasonably similar. Well-known applications include:
 
 -   labour economics: comparing employment in New Jersey and Pennsylvania after a minimum wage change [@card1993].
 -   public health: comparing places that expanded Medicaid [@wiggins2020] or adopted smoking bans with similar places that did not [@fu2024].
